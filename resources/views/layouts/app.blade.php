@@ -11,7 +11,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Consultant Cube</title>
 
-    <!-- <link rel="icon" class="icon" type="x-icon" href="{{ asset('asset/images/shreeved.png')}}" sizes="as big as possible"> -->
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('asset/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -32,6 +31,8 @@
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('asset/css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('asset/css/style3.css')}}" rel="stylesheet">
+
 </head>
 
 <body id="page-top">
@@ -61,7 +62,7 @@
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('home')}}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="bi bi-speedometer2"></i>
                     <span>Dashboard</span></a>
             </li>
 
@@ -73,37 +74,37 @@
 
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('state.index')}}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="bi bi-device-ssd-fill"></i>
                     <span>State</span></a>
             </li>
 
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('city.index')}}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="bi bi-patch-exclamation-fill"></i>
                     <span>City</span></a>
             </li>
 
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('category.index')}}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="bi bi-bookmark-star-fill"></i>
                     <span>Category</span></a>
             </li>
 
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('languageMaster.index')}}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="bi bi-translate"></i>
                     <span>Language Master</span></a>
             </li>
 
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('socialMaster.index')}}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="bi bi-dribbble"></i>
                     <span>Social Media Master</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link collapsed" style="color: #014272; font-weight: 700;" href="#" data-toggle="collapse" data-target="#collapseSetting" aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-cog" style="color: #fff; font-weight: 700;"></i>
+                    <i class="bi bi-gear-fill" style="color: #fff;"></i>
                     <span style="color: #fff;">Settings</span>
                 </a>
                 <div id="collapseSetting" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
@@ -121,32 +122,32 @@
 
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('time.index')}}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="bi bi-alarm-fill"></i>
                     <span>Time</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('language.index')}}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fa fa-language"></i>
                     <span>Language</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('gallery.index')}}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="bi bi-book-fill"></i>
                     <span>Gallery</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('video.index')}}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="bi bi-camera-video-fill"></i>
                     <span>Video</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('attachment.index')}}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="bi bi-bar-chart-fill"></i>
                     <span>Attachments</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('socialLink.index')}}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="bi bi-dribbble"></i>
                     <span>Social Link</span></a>
             </li>
             @endrole
@@ -336,9 +337,9 @@
                                 @if(isset(Auth::user()->profile_photo))
                                 <img class="img-profile rounded-circle" src="{{url('profile')}}/{{auth::user()->profile_photo}}">
                                 @else
-                                <span class="rounded-circle text-center p-2 fs-5 badge logobadge d-inline-block h-50" style="width: 43px !important;background-color:#345BCB;"><?php echo $name[0], $lastName[0] ?></span>
+                                <span class="img-profile rounded-circle"><?php echo $name[0], $lastName[0] ?></span>
                                 @endif
-                                
+
 
                             </a>
                             <!-- Dropdown - User Information -->

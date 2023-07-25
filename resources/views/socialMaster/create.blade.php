@@ -32,7 +32,7 @@
             <h4 class="">Create Social Master</h4>
         </div>
         <div class="">
-            <a href="{{ route('socialMaster.index') }}" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">BACK</a>
+            <a href="{{ route('socialMaster.index') }}" class="btn btnback btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -40,7 +40,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" action="{{route('socialMaster.store')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="socialForm" enctype="multipart/form-data" method="post">
             @csrf
 
 
@@ -55,23 +55,47 @@
             <div class="form-label-group mt-3">
                 <label for="logo" class="fw-bold">Logo <sup class="text-danger">*</sup></label>
                 <input id="logo" type="file" name="logo" class="form-control" placeholder="logo">
-                
+
                 @if ($errors->has('logo'))
                 <span class="error">{{ $errors->first('logo') }}</span>
                 @endif
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" id="saveBtn">Submit</button>
             </div>
 
         </form>
         <!-- </div> -->
     </div>
     <!-- Collapsable Card Example -->
-
 </div>
 
-
+<script type="text/javascript">
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('#saveBtn').click(function(e) {
+            e.preventDefault();
+            $(this).html('Sending..');
+            $.ajax({
+                data: $('#socialForm').serialize(),
+                url: "{{ route('socialMaster.store') }}",
+                type: "POST",
+                dataType: 'json',
+                success: function(data) {
+                    window.open("/socialMaster-index", "_self");
+                },
+                error: function(data) {
+                    console.log('Error:', data);
+                    $('#saveBtn').html('Save Changes');
+                }
+            });
+        });
+    });
+</script>
 
 @endsection

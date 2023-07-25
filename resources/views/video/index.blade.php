@@ -31,8 +31,8 @@
             <h4 class="">Video</h4>
         </div>
         <div class="">
-            <a href="{{ route('video.create') }}" id="add" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">ADD</a>
-            <a href="" id="back" class="btn btnback  btn-sm" style="background-color: #002E6E; color:white;display:none;">Back</a>
+            <a href="{{ route('video.create') }}" id="add" class="btn btnback btn-sm">ADD</a>
+            <a href="" id="back" class="btn btnback  btn-sm" style="display:none;">Back</a>
 
             <!-- /.sub-menu -->
         </div>

@@ -7,27 +7,29 @@ use App\Models\SocialMaster;
 use Illuminate\Http\Request;
 use DataTables;
 use Illuminate\Support\Facades\URL;
+
 class SocialMasterController extends Controller
 {
     public function index(Request $request)
     {
-        try{
+        try {
             if ($request->ajax()) {
-                $data = SocialMaster::where('status','!=','Deleted')->get();
+                $data = SocialMaster::where('status', '!=', 'Deleted')
+                    ->orderBy('id', 'DESC')
+                    ->get();
                 return Datatables::of($data)
-                        ->addIndexColumn()
-                        ->addColumn('action', function($row){
-                            $view = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm me-1 ">View</a>';
-                            $btn = '<a href="' . URL::route('socialMaster.edit', $row->id) . '" class="btn btn-primary btn-sm me-1">Edit</a>';
-                            $btn = $btn.'<a href="' . URL::route('socialMaster.delete', $row->id) . '" class="btn btn-danger btn-sm me-1">Delete</a>';
-                            return $view.''.$btn;
-                        })
-                        ->rawColumns(['action'])
-                        ->make(true);   
+                    ->addIndexColumn()
+                    ->addColumn('action', function ($row) {
+                        $view = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm me-1 ">View</a>';
+                        $btn = '<a href="' . URL::route('socialMaster.edit', $row->id) . '" class="btn btn-primary btn-sm me-1">Edit</a>';
+                        $btn = $btn . '<a href="' . URL::route('socialMaster.delete', $row->id) . '" class="btn btn-danger btn-sm me-1">Delete</a>';
+                        return $view . '' . $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
             }
             return view('socialMaster.index');
-        }
-        catch(\Throwable $th){
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }
@@ -35,26 +37,23 @@ class SocialMasterController extends Controller
     //For single record view
     public function view(Request $request, $id)
     {
-        try{
+        try {
             $socialMaster = SocialMaster::findOrFail($id);
             return response()->json($socialMaster);
-        }
-        catch(\Throwable $th){
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }
     }
     public function create()
     {
-        try{
+        try {
             $socialMaster = SocialMaster::all();
             return view('socialMaster.create', compact('socialMaster'));
-        }
-        catch(\Throwable $th){
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }
-        
     }
 
     public function store(Request $request)
@@ -64,7 +63,7 @@ class SocialMasterController extends Controller
             'logo' => 'required',
 
         ]);
-        try{
+        try {
             $socialMaster = new SocialMaster();
             $socialMaster->title = $request->title;
             if ($request->logo) {
@@ -73,10 +72,8 @@ class SocialMasterController extends Controller
             }
             $socialMaster->status = 'Active';
             $socialMaster->save();
-            return redirect('socialMaster-index')
-                ->with('success', 'SocialMaster Create Successfully');
-        }
-        catch(\Throwable $th){
+            return response()->json(['success' => 'Social Master Created successfully.']);
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }
@@ -84,15 +81,13 @@ class SocialMasterController extends Controller
 
     public function edit(Request $request, $id)
     {
-        try{
+        try {
             $socialMaster = SocialMaster::find($id);
             return view('socialMaster.edit', compact('socialMaster'));
-        }
-        catch(\Throwable $th){
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }
-        
     }
 
     public function update(Request $request)
@@ -100,7 +95,7 @@ class SocialMasterController extends Controller
         $this->validate($request, [
             'title' => 'required',
         ]);
-        try{
+        try {
             $id = $request->id;
             $socialMaster = SocialMaster::find($id);
             $socialMaster->title = $request->title;
@@ -112,8 +107,7 @@ class SocialMasterController extends Controller
             $socialMaster->save();
             return redirect('socialMaster-index')
                 ->with('success', 'SocialMaster Updated Successfully');
-        }
-        catch(\Throwable $th){
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }
@@ -121,17 +115,15 @@ class SocialMasterController extends Controller
 
     function delete($id)
     {
-        try{
+        try {
             $socialMaster = SocialMaster::find($id);
             $socialMaster->status = "Deleted";
             $socialMaster->save();
             return redirect("socialMaster-index")
                 ->with('success', 'SocialMaster Deleted successfully');
-        }
-        catch(\Throwable $th){
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }
-        
     }
 }

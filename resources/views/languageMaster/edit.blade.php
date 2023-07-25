@@ -32,7 +32,7 @@
             <h4 class="">Edit Language Master</h4>
         </div>
         <div class="">
-            <a href="{{ route('languageMaster.index') }}" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">BACK</a>
+            <a href="{{ route('languageMaster.index') }}" class="btn btnback btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -40,7 +40,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" action="{{route('languageMaster.update')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="languageForm" enctype="multipart/form-data" method="post">
             @csrf
 
             <input type="hidden" name="id" id="id" value="{{$languageMaster->id}}">
@@ -65,6 +65,38 @@
 
 </div>
 
+<script type="text/javascript">
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(document).ready(function() {
+            // Get the values you want to update
+            $("#languageForm").submit(function(event) {
+                var id = $('#id').val();
+                var language = $('#language').val();
 
+                $.ajax({
+                    url: "{{ route('languageMaster.update') }}",
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}', // Include the CSRF token for Laravel security
+                        id: id,
+                        language: language,
+                    },
+                    success: function(response) {
+                        window.open("/languageMaster-index", "_self");
+                    },
+                    error: function(error) {
+                        // Handle error response
+                        alert('Error Updating languageMaster.'); // You can replace this with any error message handling
+                    }
+                });
+            });
+        });
+    });
+</script>
 
 @endsection

@@ -27,13 +27,14 @@
 <div class="card">
     <!-- /.box-title -->
     <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+
         <div class="">
             <h4 class="">Social Master</h4>
         </div>
         <div class="">
-            <a href="{{ route('socialMaster.create') }}" id="add" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">ADD</a>
+            <a href="{{ route('socialMaster.create') }}" id="add" class="btn btnback btn-sm">ADD</a>
 
-            <a href="" id="back" class="btn btnback  btn-sm" style="background-color: #002E6E; color:white;display:none;">Back</a>
+            <a href="" id="back" class="btn btnback  btn-sm" style="display:none;">Back</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -73,7 +74,7 @@
         serverSide: true,
         ajax: "{{ route('socialMaster.index') }}",
         columns: [
-            {data: 'id', name: 'id'},
+            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'title', name: 'title'},
             {
                 data: 'logo', 

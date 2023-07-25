@@ -31,9 +31,9 @@
             <h4 class="">State</h4>
         </div>
         <div class="">
-            <a href="{{ route('state.create') }}" id="add" class="btn btnback  btn-sm" style="background-color: #002E6E; color:white;">ADD</a>
+            <a href="{{ route('state.create') }}" id="add" class="btn btnback  btn-sm">ADD</a>
 
-            <a href="" id="back" class="btn btnback  btn-sm" style="background-color: #002E6E; color:white;display:none;">Back</a>
+            <a href="" id="back" class="btn btnback  btn-sm" style="display:none;">Back</a>
             <!-- /.sub-menu -->
         </div>
     </div>
@@ -79,7 +79,7 @@
         serverSide: true,
         ajax: "{{ route('state.index') }}",
         columns: [
-            {data: 'id', name: 'id'},
+            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'stateName', name: 'stateName'},
             {data: 'status', name: 'status'},
             {
@@ -122,6 +122,8 @@
     });
   });
 </script>
+
+
 
 
 @endsection

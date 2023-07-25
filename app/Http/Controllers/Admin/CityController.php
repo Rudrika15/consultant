@@ -22,6 +22,7 @@ class CityController extends Controller
             if ($request->ajax()) {
                 $data = City::with('state')
                     ->where('status', '!=', 'Deleted')
+                    ->orderBy('id', 'DESC')
                     ->get();
                 return Datatables::of($data)
                     ->addIndexColumn()
@@ -76,8 +77,7 @@ class CityController extends Controller
             $city->status = 'Active';
 
             $city->save();
-            return redirect('city-index')
-                ->with('success', 'City Create Successfully');
+            return response()->json(['success' => 'City Created successfully.']);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -110,8 +110,12 @@ class CityController extends Controller
             $city->status = 'Active';
 
             $city->save();
-            return redirect('city-index')
-                ->with('success', 'City Updated Successfully');
+            return response()->json([
+                'stateId' => $city->stateId,
+                'cityName' => $city->cityName,
+                'status' => 'City Updated Successfully!',
+            ]);
+            return redirect()->route('city-index')->with('success', 'City Updated Successfully');
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');

@@ -32,7 +32,7 @@
             <h4 class="">Edit State</h4>
         </div>
         <div class="">
-            <a href="{{ route('state.index') }}" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">BACK</a>
+            <a href="{{ route('state.index') }}" class="btn btnback btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -40,7 +40,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" action="{{route('state.update')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="sateForm" enctype="multipart/form-data">
             @csrf
 
             <input type="hidden" name="id" id="id" value="{{$state->id}}">
@@ -64,6 +64,38 @@
 
 </div>
 
+<script type="text/javascript">
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(document).ready(function() {
+            // Get the values you want to update
+            $("#sateForm").submit(function(event) {
+                var id = $('#id').val();
+                var stateName = $('#stateName').val();
+                $.ajax({
+                    url: "{{ route('state.update') }}",
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}', // Include the CSRF token for Laravel security
+                        id: id,
+                        stateName: stateName
+                    },
+                    success: function(response) {
+                        window.open("/state-index", "_self");
+                    },
+                    error: function(error) {
+                        // Handle error response
+                        alert('Error Updating State.'); // You can replace this with any error message handling
+                    }
+                });
+            });
+        });
+    });
+</script>
 
 
 @endsection

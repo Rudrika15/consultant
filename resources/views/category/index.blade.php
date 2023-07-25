@@ -31,9 +31,9 @@
             <h4 class="">Category</h4>
         </div>
         <div class="">
-            <a href="{{ route('category.create') }}" id="add" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">ADD</a>
+            <a href="{{ route('category.create') }}" id="add" class="btn btnback btn-sm">ADD</a>
 
-            <a href="" id="back" class="btn btnback  btn-sm" style="background-color: #002E6E; color:white;display:none;">Back</a>
+            <a href="" id="back" class="btn btnback  btn-sm" style="display:none;">Back</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -73,7 +73,7 @@
         serverSide: true,
         ajax: "{{ route('category.index') }}",
         columns: [
-            {data: 'id', name: 'id'},
+            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'catName', name: 'catName'},
             {data: 'status', name: 'status'},
             {

@@ -31,9 +31,9 @@
             <h4 class="">Attachment</h4>
         </div>
         <div class="">
-            <a href="{{ route('attachment.create') }}" id="add" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">ADD</a>
+            <a href="{{ route('attachment.create') }}" id="add" class="btn btnback btn-sm">ADD</a>
 
-            <a href="" id="back" class="btn btnback  btn-sm" style="background-color: #002E6E; color:white;display:none;">Back</a>
+            <a href="" id="back" class="btn btnback  btn-sm" style="display:none;">Back</a>
 
             <!-- /.sub-menu -->
         </div>

@@ -31,8 +31,8 @@
             <h4 class="">City</h4>
         </div>
         <div class="">
-            <a href="{{ route('city.create') }}" id="add" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">ADD</a>
-            <a href="" id="back" class="btn btnback  btn-sm" style="background-color: #002E6E; color:white;display:none;">Back</a>
+            <a href="{{ route('city.create') }}" id="add" class="btn btnback btn-sm">ADD</a>
+            <a href="" id="back" class="btn btnback  btn-sm" style="display:none;">Back</a>
            
             <!-- /.sub-menu -->
         </div>
@@ -78,7 +78,7 @@
         serverSide: true,
         ajax: "{{ route('city.index') }}",
         columns: [
-            {data: 'id', name: 'id'},
+            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'state.stateName', name: 'state.stateName'},
             {data: 'cityName', name: 'cityName'},
             {data: 'status', name: 'status'},

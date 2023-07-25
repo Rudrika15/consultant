@@ -32,7 +32,7 @@
             <h4 class="">Create Category</h4>
         </div>
         <div class="">
-            <a href="{{ route('category.index') }}" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">BACK</a>
+            <a href="{{ route('category.index') }}" class="btn btnback btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -40,7 +40,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" action="{{route('category.store')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="categoryForm" enctype="multipart/form-data" method="post">
             @csrf
 
 
@@ -53,7 +53,7 @@
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" id="saveBtn">Submit</button>
             </div>
 
         </form>
@@ -63,6 +63,31 @@
 
 </div>
 
-
+<script type="text/javascript">
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('#saveBtn').click(function(e) {
+            e.preventDefault();
+            $(this).html('Sending..');
+            $.ajax({
+                data: $('#categoryForm').serialize(),
+                url: "{{ route('category.store') }}",
+                type: "POST",
+                dataType: 'json',
+                success: function(data) {
+                    window.open("/category-index", "_self");
+                },
+                error: function(data) {
+                    console.log('Error:', data);
+                    $('#saveBtn').html('Save Changes');
+                }
+            });
+        });
+    });
+</script>
 
 @endsection

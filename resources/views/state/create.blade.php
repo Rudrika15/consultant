@@ -32,7 +32,7 @@
             <h4 class="">Create State</h4>
         </div>
         <div class="">
-            <a href="{{ route('state.index') }}" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">BACK</a>
+            <a href="{{ route('state.index') }}" class="btn btnback btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -40,7 +40,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" action="{{route('state.store')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="sateForm" enctype="multipart/form-data" method="post">
             @csrf
 
 
@@ -53,7 +53,7 @@
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" id="saveBtn">Submit</button>
             </div>
 
         </form>
@@ -63,6 +63,31 @@
 
 </div>
 
-
+<script type="text/javascript">
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('#saveBtn').click(function(e) {
+            e.preventDefault();
+            $(this).html('Sending..');
+            $.ajax({
+                data: $('#sateForm').serialize(),
+                url: "{{ route('state.store') }}",
+                type: "POST",
+                dataType: 'json',
+                success: function(data) {
+                    window.open("/state-index", "_self");
+                },
+                error: function(data) {
+                    console.log('Error:', data);
+                    $('#saveBtn').html('Save Changes');
+                }
+            });
+        });
+    });
+</script>
 
 @endsection

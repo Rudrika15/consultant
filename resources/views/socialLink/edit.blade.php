@@ -32,7 +32,7 @@
             <h4 class="">Edit Social Link</h4>
         </div>
         <div class="">
-            <a href="{{ route('socialLink.index') }}" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">BACK</a>
+            <a href="{{ route('socialLink.index') }}" class="btn btnback btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>

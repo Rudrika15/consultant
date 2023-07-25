@@ -32,7 +32,7 @@
             <h4 class="">Edit Gallery</h4>
         </div>
         <div class="">
-            <a href="{{ route('gallery.index') }}" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">BACK</a>
+            <a href="{{ route('gallery.index') }}" class="btn btnback btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>

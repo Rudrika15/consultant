@@ -32,7 +32,7 @@
             <h4 class="">Edit Category</h4>
         </div>
         <div class="">
-            <a href="{{ route('category.index') }}" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">BACK</a>
+            <a href="{{ route('category.index') }}" class="btn btnback btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -40,7 +40,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" action="{{route('category.update')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="categoryForm" enctype="multipart/form-data" method="post">
             @csrf
             <input type="hidden" name="id" id="id" value="{{$category->id}}">
 
@@ -64,6 +64,38 @@
 
 </div>
 
+<script type="text/javascript">
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(document).ready(function() {
+            // Get the values you want to update
+            $("#categoryForm").submit(function(event) {
+                var id = $('#id').val();
+                var catName = $('#catName').val();
 
+                $.ajax({
+                    url: "{{ route('category.update') }}",
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}', // Include the CSRF token for Laravel security
+                        id: id,
+                        catName: catName
+                    },
+                    success: function(response) {
+                        window.open("/category-index", "_self");
+                    },
+                    error: function(error) {
+                        // Handle error response
+                        alert('Error Updating Category.'); // You can replace this with any error message handling
+                    }
+                });
+            });
+        });
+    });
+</script>
 
 @endsection

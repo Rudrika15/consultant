@@ -14,12 +14,12 @@
 @endif
 
 <div class="card">
-<div class="card-header" style="padding: 10px 10px 10px 10px; display: flex; justify-content: space-between; background-color: #03ACF0; color:white;">
+<div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
     <div class="">
         <h4 class="">Create New Role</h4>
     </div>
     <div class="">
-        <a href="{{ route('roles.index') }}" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">Back</a>
+        <a href="{{ route('roles.index') }}" class="btn btnback btn-sm">Back</a>
 
         <!-- /.sub-menu -->
     </div>

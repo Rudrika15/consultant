@@ -32,7 +32,7 @@
             <h4 class="">Edit City</h4>
         </div>
         <div class="">
-            <a href="{{ route('city.index') }}" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">BACK</a>
+            <a href="{{ route('city.index') }}" class="btn btnback btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -40,19 +40,19 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" action="{{route('city.update')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="cityForm" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="id" id="id" value="{{$city->id}}">
 
             <div class="form-label-group mt-3">
                 <div class="form-group">
                     <strong>State Name:</strong>
-                    <select class="form-control" data-error='State Name Field is required' required name="stateId" id="stateId">
+                    <select class="form-control" data-error='State Name Field is required' name="stateId" id="stateId">
                         <option value="" selected disabled> Select User Name </option>
                         @foreach ($state as $statedata)
                         <option value="{{ $statedata->id }}" {{$statedata->id == old('stateId',$city->stateId)? 'selected':''}}>{{ $statedata->stateName }}</option>
                         @endforeach
-                        
+
                     </select>
                     <div class="help-block with-errors"></div>
                     @error('stateId')
@@ -83,6 +83,40 @@
 
 </div>
 
+<script type="text/javascript">
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(document).ready(function() {
+            // Get the values you want to update
+            $("#cityForm").submit(function(event) {
+                var id = $('#id').val();
+                var stateId = $('#stateId').val();
+                var cityName = $('#cityName').val();
 
+                $.ajax({
+                    url: "{{ route('city.update') }}",
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}', // Include the CSRF token for Laravel security
+                        id: id,
+                        stateId: stateId,
+                        cityName: cityName
+                    },
+                    success: function(response) {
+                        window.open("/city-index", "_self");
+                    },
+                    error: function(error) {
+                        // Handle error response
+                        alert('Error Updating City.'); // You can replace this with any error message handling
+                    }
+                });
+            });
+        });
+    });
+</script>
 
 @endsection

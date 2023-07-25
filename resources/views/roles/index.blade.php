@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('header','Fair')
+@section('header','Role')
 @section('content')
 
 {{-- Message --}}
@@ -24,12 +24,12 @@
 
 <div class="card">
 
-    <div class="card-header" style="padding: 10px 10px 10px 10px; display: flex; justify-content: space-between; background-color: #03ACF0; color:white;">
+    <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
         <div class="">
             <h4 class="">Role Management</h4>
         </div>
         <div class="">
-            <a href="{{ route('roles.create') }}" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">ADD</a>
+            <a href="{{ route('roles.create') }}" class="btn btnback btn-sm">ADD</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -51,7 +51,7 @@
                     <td>{{ $role->name }}</td>
                     <td>
                         <a class="btn btn-info" href="{{ route('roles.show',$role->id) }}">Show</a>
-                        <a class="btn btn-primary" href="{{ route('roles.edit',$role->id) }}" >Edit</a>
+                        <a class="btn btn-primary" href="{{ route('roles.edit',$role->id) }}">Edit</a>
                         {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
                         {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                         {!! Form::close() !!}

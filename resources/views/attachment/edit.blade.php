@@ -32,7 +32,7 @@
             <h4 class="">Create Attachment</h4>
         </div>
         <div class="">
-            <a href="{{ route('attachment.index') }}" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">BACK</a>
+            <a href="{{ route('attachment.index') }}" class="btn btnback btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
