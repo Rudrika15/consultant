@@ -56,7 +56,7 @@
                 </tbody>
             </table>
         </div>
-    <div id="viewDataDiv"></div>
+        <div id="viewDataDiv"></div>
     </div>
 
 </div>
@@ -67,48 +67,74 @@
 </script>
 
 <script type="text/javascript">
-  $(function () {   
-    var table = $('.data-table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('language.index') }}",
-        columns: [
-            {data: 'id', name: 'id'},
-            {data: 'language_masters.language', name: 'language_masters.language'},
-            {data: 'status', name: 'status'},
-            {
-                data: 'action',
-                name: 'action',
-                orderable: false,
-                searchable: false,
-            },
-        ]
-    }); 
-    
-    $(document).on('click', '.edit', function() {
-        var row = $(this).closest('tr');
-        var data = table.row(row).data();
-        var languageId = data.id;
+    $(function() {
+        var table = $('.data-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('language.index') }}",
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'language_masters.language',
+                    name: 'language_masters.language'
+                },
+                {
+                    data: 'status',
+                    name: 'status'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false,
+                },
+            ]
+        });
 
-        $.ajax({
-            url: "{{ url('language') }}" + '/' + languageId + '/view',
-            type: 'GET',
-            success: function(response) {
-                // Handle the Ajax response here
-                console.log(response); // Check the response in the browser console
-                $('#dataTableDiv').hide();
-                $('#add').hide();
-                $('#back').show();
-                $('#viewDataDiv').html('<strong>Language Name:</strong> ' + response.language_masters.language +'<br>'+'<strong>Satus:</strong> ' + response.status);
+        $(document).on('click', '.edit', function() {
+            var row = $(this).closest('tr');
+            var data = table.row(row).data();
+            var languageId = data.id;
 
-            },
-            error: function(error) {
-                // Handle the error response here
-                console.log(error); // Check the error in the browser console
+            $.ajax({
+                url: "{{ url('language') }}" + '/' + languageId + '/view',
+                type: 'GET',
+                success: function(response) {
+                    // Handle the Ajax response here
+                    console.log(response); // Check the response in the browser console
+                    $('#dataTableDiv').hide();
+                    $('#add').hide();
+                    $('#back').show();
+                    $('#viewDataDiv').html('<strong>Language Name:</strong> ' + response.language_masters.language + '<br>' + '<strong>Satus:</strong> ' + response.status);
+
+                },
+                error: function(error) {
+                    // Handle the error response here
+                    console.log(error); // Check the error in the browser console
+                }
+            });
+        });
+        $('document').on('click', '#delete', function() {
+
+            var timeURL = $(this).data('url');
+            var trObj = $(this);
+
+            if (confirm("Are you sure you want to remove this language?") == true) {
+                $.ajax({
+                    url: timeURL,
+                    type: 'DELETE',
+                    dataType: 'json',
+                    success: function(data) {
+                        alert(data.success);
+                        trObj.parents("tr").remove();
+                    }
+                });
             }
+
         });
     });
-  });
 </script>
 
 @endsection

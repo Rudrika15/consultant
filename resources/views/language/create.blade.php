@@ -40,7 +40,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" action="{{route('language.store')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="languageForm" name="languageForm" action="{{route('language.store')}}" enctype="multipart/form-data" method="post">
             @csrf
 
             <div class="form-label-group mt-3">
@@ -59,7 +59,7 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" id="saveBtn" class="btn btn-primary">Submit</button>
             </div>
 
         </form>
@@ -68,7 +68,32 @@
     <!-- Collapsable Card Example -->
 
 </div>
-
+<script type="text/javascript">
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('#saveBtn').click(function(e) {
+            e.preventDefault();
+            $(this).html('Sending..');
+            $.ajax({
+                data: $('#languageForm').serialize(),
+                url: "{{ route('language.store') }}",
+                type: "POST",
+                dataType: 'json',
+                success: function(data) {
+                    window.open("/language-index", "_self");
+                },
+                error: function(data) {
+                    console.log('Error:', data);
+                    $('#saveBtn').html('Save Changes');
+                }
+            });
+        });
+    });
+</script>
 
 
 @endsection

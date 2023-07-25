@@ -99,6 +99,12 @@ Route::post('socialMaster-update', [SocialMasterController::class, 'update'])->n
 Route::get('socialMaster-delete/{id?}', [SocialMasterController::class, 'delete'])->name('socialMaster.delete');
 
 
+
+
+
+/* ------------------------Consultant Panele ---------------------------------- */
+
+
 // /* time */
 Route::get('time-index', [TimeController::class, 'index'])->name('time.index');
 Route::get('time/{id}/view',[TimeController::class, 'view'])->name('time.view');
@@ -108,9 +114,6 @@ Route::get('time-edit/{id?}', [TimeController::class, 'edit'])->name('time.edit'
 Route::post('time-update', [TimeController::class, 'update'])->name('time.update');
 Route::get('time-delete/{id?}', [TimeController::class, 'delete'])->name('time.delete');
 
-
-
-/* ------------------------Consultant Panele ---------------------------------- */
 
 // /* Language */
 Route::get('language-index', [LanguageController::class, 'index'])->name('language.index');

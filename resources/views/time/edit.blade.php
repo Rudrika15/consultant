@@ -40,7 +40,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" action="{{route('time.update')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="timeForm" name="timeForm" action="{{route('time.update')}}" enctype="multipart/form-data" method="post">
             @csrf
             
             <input type="hidden" name="id" id="id" value="{{$time->id}}">
@@ -73,6 +73,40 @@
 
 </div>
 
-
+<script type="text/javascript">
+  $(function () {
+     
+    $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+    });
+    $(document).ready(function() {
+        // Get the values you want to update
+        $("#timeForm").submit(function(event){
+            var id = $('#id').val();
+            var time = $('#time').val();
+            var day = $('#day').val();
+            $.ajax({
+                url: '{{ route('time.update') }}',
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}', // Include the CSRF token for Laravel security
+                    id: id,
+                    time: time,
+                    day: day
+                },
+                success: function (response) {
+                    window.open("/time-index", "_self"); 
+                },
+                error: function (error) {
+                    // Handle error response
+                    alert('Error updating time.'); // You can replace this with any error message handling
+                }
+            });
+        });
+    });
+  });
+</script>
 
 @endsection

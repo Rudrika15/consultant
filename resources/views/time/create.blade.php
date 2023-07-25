@@ -40,7 +40,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" action="{{route('time.store')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group"id="timeForm" name="timeForm" action="{{route('time.store')}}" enctype="multipart/form-data" method="post">
             @csrf
             
             <div class="form-label-group mt-3">
@@ -61,16 +61,42 @@
            
            
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" id="saveBtn" class="btn btn-primary">Submit</button>
             </div>
 
         </form>
+        
         <!-- </div> -->
     </div>
+
     <!-- Collapsable Card Example -->
 
 </div>
 
-
-
+<script type="text/javascript">
+  $(function () {
+    $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+    });
+     $('#saveBtn').click(function (e) {
+        e.preventDefault();
+        $(this).html('Sending..');
+        $.ajax({
+          data: $('#timeForm').serialize(),
+          url: "{{ route('time.store') }}",
+          type: "POST",
+          dataType: 'json',
+          success: function (data) {
+                    window.open("/time-index", "_self");  
+          },
+          error: function (data) {
+              console.log('Error:', data);
+              $('#saveBtn').html('Save Changes');
+          }
+      });
+    });
+});     
+</script>
 @endsection

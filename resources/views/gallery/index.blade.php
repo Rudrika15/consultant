@@ -44,18 +44,18 @@
 
             <table class="table table-bordered data-table">
                 <thead>
-                <tr>
-                    <th>Sr No</th>
-                    <th>Title</th>
-                    <th>Photo</th>
-                    <th>Status</th>
-                    <th width="280px">Action</th>
-                </tr>
+                    <tr>
+                        <th>Sr No</th>
+                        <th>Title</th>
+                        <th>Photo</th>
+                        <th>Status</th>
+                        <th width="280px">Action</th>
+                    </tr>
                 </thead>
                 <tbody></tbody>
             </table>
         </div>
-    <div id="viewDataDiv"></div>
+        <div id="viewDataDiv"></div>
     </div>
 
 </div>
@@ -65,60 +65,68 @@
     }
 </script>
 <script type="text/javascript">
-  $(function () {   
-    var table = $('.data-table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('gallery.index') }}",
-        columns: [
-            {data: 'id', name: 'id'},
-            {data: 'title', name: 'title'},
-            {
-                data: 'photo', 
-                name: 'photo',
-                render: function(data, type, full, meta) {
+    $(function() {
+        var table = $('.data-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('gallery.index') }}",
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'title',
+                    name: 'title'
+                },
+                {
+                    data: 'photo',
+                    name: 'photo',
+                    render: function(data, type, full, meta) {
                         // Check if the "data" is empty or null
                         if (data) {
-                            return '<img src="{{url('/gallery')}}/' + data + '" alt="Logo" style="max-width: 100px; max-height: 100px;">';
+                            return '<img src="{{url(' / gallery ')}}/' + data + '" alt="Logo" style="max-width: 100px; max-height: 100px;">';
                         }
                         return 'No Photo'; // Display "No Logo" if data is empty or null
                     }
-            },
-            {data: 'status', name: 'status'},
-            {
-                data: 'action',
-                name: 'action',
-                orderable: false,
-                searchable: false,
-                
-            },
-        ]
-    }); 
-    
-    $(document).on('click', '.edit', function() {
-        var row = $(this).closest('tr');
-        var data = table.row(row).data();
-        var galleryId = data.id;
+                },
+                {
+                    data: 'status',
+                    name: 'status'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false,
 
-        $.ajax({
-            url: "{{ url('gallery') }}" + '/' + galleryId + '/view',
-            type: 'GET',
-            success: function(response) {
-                // Handle the Ajax response here
-                console.log(response); // Check the response in the browser console
-                $('#dataTableDiv').hide();
-                $('#add').hide();
-                $('#back').show();
-                $('#viewDataDiv').html('<strong>Title:</strong> ' + response.title+'<br><strong>Photo:</strong><img src="{{url('/gallery')}}/'+response.photo+'" width="100px" height="100px">' +'<br>'+'<strong>Satus:</strong> ' + response.status);
+                },
+            ]
+        });
 
-            },
-            error: function(error) {
-                // Handle the error response here
-                console.log(error); // Check the error in the browser console
-            }
+        $(document).on('click', '.edit', function() {
+            var row = $(this).closest('tr');
+            var data = table.row(row).data();
+            var galleryId = data.id;
+
+            $.ajax({
+                url: "{{ url('gallery') }}" + '/' + galleryId + '/view',
+                type: 'GET',
+                success: function(response) {
+                    // Handle the Ajax response here
+                    console.log(response); // Check the response in the browser console
+                    $('#dataTableDiv').hide();
+                    $('#add').hide();
+                    $('#back').show();
+                    $('#viewDataDiv').html('<strong>Title:</strong> ' + response.title + '<br><strong>Photo:</strong><img src="{{url(' / gallery ')}}/' + response.photo + '" width="100px" height="100px">' + '<br>' + '<strong>Satus:</strong> ' + response.status);
+
+                },
+                error: function(error) {
+                    // Handle the error response here
+                    console.log(error); // Check the error in the browser console
+                }
+            });
         });
     });
-  });
 </script>
 
 @endsection

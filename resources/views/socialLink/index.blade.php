@@ -43,15 +43,15 @@
 
             <table class="table table-bordered data-table">
                 <thead>
-                <tr>
-                    <th>Sr No</th>
-                    <th>Social Media</th>
-                    <th>Url</th>
-                    <th>Status</th>
-                    <th width="280px">Action</th>
-                </tr>
+                    <tr>
+                        <th>Sr No</th>
+                        <th>Social Media</th>
+                        <th>Url</th>
+                        <th>Status</th>
+                        <th width="280px">Action</th>
+                    </tr>
                 </thead>
-               <tbody></tbody>
+                <tbody></tbody>
             </table>
         </div>
         <div id="viewDataDiv"></div>
@@ -65,50 +65,79 @@
 </script>
 
 <script type="text/javascript">
-  $(function () {   
-    var table = $('.data-table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('socialLink.index') }}",
-        columns: [
-            {data: 'id', name: 'id'},
-            {data: 'social_masters.title', name: 'social_masters.title'},
-            {data: 'url', name: 'url'},
-            {data: 'status', name: 'status'},
-            {
-                data: 'action',
-                name: 'action',
-                orderable: false,
-                searchable: false,
-               
-            },
-        ]
-    }); 
-    
-    $(document).on('click', '.edit', function() {
-        var row = $(this).closest('tr');
-        var data = table.row(row).data();
-        var cityId = data.id;
+    $(function() {
+        var table = $('.data-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('socialLink.index') }}",
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'social_masters.title',
+                    name: 'social_masters.title'
+                },
+                {
+                    data: 'url',
+                    name: 'url'
+                },
+                {
+                    data: 'status',
+                    name: 'status'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false,
 
-        $.ajax({
-            url: "{{ url('socialLink') }}" + '/' + cityId + '/view',
-            type: 'GET',
-            success: function(response) {
-                // Handle the Ajax response here
-                console.log(response); // Check the response in the browser console
-                $('#dataTableDiv').hide();
-                $('#add').hide();
-                $('#back').show();
-                $('#viewDataDiv').html('<strong>Title:</strong> ' + response.social_masters.title +'<br>'+'<strong>URL:</strong> '+ response.url +'<br>'+'<strong>Satus:</strong> ' + response.status);
+                },
+            ]
+        });
 
-            },
-            error: function(error) {
-                // Handle the error response here
-                console.log(error); // Check the error in the browser console
+        $(document).on('click', '.edit', function() {
+            var row = $(this).closest('tr');
+            var data = table.row(row).data();
+            var cityId = data.id;
+
+            $.ajax({
+                url: "{{ url('socialLink') }}" + '/' + cityId + '/view',
+                type: 'GET',
+                success: function(response) {
+                    // Handle the Ajax response here
+                    console.log(response); // Check the response in the browser console
+                    $('#dataTableDiv').hide();
+                    $('#add').hide();
+                    $('#back').show();
+                    $('#viewDataDiv').html('<strong>Title:</strong> ' + response.social_masters.title + '<br>' + '<strong>URL:</strong> ' + response.url + '<br>' + '<strong>Satus:</strong> ' + response.status);
+
+                },
+                error: function(error) {
+                    // Handle the error response here
+                    console.log(error); // Check the error in the browser console
+                }
+            });
+        });
+        $('document').on('click', '#delete', function() {
+
+            var timeURL = $(this).data('url');
+            var trObj = $(this);
+
+            if (confirm("Are you sure you want to remove this user?") == true) {
+                $.ajax({
+                    url: timeURL,
+                    type: 'DELETE',
+                    dataType: 'json',
+                    success: function(data) {
+                        alert(data.success);
+                        trObj.parents("tr").remove();
+                    }
+                });
             }
+
         });
     });
-  });
 </script>
 
 @endsection

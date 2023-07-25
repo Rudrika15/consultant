@@ -52,13 +52,13 @@
                         <th width="280px">Action</th>
                     </tr>
                 </thead>
-                
+
                 <tbody>
 
                 </tbody>
             </table>
         </div>
-    <div id="viewDataDiv"></div>
+        <div id="viewDataDiv"></div>
     </div>
 
 </div>
@@ -69,50 +69,80 @@
 </script>
 
 <script type="text/javascript">
-  $(function () {   
-    var table = $('.data-table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('time.index') }}",
-        columns: [
-            {data: 'id', name: 'id'},
-            {data:'day', name:'day'},
-            {data:'time', name:'time'},
-            {data: 'status', name: 'status'},
-            {
-                data: 'action',
-                name: 'action',
-                orderable: false,
-                searchable: false,
+    $(function() {
+        var table = $('.data-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('time.index') }}",
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'day',
+                    name: 'day'
+                },
+                {
+                    data: 'time',
+                    name: 'time'
+                },
+                {
+                    data: 'status',
+                    name: 'status'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false,
 
-            },
-        ]
-    }); 
-    
-    $(document).on('click', '.edit', function() {
-        var row = $(this).closest('tr');
-        var data = table.row(row).data();
-        var stateId = data.id;
+                },
+            ]
+        });
 
-        $.ajax({
-            url: "{{ url('time') }}" + '/' + stateId + '/view',
-            type: 'GET',
-            success: function(response) {
-                // Handle the Ajax response here
-                console.log(response); // Check the response in the browser console
-                $('#dataTableDiv').hide();
-                $('#add').hide();
-                $('#back').show();
-                $('#viewDataDiv').html('<strong>Day:</strong> ' + response.day +'<br><strong>Time:</strong> ' + response.time +'<br><strong>Satus:</strong> ' + response.status);
+        $(document).on('click', '.edit', function() {
+            var row = $(this).closest('tr');
+            var data = table.row(row).data();
+            var stateId = data.id;
 
-            },
-            error: function(error) {
-                // Handle the error response here
-                console.log(error); // Check the error in the browser console
+            $.ajax({
+                url: "{{ url('time') }}" + '/' + stateId + '/view',
+                type: 'GET',
+                success: function(response) {
+                    // Handle the Ajax response here
+                    console.log(response); // Check the response in the browser console
+                    $('#dataTableDiv').hide();
+                    $('#add').hide();
+                    $('#back').show();
+                    $('#viewDataDiv').html('<strong>Day:</strong> ' + response.day + '<br><strong>Time:</strong> ' + response.time + '<br><strong>Satus:</strong> ' + response.status);
+
+                },
+                error: function(error) {
+                    // Handle the error response here
+                    console.log(error); // Check the error in the browser console
+                }
+            });
+        });
+
+        $('document').on('click', '#delete', function() {
+
+            var timeURL = $(this).data('url');
+            var trObj = $(this);
+
+            if (confirm("Are you sure you want to remove this user?") == true) {
+                $.ajax({
+                    url: timeURL,
+                    type: 'DELETE',
+                    dataType: 'json',
+                    success: function(data) {
+                        alert(data.success);
+                        trObj.parents("tr").remove();
+                    }
+                });
             }
+
         });
     });
-  });
 </script>
 
 @endsection

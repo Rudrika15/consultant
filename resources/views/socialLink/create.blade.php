@@ -40,13 +40,13 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" action="{{route('socialLink.store')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="socialLinkForm" name="socialLinkForm" action="{{route('socialLink.store')}}" enctype="multipart/form-data" method="post">
             @csrf
 
 
             <div class="form-label-group mt-3">
                 <div class="form-group">
-                   
+
                     <strong>Social Media Master:</strong>
                     <select class="form-control" data-error='Social Media Master Field is required' required name="socialMediaMasterId" id="socialMediaMasterId">
                         <option value="" selected disabled> Select Social Media Master </option>
@@ -67,10 +67,10 @@
                 <span class="error">{{ $errors->first('url') }}</span>
                 @endif
             </div>
-        
-           
+
+
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" id="saveBtn" class="btn btn-primary">Submit</button>
             </div>
 
         </form>
@@ -79,6 +79,32 @@
     <!-- Collapsable Card Example -->
 
 </div>
+<script type="text/javascript">
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('#saveBtn').click(function(e) {
+            e.preventDefault();
+            $(this).html('Sending..');
+            $.ajax({
+                data: $('#socialLinkForm').serialize(),
+                url: "{{ route('socialLink.store') }}",
+                type: "POST",
+                dataType: 'json',
+                success: function(data) {
+                    window.open("/socialLink-index", "_self");
+                },
+                error: function(data) {
+                    console.log('Error:', data);
+                    $('#saveBtn').html('Save Changes');
+                }
+            });
+        });
+    });
+</script>
 
 
 

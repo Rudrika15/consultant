@@ -40,7 +40,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" action="{{route('gallery.store')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="galleryForm" name="galleryForm" action="{{route('gallery.store')}}" enctype="multipart/form-data" method="post">
             @csrf
 
 
@@ -55,14 +55,14 @@
             <div class="form-label-group mt-3">
                 <label for="photo" class="fw-bold">Photo <sup class="text-danger">*</sup></label>
                 <input id="photo" type="file" name="photo" class="form-control" placeholder="photo">
-                
+
                 @if ($errors->has('photo'))
                 <span class="error">{{ $errors->first('photo') }}</span>
                 @endif
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" id="saveBtn" class="btn btn-primary">Submit</button>
             </div>
 
         </form>
@@ -72,6 +72,38 @@
 
 </div>
 
+<!-- <script type="text/javascript">
+    $(document).ready(function(e) {
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
 
+        $('#galleryForm').submit(function(e) {
+
+            e.preventDefault();
+
+            var formData = new FormData(this);
+
+            $.ajax({
+                type: 'POST',
+                url: "{{ url('gallery-store')}}",
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: (data) => {
+                    this.reset();
+                    alert('Image has been uploaded using jQuery ajax successfully');
+                },
+                error: function(data) {
+                    console.log(data);
+                }
+            });
+        });
+    });
+</script> -->
 @endsection

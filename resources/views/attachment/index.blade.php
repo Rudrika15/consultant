@@ -44,15 +44,15 @@
 
             <table class="table table-bordered data-table">
                 <thead>
-                <tr>
-                    <th>Sr No</th>
-                    <th>Title</th>
-                    <th>File</th>
-                    <th>Status</th>
-                    <th width="280px">Action</th>
-                </tr>
+                    <tr>
+                        <th>Sr No</th>
+                        <th>Title</th>
+                        <th>File</th>
+                        <th>Status</th>
+                        <th width="280px">Action</th>
+                    </tr>
                 </thead>
-                <tbody></tbody> 
+                <tbody></tbody>
             </table>
         </div>
         <div id="viewDataDiv"></div>
@@ -65,61 +65,69 @@
     }
 </script>
 <script type="text/javascript">
-  $(function () {   
-    var table = $('.data-table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('attachment.index') }}",
-        columns: [
-            {data: 'id', name: 'id'},
-            {data: 'title', name: 'title'},
-            {
-                data: 'file', 
-                name: 'file',
-                render: function(data, type, full, meta) {
+    $(function() {
+        var table = $('.data-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('attachment.index') }}",
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'title',
+                    name: 'title'
+                },
+                {
+                    data: 'file',
+                    name: 'file',
+                    render: function(data, type, full, meta) {
                         // Check if the "data" is empty or null
                         if (data) {
-                            return '<img src="{{url('/attachment')}}/' + data + '" alt="Logo" style="max-width: 100px; max-height: 100px;">';
+                            return '<img src="{{url(' / attachment ')}}/' + data + '" alt="Logo" style="max-width: 100px; max-height: 100px;">';
                         }
                         return 'No Logo'; // Display "No Logo" if data is empty or null
                     }
-            },
-                
-            {data: 'status', name: 'status'},
-            {
-                data: 'action',
-                name: 'action',
-                orderable: false,
-                searchable: false,
-                
-            },
-        ]
-    }); 
-    
-    $(document).on('click', '.edit', function() {
-        var row = $(this).closest('tr');
-        var data = table.row(row).data();
-        var socialMasterId = data.id;
+                },
 
-        $.ajax({
-            url: "{{ url('attachment') }}" + '/' + socialMasterId + '/view',
-            type: 'GET',
-            success: function(response) {
-                // Handle the Ajax response here
-                console.log(response); // Check the response in the browser console
-                $('#dataTableDiv').hide();
-                $('#add').hide();
-                $('#back').show();
-                $('#viewDataDiv').html('<strong>Title:</strong> ' + response.title+'<br><strong>File:</strong><img src="{{url('/attachment')}}/'+response.file+'" width="100px" height="100px">' +'<br>'+'<strong>Satus:</strong>' + response.status);
+                {
+                    data: 'status',
+                    name: 'status'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false,
 
-            },
-            error: function(error) {
-                // Handle the error response here
-                console.log(error); // Check the error in the browser console
-            }
+                },
+            ]
+        });
+
+        $(document).on('click', '.edit', function() {
+            var row = $(this).closest('tr');
+            var data = table.row(row).data();
+            var socialMasterId = data.id;
+
+            $.ajax({
+                url: "{{ url('attachment') }}" + '/' + socialMasterId + '/view',
+                type: 'GET',
+                success: function(response) {
+                    // Handle the Ajax response here
+                    console.log(response); // Check the response in the browser console
+                    $('#dataTableDiv').hide();
+                    $('#add').hide();
+                    $('#back').show();
+                    $('#viewDataDiv').html('<strong>Title:</strong> ' + response.title + '<br><strong>File:</strong><img src="{{url(' / attachment ')}}/' + response.file + '" width="100px" height="100px">' + '<br>' + '<strong>Satus:</strong>' + response.status);
+
+                },
+                error: function(error) {
+                    // Handle the error response here
+                    console.log(error); // Check the error in the browser console
+                }
+            });
         });
     });
-  });
 </script>
 
 @endsection

@@ -40,7 +40,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" action="{{route('video.store')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="videoForm" name="videoForm" action="{{route('video.store')}}" enctype="multipart/form-data" method="post">
             @csrf
 
 
@@ -51,9 +51,9 @@
                 <span class="error">{{ $errors->first('url') }}</span>
                 @endif
             </div>
-           
+
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" id="saveBtn" class="btn btn-primary">Submit</button>
             </div>
 
         </form>
@@ -63,6 +63,31 @@
 
 </div>
 
-
+<script type="text/javascript">
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('#saveBtn').click(function(e) {
+            e.preventDefault();
+            $(this).html('Sending..');
+            $.ajax({
+                data: $('#videoForm').serialize(),
+                url: "{{ route('video.store') }}",
+                type: "POST",
+                dataType: 'json',
+                success: function(data) {
+                    window.open("/video-index", "_self");
+                },
+                error: function(data) {
+                    console.log('Error:', data);
+                    $('#saveBtn').html('Save Changes');
+                }
+            });
+        });
+    });
+</script>
 
 @endsection
