@@ -1,0 +1,820 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-size: larger;
+
+}
+
+.line {
+    position: absolute;
+    width: 250px;
+    height: 5px;
+    top: 80px;
+    padding-right: 10px;
+    background: #D9D9D9;
+    border-radius: 5px;
+}
+
+.line:hover {
+    background-color: #636363;
+}
+
+.biic {
+    left: 40px;
+    top: 35px;
+    position: absolute;
+}
+
+.header {
+    left: 110px;
+    top: 35px;
+    position: absolute;
+}
+
+.count {
+    left: 110px;
+    top: 55px;
+    position: absolute;
+}
+
+.lead {
+    left: 350px;
+    top: 230px;
+    position: absolute;
+    font-weight: 500;
+    font-style: normal;
+
+}
+
+.lead_circle {
+    /* Ellipse 1 */
+
+    box-sizing: border-box;
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    left: 360px;
+    top: 280px;
+    border-radius: 50%;
+    background: conic-gradient(from 180deg at 50% 50%, #D9D9D9 0deg, #FFFFFF 41.25deg, #FFFFFF 41.29deg, #F5F5F5 112.06deg, rgba(118, 118, 118, 0.553691) 112.38deg, #CECECE 112.44deg, #AAAAAA 112.47deg, #D9D9D9 179.03deg, #636363 180deg, rgba(14, 14, 14, 0.58) 240.33deg, rgba(0, 0, 0, 0.25) 240.96deg, rgba(14, 14, 14, 0.58) 297.23deg, #000000 297.49deg, #000000 360deg);
+    border: 1px solid #ABABAB;
+}
+
+.lead_circle h5 {
+    /* Leads */
+    position: absolute;
+    width: 88px;
+    height: 28px;
+    left: 110px;
+    top: 140px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 92.5%;
+    /* identical to box height, or 28px */
+    text-align: center;
+    color: #636363;
+}
+
+.circle {
+    box-sizing: border-box;
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    left: 23px;
+    top: 25px;
+    border-radius: 50%;
+    background-color: white;
+    border: 1px solid #ABABAB;
+}
+
+/* Rectangle 11 */
+.box1 {
+    position: absolute;
+    width: 102px;
+    height: 36px;
+    left: 310px;
+    top: 600px;
+
+    background: #ABABAB;
+    border-radius: 10px;
+}
+
+/* New */
+.new {
+    position: absolute;
+    width: 50px;
+    height: 21px;
+    left: 30px;
+    top: 6px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 23.1125px;
+    line-height: 21px;
+    text-align: center;
+
+    color: black;
+
+}
+
+/* Rectangle 12 */
+.box2 {
+    position: absolute;
+    width: 176px;
+    height: 36px;
+    left: 430px;
+    top: 600px;
+
+    background: #525252;
+    border-radius: 10px;
+
+}
+
+/* Disqualified */
+.disq {
+    position: absolute;
+    width: 135px;
+    height: 21px;
+    left: 20px;
+    top: 6px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 23.1125px;
+    line-height: 21px;
+    text-align: center;
+
+    color: #000;
+}
+
+
+/* Rectangle 13 */
+.box3 {
+    position: absolute;
+    width: 176px;
+    height: 36px;
+    left: 625px;
+    top: 600px;
+
+    background: #EFEFEF;
+    border-radius: 10px;
+
+}
+
+/* Qualified */
+.quali {
+    position: absolute;
+    width: 104px;
+    height: 21px;
+    left: 35px;
+    top: 6px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 23.1125px;
+    line-height: 21px;
+    text-align: center;
+
+    color: #000000;
+
+
+}
+
+/* Rectangle 14 */
+.box4 {
+    position: absolute;
+    width: 176px;
+    height: 36px;
+    left: 235px;
+    top: 650px;
+
+    background: #BBBBBB;
+    border-radius: 10px;
+
+}
+
+/* Contacted */
+.contact {
+    position: absolute;
+    width: 124px;
+    height: 21px;
+    left: 22px;
+    top: 6px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 23.1125px;
+    line-height: 21px;
+    text-align: center;
+
+    color: #000000;
+
+}
+
+/* Rectangle 15 */
+.box5 {
+    position: absolute;
+    width: 176px;
+    height: 36px;
+    left: 430px;
+    top: 650px;
+
+    background: #000000;
+    border-radius: 10px;
+
+}
+
+/* Proposal sent */
+.prapo {
+    position: absolute;
+    width: 157px;
+    height: 21px;
+    left: 13px;
+    top: 6px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 23.1125px;
+    line-height: 21px;
+    text-align: center;
+
+    color: #FFFFFF;
+
+}
+
+
+
+/* Rectangle 16 */
+.box6 {
+    position: absolute;
+    width: 176px;
+    height: 36px;
+    left: 625px;
+    top: 650px;
+
+    background: rgba(97, 97, 97, 0.78);
+    border-radius: 10px;
+}
+
+/* Converted */
+.converted {
+    position: absolute;
+    width: 122px;
+    height: 21px;
+    left: 25px;
+    top: 6px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 23.1125px;
+    line-height: 21px;
+    text-align: center;
+    color: #000000;
+
+}
+
+
+/* graph */
+
+/* 0 */
+.first {
+    position: absolute;
+    width: 16px;
+    height: 23px;
+    left: 758px;
+    top: 820px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 92.5%;
+    /* or 23px */
+    text-align: center;
+
+    color: #636363;
+}
+
+
+/* 50 */
+.second {
+    position: absolute;
+    width: 32px;
+    height: 23px;
+    left: 738px;
+    top: 764px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 92.5%;
+    /* or 23px */
+    text-align: center;
+
+    color: #636363;
+
+}
+
+/* 100 */
+.third {
+    position: absolute;
+    width: 40px;
+    height: 23px;
+    left: 738px;
+    top: 704px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 92.5%;
+    /* or 23px */
+    text-align: center;
+
+    color: #636363;
+
+
+}
+
+/* 150 */
+.fourth {
+    position: absolute;
+    width: 40px;
+    height: 23px;
+    left: 738px;
+    top: 648px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 92.5%;
+    /* or 23px */
+    text-align: center;
+
+    color: #636363;
+}
+
+
+/* 200 */
+.fifth {
+    position: absolute;
+    width: 46px;
+    height: 23px;
+    left: 738px;
+    top: 592px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 92.5%;
+    /* or 23px */
+    text-align: center;
+
+    color: #636363;
+}
+
+
+/* 250 */
+.sixth {
+    position: absolute;
+    width: 46px;
+    height: 23px;
+    left: 738px;
+    top: 536px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 92.5%;
+    /* or 23px */
+    text-align: center;
+
+    color: #636363;
+}
+
+
+/* 300 */
+.seventh {
+    position: absolute;
+    width: 47px;
+    height: 23px;
+    left: 738px;
+    top: 476px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 92.5%;
+    /* or 23px */
+    text-align: center;
+
+    color: #636363;
+
+}
+
+/* 350 */
+.eighth {
+    position: absolute;
+    width: 47px;
+    height: 23px;
+    left: 738px;
+    top: 420px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 92.5%;
+    /* or 23px */
+    text-align: center;
+
+    color: #636363;
+
+}
+
+/* 1 */
+.col_one {
+    position: absolute;
+    width: 9px;
+    height: 23px;
+    left: 792px;
+    top: 844px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 92.5%;
+    /* or 23px */
+    text-align: center;
+
+    color: #636363;
+
+}
+
+/* 2 */
+.col_two {
+    position: absolute;
+    width: 15px;
+    height: 23px;
+    left: 905px;
+    top: 844px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 92.5%;
+    /* or 23px */
+    text-align: center;
+
+    color: #636363;
+
+}
+
+/* 3 */
+.col_three {
+    position: absolute;
+    width: 15px;
+    height: 23px;
+    left: 1025px;
+    top: 844px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 92.5%;
+    /* or 23px */
+    text-align: center;
+
+    color: #636363;
+
+}
+
+/* 4 */
+.col_four {
+    position: absolute;
+    width: 16px;
+    height: 23px;
+    left: 1144px;
+    top: 844px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 92.5%;
+    /* or 23px */
+    text-align: center;
+
+    color: #636363;
+
+}
+
+/* 5 */
+.col_fifth {
+    position: absolute;
+    width: 16px;
+    height: 23px;
+    left: 1267px;
+    top: 844px;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 92.5%;
+    /* or 23px */
+    text-align: center;
+
+    color: #636363;
+
+}
+
+/* Line 1 */
+.line1 {
+    position: absolute;
+    width: 400px;
+    height: 0px;
+    left: 653px;
+    top: 458px;
+
+    border: 2px solid #000000;
+    transform: rotate(90deg);
+
+}
+
+/* Line 4 */
+.line4 {
+    position: absolute;
+    width: 400px;
+    height: 0px;
+    left: 770px;
+    top: 458px;
+
+    border: 1px dashed rgba(0, 0, 0, 0.5);
+    transform: rotate(90deg);
+
+}
+
+/* Line 6 */
+.line6 {
+    position: absolute;
+    width: 400px;
+    height: 0px;
+    left: 890px;
+    top: 458px;
+
+    border: 1px dashed rgba(0, 0, 0, 0.5);
+    transform: rotate(90deg);
+
+}
+
+/* Line 8 */
+.line8 {
+    position: absolute;
+    width: 400px;
+    height: 0px;
+    left: 1010px;
+    top: 458px;
+
+    border: 1px dashed rgba(0, 0, 0, 0.5);
+    transform: rotate(90deg);
+}
+
+/* Line 10 */
+.line10 {
+    position: absolute;
+    width: 400px;
+    height: 0px;
+    left: 1130px;
+    top: 458px;
+
+    border: 1px dashed rgba(0, 0, 0, 0.5);
+    transform: rotate(90deg);
+}
+
+/* Line 2 */
+.line2 {
+    position: absolute;
+    width: 542px;
+    height: 0px;
+    left: 1334px;
+    top: 832px;
+
+    border: 1px solid #000000;
+    transform: rotate(180deg);
+
+}
+
+/* Line 12 */
+.line12 {
+    position: absolute;
+    width: 542px;
+    height: 0px;
+    left: 854px;
+    top: 657px;
+
+    border: 2px solid #000000;
+    transform: rotate(180deg);
+
+}
+
+/* Line 13 */
+.line13 {
+    position: absolute;
+    width: 542px;
+    height: 0px;
+    left: 854px;
+    top: 605px;
+
+    border: 1px dashed rgba(0, 0, 0, 0.5);
+    transform: rotate(180deg);
+}
+
+/* Line 14 */
+.line14 {
+    position: absolute;
+    width: 542px;
+    height: 0px;
+    left: 854px;
+    top: 555px;
+
+    border: 1px dashed rgba(0, 0, 0, 0.5);
+    transform: rotate(180deg);
+}
+
+/* Line 15 */
+.line15 {
+    position: absolute;
+    width: 542px;
+    height: 0px;
+    left: 854px;
+    top: 505px;
+
+    border: 1px dashed rgba(0, 0, 0, 0.5);
+    transform: rotate(180deg);
+}
+
+/* Line 16 */
+.line16 {
+    position: absolute;
+    width: 542px;
+    height: 0px;
+    left: 854px;
+    top: 448px;
+
+    border: 1px dashed rgba(0, 0, 0, 0.5);
+    transform: rotate(180deg);
+}
+
+/* Line 18 */
+.line18 {
+    position: absolute;
+    width: 542px;
+    height: 0px;
+    left: 854px;
+    top: 390px;
+
+    border: 1px dashed rgba(0, 0, 0, 0.5);
+    transform: rotate(180deg);
+}
+
+/* Line 19 */
+.line19 {
+    position: absolute;
+    width: 542px;
+    height: 0px;
+    left: 854px;
+    top: 330px;
+
+    border: 1px dashed rgba(0, 0, 0, 0.5);
+    transform: rotate(180deg);
+}
+
+/* Line 20 */
+.line20 {
+    position: absolute;
+    width: 542px;
+    height: 0px;
+    left: 854px;
+    top: 260px;
+
+    border: 1px dashed rgba(0, 0, 0, 0.5);
+    transform: rotate(180deg);
+}
+
+/* Ellipse 2 */
+.round2 {
+    position: absolute;
+    width: 11px;
+    height: 11px;
+    left: 787px;
+    top: 770px;
+    border-radius: 50px;
+    background: #636363;
+
+}
+
+/* Ellipse 3 */
+.round3 {
+    position: absolute;
+    width: 11px;
+    height: 11px;
+    left: 1010px;
+    top: 480px;
+    border-radius: 50px;
+    background: #636363;
+
+}
+
+/* Ellipse 4 */
+.round4 {
+    position: absolute;
+    width: 11px;
+    height: 11px;
+    left: 1029px;
+    top: 772px;
+    border-radius: 50px;
+    background: #636363;
+}
+
+/* Ellipse 5 */
+.round5 {
+    position: absolute;
+    width: 11px;
+    height: 11px;
+    left: 1147px;
+    top: 713px;
+    border-radius: 50px;
+    background: #636363;
+}
+
+/* Ellipse 6 */
+.round6 {
+    position: absolute;
+    width: 11px;
+    height: 11px;
+    left: 1271px;
+    top: 772px;
+    border-radius: 50px;
+    background: #636363;
+
+}
+
+/* Ellipse 7 */
+.round7 {
+    position: absolute;
+    width: 11px;
+    height: 11px;
+    left: 1020px;
+    top: 480px;
+    border-radius: 50px;
+    background: #636363;
+}
+
+/* Ellipse 8 */
+.round8 {
+    position: absolute;
+    width: 11px;
+    height: 11px;
+    left: 1120px;
+    top: 373px;
+    border-radius: 50px;
+    background: #636363;
+}
+
+/* Ellipse 9 */
+.round9 {
+    position: absolute;
+    width: 11px;
+    height: 11px;
+    left: 1270px;
+    top: 310px;
+    border-radius: 50px;
+    background: #636363;
+
+}
+
+/* Vector 1 */
+.vector {
+    position: absolute;
+    width: 547px;
+    height: 346.49px;
+    left: 850px;
+    top: 260px;
+    border: 1px solid #000000;
+}
