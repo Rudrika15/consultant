@@ -93,6 +93,7 @@
         $(document).ready(function() {
             // Get the values you want to update
             $("#cityForm").submit(function(event) {
+                event.preventDefault();
                 var id = $('#id').val();
                 var stateId = $('#stateId').val();
                 var cityName = $('#cityName').val();
@@ -107,11 +108,30 @@
                         cityName: cityName
                     },
                     success: function(response) {
-                        window.open("/city-index", "_self");
+                        if (response.success) {
+                            // Success message using SweetAlert
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Updated',
+                                text: response.message,
+                            });
+
+                        } else {
+                            // Error message using SweetAlert
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'An error occurred!',
+                            });
+                        }
                     },
-                    error: function(error) {
-                        // Handle error response
-                        alert('Error Updating City.'); // You can replace this with any error message handling
+                    error: function(xhr, status, error) {
+                        // Error message using SweetAlert
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'An error occurred!',
+                        });
                     }
                 });
             });

@@ -40,7 +40,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" id="categoryForm" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="categoryForm" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="id" id="id" value="{{$category->id}}">
 
@@ -54,7 +54,7 @@
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" id="">Submit</button>
             </div>
 
         </form>
@@ -74,6 +74,7 @@
         $(document).ready(function() {
             // Get the values you want to update
             $("#categoryForm").submit(function(event) {
+                event.preventDefault();
                 var id = $('#id').val();
                 var catName = $('#catName').val();
 
@@ -86,11 +87,30 @@
                         catName: catName
                     },
                     success: function(response) {
-                        window.open("/category-index", "_self");
+                        if (response.success) {
+                            // Success message using SweetAlert
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Updated',
+                                text: response.message,
+                            });
+
+                        } else {
+                            // Error message using SweetAlert
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'An error occurred!',
+                            });
+                        }
                     },
-                    error: function(error) {
-                        // Handle error response
-                        alert('Error Updating Category.'); // You can replace this with any error message handling
+                    error: function(xhr, status, error) {
+                        // Error message using SweetAlert
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'An error occurred!',
+                        });
                     }
                 });
             });

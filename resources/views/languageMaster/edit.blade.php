@@ -40,7 +40,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" id="languageForm" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="languageForm" enctype="multipart/form-data">
             @csrf
 
             <input type="hidden" name="id" id="id" value="{{$languageMaster->id}}">
@@ -75,6 +75,7 @@
         $(document).ready(function() {
             // Get the values you want to update
             $("#languageForm").submit(function(event) {
+                event.preventDefault();
                 var id = $('#id').val();
                 var language = $('#language').val();
 
@@ -87,11 +88,29 @@
                         language: language,
                     },
                     success: function(response) {
-                        window.open("/languageMaster-index", "_self");
+                        if (response.success) {
+                            // Success message using SweetAlert
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Updated',
+                                text: response.message,
+                            });
+                        } else {
+                            // Error message using SweetAlert
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'An error occurred!',
+                            });
+                        }
                     },
-                    error: function(error) {
-                        // Handle error response
-                        alert('Error Updating languageMaster.'); // You can replace this with any error message handling
+                    error: function(xhr, status, error) {
+                        // Error message using SweetAlert
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'An error occurred!',
+                        });
                     }
                 });
             });

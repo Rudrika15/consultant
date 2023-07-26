@@ -23,7 +23,7 @@ class CategoryController extends Controller
                     ->addColumn('action', function ($row) {
                         $view = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm me-1 ">View</a>';
                         $btn = '<a href="' . URL::route('category.edit', $row->id) . '" class="btn btn-primary btn-sm me-1">Edit</a>';
-                        $btn = $btn . '<a href="' . URL::route('category.delete', $row->id) . '" class="btn btn-danger btn-sm me-1">Delete</a>';
+                        $btn = $btn . '<a href="' . URL::route('category.delete', $row->id) . '" class="btn btn-danger btn-sm me-1 delete">Delete</a>';
                         return $view . '' . $btn;
                     })
                     ->rawColumns(['action'])
@@ -62,7 +62,12 @@ class CategoryController extends Controller
             $category->status = 'Active';
 
             $category->save();
-            return response()->json(['success' => 'Category Created successfully.']);
+            $response = [
+                'success' => true,
+                'message' => 'Category Created Successfully!',
+            ];
+
+            return response()->json($response);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -91,11 +96,12 @@ class CategoryController extends Controller
             $category->status = 'Active';
 
             $category->save();
-            return response()->json([
-                'catName' => $category->catName,
-                'status' => 'Category Updated Successfully!',
-            ]);
-            return redirect()->route('state-index')->with('success', 'Category Updated Successfully');
+            $response = [
+                'success' => true,
+                'message' => 'Category Updated Successfully!',
+            ];
+
+            return response()->json($response);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -108,8 +114,12 @@ class CategoryController extends Controller
             $category = Category::find($id);
             $category->status = "Deleted";
             $category->save();
-            return redirect("category-index")
-                ->with('success', 'Category Deleted successfully');
+            $response = [
+                'success' => true,
+                'message' => 'Category Deleted Successfully!',
+            ];
+
+            return response()->json($response);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');

@@ -55,9 +55,10 @@
             <div class="form-label-group mt-3">
                 <label for="logo" class="fw-bold">Logo <sup class="text-danger">*</sup></label>
                 <input id="logo" type="file" name="logo" class="form-control" placeholder="logo">
+                <img id="preview-logo" width="100px" height="100px"  class="mt-3">
 
                 @if ($errors->has('logo'))
-                <span class="error">{{ $errors->first('logo') }}</span>
+                <span class="error" id="image-input-error">{{ $errors->first('logo') }}</span>
                 @endif
             </div>
 
@@ -66,34 +67,75 @@
             </div>
 
         </form>
+
         <!-- </div> -->
     </div>
     <!-- Collapsable Card Example -->
 </div>
 
+
+
+
 <script type="text/javascript">
-    $(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $('#saveBtn').click(function(e) {
-            e.preventDefault();
-            $(this).html('Sending..');
-            $.ajax({
-                data: $('#socialForm').serialize(),
-                url: "{{ route('socialMaster.store') }}",
-                type: "POST",
-                dataType: 'json',
-                success: function(data) {
-                    window.open("/socialMaster-index", "_self");
+    /*------------------------------------------
+    --------------------------------------------
+    File Input Change Event
+    --------------------------------------------
+    --------------------------------------------*/
+    $('#logo').change(function() {
+        let reader = new FileReader();
+
+        reader.onload = (e) => {
+            $('#preview-logo').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(this.files[0]);
+
+    });
+
+    /*------------------------------------------
+    --------------------------------------------
+    Form Submit Event
+    --------------------------------------------
+    --------------------------------------------*/
+    $('#socialForm').submit(function(e) {
+        e.preventDefault();
+        let formData = new FormData(this);
+        $('#image-input-error').text('');
+
+        $.ajax({
+            type: 'POST',
+            url: "{{ route('socialMaster.store') }}",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                    if (response.success) {
+                        // Success message using SweetAlert
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Created',
+                            text: response.message,
+                        });
+                        $('#socialForm').trigger("reset");
+
+                    } else {
+                        // Error message using SweetAlert
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'An error occurred!',
+                        });
+                    }
                 },
-                error: function(data) {
-                    console.log('Error:', data);
-                    $('#saveBtn').html('Save Changes');
+                error: function(xhr, status, error) {
+                    // Error message using SweetAlert
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'An error occurred!',
+                    });
                 }
-            });
         });
     });
 </script>

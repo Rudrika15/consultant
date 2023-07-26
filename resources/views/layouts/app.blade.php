@@ -33,6 +33,10 @@
     <link href="{{ asset('asset/css/sb-admin-2.min.css')}}" rel="stylesheet">
     <link href="{{ asset('asset/css/style3.css')}}" rel="stylesheet">
 
+
+    <!-- alert msg -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body id="page-top">

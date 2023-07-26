@@ -24,7 +24,7 @@ class StateController extends Controller
                     ->addColumn('action', function ($row) {
                         $view = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm me-1 ">View</a>';
                         $btn = '<a href="' . URL::route('state.edit', $row->id) . '" class="btn btn-primary btn-sm me-1">Edit</a>';
-                        $btn = $btn . '<a href="' . URL::route('state.delete', $row->id) . '" class="btn btn-danger btn-sm me-1">Delete</a>';
+                        $btn = $btn . '<a href="' . URL::route('state.delete', $row->id) . '" class="btn btn-danger btn-sm me-1 delete">Delete</a>';
                         return $view . '' . $btn;
                     })
                     ->rawColumns(['action'])
@@ -70,7 +70,12 @@ class StateController extends Controller
             $state->status = 'Active';
             $state->save();
 
-            return response()->json(['success' => 'State Created successfully.']);
+            $response = [
+                'success' => true,
+                'message' => 'State Created Successfully!',
+            ];
+
+            return response()->json($response);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -100,11 +105,12 @@ class StateController extends Controller
             $state->status = 'Active';
 
             $state->save();
-            return response()->json([
-                'stateName' => $state->stateName,
-                'status' => 'State Updated Successfully!',
-            ]);
-            return redirect()->route('state-index')->with('success', 'State Updated Successfully');
+            $response = [
+                'success' => true,
+                'message' => 'State Updated Successfully!',
+            ];
+
+            return response()->json($response);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -117,7 +123,12 @@ class StateController extends Controller
             $state = State::find($id);
             $state->status = "Deleted";
             $state->save();
-            return response()->json(['success'=>'State Deleted Successfully!']);
+            $response = [
+                'success' => true,
+                'message' => 'State Deleted Successfully!',
+            ];
+
+            return response()->json($response);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');

@@ -41,27 +41,27 @@
     <div class="card-body">
         <div class="table-responsive" id="dataTableDiv">
 
-        <table class="table table-bordered data-table">
-        <thead>
-            <tr>
-                <th>Sr No</th>
-                <th>State Name</th>
-                <th>Status</th>
-                <th width="280px">Action</th>
-            </tr>
-        </thead>
-        <!-- <tr>
+            <table class="table table-bordered data-table">
+                <thead>
+                    <tr>
+                        <th>Sr No</th>
+                        <th>State Name</th>
+                        <th>Status</th>
+                        <th width="280px">Action</th>
+                    </tr>
+                </thead>
+                <!-- <tr>
             <td>
                 <a href="">Edit</a>
                 <a href="">Delete</a>
             </td>
         </tr> -->
-        <tbody>
-        </tbody>
-    </table>
-          
+                <tbody>
+                </tbody>
+            </table>
+
         </div>
-         <!-- Show single data -->
+        <!-- Show single data -->
         <div id="viewDataDiv"></div>
     </div>
 
@@ -73,58 +73,133 @@
 </script>
 
 <script type="text/javascript">
-  $(function () {   
-    var table = $('.data-table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('state.index') }}",
-        columns: [
-            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'stateName', name: 'stateName'},
-            {data: 'status', name: 'status'},
-            {
-                data: 'action',
-                name: 'action',
-                orderable: false,
-                searchable: false,
-                // render: function(data, type, full, meta) {
-                //         var btn='<a href="javascript:void(0)" class="edit btn btn-primary btn-sm me-1 ">View</a>';
-       
-                //         //var editBtn = '<a href="' + "{{ route('state.edit', ['id' => '']) }}/" + data.id + '" class="btn btn-info btn-sm">Edit</a>';
-                //         return btn + ' ' + data.id;
-                // }
-            },
-        ]
-    }); 
-    
-    $(document).on('click', '.edit', function() {
-        var row = $(this).closest('tr');
-        var data = table.row(row).data();
-        var stateId = data.id;
+    $(function() {
+        var table = $('.data-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('state.index') }}",
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'stateName',
+                    name: 'stateName'
+                },
+                {
+                    data: 'status',
+                    name: 'status'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false,
+                    // render: function(data, type, full, meta) {
+                    //         var btn='<a href="javascript:void(0)" class="edit btn btn-primary btn-sm me-1 ">View</a>';
 
-        $.ajax({
-            url: "{{ url('state') }}" + '/' + stateId + '/view',
-            type: 'GET',
-            success: function(response) {
-                // Handle the Ajax response here
-                console.log(response); // Check the response in the browser console
-                $('#dataTableDiv').hide();
-                $('#add').hide();
-                $('#back').show();
-                $('#viewDataDiv').html('<strong>State Name:</strong> ' + response.stateName +'<br>'+'<strong>Satus:</strong> ' + response.status);
-
-            },
-            error: function(error) {
-                // Handle the error response here
-                console.log(error); // Check the error in the browser console
-            }
+                    //         //var editBtn = '<a href="' + "{{ route('state.edit', ['id' => '']) }}/" + data.id + '" class="btn btn-info btn-sm">Edit</a>';
+                    //         return btn + ' ' + data.id;
+                    // }
+                },
+            ]
         });
+
+        $(document).on('click', '.edit', function() {
+            var row = $(this).closest('tr');
+            var data = table.row(row).data();
+            var stateId = data.id;
+
+            $.ajax({
+                url: "{{ url('state') }}" + '/' + stateId + '/view',
+                type: 'GET',
+                success: function(response) {
+                    // Handle the Ajax response here
+                    console.log(response); // Check the response in the browser console
+                    $('#dataTableDiv').hide();
+                    $('#add').hide();
+                    $('#back').show();
+                    $('#viewDataDiv').html('<strong>State Name:</strong> ' + response.stateName + '<br>' + '<strong>Satus:</strong> ' + response.status);
+
+                },
+                error: function(error) {
+                    // Handle the error response here
+                    console.log(error); // Check the error in the browser console
+                }
+            });
+        });
+
+        $('body').on('click', '.delete', function(event) {
+            event.preventDefault();
+            var row = $(this).closest('tr');
+            var data = table.row(row).data();
+            var id = data.id;
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'This action cannot be undone!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085D6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, I am sure!',
+            }).then((confirmation) => {
+                if (confirmation.isConfirmed) {
+                    Swal.fire({
+                        title: 'Delete Confirmation',
+                        text: 'Do you really want to delete this record?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085D6',
+                        confirmButtonText: 'Yes, delete it!',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // AJAX request to delete the record
+                            $.ajax({
+                                url: '/state-delete' + '/' + id,
+                                method: 'GET',
+                                data: {
+                                    _token: "{{ csrf_token() }}",
+                                    id: id
+                                },
+                                success: function(response) {
+                                    if (response.success) {
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Deleted',
+                                            text: response.message,
+                                        }).then(() => {
+                                            // Refresh the page
+                                            location.reload();
+                                        });
+                                    } else {
+                                        // Error message using SweetAlert
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Error',
+                                            text: 'An error occurred!',
+                                        });
+                                    }
+                                },
+                                error: function(xhr, status, error) {
+                                    // Error message using SweetAlert
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Error',
+                                        text: 'An error occurred!',
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
     });
-  });
 </script>
 
 
 
 
 @endsection
-

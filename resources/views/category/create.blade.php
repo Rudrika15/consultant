@@ -72,18 +72,38 @@
         });
         $('#saveBtn').click(function(e) {
             e.preventDefault();
-            $(this).html('Sending..');
+            $(this).html('Submit');
             $.ajax({
                 data: $('#categoryForm').serialize(),
                 url: "{{ route('category.store') }}",
                 type: "POST",
                 dataType: 'json',
-                success: function(data) {
-                    window.open("/category-index", "_self");
+                success: function(response) {
+                    if (response.success) {
+                        // Success message using SweetAlert
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Created',
+                            text: response.message,
+                        });
+                        $('#categoryForm').trigger("reset");
+
+                    } else {
+                        // Error message using SweetAlert
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'An error occurred!',
+                        });
+                    }
                 },
-                error: function(data) {
-                    console.log('Error:', data);
-                    $('#saveBtn').html('Save Changes');
+                error: function(xhr, status, error) {
+                    // Error message using SweetAlert
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'An error occurred!',
+                    });
                 }
             });
         });

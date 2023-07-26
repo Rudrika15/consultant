@@ -27,7 +27,7 @@ class LanguageMasterController extends Controller
                     ->addColumn('action', function ($row) {
                         $view = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm me-1 ">View</a>';
                         $btn = '<a href="' . URL::route('languageMaster.edit', $row->id) . '" class="btn btn-primary btn-sm me-1">Edit</a>';
-                        $btn = $btn . '<a href="' . URL::route('languageMaster.delete', $row->id) . '" class="btn btn-danger btn-sm me-1">Delete</a>';
+                        $btn = $btn . '<a href="' . URL::route('languageMaster.delete', $row->id) . '" class="btn btn-danger btn-sm me-1 delete">Delete</a>';
                         return $view . '' . $btn;
                     })
                     ->rawColumns(['action'])
@@ -72,7 +72,12 @@ class LanguageMasterController extends Controller
             $languageMaster->status = 'Active';
 
             $languageMaster->save();
-            return response()->json(['success' => 'Language Master Created successfully.']);
+            $response = [
+                'success' => true,
+                'message' => 'Language Created Successfully!',
+            ];
+
+            return response()->json($response);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -102,11 +107,12 @@ class LanguageMasterController extends Controller
             $languageMaster->status = 'Active';
 
             $languageMaster->save();
-            return response()->json([
-                'stateName' => $languageMaster->language,
-                'status' => 'Language Updated Successfully!',
-            ]);
-            return redirect()->route('state-index')->with('success', 'Language Updated Successfully');
+            $response = [
+                'success' => true,
+                'message' => 'Language Updated Successfully!',
+            ];
+
+            return response()->json($response);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -119,8 +125,12 @@ class LanguageMasterController extends Controller
             $languageMaster = LanguageMaster::find($id);
             $languageMaster->status = "Deleted";
             $languageMaster->save();
-            return redirect("languageMaster-index")
-                ->with('success', 'language Deleted successfully');
+            $response = [
+                'success' => true,
+                'message' => 'Language Master Deleted Successfully!',
+            ];
+
+            return response()->json($response);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');

@@ -22,7 +22,7 @@ class SocialMasterController extends Controller
                     ->addColumn('action', function ($row) {
                         $view = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm me-1 ">View</a>';
                         $btn = '<a href="' . URL::route('socialMaster.edit', $row->id) . '" class="btn btn-primary btn-sm me-1">Edit</a>';
-                        $btn = $btn . '<a href="' . URL::route('socialMaster.delete', $row->id) . '" class="btn btn-danger btn-sm me-1">Delete</a>';
+                        $btn = $btn . '<a href="' . URL::route('socialMaster.delete', $row->id) . '" class="btn btn-danger btn-sm me-1 delete">Delete</a>';
                         return $view . '' . $btn;
                     })
                     ->rawColumns(['action'])
@@ -58,6 +58,7 @@ class SocialMasterController extends Controller
 
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'title' => 'required',
             'logo' => 'required',
@@ -72,7 +73,12 @@ class SocialMasterController extends Controller
             }
             $socialMaster->status = 'Active';
             $socialMaster->save();
-            return response()->json(['success' => 'Social Master Created successfully.']);
+            $response = [
+                'success' => true,
+                'message' => 'Social Master Created Successfully!',
+            ];
+
+            return response()->json($response);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -105,8 +111,12 @@ class SocialMasterController extends Controller
             }
             $socialMaster->status = 'Active';
             $socialMaster->save();
-            return redirect('socialMaster-index')
-                ->with('success', 'SocialMaster Updated Successfully');
+            $response = [
+                'success' => true,
+                'message' => 'Social Master Updated Successfully!',
+            ];
+
+            return response()->json($response);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -119,8 +129,12 @@ class SocialMasterController extends Controller
             $socialMaster = SocialMaster::find($id);
             $socialMaster->status = "Deleted";
             $socialMaster->save();
-            return redirect("socialMaster-index")
-                ->with('success', 'SocialMaster Deleted successfully');
+            $response = [
+                'success' => true,
+                'message' => 'Social Master Deleted Successfully!',
+            ];
+
+            return response()->json($response);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
