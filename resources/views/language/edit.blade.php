@@ -40,7 +40,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" id="languageForm" name="languageForm" action="{{route('language.update')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="languageForm" name="languageForm"  enctype="multipart/form-data" >
             @csrf
             <input type="hidden" name="id" id="id" value="{{$language->id}}">
             <div class="form-label-group mt-3">
@@ -79,6 +79,7 @@
         $(document).ready(function() {
             // Get the values you want to update
             $("#languageForm").submit(function(event) {
+                event.preventDefault();
                 var id = $('#id').val();
                 var languageId = $('#languageId').val();
 
@@ -91,11 +92,29 @@
                         languageId: languageId,
                     },
                     success: function(response) {
-                        window.open("/language-index", "_self");
+                        if (response.success) {
+                        // Success message using SweetAlert
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: response.message,
+                        },200);
+                    } else {
+                        // Error message using SweetAlert
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'An error occurred!',
+                        });
+                    }
                     },
-                    error: function(error) {
-                        // Handle error response
-                        alert('Error updating language.'); // You can replace this with any error message handling
+                    error: function(xhr, status, error) {
+                    // Error message using SweetAlert
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'An error occurred!',
+                        });
                     }
                 });
             });

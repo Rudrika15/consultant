@@ -40,7 +40,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" id="videoForm" name="videoForm" action="{{route('video.store')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="videoForm" name="videoForm"  enctype="multipart/form-data" >
             @csrf
 
 
@@ -72,18 +72,37 @@
         });
         $('#saveBtn').click(function(e) {
             e.preventDefault();
-            $(this).html('Sending..');
+            $(this).html('Submit');
             $.ajax({
                 data: $('#videoForm').serialize(),
                 url: "{{ route('video.store') }}",
                 type: "POST",
                 dataType: 'json',
-                success: function(data) {
-                    window.open("/video-index", "_self");
+                success: function(response) {
+                    if (response.success) {
+                        // Success message using SweetAlert
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: response.message,
+                        },200);
+                        $('#videoForm').trigger("reset");
+                    } else {
+                        // Error message using SweetAlert
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'An error occurred!',
+                        });
+                    }
                 },
-                error: function(data) {
-                    console.log('Error:', data);
-                    $('#saveBtn').html('Save Changes');
+                error: function(xhr, status, error) {
+                    // Error message using SweetAlert
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'An error occurred!',
+                    });
                 }
             });
         });

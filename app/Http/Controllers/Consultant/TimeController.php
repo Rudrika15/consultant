@@ -24,7 +24,7 @@ class TimeController extends Controller
                     ->addColumn('action', function ($row) {
                         $view = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm me-1 ">View</a>';
                         $btn = '<a href="' . URL::route('time.edit', $row->id) . '" class="update btn btn-primary btn-sm me-1">Edit</a>';
-                        $btn = $btn . '<a href="' . URL::route('time.delete', $row->id) . '" class="delete btn btn-danger btn-sm me-1">Delete</a>';
+                        $btn = $btn . '<a href="' . URL::route('time.delete', $row->id) . '" class="delete btn btn-danger btn-sm me-1" id="delete">Delete</a>';
                         return $view . '' . $btn;
                     })
                     ->rawColumns(['action'])
@@ -72,15 +72,12 @@ class TimeController extends Controller
             $time->day = $request->input('day');
             $time->status = 'Active';
             $time->save();
-
-            //Return a JSON response with the stored data.
             return response()->json([
-                'day' => $time->day,
-                'time' => $time->time,
-                'status' => 'Data stored successfully!',
+                'success' => true,
+                'message' => 'Time Created Successfully!',
             ]);
-            return redirect()->route('time-index')->with('success', 'Time Create Successfully');
-        } catch (\Throwable $th) {
+
+         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }
@@ -110,8 +107,11 @@ class TimeController extends Controller
             $time->day = $request->day;
             $time->status = 'Active';
             $time->save();
-
-            return redirect()->route('time-index')->with('success', 'Time Create Successfully');
+            return response()->json([
+                'success' => true,
+                'message' => 'Time Updated Successfully!',
+            ]);
+            
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -124,8 +124,11 @@ class TimeController extends Controller
             $time = Time::find($id);
             $time->status = "Deleted";
             $time->save();
-            return redirect("time-index")
-                ->with('success', 'Time Deleted successfully');
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Time Deleted Successfully!',
+            ]);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');

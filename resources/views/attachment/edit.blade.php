@@ -40,7 +40,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" action="{{route('attachment.update')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="attachmentForm" name="attachmentForm" enctype="multipart/form-data">
             @csrf
 
             <input type="hidden" name="id" id="id" value="{{$attachment->id}}">
@@ -55,7 +55,7 @@
             <div class="form-label-group mt-3">
                 <label for="file" class="fw-bold">File <sup class="text-danger">*</sup></label>
                 <input id="file" type="file" name="file" class="form-control" placeholder="file">
-                <img src="{{ url('/attachment/' . $attachment->file) }}" alt="" style="height:100px; width: 100px;">
+                <img id="preview-file" class="mt-3" src="{{ url('/attachment/' . $attachment->file) }}" alt="" style="height:100px; width: 100px;">
 
                 @if ($errors->has('file'))
                 <span class="error">{{ $errors->first('file') }}</span>
@@ -63,7 +63,7 @@
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" id="saveBtn" class="btn btn-primary">Submit</button>
             </div>
 
         </form>
@@ -73,6 +73,54 @@
 
 </div>
 
-
+<script type="text/javascript">
+   
+    $('#file').change(function() {
+        let reader = new FileReader();
+        reader.onload = (e) => {
+            $('#preview-file').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(this.files[0]);
+    });
+    
+    $('#attachmentForm').submit(function(e) {
+        e.preventDefault();
+        let formData = new FormData(this);
+        
+        $.ajax({
+            type: 'POST',
+            url: "{{ route('attachment.update') }}",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                    if (response.success) {
+                        // Success message using SweetAlert
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: response.message,
+                        },200);
+                        $('#attachmentForm').trigger("reset");
+                    } else {
+                        // Error message using SweetAlert
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'An error occurred!',
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Error message using SweetAlert
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'An error occurred!',
+                    });
+                }
+        });
+    });
+</script>
 
 @endsection

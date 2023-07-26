@@ -40,7 +40,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" id="timeForm" name="timeForm" action="{{route('time.update')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="timeForm" name="timeForm"  enctype="multipart/form-data">
             @csrf
             
             <input type="hidden" name="id" id="id" value="{{$time->id}}">
@@ -63,10 +63,10 @@
            
            
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" id="saveBtn" class="btn btn-primary">Submit</button>
             </div>
 
-        </form>
+        </form>                                                                                                                                                                                                                                                                                                                                         
         <!-- </div> -->
     </div>
     <!-- Collapsable Card Example -->
@@ -82,8 +82,9 @@
           }
     });
     $(document).ready(function() {
-        // Get the values you want to update
+        // Get the values you want to update                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
         $("#timeForm").submit(function(event){
+            event.preventDefault();
             var id = $('#id').val();
             var time = $('#time').val();
             var day = $('#day').val();
@@ -96,14 +97,32 @@
                     time: time,
                     day: day
                 },
-                success: function (response) {
-                    window.open("/time-index", "_self"); 
+                success: function(response) {
+                    if (response.success) {
+                        // Success message using SweetAlert
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: response.message,
+                        },200);
+                    } else {
+                        // Error message using SweetAlert
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'An error occurred!',
+                        });
+                    }
                 },
-                error: function (error) {
-                    // Handle error response
-                    alert('Error updating time.'); // You can replace this with any error message handling
+                error: function(xhr, status, error) {
+                    // Error message using SweetAlert
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'An error occurred!',
+                    });
                 }
-            });
+             });
         });
     });
   });

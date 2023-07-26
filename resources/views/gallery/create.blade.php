@@ -40,7 +40,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" id="galleryForm" name="galleryForm" action="{{route('gallery.store')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="galleryForm" name="galleryForm" enctype="multipart/form-data">
             @csrf
 
 
@@ -55,7 +55,8 @@
             <div class="form-label-group mt-3">
                 <label for="photo" class="fw-bold">Photo <sup class="text-danger">*</sup></label>
                 <input id="photo" type="file" name="photo" class="form-control" placeholder="photo">
-
+                <img id="preview-photo" src="/gallery/default.jpg" name="preview-photo"  class="mt-3" width="100px" height="100px">
+                
                 @if ($errors->has('photo'))
                 <span class="error">{{ $errors->first('photo') }}</span>
                 @endif
@@ -72,38 +73,53 @@
 
 </div>
 
-<!-- <script type="text/javascript">
-    $(document).ready(function(e) {
-
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-
-        $('#galleryForm').submit(function(e) {
-
-            e.preventDefault();
-
-            var formData = new FormData(this);
-
-            $.ajax({
-                type: 'POST',
-                url: "{{ url('gallery-store')}}",
-                data: formData,
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: (data) => {
-                    this.reset();
-                    alert('Image has been uploaded using jQuery ajax successfully');
+<script type="text/javascript">
+   
+    $('#photo').change(function() {
+        let reader = new FileReader();
+        reader.onload = (e) => {
+            $('#preview-photo').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(this.files[0]);
+    });
+    
+    $('#galleryForm').submit(function(e) {
+        e.preventDefault();
+        let formData = new FormData(this);
+        
+        $.ajax({
+            type: 'POST',
+            url: "{{ route('gallery.store') }}",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                    if (response.success) {
+                        // Success message using SweetAlert
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: response.message,
+                        },200);
+                        $('#galleryForm').trigger("reset");
+                    } else {
+                        // Error message using SweetAlert
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'An error occurred!',
+                        });
+                    }
                 },
-                error: function(data) {
-                    console.log(data);
+                error: function(xhr, status, error) {
+                    // Error message using SweetAlert
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'An error occurred!',
+                    });
                 }
-            });
         });
     });
-</script> -->
+</script>
 @endsection

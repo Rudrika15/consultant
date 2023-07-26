@@ -71,11 +71,12 @@ class VideoController extends Controller
             $video->url = $request->url;
             $video->status = 'Active';
             $video->save();
+
             return response()->json([
-                'url' => $video->url,
-                'status' => $video->status,
-                'status' => 'Data stored successfully!',
-            ]);
+                'success' => true,
+                'message' => 'Video Created Successfully!',
+            ],200);
+
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -106,7 +107,12 @@ class VideoController extends Controller
             $video->url = $request->url;
             $video->status = 'Active';
             $video->save();
-            return redirect('video-index')->with('success', 'Video Updated Successfully');
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Video Updated Successfully!',
+            ],200);
+
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -119,8 +125,12 @@ class VideoController extends Controller
             $video = Video::find($id);
             $video->status = "Deleted";
             $video->save();
-            return redirect("video-index")
-                ->with('success', 'Video Deleted successfully');
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Video Updated Successfully!',
+            ],200);
+            
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');

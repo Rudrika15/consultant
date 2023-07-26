@@ -9,6 +9,7 @@ use App\Http\Controllers\Consultant\AttachmentController;
 use App\Http\Controllers\Consultant\ConsultantController;
 use App\Http\Controllers\Consultant\GalleryController;
 use App\Http\Controllers\Consultant\LanguageController;
+use App\Http\Controllers\Consultant\PackageController;
 use App\Http\Controllers\Consultant\SocialLinkController;
 use App\Http\Controllers\Consultant\TimeController;
 use App\Http\Controllers\Consultant\VideoController;
@@ -159,3 +160,12 @@ Route::post('socialLink-store', [SocialLinkController::class, 'store'])->name('s
 Route::get('socialLink-edit/{id?}', [SocialLinkController::class, 'edit'])->name('socialLink.edit');
 Route::post('socialLink-update', [SocialLinkController::class, 'update'])->name('socialLink.update');
 Route::get('socialLink-delete/{id?}', [SocialLinkController::class, 'delete'])->name('socialLink.delete');
+
+/* Package  */
+Route::get('package-index', [PackageController::class, 'index'])->name('package.index');
+Route::get('package/{id}/view',[PackageController::class, 'view'])->name('package.view');
+Route::get('package-create', [PackageController::class, 'create'])->name('package.create');
+Route::post('package-store', [PackageController::class, 'store'])->name('package.store');
+Route::get('package-edit/{id?}', [PackageController::class, 'edit'])->name('package.edit');
+Route::post('package-update', [PackageController::class, 'update'])->name('package.update');
+Route::get('package-delete/{id?}', [PackageController::class, 'delete'])->name('package.delete');

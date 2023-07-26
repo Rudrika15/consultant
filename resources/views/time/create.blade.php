@@ -40,7 +40,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group"id="timeForm" name="timeForm" action="{{route('time.store')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group"id="timeForm" name="timeForm"  enctype="multipart/form-data" >
             @csrf
             
             <div class="form-label-group mt-3">
@@ -82,20 +82,40 @@
     });
      $('#saveBtn').click(function (e) {
         e.preventDefault();
-        $(this).html('Sending..');
+        $(this).html('Submit');
         $.ajax({
           data: $('#timeForm').serialize(),
           url: "{{ route('time.store') }}",
           type: "POST",
           dataType: 'json',
-          success: function (data) {
-                    window.open("/time-index", "_self");  
+          success: function (response) {
+                    // window.open("/time-index", "_self");
+                    if (response.success) {
+                        // Success message using SweetAlert
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: response.message,
+                        });
+                        $('#timeForm').trigger("reset");
+                    } else {
+                        // Error message using SweetAlert
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'An error occurred!',
+                        });
+                    }
           },
-          error: function (data) {
-              console.log('Error:', data);
-              $('#saveBtn').html('Save Changes');
-          }
-      });
+          error: function(xhr, status, error) {
+                    // Error message using SweetAlert
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'An error occurred!',
+                    });
+                }
+        });
     });
 });     
 </script>

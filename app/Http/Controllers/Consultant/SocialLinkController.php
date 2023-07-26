@@ -79,9 +79,13 @@ class SocialLinkController extends Controller
             $socialLink->url = $request->url;
 
             $socialLink->status = 'Active';
-            $socialLink->save();
-            return redirect('socialLink-index')
-                ->with('success', 'SocialLink Create Successfully');
+            $socialLink->save();  
+
+            return response()->json([
+                'success' => true,
+                'message' => 'SocialLink Created Successfully!',
+            ],200);
+
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -117,8 +121,12 @@ class SocialLinkController extends Controller
 
             $socialLink->status = 'Active';
             $socialLink->save();
-            return redirect('socialLink-index')
-                ->with('success', 'SocialLink Updated Successfully');
+
+            return response()->json([
+                'success' => true,
+                'message' => 'SocialLink Updated Successfully!',
+            ],200);
+
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -131,8 +139,10 @@ class SocialLinkController extends Controller
             $socialLink = SocialLink::find($id);
             $socialLink->status = "Deleted";
             $socialLink->save();
-            return redirect("socialLink-index")
-                ->with('success', 'SocialLink Deleted successfully');
+            return response()->json([
+                'success' => true,
+                'message' => 'SocialLink Deleted Successfully!',
+            ],200);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');

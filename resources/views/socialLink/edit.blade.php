@@ -70,7 +70,7 @@
 
 
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" id="saveBtn" class="btn btn-primary">Submit</button>
             </div>
 
         </form>
@@ -91,6 +91,7 @@
     $(document).ready(function() {
         // Get the values you want to update
         $("#socialLinkForm").submit(function(event){
+            event.preventDefault();
             var id = $('#id').val();
             var socialMediaMasterId = $('#socialMediaMasterId').val();
             var url = $('#url').val();
@@ -103,12 +104,30 @@
                     socialMediaMasterId: socialMediaMasterId,
                     url: url
                 },
-                success: function (response) {
-                    window.open("/socialLink-index", "_self"); 
+                success: function(response) {
+                    if (response.success) {
+                        // Success message using SweetAlert
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: response.message,
+                        },200);
+                    } else {
+                        // Error message using SweetAlert
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'An error occurred!',
+                        });
+                    }
                 },
-                error: function (error) {
-                    // Handle error response
-                    alert('Error updating socialLink.'); // You can replace this with any error message handling
+                error: function(xhr, status, error) {
+                    // Error message using SweetAlert
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'An error occurred!',
+                    });
                 }
             });
         });
