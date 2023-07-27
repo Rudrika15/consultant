@@ -32,7 +32,7 @@
         </div>
         <div class="">
             <a href="{{ route('city.create') }}" id="add" class="btn btnback btn-sm">ADD</a>
-            <a href="" id="back" class="btn btnback  btn-sm" style="display:none;">Back</a>
+            <a href="" id="back" class="btn btnback  btn-sm" style="display:none;">BACK</a>
 
             <!-- /.sub-menu -->
         </div>

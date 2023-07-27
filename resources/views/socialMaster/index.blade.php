@@ -33,7 +33,7 @@
         <div class="">
             <a href="{{ route('socialMaster.create') }}" id="add" class="btn btnback btn-sm">ADD</a>
 
-            <a href="" id="back" class="btn btnback  btn-sm" style="display:none;">Back</a>
+            <a href="" id="back" class="btn btnback  btn-sm" style="display:none;">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
