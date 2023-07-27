@@ -33,7 +33,7 @@ class LanguageController extends Controller
                         ->rawColumns(['action'])
                         ->make(true);   
             }
-            return view('language.index');
+            return view('consultant.language.index');
         }
         catch(\Throwable $th){
             //throw $th;
@@ -57,7 +57,7 @@ class LanguageController extends Controller
         try{
             $languageMaster=LanguageMaster::all();
             $language = Language::all();
-            return view('language.create', compact('language','languageMaster'));
+            return view('consultant.language.create', compact('language','languageMaster'));
         }
         catch(\Throwable $th){
             //throw $th;
@@ -92,7 +92,7 @@ class LanguageController extends Controller
         try{
             $languageMaster=LanguageMaster::all();
             $language = Language::find($id);
-            return view('language.edit', compact('language','languageMaster'));
+            return view('consultant.language.edit', compact('language','languageMaster'));
         }
         catch(\Throwable $th){
             //throw $th;

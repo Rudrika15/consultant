@@ -30,7 +30,7 @@ class VideoController extends Controller
                         ->rawColumns(['action'])
                         ->make(true);   
             }
-            return view('video.index');    
+            return view('consultant.video.index');    
         }
         catch(\Throwable $th){
             //throw $th;
@@ -53,7 +53,7 @@ class VideoController extends Controller
     {
         try{
             $video = Video::all();
-            return view('video.create', compact('video'));
+            return view('consultant.video.create', compact('video'));
         }
         catch(\Throwable $th){
             //throw $th;
@@ -89,7 +89,7 @@ class VideoController extends Controller
     {
         try{
             $video = Video::find($id);
-            return view('video.edit', compact('video'));
+            return view('consultant.video.edit', compact('video'));
         }
         catch(\Throwable $th){
             //throw $th;

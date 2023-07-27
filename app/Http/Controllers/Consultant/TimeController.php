@@ -30,7 +30,7 @@ class TimeController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
             }
-            return view('time.index');
+            return view('consultant.time.index');
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -51,7 +51,7 @@ class TimeController extends Controller
     {
         try {
             $time = Time::all();
-            return view('time.create', compact('time'));
+            return view('consultant.time.create', compact('time'));
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -86,7 +86,7 @@ class TimeController extends Controller
     {
         try {
             $time = Time::find($id);
-            return view('time.edit', compact('time'));
+            return view('consultant.time.edit', compact('time'));
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');

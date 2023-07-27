@@ -35,7 +35,7 @@ class SocialLinkController extends Controller
                     ->make(true);
             }
 
-            return view('socialLink.index');
+            return view('consultant.socialLink.index');
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -57,7 +57,7 @@ class SocialLinkController extends Controller
         try {
             $socialMaster = SocialMaster::all();
             $socialLink = SocialLink::all();
-            return view('socialLink.create', compact('socialLink', 'socialMaster'));
+            return view('consultant.socialLink.create', compact('socialLink', 'socialMaster'));
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -97,7 +97,7 @@ class SocialLinkController extends Controller
         try {
             $socialMaster = SocialMaster::all();
             $socialLink = SocialLink::find($id);
-            return view('socialLink.edit', compact('socialLink', 'socialMaster'));
+            return view('consultant.socialLink.edit', compact('socialLink', 'socialMaster'));
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');

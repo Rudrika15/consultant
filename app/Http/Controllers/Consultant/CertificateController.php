@@ -27,7 +27,7 @@ class CertificateController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
             }
-            return view('certificate.index');
+            return view('consultant.certificate.index');
         // }
         // catch(\Throwable $th){
         //     //throw $th;
@@ -49,7 +49,7 @@ class CertificateController extends Controller
     {
         try{
             $certificate = Certificate::all();
-            return view('certificate.create', compact('certificate'));
+            return view('consultant.certificate.create', compact('certificate'));
         }
         catch(\Throwable $th){
             //throw $th;
@@ -92,7 +92,7 @@ class CertificateController extends Controller
     {
         try{
             $certificate = Certificate::find($id);
-            return view('certificate.edit', compact('certificate'));
+            return view('consultant.certificate.edit', compact('certificate'));
         }
         catch(\Throwable $th){
             //throw $th;

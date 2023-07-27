@@ -32,7 +32,7 @@ class AttachmentController extends Controller
                         ->rawColumns(['action'])
                         ->make(true);   
             }
-            return view('attachment.index');
+            return view('consultant.attachment.index');
         }
         catch(\Throwable $th){
             //throw $th;
@@ -55,7 +55,7 @@ class AttachmentController extends Controller
     {
         try{
             $attachment = Attachment::all();
-            return view('attachment.create', compact('attachment'));
+            return view('consultant.attachment.create', compact('attachment'));
         }
         catch(\Throwable $th){
             //throw $th;
@@ -97,7 +97,7 @@ class AttachmentController extends Controller
     {
         try{
             $attachment = Attachment::find($id);
-            return view('attachment.edit', compact('attachment'));
+            return view('consultant.attachment.edit', compact('attachment'));
         }
         catch(\Throwable $th){
             //throw $th;

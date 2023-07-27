@@ -31,7 +31,7 @@ class GalleryController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
             }
-            return view('gallery.index');
+            return view('consultant.gallery.index');
         }
         catch(\Throwable $th){
             //throw $th;
@@ -54,7 +54,7 @@ class GalleryController extends Controller
     {
         try{
             $gallery = Gallery::all();
-            return view('gallery.create', compact('gallery'));
+            return view('consultant.gallery.create', compact('gallery'));
         }
         catch(\Throwable $th){
             //throw $th;
@@ -97,7 +97,7 @@ class GalleryController extends Controller
     {
         try{
             $gallery = Gallery::find($id);
-            return view('gallery.edit', compact('gallery'));
+            return view('consultant.gallery.edit', compact('gallery'));
         }
         catch(\Throwable $th){
             //throw $th;

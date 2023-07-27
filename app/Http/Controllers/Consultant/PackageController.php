@@ -28,7 +28,7 @@ class PackageController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
             }
-            return view('package.index');
+            return view('consultant.package.index');
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -49,7 +49,7 @@ class PackageController extends Controller
     {
         try {
             $package = Package::all();
-            return view('package.create', compact('package'));
+            return view('consultant.package.create', compact('package'));
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -88,7 +88,7 @@ class PackageController extends Controller
     {
         try {
             $package = Package::find($id);
-            return view('package.edit', compact('package'));
+            return view('consultant.package.edit', compact('package'));
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');

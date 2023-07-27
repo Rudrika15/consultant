@@ -27,7 +27,7 @@ class AchievementController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
             }
-            return view('achievement.index');
+            return view('consultant.achievement.index');
         }
         catch(\Throwable $th){
             //throw $th;
@@ -49,7 +49,7 @@ class AchievementController extends Controller
     {
         try{
             $achievement = Achievement::all();
-            return view('achievement.create', compact('achievement'));
+            return view('consultant.achievement.create', compact('achievement'));
         }
         catch(\Throwable $th){
             //throw $th;
@@ -91,7 +91,7 @@ class AchievementController extends Controller
     {
         try{
             $achievement = Achievement::find($id);
-            return view('achievement.edit', compact('achievement'));
+            return view('consultant.achievement.edit', compact('achievement'));
         }
         catch(\Throwable $th){
             //throw $th;
