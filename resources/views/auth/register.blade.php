@@ -125,7 +125,7 @@
                                                 <label for="name" class="col-form-label text-md-end">{{ __('State') }}</label>
 
                                                 <select class="form-select" aria-label="Default select example" id="stateId" name="stateId" value="{{ old('stateId') }}" required autocomplete="stateId" autofocus>
-                                                    <option value="">-- select State --</option>
+                                                    <option value="">-- Select State --</option>
                                                     @foreach($states as $data)
                                                     <option value="{{$data->id}}">{{$data->stateName}}</option>
                                                     @endforeach
@@ -140,7 +140,7 @@
                                                 <label for="name" class="col-form-label text-md-end">{{ __('City') }}</label>
 
                                                 <select class="form-select" aria-label="Default select example" id="cityId" name="cityId" value="{{ old('cityId') }}" required autocomplete="cityId" autofocus>
-                                          
+                                                <option value="">-- Select City --</option>
                                                 </select>
                                                 @error('cityId')
                                                 <span class="invalid-feedback" role="alert">
