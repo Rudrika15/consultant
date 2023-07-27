@@ -32,7 +32,11 @@
             <h4 class="">Edit City</h4>
         </div>
         <div class="">
+<<<<<<< HEAD
             <a href="{{ route('city.index') }}" class="btn btnback btn-sm">BACK</a>
+=======
+            <a href="{{ route('city.index') }}" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">BACK</a>
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 
             <!-- /.sub-menu -->
         </div>
@@ -40,19 +44,31 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
+<<<<<<< HEAD
         <form class="form-group" id="cityForm" enctype="multipart/form-data">
+=======
+        <form class="form-group" action="{{route('city.update')}}" enctype="multipart/form-data" method="post">
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
             @csrf
             <input type="hidden" name="id" id="id" value="{{$city->id}}">
 
             <div class="form-label-group mt-3">
                 <div class="form-group">
                     <strong>State Name:</strong>
+<<<<<<< HEAD
                     <select class="form-control" data-error='State Name Field is required' name="stateId" id="stateId">
+=======
+                    <select class="form-control" data-error='State Name Field is required' required name="stateId" id="stateId">
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
                         <option value="" selected disabled> Select User Name </option>
                         @foreach ($state as $statedata)
                         <option value="{{ $statedata->id }}" {{$statedata->id == old('stateId',$city->stateId)? 'selected':''}}>{{ $statedata->stateName }}</option>
                         @endforeach
+<<<<<<< HEAD
 
+=======
+                        
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
                     </select>
                     <div class="help-block with-errors"></div>
                     @error('stateId')
@@ -83,6 +99,7 @@
 
 </div>
 
+<<<<<<< HEAD
 <script type="text/javascript">
     $(function() {
         $.ajaxSetup({
@@ -138,5 +155,8 @@
         });
     });
 </script>
+=======
+
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 
 @endsection

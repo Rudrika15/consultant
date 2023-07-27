@@ -32,7 +32,11 @@
             <h4 class="">Edit Social Link</h4>
         </div>
         <div class="">
+<<<<<<< HEAD
             <a href="{{ route('socialLink.index') }}" class="btn btnback btn-sm">BACK</a>
+=======
+            <a href="{{ route('socialLink.index') }}" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">BACK</a>
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 
             <!-- /.sub-menu -->
         </div>
@@ -40,6 +44,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
+<<<<<<< HEAD
         <form class="form-group" action="{{route('socialLink.update')}}" enctype="multipart/form-data" method="post">
             @csrf
     <input type="hidden" name="id" id="id" value="{{$socialLink->id}}">
@@ -47,6 +52,15 @@
             <div class="form-label-group mt-3">
                 <div class="form-group">
                 
+=======
+        <form class="form-group" id="socialLinkForm" name="socialLinkForm" action="{{route('socialLink.update')}}" enctype="multipart/form-data" method="post">
+            @csrf
+            <input type="hidden" name="id" id="id" value="{{$socialLink->id}}">
+
+            <div class="form-label-group mt-3">
+                <div class="form-group">
+
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
                     <strong>Social Media Master:</strong>
                     <select class="form-control" data-error='Social Media Master Field is required' required name="socialMediaMasterId" id="socialMediaMasterId">
                         <option value="" selected disabled> Select Social Media Master </option>
@@ -67,8 +81,13 @@
                 <span class="error">{{ $errors->first('url') }}</span>
                 @endif
             </div>
+<<<<<<< HEAD
         
            
+=======
+
+
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
@@ -80,6 +99,44 @@
 
 </div>
 
+<<<<<<< HEAD
+=======
+<script type="text/javascript">
+  $(function () {
+     
+    $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+    });
+    $(document).ready(function() {
+        // Get the values you want to update
+        $("#socialLinkForm").submit(function(event){
+            var id = $('#id').val();
+            var socialMediaMasterId = $('#socialMediaMasterId').val();
+            var url = $('#url').val();
+            $.ajax({
+                url: '{{ route('socialLink.update') }}',
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}', // Include the CSRF token for Laravel security
+                    id: id,
+                    socialMediaMasterId: socialMediaMasterId,
+                    url: url
+                },
+                success: function (response) {
+                    window.open("/socialLink-index", "_self"); 
+                },
+                error: function (error) {
+                    // Handle error response
+                    alert('Error updating socialLink.'); // You can replace this with any error message handling
+                }
+            });
+        });
+    });
+  });
+</script>
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 
 
 @endsection

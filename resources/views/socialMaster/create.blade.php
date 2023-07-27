@@ -32,7 +32,11 @@
             <h4 class="">Create Social Master</h4>
         </div>
         <div class="">
+<<<<<<< HEAD
             <a href="{{ route('socialMaster.index') }}" class="btn btnback btn-sm">BACK</a>
+=======
+            <a href="{{ route('socialMaster.index') }}" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">BACK</a>
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 
             <!-- /.sub-menu -->
         </div>
@@ -40,7 +44,11 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
+<<<<<<< HEAD
         <form class="form-group" id="socialForm" enctype="multipart/form-data" method="post">
+=======
+        <form class="form-group" action="{{route('socialMaster.store')}}" enctype="multipart/form-data" method="post">
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
             @csrf
 
 
@@ -55,14 +63,21 @@
             <div class="form-label-group mt-3">
                 <label for="logo" class="fw-bold">Logo <sup class="text-danger">*</sup></label>
                 <input id="logo" type="file" name="logo" class="form-control" placeholder="logo">
+<<<<<<< HEAD
                 <img id="preview-logo" width="100px" height="100px"  class="mt-3">
 
                 @if ($errors->has('logo'))
                 <span class="error" id="image-input-error">{{ $errors->first('logo') }}</span>
+=======
+                
+                @if ($errors->has('logo'))
+                <span class="error">{{ $errors->first('logo') }}</span>
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
                 @endif
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
+<<<<<<< HEAD
                 <button type="submit" class="btn btn-primary" id="saveBtn">Submit</button>
             </div>
 
@@ -71,10 +86,21 @@
         <!-- </div> -->
     </div>
     <!-- Collapsable Card Example -->
+=======
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+
+        </form>
+        <!-- </div> -->
+    </div>
+    <!-- Collapsable Card Example -->
+
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 </div>
 
 
 
+<<<<<<< HEAD
 
 <script type="text/javascript">
     /*------------------------------------------
@@ -140,4 +166,6 @@
     });
 </script>
 
+=======
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 @endsection

@@ -32,7 +32,11 @@
             <h4 class="">Create Language</h4>
         </div>
         <div class="">
+<<<<<<< HEAD
             <a href="{{ route('language.index') }}" class="btn btnback btn-sm">BACK</a>
+=======
+            <a href="{{ route('language.index') }}" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">BACK</a>
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 
             <!-- /.sub-menu -->
         </div>
@@ -40,7 +44,11 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
+<<<<<<< HEAD
         <form class="form-group" action="{{route('language.update')}}" enctype="multipart/form-data" method="post">
+=======
+        <form class="form-group" id="languageForm" name="languageForm" action="{{route('language.update')}}" enctype="multipart/form-data" method="post">
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
             @csrf
             <input type="hidden" name="id" id="id" value="{{$language->id}}">
             <div class="form-label-group mt-3">
@@ -68,7 +76,44 @@
     <!-- Collapsable Card Example -->
 
 </div>
+<<<<<<< HEAD
 
 
 
+=======
+<script type="text/javascript">
+    $(function() {
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(document).ready(function() {
+            // Get the values you want to update
+            $("#languageForm").submit(function(event) {
+                var id = $('#id').val();
+                var languageId = $('#languageId').val();
+
+                $.ajax({
+                    url: '{{route('language.update')}}',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}', // Include the CSRF token for Laravel security
+                        id: id,
+                        languageId: languageId,
+                    },
+                    success: function(response) {
+                        window.open("/language-index", "_self");
+                    },
+                    error: function(error) {
+                        // Handle error response
+                        alert('Error updating language.'); // You can replace this with any error message handling
+                    }
+                });
+            });
+        });
+    });
+</script>
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 @endsection

@@ -31,9 +31,15 @@
             <h4 class="">State</h4>
         </div>
         <div class="">
+<<<<<<< HEAD
             <a href="{{ route('state.create') }}" id="add" class="btn btnback  btn-sm">ADD</a>
 
             <a href="" id="back" class="btn btnback  btn-sm" style="display:none;">Back</a>
+=======
+            <a href="{{ route('state.create') }}" id="add" class="btn btnback  btn-sm" style="background-color: #002E6E; color:white;">ADD</a>
+
+            <a href="" id="back" class="btn btnback  btn-sm" style="background-color: #002E6E; color:white;display:none;">Back</a>
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
             <!-- /.sub-menu -->
         </div>
     </div>
@@ -41,6 +47,7 @@
     <div class="card-body">
         <div class="table-responsive" id="dataTableDiv">
 
+<<<<<<< HEAD
             <table class="table table-bordered data-table">
                 <thead>
                     <tr>
@@ -51,17 +58,38 @@
                     </tr>
                 </thead>
                 <!-- <tr>
+=======
+        <table class="table table-bordered data-table">
+        <thead>
+            <tr>
+                <th>Sr No</th>
+                <th>State Name</th>
+                <th>Status</th>
+                <th width="280px">Action</th>
+            </tr>
+        </thead>
+        <!-- <tr>
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
             <td>
                 <a href="">Edit</a>
                 <a href="">Delete</a>
             </td>
         </tr> -->
+<<<<<<< HEAD
                 <tbody>
                 </tbody>
             </table>
 
         </div>
         <!-- Show single data -->
+=======
+        <tbody>
+        </tbody>
+    </table>
+          
+        </div>
+         <!-- Show single data -->
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
         <div id="viewDataDiv"></div>
     </div>
 
@@ -73,6 +101,7 @@
 </script>
 
 <script type="text/javascript">
+<<<<<<< HEAD
     $(function() {
         var table = $('.data-table').DataTable({
             processing: true,
@@ -203,3 +232,58 @@
 
 
 @endsection
+=======
+  $(function () {   
+    var table = $('.data-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('state.index') }}",
+        columns: [
+            {data: 'id', name: 'id'},
+            {data: 'stateName', name: 'stateName'},
+            {data: 'status', name: 'status'},
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false,
+                // render: function(data, type, full, meta) {
+                //         var btn='<a href="javascript:void(0)" class="edit btn btn-primary btn-sm me-1 ">View</a>';
+       
+                //         //var editBtn = '<a href="' + "{{ route('state.edit', ['id' => '']) }}/" + data.id + '" class="btn btn-info btn-sm">Edit</a>';
+                //         return btn + ' ' + data.id;
+                // }
+            },
+        ]
+    }); 
+    
+    $(document).on('click', '.edit', function() {
+        var row = $(this).closest('tr');
+        var data = table.row(row).data();
+        var stateId = data.id;
+
+        $.ajax({
+            url: "{{ url('state') }}" + '/' + stateId + '/view',
+            type: 'GET',
+            success: function(response) {
+                // Handle the Ajax response here
+                console.log(response); // Check the response in the browser console
+                $('#dataTableDiv').hide();
+                $('#add').hide();
+                $('#back').show();
+                $('#viewDataDiv').html('<strong>State Name:</strong> ' + response.stateName +'<br>'+'<strong>Satus:</strong> ' + response.status);
+
+            },
+            error: function(error) {
+                // Handle the error response here
+                console.log(error); // Check the error in the browser console
+            }
+        });
+    });
+  });
+</script>
+
+
+@endsection
+
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1

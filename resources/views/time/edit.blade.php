@@ -32,7 +32,11 @@
             <h4 class="">Create Time</h4>
         </div>
         <div class="">
+<<<<<<< HEAD
             <a href="{{ route('time.index') }}" class="btn btnback btn-sm">BACK</a>
+=======
+            <a href="{{ route('time.index') }}" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">BACK</a>
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 
             <!-- /.sub-menu -->
         </div>
@@ -40,7 +44,11 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
+<<<<<<< HEAD
         <form class="form-group" action="{{route('time.update')}}" enctype="multipart/form-data" method="post">
+=======
+        <form class="form-group" id="timeForm" name="timeForm" action="{{route('time.update')}}" enctype="multipart/form-data" method="post">
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
             @csrf
             
             <input type="hidden" name="id" id="id" value="{{$time->id}}">
@@ -73,6 +81,44 @@
 
 </div>
 
+<<<<<<< HEAD
 
+=======
+<script type="text/javascript">
+  $(function () {
+     
+    $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+    });
+    $(document).ready(function() {
+        // Get the values you want to update
+        $("#timeForm").submit(function(event){
+            var id = $('#id').val();
+            var time = $('#time').val();
+            var day = $('#day').val();
+            $.ajax({
+                url: '{{ route('time.update') }}',
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}', // Include the CSRF token for Laravel security
+                    id: id,
+                    time: time,
+                    day: day
+                },
+                success: function (response) {
+                    window.open("/time-index", "_self"); 
+                },
+                error: function (error) {
+                    // Handle error response
+                    alert('Error updating time.'); // You can replace this with any error message handling
+                }
+            });
+        });
+    });
+  });
+</script>
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 
 @endsection

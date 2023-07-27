@@ -28,7 +28,11 @@ class SocialLinkController extends Controller
                     ->addColumn('action', function ($row) {
                         $view = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm me-1 ">View</a>';
                         $btn = '<a href="' . URL::route('socialLink.edit', $row->id) . '" class="btn btn-primary btn-sm me-1">Edit</a>';
+<<<<<<< HEAD
                         $btn = $btn . '<a href="' . URL::route('socialLink.delete', $row->id) . '" class="btn btn-danger btn-sm me-1">Delete</a>';
+=======
+                        $btn = $btn . '<a href="' . URL::route('socialLink.delete', $row->id) . '" class="delete btn btn-danger btn-sm me-1">Delete</a>';
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
                         return $view . '' . $btn;
                     })
                     ->rawColumns(['action'])

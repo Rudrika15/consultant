@@ -11,7 +11,11 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
+<<<<<<< HEAD
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
+=======
+    use HasApiTokens, HasFactory, Notifiable,HasRoles;
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 
     /**
      * The attributes that are mass assignable.
@@ -20,6 +24,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+<<<<<<< HEAD
+=======
+        'lastName',
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
         'email',
         'password',
         'stateId',
@@ -48,9 +56,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+<<<<<<< HEAD
 
     public function profile()
     {
         return $this->hasOne(Profile::class, 'userId');
     }
+=======
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 }

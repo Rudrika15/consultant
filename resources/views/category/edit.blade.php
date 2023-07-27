@@ -32,7 +32,11 @@
             <h4 class="">Edit Category</h4>
         </div>
         <div class="">
+<<<<<<< HEAD
             <a href="{{ route('category.index') }}" class="btn btnback btn-sm">BACK</a>
+=======
+            <a href="{{ route('category.index') }}" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">BACK</a>
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 
             <!-- /.sub-menu -->
         </div>
@@ -40,7 +44,11 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
+<<<<<<< HEAD
         <form class="form-group" id="categoryForm" enctype="multipart/form-data">
+=======
+        <form class="form-group" action="{{route('category.update')}}" enctype="multipart/form-data" method="post">
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
             @csrf
             <input type="hidden" name="id" id="id" value="{{$category->id}}">
 
@@ -54,7 +62,11 @@
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
+<<<<<<< HEAD
                 <button type="submit" class="btn btn-primary" id="">Submit</button>
+=======
+                <button type="submit" class="btn btn-primary">Submit</button>
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
             </div>
 
         </form>
@@ -64,6 +76,7 @@
 
 </div>
 
+<<<<<<< HEAD
 <script type="text/javascript">
     $(function() {
         $.ajaxSetup({
@@ -117,5 +130,8 @@
         });
     });
 </script>
+=======
+
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 
 @endsection

@@ -32,7 +32,11 @@
             <h4 class="">Edit Video</h4>
         </div>
         <div class="">
+<<<<<<< HEAD
             <a href="{{ route('video.index') }}" class="btn btnback btn-sm">BACK</a>
+=======
+            <a href="{{ route('video.index') }}" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">BACK</a>
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 
             <!-- /.sub-menu -->
         </div>
@@ -40,7 +44,11 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
+<<<<<<< HEAD
         <form class="form-group" action="{{route('video.update')}}" enctype="multipart/form-data" method="post">
+=======
+        <form class="form-group" id="videoForm" name="videoForm" action="{{route('video.update')}}" enctype="multipart/form-data" method="post">
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
             @csrf
 
             <input type="hidden" id="id" name="id" value="{{$video->id}}">
@@ -62,7 +70,44 @@
     <!-- Collapsable Card Example -->
 
 </div>
+<<<<<<< HEAD
 
+=======
+<script type="text/javascript">
+  $(function () {
+     
+    $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+    });
+    $(document).ready(function() {
+        // Get the values you want to update
+        $("#videoForm").submit(function(event){
+            var id = $('#id').val();
+            var url = $('#url').val();
+            
+            $.ajax({
+                url: '{{ route('video.update') }}',
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}', // Include the CSRF token for Laravel security
+                    id: id,
+                    url: url,
+                },
+                success: function (response) {
+                    window.open("/video-index", "_self"); 
+                },
+                error: function (error) {
+                    // Handle error response
+                    alert('Error updating video.'); // You can replace this with any error message handling
+                }
+            });
+        });
+    });
+  });
+</script>
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 
 
 @endsection

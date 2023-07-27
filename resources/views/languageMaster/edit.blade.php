@@ -32,7 +32,11 @@
             <h4 class="">Edit Language Master</h4>
         </div>
         <div class="">
+<<<<<<< HEAD
             <a href="{{ route('languageMaster.index') }}" class="btn btnback btn-sm">BACK</a>
+=======
+            <a href="{{ route('languageMaster.index') }}" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">BACK</a>
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 
             <!-- /.sub-menu -->
         </div>
@@ -40,7 +44,11 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
+<<<<<<< HEAD
         <form class="form-group" id="languageForm" enctype="multipart/form-data">
+=======
+        <form class="form-group" action="{{route('languageMaster.update')}}" enctype="multipart/form-data" method="post">
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
             @csrf
 
             <input type="hidden" name="id" id="id" value="{{$languageMaster->id}}">
@@ -65,6 +73,7 @@
 
 </div>
 
+<<<<<<< HEAD
 <script type="text/javascript">
     $(function() {
         $.ajaxSetup({
@@ -117,5 +126,8 @@
         });
     });
 </script>
+=======
+
+>>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 
 @endsection
