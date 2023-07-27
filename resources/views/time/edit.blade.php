@@ -32,11 +32,7 @@
             <h4 class="">Create Time</h4>
         </div>
         <div class="">
-<<<<<<< HEAD
             <a href="{{ route('time.index') }}" class="btn btnback btn-sm">BACK</a>
-=======
-            <a href="{{ route('time.index') }}" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">BACK</a>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 
             <!-- /.sub-menu -->
         </div>
@@ -44,7 +40,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" id="timeForm" name="timeForm" action="{{route('time.update')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="timeForm" name="timeForm"  enctype="multipart/form-data">
             @csrf
             
             <input type="hidden" name="id" id="id" value="{{$time->id}}">
@@ -77,9 +73,6 @@
 
 </div>
 
-<<<<<<< HEAD
-
-=======
 <script type="text/javascript">
   $(function () {
      
@@ -96,7 +89,7 @@
             var time = $('#time').val();
             var day = $('#day').val();
             $.ajax({
-                url: '{{ route('time.update') }}',
+                url: "{{ route('time.update') }}",
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}', // Include the CSRF token for Laravel security
@@ -134,6 +127,5 @@
     });
   });
 </script>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 
 @endsection

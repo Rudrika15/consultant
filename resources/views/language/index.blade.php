@@ -33,7 +33,7 @@
         <div class="">
             <a href="{{ route('language.create') }}" id="add" class="btn btnback btn-sm">ADD</a>
 
-            <a href="" id="back" class="btn btnback  btn-sm" style="display:none;">Back</a>
+            <a href="" id="back" class="btn btnback  btn-sm" style="display:none;">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -117,25 +117,6 @@
                 }
             });
         });
-        $('document').on('click', '#delete', function() {
-
-            var timeURL = $(this).data('url');
-            var trObj = $(this);
-
-            if (confirm("Are you sure you want to remove this language?") == true) {
-                $.ajax({
-                    url: timeURL,
-                    type: 'DELETE',
-                    dataType: 'json',
-                    success: function(data) {
-                        alert(data.success);
-                        trObj.parents("tr").remove();
-                    }
-                });
-            }
-
-        });
-
         $('body').on('click', '.delete', function(event) {
             event.preventDefault();
             var row = $(this).closest('tr');
@@ -154,7 +135,7 @@
                         if (result.isConfirmed) {
                             // AJAX request to delete the record
                             $.ajax({
-                                url: '/language-delete'+'/'+id,
+                                url: "{{ url('language-delete') }}"+'/'+id,
                                 method: 'GET',
                                 data: {
                                     _token: "{{ csrf_token() }}",

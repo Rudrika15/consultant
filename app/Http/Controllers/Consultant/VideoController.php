@@ -24,7 +24,7 @@ class VideoController extends Controller
                         ->addColumn('action', function($row){
                             $view = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm me-1 ">View</a>';
                             $btn = '<a href="' . URL::route('video.edit', $row->id) . '" class="btn btn-primary btn-sm me-1">Edit</a>';
-                            $btn = $btn.'<a href="' . URL::route('video.delete', $row->id) . '" class="btn btn-danger btn-sm me-1">Delete</a>';
+                            $btn = $btn.'<a href="' . URL::route('video.delete', $row->id) . '" class="delete btn btn-danger btn-sm me-1">Delete</a>';
                             return $view.''.$btn;
                         })
                         ->rawColumns(['action'])

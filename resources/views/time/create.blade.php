@@ -32,11 +32,7 @@
             <h4 class="">Create Time</h4>
         </div>
         <div class="">
-<<<<<<< HEAD
             <a href="{{ route('time.index') }}" class="btn btnback btn-sm">BACK</a>
-=======
-            <a href="{{ route('time.index') }}" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">BACK</a>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 
             <!-- /.sub-menu -->
         </div>
@@ -44,15 +40,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <form class="form-group" action="{{route('time.store')}}" enctype="multipart/form-data" method="post">
-=======
-        <form class="form-group"id="timeForm" name="timeForm" action="{{route('time.store')}}" enctype="multipart/form-data" method="post">
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
-=======
         <form class="form-group"id="timeForm" name="timeForm"  enctype="multipart/form-data" >
->>>>>>> cb89ed909404bc596cd0f8893a96e5d165b696e8
             @csrf
             
             <div class="form-label-group mt-3">
@@ -73,14 +61,6 @@
            
            
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
-<<<<<<< HEAD
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-
-        </form>
-        <!-- </div> -->
-    </div>
-=======
                 <button type="submit" id="saveBtn" class="btn btn-primary">Submit</button>
             </div>
 
@@ -89,15 +69,10 @@
         <!-- </div> -->
     </div>
 
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
     <!-- Collapsable Card Example -->
 
 </div>
 
-<<<<<<< HEAD
-
-
-=======
 <script type="text/javascript">
   $(function () {
     $.ajaxSetup({
@@ -144,5 +119,4 @@
     });
 });     
 </script>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 @endsection

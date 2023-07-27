@@ -78,7 +78,7 @@
             var url = $('#url').val();
             
             $.ajax({
-                url: '{{ route('video.update') }}',
+                url: "{{ route('video.update') }}",
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}', // Include the CSRF token for Laravel security
