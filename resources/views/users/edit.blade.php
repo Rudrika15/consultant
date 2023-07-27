@@ -16,20 +16,12 @@
 
 <div class="card">
 
-<<<<<<< HEAD
 <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
-=======
-    <div class="card-header" style="padding: 10px 10px 10px 10px; display: flex; justify-content: space-between; background-color: #03ACF0; color:white;">
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
         <div class="">
             <h4 class="">Edit User</h4>
         </div>
         <div class="">
-<<<<<<< HEAD
             <a href="{{ route('users.index') }}" class="btn btnback btn-sm">Back</a>
-=======
-            <a href="{{ route('users.index') }}" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">Back</a>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 
             <!-- /.sub-menu -->
         </div>

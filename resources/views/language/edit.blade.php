@@ -32,11 +32,7 @@
             <h4 class="">Create Language</h4>
         </div>
         <div class="">
-<<<<<<< HEAD
             <a href="{{ route('language.index') }}" class="btn btnback btn-sm">BACK</a>
-=======
-            <a href="{{ route('language.index') }}" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">BACK</a>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 
             <!-- /.sub-menu -->
         </div>
@@ -44,11 +40,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-<<<<<<< HEAD
-        <form class="form-group" action="{{route('language.update')}}" enctype="multipart/form-data" method="post">
-=======
         <form class="form-group" id="languageForm" name="languageForm" action="{{route('language.update')}}" enctype="multipart/form-data" method="post">
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
             @csrf
             <input type="hidden" name="id" id="id" value="{{$language->id}}">
             <div class="form-label-group mt-3">
@@ -76,11 +68,6 @@
     <!-- Collapsable Card Example -->
 
 </div>
-<<<<<<< HEAD
-
-
-
-=======
 <script type="text/javascript">
     $(function() {
 
@@ -115,5 +102,4 @@
         });
     });
 </script>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 @endsection

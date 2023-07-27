@@ -35,14 +35,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-<<<<<<< HEAD
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/homepage', [App\Http\Controllers\HomeController::class, 'homePage'])->name('app');
 
-=======
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
@@ -106,15 +102,6 @@ Route::post('socialMaster-update', [SocialMasterController::class, 'update'])->n
 Route::get('socialMaster-delete/{id?}', [SocialMasterController::class, 'delete'])->name('socialMaster.delete');
 
 
-<<<<<<< HEAD
-=======
-
-
-
-/* ------------------------Consultant Panele ---------------------------------- */
-
-
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 // /* time */
 Route::get('time-index', [TimeController::class, 'index'])->name('time.index');
 Route::get('time/{id}/view',[TimeController::class, 'view'])->name('time.view');
@@ -125,12 +112,9 @@ Route::post('time-update', [TimeController::class, 'update'])->name('time.update
 Route::get('time-delete/{id?}', [TimeController::class, 'delete'])->name('time.delete');
 
 
-<<<<<<< HEAD
 
 /* ------------------------Consultant Panele ---------------------------------- */
 
-=======
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 // /* Language */
 Route::get('language-index', [LanguageController::class, 'index'])->name('language.index');
 Route::get('language/{id}/view',[LanguageController::class, 'view'])->name('language.view');

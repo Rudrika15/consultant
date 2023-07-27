@@ -11,10 +11,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Consultant Cube</title>
 
-<<<<<<< HEAD
-=======
-    <!-- <link rel="icon" class="icon" type="x-icon" href="{{ asset('asset/images/shreeved.png')}}" sizes="as big as possible"> -->
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('asset/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -25,11 +21,6 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
     <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
@@ -39,15 +30,12 @@
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('asset/css/sb-admin-2.min.css')}}" rel="stylesheet">
-<<<<<<< HEAD
     <link href="{{ asset('asset/css/style3.css')}}" rel="stylesheet">
 
 
     <!-- alert msg -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-=======
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 </head>
 
 <body id="page-top">
@@ -77,11 +65,7 @@
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('home')}}">
-<<<<<<< HEAD
                     <i class="bi bi-speedometer2"></i>
-=======
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
                     <span>Dashboard</span></a>
             </li>
 
@@ -93,61 +77,37 @@
 
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('state.index')}}">
-<<<<<<< HEAD
                     <i class="bi bi-device-ssd-fill"></i>
-=======
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
                     <span>State</span></a>
             </li>
 
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('city.index')}}">
-<<<<<<< HEAD
                     <i class="bi bi-patch-exclamation-fill"></i>
-=======
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
                     <span>City</span></a>
             </li>
 
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('category.index')}}">
-<<<<<<< HEAD
                     <i class="bi bi-bookmark-star-fill"></i>
-=======
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
                     <span>Category</span></a>
             </li>
 
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('languageMaster.index')}}">
-<<<<<<< HEAD
                     <i class="bi bi-translate"></i>
-=======
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
                     <span>Language Master</span></a>
             </li>
 
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('socialMaster.index')}}">
-<<<<<<< HEAD
                     <i class="bi bi-dribbble"></i>
-=======
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
                     <span>Social Media Master</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link collapsed" style="color: #014272; font-weight: 700;" href="#" data-toggle="collapse" data-target="#collapseSetting" aria-expanded="true" aria-controls="collapsePages">
-<<<<<<< HEAD
                     <i class="bi bi-gear-fill" style="color: #fff;"></i>
-=======
-                    <i class="fas fa-fw fa-cog" style="color: #fff; font-weight: 700;"></i>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
                     <span style="color: #fff;">Settings</span>
                 </a>
                 <div id="collapseSetting" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
@@ -165,56 +125,32 @@
 
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('time.index')}}">
-<<<<<<< HEAD
                     <i class="bi bi-alarm-fill"></i>
-=======
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
                     <span>Time</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('language.index')}}">
-<<<<<<< HEAD
                     <i class="fa fa-language"></i>
-=======
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
                     <span>Language</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('gallery.index')}}">
-<<<<<<< HEAD
                     <i class="bi bi-book-fill"></i>
-=======
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
                     <span>Gallery</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('video.index')}}">
-<<<<<<< HEAD
                     <i class="bi bi-camera-video-fill"></i>
-=======
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
                     <span>Video</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('attachment.index')}}">
-<<<<<<< HEAD
                     <i class="bi bi-bar-chart-fill"></i>
-=======
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
                     <span>Attachments</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('socialLink.index')}}">
-<<<<<<< HEAD
                     <i class="bi bi-dribbble"></i>
-=======
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
                     <span>Social Link</span></a>
             </li>
             @endrole
@@ -399,7 +335,6 @@
 
 
                                 $name = Auth::user()->name;
-<<<<<<< HEAD
                                 $lastName = Auth::user()->lastName;
                                 ?>
                                 @if(isset(Auth::user()->profile_photo))
@@ -409,16 +344,6 @@
                                 @endif
 
 
-=======
-                                $lastName=Auth::user()->lastName;
-                                ?>
-                                @if(isset(Auth::user()->profile_photo))
-                                <img class="img-profile rounded-circle" src="{{url('profile')}}/{{auth::user()->profile_photo}}">
-
-                                @else
-                                <span class="rounded-circle text-center p-2 fs-5 badge logobadge d-inline-block h-50" style="width: 43px !important;background-color:#345BCB;"><?php echo $name[0],$lastName[0] ?></span>
-                                @endif
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

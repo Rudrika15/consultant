@@ -27,23 +27,13 @@
 <div class="card">
     <!-- /.box-title -->
     <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
-<<<<<<< HEAD
-
-=======
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
         <div class="">
             <h4 class="">Social Master</h4>
         </div>
         <div class="">
-<<<<<<< HEAD
             <a href="{{ route('socialMaster.create') }}" id="add" class="btn btnback btn-sm">ADD</a>
 
             <a href="" id="back" class="btn btnback  btn-sm" style="display:none;">Back</a>
-=======
-            <a href="{{ route('socialMaster.create') }}" id="add" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">ADD</a>
-
-            <a href="" id="back" class="btn btnback  btn-sm" style="background-color: #002E6E; color:white;display:none;">Back</a>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 
             <!-- /.sub-menu -->
         </div>
@@ -66,11 +56,7 @@
                 </tbody>
             </table>
         </div>
-<<<<<<< HEAD
         <div id="viewDataDiv"></div>
-=======
-    <div id="viewDataDiv"></div>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
     </div>
 
 </div>
@@ -81,7 +67,6 @@
 </script>
 
 <script type="text/javascript">
-<<<<<<< HEAD
     $(function() {
         var table = $('.data-table').DataTable({
             processing: true,
@@ -101,7 +86,7 @@
                     render: function(data, type, full, meta) {
                         // Check if the "data" is empty or null
                         if (data) {
-                            return '<img src="{{url(' / logo ')}}/' + data + '" alt="Logo" style="max-width: 100px; max-height: 100px;">';
+                            return '<img src="{{url('/logo')}}/' + data + '" alt="Logo" style="max-width: 100px; max-height: 100px;">';
                         }
                         return 'No Logo'; // Display "No Logo" if data is empty or null
                     }
@@ -215,64 +200,4 @@
     });
 </script>
 
-=======
-  $(function () {   
-    var table = $('.data-table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('socialMaster.index') }}",
-        columns: [
-            {data: 'id', name: 'id'},
-            {data: 'title', name: 'title'},
-            {
-                data: 'logo', 
-                name: 'logo',
-                render: function(data, type, full, meta) {
-                        // Check if the "data" is empty or null
-                        if (data) {
-                            return '<img src="{{url('/logo')}}/' + data + '" alt="Logo" style="max-width: 100px; max-height: 100px;">';
-                        }
-                        return 'No Logo'; // Display "No Logo" if data is empty or null
-                    }
-            },
-                
-            {data: 'status', name: 'status'},
-            {
-                data: 'action',
-                name: 'action',
-                orderable: false,
-                searchable: false,
-                
-            },
-        ]
-    }); 
-    
-    $(document).on('click', '.edit', function() {
-        var row = $(this).closest('tr');
-        var data = table.row(row).data();
-        var socialMasterId = data.id;
-
-        $.ajax({
-            url: "{{ url('socialMaster') }}" + '/' + socialMasterId + '/view',
-            type: 'GET',
-            success: function(response) {
-                // Handle the Ajax response here
-                console.log(response); // Check the response in the browser console
-                $('#dataTableDiv').hide();
-                $('#add').hide();
-                $('#back').show();
-                $('#viewDataDiv').html('<strong>SocialMaster Name:</strong> ' + response.title+'<br><strong>Logo:</strong><img src="{{url('/logo')}}/'+response.logo+'" width="100px" height="100px">' +'<br>'+'<strong>Satus:</strong>' + response.status);
-
-            },
-            error: function(error) {
-                // Handle the error response here
-                console.log(error); // Check the error in the browser console
-            }
-        });
-    });
-  });
-</script>
-
-
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 @endsection

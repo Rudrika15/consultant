@@ -13,7 +13,6 @@ class StateController extends Controller
     //
     public function index(Request $request)
     {
-<<<<<<< HEAD
         try {
             if ($request->ajax()) {
                 $data = State::select('*')
@@ -36,28 +35,10 @@ class StateController extends Controller
             //throw $th;
             return view('servererror');
         }
-=======
-        if ($request->ajax()) {
-            $data = State::select('*')
-            ->where('status','!=','Deleted');
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-                        $view = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm me-1 ">View</a>';
-                        $btn = '<a href="' . URL::route('state.edit', $row->id) . '" class="btn btn-primary btn-sm me-1">Edit</a>';
-                        $btn = $btn.'<a href="' . URL::route('state.delete', $row->id) . '" class="btn btn-danger btn-sm me-1">Delete</a>';
-                        return $view.''.$btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);   
-        } 
-        return view('state.index');
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
     }
 
     public function view(Request $request, $id)
     {
-<<<<<<< HEAD
         try {
             $state = State::findOrFail($id);
             return response()->json($state);
@@ -76,16 +57,6 @@ class StateController extends Controller
             //throw $th;
             return view('servererror');
         }
-=======
-        $state = State::findOrFail($id);
-        return response()->json($state);
-    }
-    public function create()
-    {
-        $state = State::all();
-
-        return view('state.create', compact('state'));
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
     }
     public function store(Request $request)
     {
@@ -93,7 +64,6 @@ class StateController extends Controller
             'stateName' => 'required',
         ]);
 
-<<<<<<< HEAD
         try {
             $state = new State();
             $state->stateName = $request->stateName;
@@ -110,20 +80,10 @@ class StateController extends Controller
             //throw $th;
             return view('servererror');
         }
-=======
-        $state = new State();
-        $state->stateName = $request->stateName;
-        $state->status = 'Active';
-
-        $state->save();
-        return redirect('state-index')
-            ->with('success', 'State Create Successfully');
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
     }
 
     public function edit(Request $request, $id)
     {
-<<<<<<< HEAD
         try {
             $state = State::find($id);
             return view('state.edit', compact('state'));
@@ -131,10 +91,6 @@ class StateController extends Controller
             //throw $th;
             return view('servererror');
         }
-=======
-        $state = State::find($id);
-        return view('state.edit', compact('state'));
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
     }
 
     public function update(Request $request)
@@ -142,7 +98,6 @@ class StateController extends Controller
         $this->validate($request, [
             'stateName' => 'required',
         ]);
-<<<<<<< HEAD
         try {
             $id = $request->id;
             $state = State::find($id);
@@ -160,22 +115,10 @@ class StateController extends Controller
             //throw $th;
             return view('servererror');
         }
-=======
-
-        $id = $request->id;
-        $state = State::find($id);
-        $state->stateName = $request->stateName;
-        $state->status = 'Active';
-
-        $state->save();
-        return redirect('state-index')
-            ->with('success', 'State Update Successfully');
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
     }
 
     function delete($id)
     {
-<<<<<<< HEAD
         try {
             $state = State::find($id);
             $state->status = "Deleted";
@@ -190,12 +133,5 @@ class StateController extends Controller
             //throw $th;
             return view('servererror');
         }
-=======
-        $state = State::find($id);
-        $state->status = "Deleted";
-        $state->save();
-        return redirect("state-index")
-            ->with('success', 'State Deleted successfully');
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
     }
 }

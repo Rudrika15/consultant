@@ -22,21 +22,14 @@ class CityController extends Controller
             if ($request->ajax()) {
                 $data = City::with('state')
                     ->where('status', '!=', 'Deleted')
-<<<<<<< HEAD
                     ->orderBy('id', 'DESC')
-=======
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
                     ->get();
                 return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function ($row) {
                         $view = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm me-1 ">View</a>';
                         $btn = '<a href="' . URL::route('city.edit', $row->id) . '" class="btn btn-primary btn-sm me-1">Edit</a>';
-<<<<<<< HEAD
                         $btn = $btn . '<a href="' . URL::route('city.delete', $row->id) . '" class="btn btn-danger btn-sm me-1 delete">Delete</a>';
-=======
-                        $btn = $btn . '<a href="' . URL::route('city.delete', $row->id) . '" class="btn btn-danger btn-sm me-1">Delete</a>';
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
                         return $view . '' . $btn;
                     })
                     ->rawColumns(['action'])
@@ -84,17 +77,12 @@ class CityController extends Controller
             $city->status = 'Active';
 
             $city->save();
-<<<<<<< HEAD
             $response = [
                 'success' => true,
                 'message' => 'City Created Successfully!',
             ];
 
             return response()->json($response);
-=======
-            return redirect('city-index')
-                ->with('success', 'City Create Successfully');
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -127,17 +115,12 @@ class CityController extends Controller
             $city->status = 'Active';
 
             $city->save();
-<<<<<<< HEAD
             $response = [
                 'success' => true,
                 'message' => 'City Updated Successfully!',
             ];
 
             return response()->json($response);
-=======
-            return redirect('city-index')
-                ->with('success', 'City Updated Successfully');
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -150,17 +133,12 @@ class CityController extends Controller
             $state = City::find($id);
             $state->status = "Deleted";
             $state->save();
-<<<<<<< HEAD
             $response = [
                 'success' => true,
                 'message' => 'City Deleted Successfully!',
             ];
 
             return response()->json($response);
-=======
-            return redirect("city-index")
-                ->with('success', 'City Deleted successfully');
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');

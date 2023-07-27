@@ -32,11 +32,7 @@
             <h4 class="">Create Language</h4>
         </div>
         <div class="">
-<<<<<<< HEAD
             <a href="{{ route('language.index') }}" class="btn btnback btn-sm">BACK</a>
-=======
-            <a href="{{ route('language.index') }}" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">BACK</a>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 
             <!-- /.sub-menu -->
         </div>
@@ -44,11 +40,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-<<<<<<< HEAD
-        <form class="form-group" action="{{route('language.store')}}" enctype="multipart/form-data" method="post">
-=======
         <form class="form-group" id="languageForm" name="languageForm" action="{{route('language.store')}}" enctype="multipart/form-data" method="post">
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
             @csrf
 
             <div class="form-label-group mt-3">
@@ -67,11 +59,7 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
-<<<<<<< HEAD
-                <button type="submit" class="btn btn-primary">Submit</button>
-=======
                 <button type="submit" id="saveBtn" class="btn btn-primary">Submit</button>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
             </div>
 
         </form>
@@ -80,9 +68,6 @@
     <!-- Collapsable Card Example -->
 
 </div>
-<<<<<<< HEAD
-
-=======
 <script type="text/javascript">
     $(function() {
         $.ajaxSetup({
@@ -109,7 +94,6 @@
         });
     });
 </script>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 
 
 @endsection
