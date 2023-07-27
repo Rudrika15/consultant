@@ -32,7 +32,7 @@
             <h4 class="">Create Package</h4>
         </div>
         <div class="">
-            <a href="{{ route('package.index') }}" class="btn btnback btn-sm" >BACK</a>
+            <a href="{{ route('package.index') }}" class="btn btnback btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -40,9 +40,9 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group"id="packageForm" name="packageForm"  enctype="multipart/form-data" >
+        <form class="form-group" id="packageForm" name="packageForm" enctype="multipart/form-data">
             @csrf
-            
+
             <div class="form-label-group mt-3">
                 <label for="title" class="fw-bold">Title <sup class="text-danger">*</sup></label>
                 <input id="title" type="text" name="title" class="form-control" placeholder="Title">
@@ -50,7 +50,7 @@
                 <span class="error">{{ $errors->first('title') }}</span>
                 @endif
             </div>
-        
+
             <div class="form-label-group mt-3">
                 <label for="price" class="fw-bold">Price <sup class="text-danger">*</sup></label>
                 <input id="price" type="text" name="price" class="form-control" placeholder="Price">
@@ -74,14 +74,14 @@
                 <span class="error">{{ $errors->first('validUpTo') }}</span>
                 @endif
             </div>
-           
-           
+
+
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
                 <button type="submit" id="saveBtn" class="btn btn-primary">Submit</button>
             </div>
 
         </form>
-        
+
         <!-- </div> -->
     </div>
 
@@ -90,21 +90,21 @@
 </div>
 
 <script type="text/javascript">
-  $(function () {
-    $.ajaxSetup({
-          headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-    });
-     $('#saveBtn').click(function (e) {
-        e.preventDefault();
-        $(this).html('Submit');
-        $.ajax({
-          data: $('#packageForm').serialize(),
-          url: "{{ route('package.store') }}",
-          type: "POST",
-          dataType: 'json',
-          success: function (response) {
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('#saveBtn').click(function(e) {
+            e.preventDefault();
+            $(this).html('Submit');
+            $.ajax({
+                data: $('#packageForm').serialize(),
+                url: "{{ route('package.store') }}",
+                type: "POST",
+                dataType: 'json',
+                success: function(response) {
                     // window.open("/time-index", "_self");
                     if (response.success) {
                         // Success message using SweetAlert
@@ -122,8 +122,8 @@
                             text: 'An error occurred!',
                         });
                     }
-          },
-          error: function(xhr, status, error) {
+                },
+                error: function(xhr, status, error) {
                     // Error message using SweetAlert
                     Swal.fire({
                         icon: 'error',
@@ -131,8 +131,8 @@
                         text: 'An error occurred!',
                     });
                 }
+            });
         });
     });
-});     
 </script>
 @endsection

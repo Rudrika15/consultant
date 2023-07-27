@@ -36,13 +36,13 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" action="{{route('profile.update')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="profileForm" name="profileForm" action="{{route('profile.update')}}" enctype="multipart/form-data" method="post">
             @csrf
             <input type="hidden" name="id" id="id" value="{{$profile->id}}">
 
             <div class="form-label-group mt-3">
                 <label for="about" class="fw-bold">About</label>
-                <input id="about" type="text" name="about" class="form-control" placeholder="about" value="{{$profile->about}}">
+                <textarea id="about" name="about" class="form-control">{!!$profile->about!!}</textarea>
                 @if ($errors->has('about'))
                 <span class="error">{{ $errors->first('about') }}</span>
                 @endif
@@ -82,7 +82,7 @@
 
             <div class="form-label-group mt-3">
                 <label for="address" class="fw-bold">Address</label>
-                <input id="address" type="text" name="address" class="form-control" placeholder="address" value="{{$profile->address}}">
+                <textarea id="address" name="address" class="form-control">{!!$profile->address!!}</textarea>
                 @if ($errors->has('address'))
                 <span class="error">{{ $errors->first('address') }}</span>
                 @endif
@@ -93,7 +93,7 @@
                 <div class="col-auto">
                     <label for="name" class="col-form-label text-md-end fw-bold">{{ __('State') }}</label>
 
-                    <select class="form-select" aria-label="Default select example" id="stateId" name="stateId" value="{{ old('stateId') }}"  autocomplete="stateId" autofocus>
+                    <select class="form-select" aria-label="Default select example" id="stateId" name="stateId" value="{{ old('stateId') }}" autocomplete="stateId" autofocus>
                         <option value="">-- select State --</option>
                         @foreach($states as $data)
                         <option value="{{$data->id}}">{{$data->stateName}}</option>
@@ -108,7 +108,7 @@
                 <div class="col-auto">
                     <label for="name" class="col-form-label text-md-end fw-bold">{{ __('City') }}</label>
 
-                    <select class="form-select" aria-label="Default select example" id="cityId" name="cityId" value="{{ old('cityId') }}"  autocomplete="cityId" autofocus>
+                    <select class="form-select" aria-label="Default select example" id="cityId" name="cityId" value="{{ old('cityId') }}" autocomplete="cityId" autofocus>
                         <option value="">-- Select City --</option>
 
                     </select>
@@ -136,19 +136,20 @@
                         <input id="photo" type="file" name="photo" class="form-control" placeholder="photo">
                         @if ($errors->has('photo'))
                         <span class="error">{{ $errors->first('photo') }}</span>
-                        @endif    
-                     </div>
+                        @endif
+                    </div>
                     <div class="col-6">
-                        <img src="{{ asset('profile/' . $profile->photo) }}" width="70px" height="70px" class="img mt-3">
+
+                        <img id="preview-photo" src="{{ asset('profile/' . $profile->photo) }}" alt="" width="70px" height="70px" class="img mt-3">
                     </div>
                 </div>
-                
-               
-               
+
+
+
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" id="saveBtn" class="btn btn-primary">Submit</button>
             </div>
 
         </form>
@@ -185,5 +186,6 @@
     });
 </script>
 
+<!--  -->
 
 @endsection
