@@ -33,12 +33,13 @@
         "Liberation Mono", "Courier New", monospace;
 }
 
-.btnback{
+.btnback {
     background-color: var(--white);
-    color:  var(--blue);
+    color: var(--blue);
+    font-weight: bolder;
 }
 
-.img-profile{
+.img-profile {
     background-color: var(--blue);
     color: var(--white);
     padding: 3px;

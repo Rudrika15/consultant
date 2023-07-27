@@ -87,7 +87,7 @@
         });
         $('#saveBtn').click(function(e) {
             e.preventDefault();
-            $(this).html('Sending..');
+            $(this).html('Submit');
             $.ajax({
                 data: $('#socialLinkForm').serialize(),
                 url: "{{ route('socialLink.store') }}",

@@ -55,7 +55,7 @@ class SocialLinkController extends Controller
     public function create()
     {
         try {
-            $socialMaster = SocialMaster::all();
+            $socialMaster = SocialMaster::where('status','!=','Deleted')->get();
             $socialLink = SocialLink::all();
             return view('consultant.socialLink.create', compact('socialLink', 'socialMaster'));
         } catch (\Throwable $th) {
@@ -95,7 +95,7 @@ class SocialLinkController extends Controller
     public function edit(Request $request, $id)
     {
         try {
-            $socialMaster = SocialMaster::all();
+            $socialMaster = SocialMaster::where('status','!=','Deleted')->get();
             $socialLink = SocialLink::find($id);
             return view('consultant.socialLink.edit', compact('socialLink', 'socialMaster'));
         } catch (\Throwable $th) {

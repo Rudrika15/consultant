@@ -74,7 +74,6 @@
 
 </div>
 <script type="text/javascript">
-   
     $('#photo').change(function() {
         let reader = new FileReader();
         reader.onload = (e) => {
@@ -82,11 +81,11 @@
         }
         reader.readAsDataURL(this.files[0]);
     });
-    
+
     $('#galleryForm').submit(function(e) {
         e.preventDefault();
         let formData = new FormData(this);
-        
+
         $.ajax({
             type: 'POST',
             url: "{{ route('gallery.update') }}",
@@ -94,24 +93,15 @@
             contentType: false,
             processData: false,
             success: function(response) {
-                    if (response.success) {
-                        // Success message using SweetAlert
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success',
-                            text: response.message,
-                        },200);
-                        $('#galleryForm').trigger("reset");
-                    } else {
-                        // Error message using SweetAlert
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: 'An error occurred!',
-                        });
-                    }
-                },
-                error: function(xhr, status, error) {
+                if (response.success) {
+                    // Success message using SweetAlert
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: response.message,
+                    }, 200);
+                    $('#galleryForm').trigger("reset");
+                } else {
                     // Error message using SweetAlert
                     Swal.fire({
                         icon: 'error',
@@ -119,6 +109,15 @@
                         text: 'An error occurred!',
                     });
                 }
+            },
+            error: function(xhr, status, error) {
+                // Error message using SweetAlert
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'An error occurred!',
+                });
+            }
         });
     });
 </script>

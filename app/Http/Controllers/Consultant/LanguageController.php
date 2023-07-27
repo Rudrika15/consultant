@@ -55,7 +55,7 @@ class LanguageController extends Controller
     public function create()
     {
         try{
-            $languageMaster=LanguageMaster::all();
+            $languageMaster=LanguageMaster::where('status','!=','Deleted')->get();
             $language = Language::all();
             return view('consultant.language.create', compact('language','languageMaster'));
         }
@@ -90,7 +90,7 @@ class LanguageController extends Controller
     public function edit(Request $request, $id)
     {
         try{
-            $languageMaster=LanguageMaster::all();
+            $languageMaster=LanguageMaster::where('status','!=','Deleted')->get();
             $language = Language::find($id);
             return view('consultant.language.edit', compact('language','languageMaster'));
         }
