@@ -84,7 +84,7 @@
                 var languageId = $('#languageId').val();
 
                 $.ajax({
-                    url: '{{route('language.update')}}',
+                    url: "{{route('language.update')}}",
                     type: 'POST',
                     data: {
                         _token: '{{ csrf_token() }}', // Include the CSRF token for Laravel security

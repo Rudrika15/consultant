@@ -33,7 +33,6 @@
         </div>
         <div class="">
             <a href="{{ route('language.index') }}" class="btn btnback btn-sm">BACK</a>
-
             <!-- /.sub-menu -->
         </div>
     </div>
