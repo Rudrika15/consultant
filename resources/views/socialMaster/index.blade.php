@@ -120,7 +120,7 @@
                     $('#dataTableDiv').hide();
                     $('#add').hide();
                     $('#back').show();
-                    $('#viewDataDiv').html('<strong>SocialMaster Name:</strong> ' + response.title + '<br><strong>Logo:</strong><img src="{{url(' / logo ')}}/' + response.logo + '" width="100px" height="100px">' + '<br>' + '<strong>Satus:</strong>' + response.status);
+                    $('#viewDataDiv').html('<strong>SocialMaster Name:</strong> ' + response.title + '<br><strong>Logo:</strong><img src="{{url('/logo')}}/' + response.logo + '" width="100px" height="100px">' + '<br>' + '<strong>Satus:</strong>' + response.status);
 
                 },
                 error: function(error) {
