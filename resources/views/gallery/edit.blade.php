@@ -44,7 +44,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" action="{{route('gallery.update')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="galleryForm" name="galleryForm" enctype="multipart/form-data">
             @csrf
 
             <input type="hidden" name="id" id="id" value="{{$gallery->id}}">
@@ -59,7 +59,7 @@
             <div class="form-label-group mt-3">
                 <label for="photo" class="fw-bold">Photo <sup class="text-danger">*</sup></label>
                 <input id="photo" type="file" name="photo" class="form-control" placeholder="photo">
-                <img src="{{ url('/gallery/' . $gallery->photo) }}" alt="" style="height:100px; width: 100px;">
+                <img id="preview-photo" src="{{ url('/gallery/' . $gallery->photo) }}" alt="" class="mt-3" style="height:100px; width: 100px;">
 
                 @if ($errors->has('photo'))
                 <span class="error">{{ $errors->first('photo') }}</span>
@@ -68,7 +68,7 @@
 
 
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" id="saveBtn" class="btn btn-primary">Submit</button>
             </div>
 
         </form>
@@ -77,7 +77,53 @@
     <!-- Collapsable Card Example -->
 
 </div>
-
-
-
+<script type="text/javascript">
+   
+    $('#photo').change(function() {
+        let reader = new FileReader();
+        reader.onload = (e) => {
+            $('#preview-photo').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(this.files[0]);
+    });
+    
+    $('#galleryForm').submit(function(e) {
+        e.preventDefault();
+        let formData = new FormData(this);
+        
+        $.ajax({
+            type: 'POST',
+            url: "{{ route('gallery.update') }}",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                    if (response.success) {
+                        // Success message using SweetAlert
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: response.message,
+                        },200);
+                        $('#galleryForm').trigger("reset");
+                    } else {
+                        // Error message using SweetAlert
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'An error occurred!',
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Error message using SweetAlert
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'An error occurred!',
+                    });
+                }
+        });
+    });
+</script>
 @endsection

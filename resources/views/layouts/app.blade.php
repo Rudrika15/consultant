@@ -26,7 +26,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
 
+    <!-- For Sweet Alert  for css-->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <!--  For Sweet Alert  for js-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('asset/css/sb-admin-2.min.css')}}" rel="stylesheet">
@@ -152,6 +156,11 @@
                 <a class="nav-link" href="{{route('socialLink.index')}}">
                     <i class="bi bi-dribbble"></i>
                     <span>Social Link</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{route('package.index')}}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Package</span></a>
             </li>
             @endrole
 

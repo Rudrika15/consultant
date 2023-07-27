@@ -21,15 +21,15 @@ class GalleryController extends Controller
             if ($request->ajax()) {
                 $data = Gallery::where('status','!=','Deleted')->get();
                 return Datatables::of($data)
-                        ->addIndexColumn()
-                        ->addColumn('action', function($row){
-                            $view = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm me-1 ">View</a>';
-                            $btn = '<a href="' . URL::route('gallery.edit', $row->id) . '" class="btn btn-primary btn-sm me-1">Edit</a>';
-                            $btn = $btn.'<a href="' . URL::route('gallery.delete', $row->id) . '" class="btn btn-danger btn-sm me-1">Delete</a>';
-                            return $view.''.$btn;
-                        })
-                        ->rawColumns(['action'])
-                        ->make(true);   
+                    ->addIndexColumn()
+                    ->addColumn('action', function ($row) {
+                        $view = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm me-1 ">View</a>';
+                        $btn = '<a href="' . URL::route('gallery.edit', $row->id) . '" class="btn btn-primary btn-sm me-1">Edit</a>';
+                        $btn = $btn . '<a href="' . URL::route('gallery.delete', $row->id) . '" class="delete btn btn-danger btn-sm me-1">Delete</a>';
+                        return $view . '' . $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
             }
             return view('gallery.index');
         }
@@ -81,10 +81,13 @@ class GalleryController extends Controller
             }
             $gallery->status = 'Active';
             $gallery->save();
-            return redirect('gallery-index')
-                ->with('success', 'Gallery Create Successfully');
-        }
-        catch(\Throwable $th){
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Gallery Created Successfully!',
+            ],200);
+
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         } 
@@ -119,10 +122,13 @@ class GalleryController extends Controller
             }
             $gallery->status = 'Active';
             $gallery->save();
-            return redirect('gallery-index')
-                ->with('success', 'SocialMaster Updated Successfully');
-        }
-        catch(\Throwable $th){
+
+           return response()->json([
+                'success' => true,
+                'message' => 'Gallery Updated Successfully!',
+            ],200);
+
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }
@@ -134,10 +140,13 @@ class GalleryController extends Controller
             $gallery = Gallery::find($id);
             $gallery->status = "Deleted";
             $gallery->save();
-            return redirect("gallery-index")
-                ->with('success', 'Gallery Deleted successfully');
-        }
-        catch(\Throwable $th){
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Gallery Deleted Successfully!',
+            ],200);
+
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }

@@ -40,7 +40,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" id="languageForm" name="languageForm" action="{{route('language.store')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="languageForm" name="languageForm"  enctype="multipart/form-data" >
             @csrf
 
             <div class="form-label-group mt-3">
@@ -77,18 +77,37 @@
         });
         $('#saveBtn').click(function(e) {
             e.preventDefault();
-            $(this).html('Sending..');
+            $(this).html('Submit');
             $.ajax({
                 data: $('#languageForm').serialize(),
                 url: "{{ route('language.store') }}",
                 type: "POST",
                 dataType: 'json',
-                success: function(data) {
-                    window.open("/language-index", "_self");
+                success: function(response) {
+                    if (response.success) {
+                        // Success message using SweetAlert
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: response.message,
+                        },200);
+                        $('#languageForm').trigger("reset");
+                    } else {
+                        // Error message using SweetAlert
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'An error occurred!',
+                        });
+                    }
                 },
-                error: function(data) {
-                    console.log('Error:', data);
-                    $('#saveBtn').html('Save Changes');
+                error: function(xhr, status, error) {
+                    // Error message using SweetAlert
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'An error occurred!',
+                    });
                 }
             });
         });

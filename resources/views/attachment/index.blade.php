@@ -159,7 +159,7 @@
                     render: function(data, type, full, meta) {
                         // Check if the "data" is empty or null
                         if (data) {
-                            return '<img src="{{url(' / attachment ')}}/' + data + '" alt="Logo" style="max-width: 100px; max-height: 100px;">';
+                            return '<img src="{{url('/attachment')}}/' + data + '" alt="Logo" style="max-width: 100px; max-height: 100px;">';
                         }
                         return 'No Logo'; // Display "No Logo" if data is empty or null
                     }
@@ -201,6 +201,61 @@
                     console.log(error); // Check the error in the browser console
                 }
             });
+        });
+        $('body').on('click', '.delete', function(event) {
+            event.preventDefault();
+            var row = $(this).closest('tr');
+            var data = table.row(row).data();
+            var id = data.id;
+            Swal.fire({
+                        title: 'Delete Confirmation',
+                        text: 'Do you really want to delete this record?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Yes, delete it!',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // AJAX request to delete the record
+                            $.ajax({
+                                url: '/attachment-delete'+'/'+id,
+                                method: 'GET',
+                                data: {
+                                    _token: "{{ csrf_token() }}",
+                                    id:id
+                                },
+                                success: function(response) {
+                                    if (response.success) {
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Success',
+                                            text: response.message,
+                                       }).then(() => {
+                                            // Refresh the page
+                                            location.reload();
+                                        });
+                                    } else {
+                                        // Error message using SweetAlert
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Error',
+                                            text: 'An error occurred!',
+                                        });
+                                    }
+                                },
+                                error: function(xhr, status, error) {
+                                    // Error message using SweetAlert
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Error',
+                                        text: 'An error occurred!',
+                                    });
+                                }
+                            });
+                        }
+                    });
+                
         });
     });
 >>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1

@@ -77,10 +77,12 @@ class LanguageController extends Controller
             $language->status = 'Active';
 
             $language->save();
-            return redirect('language-index')
-                ->with('success', 'Language Create Successfully');
-        }
-        catch(\Throwable $th){
+            return response()->json([
+                'success' => true,
+                'message' => 'Language Created Successfully!',
+            ],200);
+            
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }
@@ -112,10 +114,12 @@ class LanguageController extends Controller
             $language->status = 'Active';
 
             $language->save();
-            return redirect('language-index')
-                ->with('success', 'Language Update Successfully');
-        }
-        catch(\Throwable $th){
+            return response()->json([
+                'success' => true,
+                'message' => 'Language Updated Successfully!',
+            ],200);
+
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }
@@ -127,10 +131,11 @@ class LanguageController extends Controller
             $language = Language::find($id);
             $language->status = "Deleted";
             $language->save();
-            return redirect("language-index")
-                ->with('success', 'Language Deleted successfully');
-        }
-        catch(\Throwable $th){
+            return response()->json([
+                'success' => true,
+                'message' => 'Language Deleted Successfully!',
+            ],200);
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }

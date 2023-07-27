@@ -32,11 +32,7 @@
             <h4 class="">Create Gallery</h4>
         </div>
         <div class="">
-<<<<<<< HEAD
             <a href="{{ route('gallery.index') }}" class="btn btnback btn-sm">BACK</a>
-=======
-            <a href="{{ route('gallery.index') }}" class="btn btnback btn-sm" style="background-color: #002E6E; color:white;">BACK</a>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
 
             <!-- /.sub-menu -->
         </div>
@@ -44,11 +40,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-<<<<<<< HEAD
-        <form class="form-group" action="{{route('gallery.store')}}" enctype="multipart/form-data" method="post">
-=======
         <form class="form-group" id="galleryForm" name="galleryForm" action="{{route('gallery.store')}}" enctype="multipart/form-data" method="post">
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
             @csrf
 
 
@@ -63,22 +55,14 @@
             <div class="form-label-group mt-3">
                 <label for="photo" class="fw-bold">Photo <sup class="text-danger">*</sup></label>
                 <input id="photo" type="file" name="photo" class="form-control" placeholder="photo">
-<<<<<<< HEAD
-                
-=======
 
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
                 @if ($errors->has('photo'))
                 <span class="error">{{ $errors->first('photo') }}</span>
                 @endif
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
-<<<<<<< HEAD
-                <button type="submit" class="btn btn-primary">Submit</button>
-=======
                 <button type="submit" id="saveBtn" class="btn btn-primary">Submit</button>
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
             </div>
 
         </form>
@@ -88,11 +72,7 @@
 
 </div>
 
-<<<<<<< HEAD
-
-
-=======
-<!-- <script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function(e) {
 
         $.ajaxSetup({
@@ -119,12 +99,16 @@
                     this.reset();
                     alert('Image has been uploaded using jQuery ajax successfully');
                 },
-                error: function(data) {
-                    console.log(data);
+                error: function(xhr, status, error) {
+                    // Error message using SweetAlert
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'An error occurred!',
+                    });
                 }
             });
         });
     });
-</script> -->
->>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1
+</script>
 @endsection

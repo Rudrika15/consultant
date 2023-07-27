@@ -182,23 +182,59 @@
                 }
             });
         });
-        $('document').on('click', '#delete', function() {
-
-            var timeURL = $(this).data('url');
-            var trObj = $(this);
-
-            if (confirm("Are you sure you want to remove this user?") == true) {
-                $.ajax({
-                    url: timeURL,
-                    type: 'DELETE',
-                    dataType: 'json',
-                    success: function(data) {
-                        alert(data.success);
-                        trObj.parents("tr").remove();
-                    }
-                });
-            }
-
+        $('body').on('click', '.delete', function(event) {
+            event.preventDefault();
+            var row = $(this).closest('tr');
+            var data = table.row(row).data();
+            var id = data.id;
+             Swal.fire({
+                        title: 'Delete Confirmation',
+                        text: 'Do you really want to delete this record?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Yes, delete it!',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // AJAX request to delete the record
+                            $.ajax({
+                                url: '/socialLink-delete'+'/'+id,
+                                method: 'GET',
+                                data: {
+                                    _token: "{{ csrf_token() }}",
+                                    id:id
+                                },
+                                success: function(response) {
+                                    if (response.success) {
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Success',
+                                            text: response.message,
+                                       }).then(() => {
+                                            // Refresh the page
+                                            location.reload();
+                                        });
+                                    } else {
+                                        // Error message using SweetAlert
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Error',
+                                            text: 'An error occurred!',
+                                        });
+                                    }
+                                },
+                                error: function(xhr, status, error) {
+                                    // Error message using SweetAlert
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Error',
+                                        text: 'An error occurred!',
+                                    });
+                                }
+                            });
+                        }
+                    });
         });
     });
 >>>>>>> 212b613ca1b671358a9b3b8b3bc33d389958a9d1

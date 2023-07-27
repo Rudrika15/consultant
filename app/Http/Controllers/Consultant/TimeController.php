@@ -19,15 +19,15 @@ class TimeController extends Controller
             if($request->ajax()){
                 $data=Time::where('status','!=','Deleted')->get();
                 return DataTables::of($data)
-                            ->addIndexColumn()
-                            ->addColumn('action', function($row){
-                                $view = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm me-1 ">View</a>';
-                                $btn = '<a href="' . URL::route('time.edit', $row->id) . '" class="btn btn-primary btn-sm me-1">Edit</a>';
-                                $btn = $btn.'<a href="' . URL::route('time.delete', $row->id) . '" class="btn btn-danger btn-sm me-1">Delete</a>';
-                                return $view.''.$btn;
-                        })
-                        ->rawColumns(['action'])
-                        ->make(true);   
+                    ->addIndexColumn()
+                    ->addColumn('action', function ($row) {
+                        $view = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm me-1 ">View</a>';
+                        $btn = '<a href="' . URL::route('time.edit', $row->id) . '" class="update btn btn-primary btn-sm me-1">Edit</a>';
+                        $btn = $btn . '<a href="' . URL::route('time.delete', $row->id) . '" class="delete btn btn-danger btn-sm me-1" id="delete">Delete</a>';
+                        return $view . '' . $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
             }
             return view('time.index'); 
         }
@@ -78,10 +78,12 @@ class TimeController extends Controller
 
             $time->status = 'Active';
             $time->save();
-            return redirect('time-index')
-                ->with('success', 'Time Create Successfully');
-        }
-        catch(\Throwable $th){
+            return response()->json([
+                'success' => true,
+                'message' => 'Time Created Successfully!',
+            ]);
+
+         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }
@@ -115,10 +117,12 @@ class TimeController extends Controller
 
             $time->status = 'Active';
             $time->save();
-            return redirect('time-index')
-                ->with('success', 'Time Update Successfully');
-        }
-        catch(\Throwable $th){
+            return response()->json([
+                'success' => true,
+                'message' => 'Time Updated Successfully!',
+            ]);
+            
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }
@@ -130,10 +134,12 @@ class TimeController extends Controller
             $time = Time::find($id);
             $time->status = "Deleted";
             $time->save();
-            return redirect("time-index")
-                ->with('success', 'Time Deleted successfully');
-        }
-        catch(\Throwable $th){
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Time Deleted Successfully!',
+            ]);
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }

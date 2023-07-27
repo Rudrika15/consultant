@@ -26,7 +26,7 @@ class AttachmentController extends Controller
                         ->addColumn('action', function($row){
                             $view = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm me-1 ">View</a>';
                             $btn = '<a href="' . URL::route('attachment.edit', $row->id) . '" class="btn btn-primary btn-sm me-1">Edit</a>';
-                            $btn = $btn.'<a href="' . URL::route('attachment.delete', $row->id) . '" class="btn btn-danger btn-sm me-1">Delete</a>';
+                            $btn = $btn.'<a href="' . URL::route('attachment.delete', $row->id) . '" class="delete btn btn-danger btn-sm me-1">Delete</a>';
                             return $view.''.$btn;
                         })
                         ->rawColumns(['action'])
@@ -81,8 +81,11 @@ class AttachmentController extends Controller
             }
             $attachment->status = 'Active';
             $attachment->save();
-            return redirect('attachment-index')
-                ->with('success', 'Attachment Create Successfully');
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Attachment Created Successfully!',
+            ],200);
         }
         catch(\Throwable $th){
             //throw $th;
@@ -119,8 +122,11 @@ class AttachmentController extends Controller
             }
             $attachment->status = 'Active';
             $attachment->save();
-            return redirect('attachment-index')
-                ->with('success', 'Attachment Updated Successfully');
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Attachment Updated Successfully!',
+            ],200);
         }
         catch(\Throwable $th){
             //throw $th;
@@ -134,8 +140,10 @@ class AttachmentController extends Controller
             $attachment = Attachment::find($id);
             $attachment->status = "Deleted";
             $attachment->save();
-            return redirect("attachment-index")
-                ->with('success', 'Attachment Deleted successfully');
+            return response()->json([
+                'success' => true,
+                'message' => 'Attachment Deleted Successfully!',
+            ],200);
         }
         catch(\Throwable $th){
             //throw $th;
