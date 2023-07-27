@@ -122,69 +122,59 @@
             var row = $(this).closest('tr');
             var data = table.row(row).data();
             var id = data.id;
+
             Swal.fire({
-                title: 'Are you sure?',
-                text: 'This action cannot be undone!',
+                title: 'Delete Confirmation',
+                text: 'Do you really want to delete this record?',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#3085D6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, I am sure!',
-            }).then((confirmation) => {
-                if (confirmation.isConfirmed) {
-                    Swal.fire({
-                        title: 'Delete Confirmation',
-                        text: 'Do you really want to delete this record?',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#d33',
-                        cancelButtonColor: '#3085D6',
-                        confirmButtonText: 'Yes, delete it!',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // AJAX request to delete the record
-                            $.ajax({
-                                url: '/languageMaster-delete' + '/' + id,
-                                method: 'GET',
-                                data: {
-                                    _token: "{{ csrf_token() }}",
-                                    id: id
-                                },
-                                success: function(response) {
-                                    if (response.success) {
-                                        Swal.fire({
-                                            icon: 'success',
-                                            title: 'Deleted',
-                                            text: response.message,
-                                        }).then(() => {
-                                            // Refresh the page
-                                            location.reload();
-                                        });
-                                    } else {
-                                        // Error message using SweetAlert
-                                        Swal.fire({
-                                            icon: 'error',
-                                            title: 'Error',
-                                            text: 'An error occurred!',
-                                        });
-                                    }
-                                },
-                                error: function(xhr, status, error) {
-                                    // Error message using SweetAlert
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'Error',
-                                        text: 'An error occurred!',
-                                    });
-                                }
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085D6',
+                confirmButtonText: 'Yes, delete it!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // AJAX request to delete the record
+                    $.ajax({
+                        url: '/languageMaster-delete' + '/' + id,
+                        method: 'GET',
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            id: id
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Deleted',
+                                    text: response.message,
+                                }).then(() => {
+                                    // Refresh the page
+                                    location.reload();
+                                });
+                            } else {
+                                // Error message using SweetAlert
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: 'An error occurred!',
+                                });
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            // Error message using SweetAlert
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'An error occurred!',
                             });
                         }
                     });
                 }
             });
         });
-
     });
+
+    // });
 </script>
 
 
