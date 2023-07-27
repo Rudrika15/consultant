@@ -16,7 +16,7 @@ class PackageController extends Controller
         
         try {
             if ($request->ajax()) {
-                $data = Package::all();
+                $data = Package::where('status','!=','Deleted')->get();
                 return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function ($row) {

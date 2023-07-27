@@ -55,6 +55,7 @@
             <div class="form-label-group mt-3">
                 <label for="photo" class="fw-bold">Photo <sup class="text-danger">*</sup></label>
                 <input id="photo" type="file" name="photo" class="form-control" placeholder="photo">
+                <img id="preview-photo" src="gallery/default.jpg" name="preview-photo" class="mt-3" width="100px" height="100px">
 
                 @if ($errors->has('photo'))
                 <span class="error">{{ $errors->first('photo') }}</span>
@@ -81,7 +82,13 @@
             }
         });
 
-
+        $('#photo').change(function() {
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                $('#preview-photo').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        });
         $('#galleryForm').submit(function(e) {
 
             e.preventDefault();
@@ -95,9 +102,23 @@
                 cache: false,
                 contentType: false,
                 processData: false,
-                success: (data) => {
-                    this.reset();
-                    alert('Image has been uploaded using jQuery ajax successfully');
+                success: function(response) {
+                    if (response.success) {
+                        // Success message using SweetAlert
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: response.message,
+                        },200);
+                        $('#galleryForm').trigger("reset");
+                    } else {
+                        // Error message using SweetAlert
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'An error occurred!',
+                        });
+                    }
                 },
                 error: function(xhr, status, error) {
                     // Error message using SweetAlert

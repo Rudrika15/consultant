@@ -10,6 +10,8 @@ use App\Http\Controllers\Consultant\ConsultantController;
 use App\Http\Controllers\Consultant\GalleryController;
 use App\Http\Controllers\Consultant\LanguageController;
 use App\Http\Controllers\Consultant\PackageController;
+use App\Http\Controllers\Consultant\CertificateController;
+use App\Http\Controllers\Consultant\AchievementController;
 use App\Http\Controllers\Consultant\SocialLinkController;
 use App\Http\Controllers\Consultant\TimeController;
 use App\Http\Controllers\Consultant\VideoController;
@@ -169,3 +171,21 @@ Route::post('package-store', [PackageController::class, 'store'])->name('package
 Route::get('package-edit/{id?}', [PackageController::class, 'edit'])->name('package.edit');
 Route::post('package-update', [PackageController::class, 'update'])->name('package.update');
 Route::get('package-delete/{id?}', [PackageController::class, 'delete'])->name('package.delete');
+
+/* Certificate  */
+Route::get('certificate-index', [CertificateController::class, 'index'])->name('certificate.index');
+Route::get('certificate/{id}/view',[CertificateController::class, 'view'])->name('certificate.view');
+Route::get('certificate-create', [CertificateController::class, 'create'])->name('certificate.create');
+Route::post('certificate-store', [CertificateController::class, 'store'])->name('certificate.store');
+Route::get('certificate-edit/{id?}', [CertificateController::class, 'edit'])->name('certificate.edit');
+Route::post('certificate-update', [CertificateController::class, 'update'])->name('certificate.update');
+Route::get('certificate-delete/{id?}', [CertificateController::class, 'delete'])->name('certificate.delete');
+
+/* achievement  */
+Route::get('achievement-index', [AchievementController::class, 'index'])->name('achievement.index');
+Route::get('achievement/{id}/view',[AchievementController::class, 'view'])->name('achievement.view');
+Route::get('achievement-create', [AchievementController::class, 'create'])->name('achievement.create');
+Route::post('achievement-store', [AchievementController::class, 'store'])->name('achievement.store');
+Route::get('achievement-edit/{id?}', [AchievementController::class, 'edit'])->name('achievement.edit');
+Route::post('achievement-update', [AchievementController::class, 'update'])->name('achievement.update');
+Route::get('achievement-delete/{id?}', [AchievementController::class, 'delete'])->name('achievement.delete');

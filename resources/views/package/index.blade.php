@@ -125,7 +125,7 @@
                     $('#dataTableDiv').hide();
                     $('#add').hide();
                     $('#back').show();
-                    $('#viewDataDiv').html('<strong>Title:</strong> ' + response.title + '<br><strong>Price:</strong> ' + response.price  + '<br><strong>Detail:</strong> ' + response.detail +'<br><strong>validUpTo:</strong> ' + response.validUpT + '<br><strong>Satus:</strong> '+ response.status);
+                    $('#viewDataDiv').html('<strong>Title:</strong> ' + response.title + '<br><strong>Price:</strong> ' + response.price  + '<br><strong>Detail:</strong> ' + response.detail +'<br><strong>Valid Up To:</strong> ' + response.validUpT + '<br><strong>Satus:</strong> '+ response.status);
 
                 },
                 error: function(error) {

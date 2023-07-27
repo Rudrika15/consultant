@@ -117,7 +117,7 @@
                     $('#dataTableDiv').hide();
                     $('#add').hide();
                     $('#back').show();
-                    $('#viewDataDiv').html('<strong>Title:</strong> ' + response.title + '<br><strong>Photo:</strong><img src="{{url('/ gallery')}}/' + response.photo + '" width="100px" height="100px">' + '<br>' + '<strong>Satus:</strong> ' + response.status);
+                    $('#viewDataDiv').html('<strong>Title:</strong> ' + response.title + '<br><strong>Photo:</strong><img src="{{url('/gallery')}}/' + response.photo + '" width="100px" height="100px" class="ms-3">' + '<br>' + '<strong>Satus:</strong> ' + response.status);
 
                 },
                 error: function(error) {

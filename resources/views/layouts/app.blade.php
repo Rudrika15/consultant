@@ -162,6 +162,17 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Package</span></a>
             </li>
+            
+            <li class="nav-item active">
+                <a class="nav-link" href="{{route('certificate.index')}}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Certificate</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{route('achievement.index')}}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Achievement</span></a>
+            </li>
             @endrole
 
             <!-- Divider -->
