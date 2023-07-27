@@ -55,7 +55,7 @@ class CityController extends Controller
     public function create()
     {
         try {
-            $state = State::all();
+            $state = State::where('status', '!=', 'Deleted')->get();
             $city = City::join('states', 'states.id', '=', 'cities.stateId')
                 ->get(['cities.*']);
             return view('city.create', compact('city', 'state'));
@@ -93,7 +93,7 @@ class CityController extends Controller
     {
         try {
             $city = City::find($id);
-            $state = State::all();
+            $state = State::where('status', '!=', 'Deleted')->get();
             return view('city.edit', compact('city', 'state'));
         } catch (\Throwable $th) {
             //throw $th;
