@@ -482,7 +482,7 @@
         ClassicEditor
             .create(document.querySelector('#about'))
             .then(editor => {
-                // console.log(editor);
+                console.log(about);
             })
             .catch(error => {
                 console.error(error);
