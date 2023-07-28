@@ -9,33 +9,29 @@ use Illuminate\Http\Request;
 use DataTables;
 use Auth;
 use Illuminate\Support\Facades\URL;
+
 class LanguageController extends Controller
 {
-    //
     public function index(Request $request)
     {
-        // $language = Language::join('language_masters','language_masters.id','=','languages.languageId')
-        //     ->where('languages.status', '!=', 'Deleted')->orderBy('id', 'DESC')
-        //     ->paginate(10, ['languages.*','language_masters.language']);
-        try{    
+        try {
             if ($request->ajax()) {
                 $data = Language::with('language_masters')
-                ->where('status','!=','Deleted')->get();
-        
+                    ->where('status', '!=', 'Deleted')->get();
+
                 return Datatables::of($data)
-                        ->addIndexColumn()
-                        ->addColumn('action', function($row){
-                            $view = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm me-1 ">View</a>';
-                            $btn = '<a href="' . URL::route('language.edit', $row->id) . '" class="btn btn-primary btn-sm me-1">Edit</a>';
-                            $btn = $btn.'<a href="' . URL::route('language.delete', $row->id) . '" class="delete btn btn-danger btn-sm me-1">Delete</a>';
-                            return $view.''.$btn;
-                        })
-                        ->rawColumns(['action'])
-                        ->make(true);   
+                    ->addIndexColumn()
+                    ->addColumn('action', function ($row) {
+                        $view = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm me-1 ">View</a>';
+                        $btn = '<a href="' . URL::route('language.edit', $row->id) . '" class="btn btn-primary btn-sm me-1">Edit</a>';
+                        $btn = $btn . '<a href="' . URL::route('language.delete', $row->id) . '" class="delete btn btn-danger btn-sm me-1">Delete</a>';
+                        return $view . '' . $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
             }
             return view('consultant.language.index');
-        }
-        catch(\Throwable $th){
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }
@@ -43,23 +39,21 @@ class LanguageController extends Controller
     //For show single data
     public function view(Request $request, $id)
     {
-        try{
+        try {
             $language = Language::with('language_masters')->findOrFail($id);
             return response()->json($language);
-        }
-        catch(\Throwable $th){
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }
-    } 
+    }
     public function create()
     {
-        try{
-            $languageMaster=LanguageMaster::where('status','!=','Deleted')->get();
+        try {
+            $languageMaster = LanguageMaster::where('status', '!=', 'Deleted')->get();
             $language = Language::all();
-            return view('consultant.language.create', compact('language','languageMaster'));
-        }
-        catch(\Throwable $th){
+            return view('consultant.language.create', compact('language', 'languageMaster'));
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }
@@ -69,8 +63,8 @@ class LanguageController extends Controller
         $this->validate($request, [
             'languageId' => 'required',
         ]);
-        try{
-            $userId=Auth::user()->id;
+        try {
+            $userId = Auth::user()->id;
             $language = new Language();
             $language->userId = $userId;
             $language->languageId = $request->languageId;
@@ -80,8 +74,7 @@ class LanguageController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Language Created Successfully!',
-            ],200);
-            
+            ], 200);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -89,12 +82,11 @@ class LanguageController extends Controller
     }
     public function edit(Request $request, $id)
     {
-        try{
-            $languageMaster=LanguageMaster::where('status','!=','Deleted')->get();
+        try {
+            $languageMaster = LanguageMaster::where('status', '!=', 'Deleted')->get();
             $language = Language::find($id);
-            return view('consultant.language.edit', compact('language','languageMaster'));
-        }
-        catch(\Throwable $th){
+            return view('consultant.language.edit', compact('language', 'languageMaster'));
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }
@@ -105,8 +97,8 @@ class LanguageController extends Controller
         $this->validate($request, [
             'languageId' => 'required',
         ]);
-        try{
-            $userId=Auth::user()->id;
+        try {
+            $userId = Auth::user()->id;
             $id = $request->id;
             $language = Language::find($id);
             $language->userId = $userId;
@@ -117,8 +109,7 @@ class LanguageController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Language Updated Successfully!',
-            ],200);
-
+            ], 200);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -127,14 +118,14 @@ class LanguageController extends Controller
 
     function delete($id)
     {
-        try{
+        try {
             $language = Language::find($id);
             $language->status = "Deleted";
             $language->save();
             return response()->json([
                 'success' => true,
                 'message' => 'Language Deleted Successfully!',
-            ],200);
+            ], 200);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');

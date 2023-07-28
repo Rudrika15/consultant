@@ -12,12 +12,8 @@ use Illuminate\Support\Facades\URL;
 
 class SocialLinkController extends Controller
 {
-    //
     public function index(Request $request)
     {
-        // $socialLink = SocialLink::join('social_masters', 'social_masters.id', '=', 'social_links.socialMediaMasterId')
-        // ->where('social_links.status', '!=', 'Deleted')->orderBy('id', 'DESC')
-        //     ->paginate(10, ['social_links.*','social_masters.title']);
         try {
             if ($request->ajax()) {
                 $data = SocialLink::with('social_masters')
@@ -55,7 +51,7 @@ class SocialLinkController extends Controller
     public function create()
     {
         try {
-            $socialMaster = SocialMaster::where('status','!=','Deleted')->get();
+            $socialMaster = SocialMaster::where('status', '!=', 'Deleted')->get();
             $socialLink = SocialLink::all();
             return view('consultant.socialLink.create', compact('socialLink', 'socialMaster'));
         } catch (\Throwable $th) {
@@ -79,13 +75,12 @@ class SocialLinkController extends Controller
             $socialLink->url = $request->url;
 
             $socialLink->status = 'Active';
-            $socialLink->save();  
+            $socialLink->save();
 
             return response()->json([
                 'success' => true,
                 'message' => 'SocialLink Created Successfully!',
-            ],200);
-
+            ], 200);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -95,7 +90,7 @@ class SocialLinkController extends Controller
     public function edit(Request $request, $id)
     {
         try {
-            $socialMaster = SocialMaster::where('status','!=','Deleted')->get();
+            $socialMaster = SocialMaster::where('status', '!=', 'Deleted')->get();
             $socialLink = SocialLink::find($id);
             return view('consultant.socialLink.edit', compact('socialLink', 'socialMaster'));
         } catch (\Throwable $th) {
@@ -125,8 +120,7 @@ class SocialLinkController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'SocialLink Updated Successfully!',
-            ],200);
-
+            ], 200);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -142,7 +136,7 @@ class SocialLinkController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'SocialLink Deleted Successfully!',
-            ],200);
+            ], 200);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');

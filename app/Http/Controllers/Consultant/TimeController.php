@@ -11,11 +11,8 @@ use Illuminate\Support\Facades\URL;
 
 class TimeController extends Controller
 {
-    //
     public function index(Request $request)
     {
-        // $time = Time::where('times.status', '!=', 'Deleted')->orderBy('id', 'DESC')
-        //     ->paginate(10, ['times.*']);
         try {
             if ($request->ajax()) {
                 $data = Time::where('times.status', '!=', 'Deleted')->get();
@@ -76,8 +73,7 @@ class TimeController extends Controller
                 'success' => true,
                 'message' => 'Time Created Successfully!',
             ]);
-
-         } catch (\Throwable $th) {
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }
@@ -111,7 +107,6 @@ class TimeController extends Controller
                 'success' => true,
                 'message' => 'Time Updated Successfully!',
             ]);
-            
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');

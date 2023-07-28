@@ -14,12 +14,9 @@ class GalleryController extends Controller
     //
     public function index(Request $request)
     {
-
-        // $gallery = Gallery::where('status', '!=', 'Deleted')->orderBy('id', 'DESC')
-        //     ->paginate(10, ['galleries.*']);
-        try{
+        try {
             if ($request->ajax()) {
-                $data = Gallery::where('status','!=','Deleted')->get();
+                $data = Gallery::where('status', '!=', 'Deleted')->get();
                 return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function ($row) {
@@ -32,35 +29,31 @@ class GalleryController extends Controller
                     ->make(true);
             }
             return view('consultant.gallery.index');
-        }
-        catch(\Throwable $th){
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
-        } 
+        }
     }
     //For show single data
     public function view(Request $request, $id)
     {
-        try{
+        try {
             $gallery = Gallery::findOrFail($id);
             return response()->json($gallery);
-        }
-        catch(\Throwable $th){
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
-        } 
+        }
     }
     public function create()
     {
-        try{
+        try {
             $gallery = Gallery::all();
             return view('consultant.gallery.create', compact('gallery'));
-        }
-        catch(\Throwable $th){
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
-        } 
-        
+        }
     }
 
     public function store(Request $request)
@@ -70,10 +63,10 @@ class GalleryController extends Controller
             'photo' => 'required',
 
         ]);
-        try{
-            $userId=Auth::user()->id;
+        try {
+            $userId = Auth::user()->id;
             $gallery = new Gallery();
-            $gallery->userId=$userId;
+            $gallery->userId = $userId;
             $gallery->title = $request->title;
             if ($request->photo) {
                 $gallery->photo = time() . '.' . $request->photo->extension();
@@ -85,24 +78,22 @@ class GalleryController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Gallery Created Successfully!',
-            ],200);
-
+            ], 200);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
-        } 
+        }
     }
 
     public function edit(Request $request, $id)
     {
-        try{
+        try {
             $gallery = Gallery::find($id);
             return view('consultant.gallery.edit', compact('gallery'));
-        }
-        catch(\Throwable $th){
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
-        } 
+        }
     }
 
     public function update(Request $request)
@@ -110,11 +101,11 @@ class GalleryController extends Controller
         $this->validate($request, [
             'title' => 'required',
         ]);
-        try{
-            $userId=Auth::user()->id;
+        try {
+            $userId = Auth::user()->id;
             $id = $request->id;
             $gallery = Gallery::find($id);
-            $gallery->userId=$userId;
+            $gallery->userId = $userId;
             $gallery->title = $request->title;
             if ($request->photo) {
                 $gallery->photo = time() . '.' . $request->photo->extension();
@@ -123,11 +114,10 @@ class GalleryController extends Controller
             $gallery->status = 'Active';
             $gallery->save();
 
-           return response()->json([
+            return response()->json([
                 'success' => true,
                 'message' => 'Gallery Updated Successfully!',
-            ],200);
-
+            ], 200);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -136,7 +126,7 @@ class GalleryController extends Controller
 
     function delete($id)
     {
-        try{
+        try {
             $gallery = Gallery::find($id);
             $gallery->status = "Deleted";
             $gallery->save();
@@ -144,8 +134,7 @@ class GalleryController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Gallery Deleted Successfully!',
-            ],200);
-
+            ], 200);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');

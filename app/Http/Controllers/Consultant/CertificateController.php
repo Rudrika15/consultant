@@ -8,14 +8,15 @@ use App\Models\Certificate;
 use DataTables;
 use Auth;
 use Illuminate\Support\Facades\URL;
+
 class CertificateController extends Controller
 {
     //
     public function index(Request $request)
     {
-        // try{
+        try {
             if ($request->ajax()) {
-                $data = Certificate::where('status','!=','Deleted')->get();
+                $data = Certificate::where('status', '!=', 'Deleted')->get();
                 return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function ($row) {
@@ -28,34 +29,30 @@ class CertificateController extends Controller
                     ->make(true);
             }
             return view('consultant.certificate.index');
-        // }
-        // catch(\Throwable $th){
-        //     //throw $th;
-        //     return view('servererror');
-        // } 
+        } catch (\Throwable $th) {
+            //throw $th;
+            return view('servererror');
+        }
     }
     public function view(Request $request, $id)
     {
-        try{
+        try {
             $certificate = Certificate::findOrFail($id);
             return response()->json($certificate);
-        }
-        catch(\Throwable $th){
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
-        } 
+        }
     }
     public function create()
     {
-        try{
+        try {
             $certificate = Certificate::all();
             return view('consultant.certificate.create', compact('certificate'));
-        }
-        catch(\Throwable $th){
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
-        } 
-        
+        }
     }
 
     public function store(Request $request)
@@ -65,10 +62,10 @@ class CertificateController extends Controller
             'photo' => 'required',
 
         ]);
-        try{
-            $userId=Auth::user()->id;
+        try {
+            $userId = Auth::user()->id;
             $certificate = new Certificate();
-            $certificate->userId=$userId;
+            $certificate->userId = $userId;
             $certificate->title = $request->title;
             if ($request->photo) {
                 $certificate->photo = time() . '.' . $request->photo->extension();
@@ -80,24 +77,22 @@ class CertificateController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'certificate Created Successfully!',
-            ],200);
-
+            ], 200);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
-        } 
+        }
     }
 
     public function edit(Request $request, $id)
     {
-        try{
+        try {
             $certificate = Certificate::find($id);
             return view('consultant.certificate.edit', compact('certificate'));
-        }
-        catch(\Throwable $th){
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
-        } 
+        }
     }
 
     public function update(Request $request)
@@ -105,11 +100,11 @@ class CertificateController extends Controller
         $this->validate($request, [
             'title' => 'required',
         ]);
-        try{
-            $userId=Auth::user()->id;
+        try {
+            $userId = Auth::user()->id;
             $id = $request->id;
             $certificate = Certificate::find($id);
-            $certificate->userId=$userId;
+            $certificate->userId = $userId;
             $certificate->title = $request->title;
             if ($request->photo) {
                 $certificate->photo = time() . '.' . $request->photo->extension();
@@ -118,11 +113,10 @@ class CertificateController extends Controller
             $certificate->status = 'Active';
             $certificate->save();
 
-           return response()->json([
+            return response()->json([
                 'success' => true,
                 'message' => 'certificate Updated Successfully!',
-            ],200);
-
+            ], 200);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -131,7 +125,7 @@ class CertificateController extends Controller
 
     function delete($id)
     {
-        try{
+        try {
             $certificate = Certificate::find($id);
             $certificate->status = "Deleted";
             $certificate->save();
@@ -139,8 +133,7 @@ class CertificateController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'certificate Deleted Successfully!',
-            ],200);
-
+            ], 200);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');

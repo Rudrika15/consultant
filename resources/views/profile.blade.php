@@ -158,6 +158,27 @@
     <!-- Collapsable Card Example -->
 
 </div>
+<script src="https://cdn.ckeditor.com/ckeditor5/38.1.1/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#about'))
+        .then(editor => {
+            console.log(about);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#address'))
+        .then(editor => {
+            // console.log(editor);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+</script>
 
 <script>
     $(document).ready(function() {
