@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\City;
-use App\Models\state;
+use App\Models\State;
 use DataTables;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Http\Request;
@@ -103,7 +103,7 @@ class CityController extends Controller
 
     public function update(Request $request)
     {
-        $this->validate($request, [
+        $this->validate($request, [ 
             'cityName' => 'required',
 
         ]);
