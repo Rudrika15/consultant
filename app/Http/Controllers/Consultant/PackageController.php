@@ -8,15 +8,15 @@ use App\Models\Package;
 use DataTables;
 use Auth;
 use Illuminate\Support\Facades\URL;
+
 class PackageController extends Controller
 {
-    //
     public function index(Request $request)
     {
-        
+
         try {
             if ($request->ajax()) {
-                $data = Package::where('status','!=','Deleted')->get();
+                $data = Package::where('status', '!=', 'Deleted')->get();
                 return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function ($row) {
@@ -78,8 +78,7 @@ class PackageController extends Controller
                 'success' => true,
                 'message' => 'Package Created Successfully!',
             ]);
-
-         } catch (\Throwable $th) {
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }
@@ -117,7 +116,6 @@ class PackageController extends Controller
                 'success' => true,
                 'message' => 'Package Updated Successfully!',
             ]);
-            
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
