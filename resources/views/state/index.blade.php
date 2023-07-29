@@ -95,16 +95,10 @@
                     name: 'action',
                     orderable: false,
                     searchable: false,
-                    // render: function(data, type, full, meta) {
-                    //         var btn='<a href="javascript:void(0)" class="edit btn btn-primary btn-sm me-1 ">View</a>';
 
-                    //         //var editBtn = '<a href="' + "{{ route('state.edit', ['id' => '']) }}/" + data.id + '" class="btn btn-info btn-sm">Edit</a>';
-                    //         return btn + ' ' + data.id;
-                    // }
                 },
             ]
         });
-
         $(document).on('click', '.edit', function() {
             var row = $(this).closest('tr');
             var data = table.row(row).data();
@@ -119,7 +113,7 @@
                     $('#dataTableDiv').hide();
                     $('#add').hide();
                     $('#back').show();
-                    $('#viewDataDiv').html('<strong>State Name:</strong> ' + response.stateName + '<br>' + '<strong>Satus:</strong> ' + response.status);
+                    $('#viewDataDiv').html('<strong>Category Name:</strong> ' + response.stateName + '<br>' + '<strong>Satus:</strong> ' + response.status);
 
                 },
                 error: function(error) {
@@ -128,7 +122,6 @@
                 }
             });
         });
-
         $('body').on('click', '.delete', function(event) {
             event.preventDefault();
             var row = $(this).closest('tr');
@@ -182,11 +175,9 @@
                         }
                     });
                 }
-
             });
         });
-
-    });
+    });     
 </script>
 
 

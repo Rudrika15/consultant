@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use DataTables;
 use Illuminate\Support\Facades\URL;
+
 class CategoryController extends Controller
 {
     public function index(Request $request)
@@ -37,8 +38,13 @@ class CategoryController extends Controller
     //For single category
     public function view(Request $request, $id)
     {
-        $category = Category::findOrFail($id);
-        return response()->json($category);
+        try {
+            $category = Category::findOrFail($id);
+            return response()->json($category);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return view('servererror');
+        }
     }
     public function create()
     {

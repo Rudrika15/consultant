@@ -12,9 +12,6 @@ class LanguageMasterController extends Controller
     //
     public function index(Request $request)
     {
-
-        // $languageMaster = LanguageMaster::where('status', '!=', 'Deleted')->orderBy('id', 'DESC')
-        //     ->paginate(10, ['language_masters.*']);
         try {
             if ($request->ajax()) {
                 $data = LanguageMaster::where('status', '!=', 'Deleted')

@@ -15,11 +15,11 @@ class StateController extends Controller
     {
         try {
             if ($request->ajax()) {
-                $data = State::select('*')
-                    ->where('status', '!=', 'Deleted')
+                $data = State::where('status', '!=', 'Deleted')
                     ->orderBy('id', 'DESC')
                     ->get();
-                return Datatables::of($data)
+
+                return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function ($row) {
                         $view = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm me-1 ">View</a>';
@@ -32,7 +32,7 @@ class StateController extends Controller
             }
             return view('state.index');
         } catch (\Throwable $th) {
-            //throw $th;
+            //throw $th;    
             return view('servererror');
         }
     }
