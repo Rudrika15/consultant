@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\Validator;
 
 class CertificateController extends Controller
 {
-    function index()
+    function index(Request $request)
     {
-        $certificate = Certificate::all();
-        if ($certificate) {
+        $userId = $request->userId;
+        $certificate = Certificate::where('userId', '=', $userId)->get();;
+        if (count($certificate) > 0) {
             return response([
                 'success' => true,
                 'message' => 'View All Certificate !',

@@ -15,9 +15,12 @@ class SocialLinkController extends Controller
     public function index(Request $request)
     {
         try {
+            $userId = Auth::user()->id;
             if ($request->ajax()) {
                 $data = SocialLink::with('social_masters')
-                    ->where('status', '!=', 'Deleted')->get();
+                    ->where('status', '!=', 'Deleted')
+                    ->where('userId', '=', $userId)
+                    ->get();
 
                 return Datatables::of($data)
                     ->addIndexColumn()

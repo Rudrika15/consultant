@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\Validator;
 
 class SocialLinkController extends Controller
 {
-    function index()
+    function index(Request $request)
     {
-        $socialLink = SocialLink::all();
-        if ($socialLink) {
+        $userId = $request->userId;
+        $socialLink = SocialLink::where('userId', '=', $userId)->get();;
+        if (count($socialLink) > 0) {
             return response([
                 'success' => true,
                 'message' => 'View All SocialLink !',

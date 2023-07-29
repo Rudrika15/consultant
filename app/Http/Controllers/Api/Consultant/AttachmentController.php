@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\Validator;
 
 class AttachmentController extends Controller
 {
-    function index()
+    function index(Request $request)
     {
-        $attachment = Attachment::all();
-        if ($attachment) {
+        $userId = $request->userId;
+        $attachment = Attachment::where('userId', '=', $userId)->get();
+        if (count($attachment) > 0) {
             return response([
                 'success' => true,
                 'message' => 'View All Achievement !',
@@ -31,7 +32,7 @@ class AttachmentController extends Controller
         $rules = array(
             'userId' => 'required',
             'title' => 'required',
-            'photo' => 'required'
+            'file' => 'required'
         );
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {

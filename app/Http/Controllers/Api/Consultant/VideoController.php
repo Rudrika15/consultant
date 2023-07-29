@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\Validator;
 
 class VideoController extends Controller
 {
-    function index()
+    function index(Request $request)
     {
-        $video = Video::all();
-        if ($video) {
+        $userId = $request->userId;
+        $video = Video::where('userId', '=', $userId)->get();;
+        if (count($video) > 0) {
             return response([
                 'success' => true,
                 'message' => 'View All Video !',

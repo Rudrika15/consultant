@@ -8,14 +8,18 @@ use App\Models\Achievement;
 use DataTables;
 use Auth;
 use Illuminate\Support\Facades\URL;
+
 class AchievementController extends Controller
 {
     //achievement
     public function index(Request $request)
     {
-        try{
+        try {
+            $userId = Auth::user()->id;
             if ($request->ajax()) {
-                $data = Achievement::where('status','!=','Deleted')->get();
+                $data = Achievement::where('status', '!=', 'Deleted')
+                    ->where('userId', '=', $userId)
+                    ->get();
                 return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function ($row) {
@@ -28,34 +32,30 @@ class AchievementController extends Controller
                     ->make(true);
             }
             return view('consultant.achievement.index');
-        }
-        catch(\Throwable $th){
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
-        } 
+        }
     }
     public function view(Request $request, $id)
     {
-        try{
+        try {
             $achievement = Achievement::findOrFail($id);
             return response()->json($achievement);
-        }
-        catch(\Throwable $th){
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
-        } 
+        }
     }
     public function create()
     {
-        try{
+        try {
             $achievement = Achievement::all();
             return view('consultant.achievement.create', compact('achievement'));
-        }
-        catch(\Throwable $th){
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
-        } 
-        
+        }
     }
 
     public function store(Request $request)
@@ -65,10 +65,10 @@ class AchievementController extends Controller
             'photo' => 'required',
 
         ]);
-        try{
-            $userId=Auth::user()->id;
+        try {
+            $userId = Auth::user()->id;
             $achievement = new Achievement();
-            $achievement->userId=$userId;
+            $achievement->userId = $userId;
             $achievement->title = $request->title;
             if ($request->photo) {
                 $achievement->photo = time() . '.' . $request->photo->extension();
@@ -80,34 +80,32 @@ class AchievementController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'achievement Created Successfully!',
-            ],200);
-
+            ], 200);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
-        } 
+        }
     }
     public function edit(Request $request, $id)
     {
-        try{
+        try {
             $achievement = Achievement::find($id);
             return view('consultant.achievement.edit', compact('achievement'));
-        }
-        catch(\Throwable $th){
+        } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
-        } 
+        }
     }
     public function update(Request $request)
     {
         $this->validate($request, [
             'title' => 'required',
         ]);
-        try{
-            $userId=Auth::user()->id;
+        try {
+            $userId = Auth::user()->id;
             $id = $request->id;
             $achievement = Achievement::find($id);
-            $achievement->userId=$userId;
+            $achievement->userId = $userId;
             $achievement->title = $request->title;
             if ($request->photo) {
                 $achievement->photo = time() . '.' . $request->photo->extension();
@@ -116,11 +114,10 @@ class AchievementController extends Controller
             $achievement->status = 'Active';
             $achievement->save();
 
-           return response()->json([
+            return response()->json([
                 'success' => true,
                 'message' => 'achievement Updated Successfully!',
-            ],200);
-
+            ], 200);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -128,7 +125,7 @@ class AchievementController extends Controller
     }
     function delete($id)
     {
-        try{
+        try {
             $achievement = Achievement::find($id);
             $achievement->status = "Deleted";
             $achievement->save();
@@ -136,8 +133,7 @@ class AchievementController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'achievement Deleted Successfully!',
-            ],200);
-
+            ], 200);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');

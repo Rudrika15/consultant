@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\Validator;
 
 class LanguageController extends Controller
 {
-    function index()
+    function index(Request $request)
     {
-        $gallery = Language::all();
-        if ($gallery) {
+        $userId = $request->userId;
+        $gallery = Language::where('userId', '=', $userId)->get();;
+        if (count($gallery) > 0) {
             return response([
                 'success' => true,
                 'message' => 'View All Language !',

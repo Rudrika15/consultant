@@ -15,8 +15,11 @@ class VideoController extends Controller
     public function index(Request $request)
     {
         try {
+            $userId = Auth::user()->id;
             if ($request->ajax()) {
-                $data = Video::where('status', '!=', 'Deleted')->get();
+                $data = Video::where('status', '!=', 'Deleted')
+                    ->where('userId', '=', $userId)
+                    ->get();
                 return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function ($row) {

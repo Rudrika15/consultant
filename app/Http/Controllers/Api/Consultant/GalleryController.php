@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\Validator;
 
 class GalleryController extends Controller
 {
-    function index()
+    function index(Request $request)
     {
-        $gallery = Gallery::all();
-        if ($gallery) {
+        $userId = $request->userId;
+        $gallery = Gallery::where('userId', '=', $userId)->get();;
+        if (count($gallery) > 0) {
             return response([
                 'success' => true,
                 'message' => 'View All Gallery!',

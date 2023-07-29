@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\Validator;
 
 class AchievementController extends Controller
 {
-    function index()
+    function index(Request $request)
     {
-        $achievement = Achievement::all();
-        if ($achievement) {
+        $userId = $request->userId;
+        $achievement = Achievement::where('userId', '=', $userId)->get();
+        if (count($achievement) > 0) {
             return response([
                 'success' => true,
                 'message' => '  View All Achievement !',

@@ -12,4 +12,8 @@ class Time extends Model
         'time',
         'day',
     ];
+    public function user()
+    {
+        return $this->hasMany(User::class, 'id', 'userId');
+    }
 }

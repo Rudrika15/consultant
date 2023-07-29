@@ -11,13 +11,14 @@ use Illuminate\Support\Facades\URL;
 
 class AttachmentController extends Controller
 {
-    //
-
     public function index(Request $request)
     {
         try {
+            $userId = Auth::user()->id;
             if ($request->ajax()) {
-                $data = Attachment::where('status', '!=', 'Deleted')->get();
+                $data = Attachment::where('status', '!=', 'Deleted')
+                    ->where('userId', '=', $userId)
+                    ->get();
                 return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function ($row) {

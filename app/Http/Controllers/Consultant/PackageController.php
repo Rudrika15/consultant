@@ -15,8 +15,11 @@ class PackageController extends Controller
     {
 
         try {
+            $userId = Auth::user()->id;
             if ($request->ajax()) {
-                $data = Package::where('status', '!=', 'Deleted')->get();
+                $data = Package::where('status', '!=', 'Deleted')
+                    ->where('userId', '=', $userId)
+                    ->get();
                 return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function ($row) {

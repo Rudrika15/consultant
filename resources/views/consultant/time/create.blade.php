@@ -40,9 +40,9 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group"id="timeForm" name="timeForm"  enctype="multipart/form-data" >
+        <form class="form-group" id="timeForm" name="timeForm" enctype="multipart/form-data">
             @csrf
-            
+
             <div class="form-label-group mt-3">
                 <label for="time" class="fw-bold">Time <sup class="text-danger">*</sup></label>
                 <input id="time" type="time" name="time" class="form-control" placeholder="time">
@@ -50,22 +50,31 @@
                 <span class="error">{{ $errors->first('time') }}</span>
                 @endif
             </div>
-        
+
             <div class="form-label-group mt-3">
                 <label for="day" class="fw-bold">Day <sup class="text-danger">*</sup></label>
-                <input id="day" type="text" name="day" class="form-control" placeholder="day">
+                <select class="form-control" data-error='State Name Field is required' required name="day" id="day">
+                    <option value="" selected disabled> Select Day </option>
+                    <option value="Sunday">Sunday</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                </select>
+                <div class="help-block with-errors"></div>
                 @if ($errors->has('day'))
                 <span class="error">{{ $errors->first('day') }}</span>
                 @endif
             </div>
-           
-           
+
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
                 <button type="submit" id="saveBtn" class="btn btn-primary">Submit</button>
             </div>
 
         </form>
-        
+
         <!-- </div> -->
     </div>
 
@@ -74,21 +83,21 @@
 </div>
 
 <script type="text/javascript">
-  $(function () {
-    $.ajaxSetup({
-          headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-    });
-     $('#saveBtn').click(function (e) {
-        e.preventDefault();
-        $(this).html('Submit');
-        $.ajax({
-          data: $('#timeForm').serialize(),
-          url: "{{ route('time.store') }}",
-          type: "POST",
-          dataType: 'json',
-          success: function (response) {
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('#saveBtn').click(function(e) {
+            e.preventDefault();
+            $(this).html('Submit');
+            $.ajax({
+                data: $('#timeForm').serialize(),
+                url: "{{ route('time.store') }}",
+                type: "POST",
+                dataType: 'json',
+                success: function(response) {
                     // window.open("/time-index", "_self");
                     if (response.success) {
                         // Success message using SweetAlert
@@ -106,8 +115,8 @@
                             text: 'An error occurred!',
                         });
                     }
-          },
-          error: function(xhr, status, error) {
+                },
+                error: function(xhr, status, error) {
                     // Error message using SweetAlert
                     Swal.fire({
                         icon: 'error',
@@ -115,8 +124,8 @@
                         text: 'An error occurred!',
                     });
                 }
+            });
         });
     });
-});     
 </script>
 @endsection

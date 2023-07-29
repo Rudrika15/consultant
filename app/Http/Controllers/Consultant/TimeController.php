@@ -14,8 +14,11 @@ class TimeController extends Controller
     public function index(Request $request)
     {
         try {
+            $userId = Auth::user()->id;
             if ($request->ajax()) {
-                $data = Time::where('times.status', '!=', 'Deleted')->get();
+                $data = Time::where('times.status', '!=', 'Deleted')
+                    ->where('userId', '=', $userId)
+                    ->get();
                 return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function ($row) {

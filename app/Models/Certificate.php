@@ -12,4 +12,8 @@ class Certificate extends Model
         'title',
         'photo',
     ];
+    public function user()
+    {
+        return $this->hasMany(User::class, 'id', 'userId');
+    }
 }

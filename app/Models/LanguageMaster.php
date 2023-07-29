@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class LanguageMaster extends Model
 {
     use HasFactory;
+    public function user()
+    {
+        return $this->hasMany(User::class, 'id', 'userId');
+    }
 }

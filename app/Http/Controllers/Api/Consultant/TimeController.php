@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\Validator;
 
 class TimeController extends Controller
 {
-    function index()
+    function index(Request $request)
     {
-        $time = Time::all();
-        if ($time) {
+        $userId = $request->userId;
+        $time = Time::where('userId', '=', $userId)->get();
+        if (count($time) > 0) {
             return response([
                 'success' => true,
                 'message' => 'View All Time !',

@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\Validator;
 
 class PackageController extends Controller
 {
-    function index()
+    function index(Request $request)
     {
-        $package = Package::all();
-        if ($package) {
+        $userId = $request->userId;
+        $package = Package::where('userId', '=', $userId)->get();;
+        if (count($package) > 0) {
             return response([
                 'success' => true,
                 'message' => 'View All Package !',
