@@ -56,7 +56,7 @@ class CityController extends Controller
     {
         try {
             $state = State::where('status', '!=', 'Deleted')->get();
-            $city = City::join('states', 'states.id', '=', 'cities.stateId')
+            $city = City::with('state')
                 ->get(['cities.*']);
             return view('city.create', compact('city', 'state'));
         } catch (\Throwable $th) {
@@ -103,7 +103,7 @@ class CityController extends Controller
 
     public function update(Request $request)
     {
-        $this->validate($request, [ 
+        $this->validate($request, [
             'cityName' => 'required',
 
         ]);
