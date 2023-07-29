@@ -1,0 +1,890 @@
+{
+	"info": {
+		"_postman_id": "93fd512e-393c-4811-babf-c990f3b7a2a1",
+		"name": "Consultant",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "25783798",
+		"_collection_link": "https://orange-robot-537600.postman.co/workspace/Consultant~4a164cd6-1a9e-4f06-a98a-e3d1902a0875/collection/25783798-93fd512e-393c-4811-babf-c990f3b7a2a1?action=share&creator=25783798&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Achievement",
+			"item": [
+				{
+					"name": "index/userId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":\"10\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:8000/api/achievement/index/5"
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userId",
+									"value": "14",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Customer Service Achievements",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/C:/Users/admin/Pictures/Customer Service Achievements.jpg"
+								}
+							]
+						},
+						"url": "https://consultantcube.psolution.in/api/achievement/store"
+					},
+					"response": []
+				},
+				{
+					"name": "update/id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userId",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "Spoke on panels discussing issues facing your profession",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/C:/Users/admin/Pictures/Spoke on panels discussing issues facing your profession.jpg"
+								}
+							]
+						},
+						"url": "https://consultantcube.psolution.in/api/achievement/update/3"
+					},
+					"response": []
+				},
+				{
+					"name": "show/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://consultantcube.psolution.in/api/achievement/show/4"
+					},
+					"response": []
+				},
+				{
+					"name": "delete/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://consultantcube.psolution.in/api/achievement/delete/3"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Attachment",
+			"item": [
+				{
+					"name": "index/userId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":\"14\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:8000/api/attachment/index/1"
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userId",
+									"value": "14",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "List of Consultants",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/admin/Pictures/Learned a new language.jpg"
+								}
+							]
+						},
+						"url": "https://consultantcube.psolution.in/api/attachment/store"
+					},
+					"response": []
+				},
+				{
+					"name": "update/id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "List Of Attachment",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/admin/Pictures/Learned a new language.jpg"
+								}
+							]
+						},
+						"url": "https://consultantcube.psolution.in/api/attachment/update/10"
+					},
+					"response": []
+				},
+				{
+					"name": "show/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://consultantcube.psolution.in/api/attachment/show/10"
+					},
+					"response": []
+				},
+				{
+					"name": "delete/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://consultantcube.psolution.in/api/attachment/delete/11"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Certificate",
+			"item": [
+				{
+					"name": "index/userId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":\"10\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://consultantcube.psolution.in/api/certificate/index"
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userId",
+									"value": "14",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Spoke On Panels Certificate",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/C:/Users/admin/Pictures/Spoke on panels discussing issues facing your profession.jpg"
+								}
+							]
+						},
+						"url": "https://consultantcube.psolution.in/api/certificate/store"
+					},
+					"response": []
+				},
+				{
+					"name": "update/id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Custmer Service Cerificate",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/C:/Users/admin/Pictures/Customer Service Achievements.jpg"
+								}
+							]
+						},
+						"url": "https://consultantcube.psolution.in/api/certificate/update/1"
+					},
+					"response": []
+				},
+				{
+					"name": "show/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://consultantcube.psolution.in/api/certificate/show/2"
+					},
+					"response": []
+				},
+				{
+					"name": "delete/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://consultantcube.psolution.in/api/certificate/delete/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Gallery",
+			"item": [
+				{
+					"name": "index/userId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":\"14\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://consultantcube.psolution.in/api/gallery/index"
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userId",
+									"value": "14",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Customer service",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/C:/Users/admin/Pictures/Customer service.jpg"
+								}
+							]
+						},
+						"url": "https://consultantcube.psolution.in/api/gallery/store"
+					},
+					"response": []
+				},
+				{
+					"name": "update/id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Gave Career Advice",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/C:/Users/admin/Pictures/Gave career advice to young professionals.jpg"
+								}
+							]
+						},
+						"url": "https://consultantcube.psolution.in/api/gallery/update/14"
+					},
+					"response": []
+				},
+				{
+					"name": "show/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://consultantcube.psolution.in/api/gallery/show/1"
+					},
+					"response": []
+				},
+				{
+					"name": "delete/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://consultantcube.psolution.in/api/gallery/delete/10"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Language",
+			"item": [
+				{
+					"name": "index/userId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":\"14\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://consultantcube.psolution.in/api/language/index"
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userId",
+									"value": "14",
+									"type": "text"
+								},
+								{
+									"key": "languageId",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": "https://consultantcube.psolution.in/api/language/store"
+					},
+					"response": []
+				},
+				{
+					"name": "update/id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "languageId",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": "https://consultantcube.psolution.in/api/language/update/22"
+					},
+					"response": []
+				},
+				{
+					"name": "show/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://consultantcube.psolution.in/api/language/show/22"
+					},
+					"response": []
+				},
+				{
+					"name": "delete/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://consultantcube.psolution.in/api/language/delete/21"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Package",
+			"item": [
+				{
+					"name": "index/userId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":\"14\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://consultantcube.psolution.in/api/package/index"
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userId",
+									"value": "14",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Mobile Recharge",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "500",
+									"type": "text"
+								},
+								{
+									"key": "detail",
+									"value": "Mobile Rechagre For Vodaphone",
+									"type": "text"
+								},
+								{
+									"key": "validUpTo",
+									"value": "3 Months",
+									"type": "text"
+								}
+							]
+						},
+						"url": "https://consultantcube.psolution.in/api/package/store"
+					},
+					"response": []
+				},
+				{
+					"name": "update/id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "wi-Fi Recharge VI",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "5000",
+									"type": "text"
+								},
+								{
+									"key": "detail",
+									"value": "Wi-Fi Recharge For Vi",
+									"type": "text"
+								},
+								{
+									"key": "validUpTo",
+									"value": "1 Year",
+									"type": "text"
+								}
+							]
+						},
+						"url": "https://consultantcube.psolution.in/api/package/update/4"
+					},
+					"response": []
+				},
+				{
+					"name": "delete/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://consultantcube.psolution.in/api/package/delete/3"
+					},
+					"response": []
+				},
+				{
+					"name": "show/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://consultantcube.psolution.in/api/package/show/4"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SocialLink",
+			"item": [
+				{
+					"name": "index/userId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":\"14\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://consultantcube.psolution.in/api/socialLink/index"
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userId",
+									"value": "14",
+									"type": "text"
+								},
+								{
+									"key": "socialMediaMasterId",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "url",
+									"value": "http://127.0.0.1:8000/api/socialLink/store  liveee",
+									"type": "text"
+								}
+							]
+						},
+						"url": "https://consultantcube.psolution.in/api/socialLink/store"
+					},
+					"response": []
+				},
+				{
+					"name": "update/id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "socialMediaMasterId",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "url",
+									"value": "http://facebook.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": "https://consultantcube.psolution.in/api/socialLink/update/19"
+					},
+					"response": []
+				},
+				{
+					"name": "delete/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://consultantcube.psolution.in/api/socialLink/delete/19"
+					},
+					"response": []
+				},
+				{
+					"name": "show/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:8000/api/socialLink/show/20"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Time",
+			"item": [
+				{
+					"name": "index/userId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":\"14\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://consultantcube.psolution.in/api/time/index"
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userId",
+									"value": "14",
+									"type": "text"
+								},
+								{
+									"key": "time",
+									"value": "11:00 Am",
+									"type": "text"
+								},
+								{
+									"key": "day",
+									"value": "Wednesday",
+									"type": "text"
+								}
+							]
+						},
+						"url": "https://consultantcube.psolution.in/api/time/store"
+					},
+					"response": []
+				},
+				{
+					"name": "update/id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "time",
+									"value": "11:00",
+									"type": "text"
+								},
+								{
+									"key": "day",
+									"value": "Saturday",
+									"type": "text"
+								}
+							]
+						},
+						"url": "https://consultantcube.psolution.in/api/time/update/36"
+					},
+					"response": []
+				},
+				{
+					"name": "delete/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://consultantcube.psolution.in/api/time/delete/36"
+					},
+					"response": []
+				},
+				{
+					"name": "show/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://consultantcube.psolution.in/api/time/show/36"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Video",
+			"item": [
+				{
+					"name": "index/userId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":\"14\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://consultantcube.psolution.in/api/video/index"
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userId",
+									"value": "14",
+									"type": "text"
+								},
+								{
+									"key": "url",
+									"value": "https://www.youtube.com/watch?v=ChyR-8YNPMA&list=RDChyR-8YNPMA&start_radio=1",
+									"type": "text"
+								}
+							]
+						},
+						"url": "https://consultantcube.psolution.in/api/video/store"
+					},
+					"response": []
+				},
+				{
+					"name": "update/id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "url",
+									"value": "https://www.youtube.com/watch?v=2CXSw1oPj3I&list=RDChyR-8YNPMA&index=4",
+									"type": "text"
+								}
+							]
+						},
+						"url": "https://consultantcube.psolution.in/api/video/update/12"
+					},
+					"response": []
+				},
+				{
+					"name": "delete/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://consultantcube.psolution.in/api/video/delete/10"
+					},
+					"response": []
+				},
+				{
+					"name": "show/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://consultantcube.psolution.in/api/video/show/12"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

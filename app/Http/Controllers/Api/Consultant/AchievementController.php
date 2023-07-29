@@ -9,10 +9,9 @@ use Illuminate\Support\Facades\Validator;
 
 class AchievementController extends Controller
 {
-    function index(Request $request)
+    function index($id)
     {
-        $userId = $request->userId;
-        $achievement = Achievement::where('userId', '=', $userId)->get();
+        $achievement = Achievement::where('userId', '=', $id)->get();
         if (count($achievement) > 0) {
             return response([
                 'success' => true,

@@ -9,10 +9,9 @@ use Illuminate\Support\Facades\Validator;
 
 class TimeController extends Controller
 {
-    function index(Request $request)
+    function index($id)
     {
-        $userId = $request->userId;
-        $time = Time::where('userId', '=', $userId)->get();
+        $time = Time::where('userId', '=', $id)->get();
         if (count($time) > 0) {
             return response([
                 'success' => true,

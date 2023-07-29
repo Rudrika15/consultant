@@ -78,66 +78,72 @@ Route::get('socialMaster-show/{id?}', [SocialMasterController::class, 'show']);
 /* profile */
 Route::get('consultant-profile/{id?}', [RegisterController::class, 'consultantProfile']);
 Route::post('consultant-update/{id?}', [RegisterController::class, 'update']);
+
+
+
+
 /*-----------------------------------  Consultant Side  ----------------------------------------*/
 
+
+
 /* Achievement Api */
-Route::get('achievement/index', [AchievementController::class, 'index']);
+Route::get('achievement/index/{id?}', [AchievementController::class, 'index']);
 Route::post('achievement/store', [AchievementController::class, 'store']);
 Route::post('achievement/update/{id?}', [AchievementController::class, 'update']);
 Route::get('achievement/delete/{id?}', [AchievementController::class, 'delete']);
 Route::get('achievement/show/{id?}', [AchievementController::class, 'show']);
 
 /*  Attachment  */
-Route::get('attachment/index', [AttachmentController::class, 'index']);
+Route::get('attachment/index/{id?}', [AttachmentController::class, 'index']);
 Route::post('attachment/store', [AttachmentController::class, 'store']);
 Route::post('attachment/update/{id?}', [AttachmentController::class, 'update']);
 Route::get('attachment/delete/{id?}', [AttachmentController::class, 'delete']);
 Route::get('attachment/show/{id?}', [AttachmentController::class, 'show']);
 
 /*  Certificate  */
-Route::get('certificate/index', [CertificateController::class, 'index']);
+Route::get('certificate/index/{id?}', [CertificateController::class, 'index']);
 Route::post('certificate/store', [CertificateController::class, 'store']);
 Route::post('certificate/update/{id?}', [CertificateController::class, 'update']);
 Route::get('certificate/delete/{id?}', [CertificateController::class, 'delete']);
 Route::get('certificate/show/{id?}', [CertificateController::class, 'show']);
 
 /*  Gallery  */
-Route::get('gallery/index', [GalleryController::class, 'index']);
+Route::get('gallery/index/{id?}', [GalleryController::class, 'index']);
 Route::post('gallery/store', [GalleryController::class, 'store']);
 Route::post('gallery/update/{id?}', [GalleryController::class, 'update']);
 Route::get('gallery/delete/{id?}', [GalleryController::class, 'delete']);
 Route::get('gallery/show/{id?}', [GalleryController::class, 'show']);
 
 /*  Language  */
-Route::get('language/index', [LanguageController::class, 'index']);
+Route::get('language/index/{id?}', [LanguageController::class, 'index']);
 Route::post('language/store', [LanguageController::class, 'store']);
 Route::post('language/update/{id?}', [LanguageController::class, 'update']);
 Route::get('language/delete/{id?}', [LanguageController::class, 'delete']);
 Route::get('language/show/{id?}', [LanguageController::class, 'show']);
 
 /*  Package  */
-Route::get('package/index', [PackageController::class, 'index']);
+Route::get('package/index/{id?}', [PackageController::class, 'index']);
 Route::post('package/store', [PackageController::class, 'store']);
 Route::post('package/update/{id?}', [PackageController::class, 'update']);
 Route::get('package/delete/{id?}', [PackageController::class, 'delete']);
 Route::get('package/show/{id?}', [PackageController::class, 'show']);
 
 /*  SocialLink  */
-Route::get('socialLink/index', [SocialLinkController::class, 'index']);
+Route::get('socialLink/index/{id?}', [SocialLinkController::class, 'index']);
 Route::post('socialLink/store', [SocialLinkController::class, 'store']);
 Route::post('socialLink/update/{id?}', [SocialLinkController::class, 'update']);
 Route::get('socialLink/delete/{id?}', [SocialLinkController::class, 'delete']);
 Route::get('socialLink/show/{id?}', [SocialLinkController::class, 'show']);
 
 /*  Time  */
-Route::get('time/index', [TimeController::class, 'index']);
+Route::get('time/index/{id?}', [TimeController::class, 'index']);
 Route::post('time/store', [TimeController::class, 'store']);
 Route::post('time/update/{id?}', [TimeController::class, 'update']);
 Route::get('time/delete/{id?}', [TimeController::class, 'delete']);
 Route::get('time/show/{id?}', [TimeController::class, 'show']);
 
 /*  Video  */
-Route::get('video/index', [VideoController::class, 'index']);
+Route::get('video/index/{id?}', [VideoController::class, 'index']);
 Route::post('video/store', [VideoController::class, 'store']);
 Route::post('video/update/{id?}', [VideoController::class, 'update']);
 Route::get('video/delete/{id?}', [VideoController::class, 'delete']);

@@ -9,10 +9,9 @@ use Illuminate\Support\Facades\Validator;
 
 class AttachmentController extends Controller
 {
-    function index(Request $request)
+    function index($id)
     {
-        $userId = $request->userId;
-        $attachment = Attachment::where('userId', '=', $userId)->get();
+        $attachment = Attachment::where('userId', '=', $id)->get();
         if (count($attachment) > 0) {
             return response([
                 'success' => true,

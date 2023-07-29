@@ -9,10 +9,9 @@ use Illuminate\Support\Facades\Validator;
 
 class PackageController extends Controller
 {
-    function index(Request $request)
+    function index($id)
     {
-        $userId = $request->userId;
-        $package = Package::where('userId', '=', $userId)->get();;
+        $package = Package::where('userId', '=', $id)->get();;
         if (count($package) > 0) {
             return response([
                 'success' => true,

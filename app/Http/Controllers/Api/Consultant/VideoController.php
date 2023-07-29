@@ -9,10 +9,9 @@ use Illuminate\Support\Facades\Validator;
 
 class VideoController extends Controller
 {
-    function index(Request $request)
+    function index($id)
     {
-        $userId = $request->userId;
-        $video = Video::where('userId', '=', $userId)->get();;
+        $video = Video::where('userId', '=', $id)->get();;
         if (count($video) > 0) {
             return response([
                 'success' => true,
