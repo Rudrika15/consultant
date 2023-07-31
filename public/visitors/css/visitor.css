@@ -1,0 +1,95 @@
+.us {
+    padding-top: 150px;
+    color: white;
+}
+.about {
+    width: 100%;
+    height: 300px;
+    color: white;
+    background-color: #005555;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+.grid {
+    height: 80px;
+    background-color: #efefef;
+    font-size: 20px;
+}
+.pcolor {
+    color: gray;
+    font-size: 18px;
+}
+
+/* Member ship */
+.membership {
+    width: 100%;
+    height: 300px;
+    color: white;
+    background-color: #005555;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+.allplan {
+    margin-top: 100px !important;
+}
+.fa-check {
+    color: #005555;
+}
+.membercard {
+    height: 100% !important;
+}
+.card-body {
+    font-size: 20px;
+}
+/* All plans include */
+
+.allplancard {
+    border-radius: 10px !important;
+}
+.fa-user {
+    font-size: 60px;
+    color: #005555;
+}
+.fa-windows {
+    font-size: 60px;
+    color: #005555;
+}
+.fa-handshake-o {
+    font-size: 60px;
+    color: #005555;
+}
+.fa-quote-left {
+    font-size: 60px;
+    color: #005555;
+}
+.fa-certificate {
+    font-size: 60px;
+    color: #005555;
+}
+
+/* Get Started */
+
+.getstarted {
+    background-color: #005555;
+    height: 300px;
+    width: 100%;
+    color: white !important;
+}
+/* Corporate */
+.corporate {
+    width: 100%;
+    height: 300px;
+    color: white;
+    background-color: #005555;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* Get In Touch */
+.getintouch {
+    background-color: #005555;
+    height: 600px;
+}
+.formlabel {
+    font-size: 20px;
+}
