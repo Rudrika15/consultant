@@ -14,7 +14,7 @@
 
 <div class="card">
 
-<div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+  <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
     <div class="">
       <h4 class="">Users Management</h4>
     </div>
@@ -58,6 +58,7 @@
       </tr>
       @endforeach
     </table>
+    {!! $data->withQueryString()->links('pagination::bootstrap-5') !!}
   </div>
 </div>
 

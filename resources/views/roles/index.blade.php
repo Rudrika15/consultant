@@ -59,6 +59,8 @@
                 </tr>
                 @endforeach
             </table>
+            {!! $roles->withQueryString()->links('pagination::bootstrap-5') !!}
+
         </div>
 
     </div>
