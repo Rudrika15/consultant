@@ -35,187 +35,152 @@
     <link rel="stylesheet" href="{{ asset('visitors/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('visitors/css/visitor.css') }}" />
 
+    <link rel="stylesheet" href="//unpkg.com/a11y-slider@latest/dist/a11y-slider.css" />
+
+    <!-- End of <body> -->
+    <script src="//unpkg.com/a11y-slider@latest/dist/a11y-slider.js"></script>
     <title>
-        Property &mdash; Free Bootstrap 5 Website Template by Untree.co
+        Consultant Cube
     </title>
 </head>
 
 <body>
-    <div class="site-mobile-menu site-navbar-target">
-        <div class="site-mobile-menu-header">
-            <div class="site-mobile-menu-close">
-                <span class="icofont-close js-menu-toggle"></span>
+    <div class="container-fluid topcolor">
+        <div class="container flex-wrap">
+            <div class="d-flex justify-content-between flex-wrap pt-3 gap-5">
+                <div class="d-flex gap-2  ms-5 mb-3">
+                    <i class="fa fa-envelope "></i>
+                    <span>connect@consultantcube.com</span>
+                    <i class="fa fa-phone "></i>
+                    <span>7600891148</span>
+
+                </div>
+                <div class="d-flex gap-3 ">
+                    <i class="fa fa-facebook-f"></i>
+                    <i class="fa fa-instagram"></i>
+                    <i class="fa fa-linkedin"></i>
+                    <i class="fa fa-user-circle-o"></i>
+                    <span>Login</span>
+                    <i class="fa fa-plus"></i>
+                    <span>Sugn Up</span>
+                    <i class="fa fa-plus pt-1"></i>
+                    <span> Become a Consultant</span>
+                </div>
             </div>
         </div>
-        <div class="site-mobile-menu-body"></div>
     </div>
-
-    <nav class="site-nav">
-        <div class="container">
-            <div class="menu-bg-wrap">
-                <div class="site-navigation">
-                    <a href="{{ route('visitors.index') }}" style="font-size: 35px;"
-                        class="logo m-0 float-start">CONSULTANT</a>
-
-                    <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">
-                        <li class="active">
-                            <a href="{{ route('visitors.index') }}" style="font-size: 20px;">HOME</a>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-sm  navbar-white bg-white">
+            <div class="container">
+                <a class="ms-5 me-5" href="{{ route('visitors.index') }}"><img class=""
+                        src="{{ asset('visitors/images/ConsultantLogo.jpg') }}" width="150px" height="50px"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto gap-3 mt-3 mb-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{ route('visitors.index') }}">HOME</a>
                         </li>
-                        <li>
-                            <a href="{{ route('visitors.aboutus') }}" style="font-size: 20px;">ABOUT US</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('visitors.aboutus') }}">ABOUT US</a>
                         </li>
-                        <li><a href="{{ route('visitors.membershipPlan') }}" style="font-size: 20px;">MEMBERSHIP
-                                PLAN</a></li>
-                        <li><a href="{{ route('visitors.corporateInquery') }}" style="font-size: 20px;">CORPORATE
-                                INQUIRY</a></li>
-                        <li><a href="contact.html" style="font-size: 20px;">CONTACT US</a></li>
-                        {{-- <li class="has-children">
-                            <a href="properties.html">Properties</a>
-                            <ul class="dropdown">
-                                <li><a href="#">Buy Property</a></li>
-                                <li><a href="#">Sell Property</a></li>
-                                <li class="has-children">
-                                    <a href="#">Dropdown</a>
-                                    <ul class="dropdown">
-                                        <li><a href="#">Sub Menu One</a></li>
-                                        <li><a href="#">Sub Menu Two</a></li>
-                                        <li><a href="#">Sub Menu Three</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('visitors.membershipPlan') }}">MEMBERSHIP PLAN</a>
                         </li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="about.html">About</a></li> --}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('visitors.corporateInquery') }}">CORPORATE INQUIRY</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">CONTACT US</a>
+                        </li>
 
                     </ul>
 
-                    <a href="#"
-                        class="burger light me-auto float-end mt-1 site-menu-toggle js-menu-toggle d-inline-block d-lg-none"
-                        data-toggle="collapse" data-target="#main-navbar">
-                        <span></span>
-                    </a>
                 </div>
             </div>
-        </div>
-    </nav>
-
+        </nav>
+    </div>
     @yield('content')
 
 
-
-    <div class="site-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="widget">
-                        <h3>Contact</h3>
-                        <address>43 Raymouth Rd. Baltemoer, London 3910</address>
-                        <ul class="list-unstyled links">
-                            <li><a href="tel://11234567890">+1(123)-456-7890</a></li>
-                            <li><a href="tel://11234567890">+1(123)-456-7890</a></li>
-                            <li>
-                                <a href="mailto:info@mydomain.com">info@mydomain.com</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- /.widget -->
-                </div>
-                <!-- /.col-lg-4 -->
-                <div class="col-lg-4">
-                    <div class="widget">
-                        <h3>Sources</h3>
-                        <ul class="list-unstyled float-start links">
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">Services</a></li>
-                            <li><a href="#">Vision</a></li>
-                            <li><a href="#">Mission</a></li>
-                            <li><a href="#">Terms</a></li>
-                            <li><a href="#">Privacy</a></li>
-                        </ul>
-                        <ul class="list-unstyled float-start links">
-                            <li><a href="#">Partners</a></li>
-                            <li><a href="#">Business</a></li>
-                            <li><a href="#">Careers</a></li>
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">FAQ</a></li>
-                            <li><a href="#">Creative</a></li>
-                        </ul>
-                    </div>
-                    <!-- /.widget -->
-                </div>
-                <!-- /.col-lg-4 -->
-                <div class="col-lg-4">
-                    <div class="widget">
-                        <h3>Links</h3>
-                        <ul class="list-unstyled links">
-                            <li><a href="#">Our Vision</a></li>
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">Contact us</a></li>
-                        </ul>
-
-                        <ul class="list-unstyled social">
-                            <li>
-                                <a href="#"><span class="icon-instagram"></span></a>
-                            </li>
-                            <li>
-                                <a href="#"><span class="icon-twitter"></span></a>
-                            </li>
-                            <li>
-                                <a href="#"><span class="icon-facebook"></span></a>
-                            </li>
-                            <li>
-                                <a href="#"><span class="icon-linkedin"></span></a>
-                            </li>
-                            <li>
-                                <a href="#"><span class="icon-pinterest"></span></a>
-                            </li>
-                            <li>
-                                <a href="#"><span class="icon-dribbble"></span></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- /.widget -->
-                </div>
-                <!-- /.col-lg-4 -->
-            </div>
-            <!-- /.row -->
-
-            <div class="row mt-5">
-                <div class="col-12 text-center">
-                    <!--
-              **==========
-              NOTE:
-              Please don't remove this copyright link unless you buy the license here https://untree.co/license/
-              **==========
-            -->
-
-                    <p>
-                        Copyright &copy;
-                        <script>
-                            document.write(new Date().getFullYear());
-                        </script>
-                        . All Rights Reserved. &mdash; Designed with love by
-                        <a href="https://untree.co">Untree.co</a>
-                        <!-- License information: https://untree.co/license/ -->
-                    </p>
+    <div class="footer mt-5">
+        <div class="site-footer mt-5">
+            <div class="container">
+                <div class="d-flex justify-content-between flex-wrap">
                     <div>
-                        Distributed by
-                        <a href="https://themewagon.com/" target="_blank">themewagon</a>
+                        <img src="{{ asset('visitors/images/ConsultantLogo.jpg') }}" alt="" width="300px"
+                            height="100px">
+                    </div>
+                    <div class="sitelink">
+
+                        <ul class="footerul" style="list-style-type: none;">
+                            <h5>Site Link</h5>
+                            <li class="mt-5 ms-0">
+                                <i class="fa fa-caret-right"></i>
+                                <a href="" class="footerlink">Contact Us</a>
+
+                            </li>
+                            <li>
+                                <i class="fa fa-caret-right"></i>
+                                <a href="" class="footerlink">About Us</a>
+                            </li>
+                            <li>
+                                <i class="fa fa-caret-right"></i>
+                                <a href="" class="footerlink">How It’s Works</a>
+                            </li>
+                            <li>
+                                <i class="fa fa-caret-right"></i>
+                                <a href="" class="footerlink">Corporate Inquiry</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="policelink">
+                        <ul class="footerul" style="list-style-type: none;">
+                            <h5>Police Link</h5>
+                            <li class="mt-5">
+                                <i class="fa fa-caret-right"></i>
+                                <a href="" class="footerlink">Cancelation And Refund Policy</a>
+
+                            </li>
+                            <li>
+                                <i class="fa fa-caret-right"></i>
+                                <a href="" class="footerlink">Terms & Conditions</a>
+                            </li>
+                            <li>
+                                <i class="fa fa-caret-right"></i>
+                                <a href="" class="footerlink">Privacy Policy</a>
+                            </li>
+                            <li>
+                                <i class="fa fa-caret-right"></i>
+                                <a href="" class="footerlink">Workshop</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
+            <!-- /.container -->
         </div>
-        <!-- /.container -->
+        <div class="copyright">
+            <div class="container d-flex justify-content-between flex-wrap pt-5">
+                <div>
+                    <p>Copyright © Consultant Cube 2022 Rights Reserve </br>
+                        Developed by Aspireotech </p>
+                </div>
+                <div class="d-flex me-5 gap-3">
+                    <i class="fa fa-facebook-f pt-1"></i>
+                    <i class="fa fa-instagram pt-1"></i>
+                    <i class="fa fa-linkedin pt-1"></i>
+                </div>
+            </div>
+
+        </div>
     </div>
+
     <!-- /.site-footer -->
 
-    <!-- Preloader -->
-    <div id="overlayer"></div>
-    <div class="loader">
-        <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-    </div>
+
 
     <script src="{{ asset('visitors/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('visitors/js/tiny-slider.js') }}"></script>
