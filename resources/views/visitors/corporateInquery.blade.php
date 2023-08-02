@@ -1,19 +1,21 @@
 @extends('layouts.visitorApp')
 @section('content')
-    <div class="corporate mt-5">
+    <div class="about">
         <div class="container">
-            <h3 class="us">Corporate Inquery</h3>
+            <h3 class="us ms-5">Corporate Inquiry</h3>
         </div>
+        <img class="img" src="{{ asset('visitors/images/Backgroung-Web-banner-.png') }}" alt="" width="100%"
+            width="300px">
     </div>
     <div class="grid pt-4">
         <div class="container">
-            <a href="{{ route('visitors.index') }}">HOME</a>
+            <a href="{{ route('visitors.index') }}" class="ms-5">HOME</a>
             <span style="color:#005555">/</span>
             <a href="{{ route('visitors.corporateInquery') }}" style="color:gray">CORPORATE INQUERY</a>
         </div>
     </div>
     <div class="container">
-        <div class="row">
+        <div class="row ms-5">
             <div class="col-lg-6 mt-5 mb-5">
                 <p class="pcolor">Your set of employees are not just an asset to your company. They are the next-line
                     leaders of your
@@ -68,7 +70,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-center mt-5 mb-5">
-                    <button class="btn bg-white  text-center">Submit</button>
+                    <button class="getinbutton text-center">Submit</button>
                 </div>
             </form>
         </div>

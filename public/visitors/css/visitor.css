@@ -1,14 +1,38 @@
-.us {
-    padding-top: 150px;
-    color: white;
+:root {
+    --purple: #333692;
+    --white: white;
+    --black: black;
 }
-.about {
-    width: 100%;
-    height: 300px;
-    color: white;
-    background-color: #005555;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+.btn {
+    background-color: var(--purple) !important;
+}
+.topcolor {
+    background-color: var(--purple) !important;
+    color: var(--white) !important;
+}
+.sitecolor {
+    background-color: var(--white) !important;
+}
+.menu {
+    background-color: var(--white) !important;
+    color: var(--purple) !important;
+    margin-top: 5px !important;
+}
+.navbar-toggler-icon {
+    background-color: #333692;
+    color: white !important;
+}
+.nav-link {
+    font-size: 15px !important;
+}
+.us {
+    position: absolute;
+    margin-top: 100px !important;
+    color: var(--white);
+}
+.img {
+    /* opacity: 0.3 !important;
+    background-color: #000000 !important; */
 }
 .grid {
     height: 80px;
@@ -24,8 +48,8 @@
 .membership {
     width: 100%;
     height: 300px;
-    color: white;
-    background-color: #005555;
+    color: var(--white);
+    background-color: var(--purple);
     margin-left: 0 !important;
     margin-right: 0 !important;
 }
@@ -33,7 +57,7 @@
     margin-top: 100px !important;
 }
 .fa-check {
-    color: #005555;
+    color: var(--purple);
 }
 .membercard {
     height: 100% !important;
@@ -48,29 +72,29 @@
 }
 .fa-user {
     font-size: 60px;
-    color: #005555;
+    color: var(--purple);
 }
 .fa-windows {
     font-size: 60px;
-    color: #005555;
+    color: var(--purple);
 }
 .fa-handshake-o {
     font-size: 60px;
-    color: #005555;
+    color: var(--purple);
 }
 .fa-quote-left {
     font-size: 60px;
-    color: #005555;
+    color: var(--purple);
 }
 .fa-certificate {
     font-size: 60px;
-    color: #005555;
+    color: var(--purple);
 }
 
 /* Get Started */
 
 .getstarted {
-    background-color: #005555;
+    background-color: var(--purple);
     height: 300px;
     width: 100%;
     color: white !important;
@@ -79,17 +103,83 @@
 .corporate {
     width: 100%;
     height: 300px;
-    color: white;
-    background-color: #005555;
+    color: var(--white);
+    background-color: var(--purple);
     margin-left: 0 !important;
     margin-right: 0 !important;
 }
 
 /* Get In Touch */
 .getintouch {
-    background-color: #005555;
+    background-color: var(--purple);
     height: 600px;
 }
 .formlabel {
     font-size: 20px;
+}
+.getinbutton {
+    background-color: white !important;
+    padding: 15px 40px !important;
+    border-radius: 30px !important;
+    font-size: 16px;
+}
+/* Footer */
+.site-footer {
+    background-color: var(--white);
+    margin-bottom: 0px !important;
+}
+.copyright {
+    background-color: var(--purple);
+    height: 150px !important;
+    color: white !important;
+}
+.footerul {
+    color: var(--black);
+    width: 400px !important;
+}
+.footerlink {
+    color: var(--black) !important;
+    text-decoration: none !important;
+    font-size: 16px;
+    margin-left: 0px !important;
+}
+.footerul li {
+    border-bottom: 1px dashed #313131 !important;
+    padding: 10px 10px 10px 0px !important;
+}
+.consultantcategory {
+    background-color: var(--purple);
+    height: 300px !important;
+}
+
+/* Cansltant category */
+.catcard {
+    border: none !important;
+    width: 250px !important;
+}
+.card-img {
+    border: 10px solid #fff !important;
+    -webkit-box-shadow: 0 6px 10px 3px rgba(0, 0, 0, 0.2) !important;
+    box-shadow: 0 6px 10px 3px rgba(0, 0, 0, 0.2) !important;
+    -webkit-border-radius: 5px 5px 5px 5px !important;
+    border-radius: 5px 5px 5px 5px !important;
+}
+.property-item {
+    width: calc(5%) !important;
+}
+/* Media query */
+@media only screen and (max-width: 600px) {
+    .footerul {
+        width: 280px !important;
+    }
+    .img {
+        height: 300px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+    .us {
+        margin-top: 130px !important;
+        margin-left: 150px !important;
+    }
 }

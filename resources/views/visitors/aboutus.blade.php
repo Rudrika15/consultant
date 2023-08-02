@@ -1,13 +1,16 @@
 @extends('layouts.visitorApp')
 @section('content')
-    <div class="about mt-5">
+    <div class="about">
         <div class="container">
-            <h3 class="us">About us</h3>
+            <h3 class="us ms-5">About us</h3>
         </div>
+        <img class="img" src="{{ asset('visitors/images/Backgroung-Web-banner-.png') }}" alt="" width="100%"
+            width="300px">
+
     </div>
     <div class="grid pt-4">
         <div class="container">
-            <a href="{{ route('visitors.index') }}">HOME</a>
+            <a href="{{ route('visitors.index') }}" class="ms-5">HOME</a>
             <span style="color:#005555">/</span>
             <a href="{{ route('visitors.aboutus') }}" style="color:gray">ABOUT US</a>
         </div>
@@ -31,14 +34,6 @@
                 clients connect with the respective Consultants and
                 meet their precise requirements in their own cube.
             </p>
-        </div>
-        <div class="row">
-            <div class="col-6">
-
-            </div>
-            <div class="col-6">
-
-            </div>
         </div>
     </div>
 @endsection
