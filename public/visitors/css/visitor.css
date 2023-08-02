@@ -2,6 +2,7 @@
     --purple: #333692;
     --white: white;
     --black: black;
+    --orangered: orangered;
 }
 .btn {
     background-color: var(--purple) !important;
@@ -164,8 +165,34 @@
     -webkit-border-radius: 5px 5px 5px 5px !important;
     border-radius: 5px 5px 5px 5px !important;
 }
-.property-item {
-    width: calc(5%) !important;
+
+.prev1 {
+    background-color: var(--orangered) !important;
+}
+.next1 {
+    background-color: var(--orangered) !important;
+}
+
+.tns-nav {
+    visibility: hidden !important;
+}
+.custom {
+    position: sticky;
+    top: 0;
+}
+
+/* Contry Card */
+.countrycard {
+    position: absolute !important;
+    top: 100% !important;
+    left: 10% !important;
+    right: 10% !important;
+    height: 100px !important;
+    color: gray !important;
+}
+.searchnowbtn {
+    background-color: var(--orangered) !important;
+    color: var(--white) !important;
 }
 /* Media query */
 @media only screen and (max-width: 600px) {
@@ -182,4 +209,152 @@
         margin-top: 130px !important;
         margin-left: 150px !important;
     }
+    .consultantcategory {
+        height: 650px !important;
+    }
+    .slider-container {
+        width: 100% !important;
+    }
+    .slider {
+        position: absolute !important;
+        top: -200% !important;
+        justify-content: center !important;
+        align-items: center !important;
+        /* right: 15px !important; */
+        width: 100% !important;
+    }
+    .countrycard {
+        position: absolute !important;
+        top: 55% !important;
+        /* left: 15% !important; */
+        min-height: 40% !important;
+        color: gray !important;
+    }
+    .categorytext {
+        position: absolute !important;
+        text-align: center;
+        top: 100% !important;
+        color: red !important;
+    }
+    .prevnext {
+        display: flex !important;
+        gap: 5px !important;
+        justify-content: center !important;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.slider {
+    position: relative;
+}
+
+.slider__container {
+    cursor: grab;
+    display: flex;
+    overflow: hidden;
+    scroll-behavior: smooth;
+}
+.slidertop {
+    position: absolute !important;
+    top: 930px !important;
+    /* left: 3% !important;
+    right: 5% !important; */
+}
+.slider__container.dragging {
+    scroll-behavior: auto;
+    cursor: grabbing;
+}
+
+.slider__item {
+    padding: 16px 8px;
+    flex: 0 0 auto;
+    width: calc(100% / 5);
+}
+
+.slider__container[data-step="4"] .slider__item {
+    width: calc(100% / 4);
+}
+
+.slider__container[data-step="3"] .slider__item {
+    width: calc(100% / 3);
+}
+
+.slider__container[data-step="2"] .slider__item {
+    width: calc(100% / 2);
+}
+
+.slider__container[data-step="1"] .slider__item {
+    width: calc(100% / 1);
+}
+
+@media screen and (max-width: 1024px) {
+    .slider__item,
+    .slider__container[data-step="4"] .slider__item {
+        width: calc(100% / 3);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .slider__item,
+    .slider__container[data-step="4"] .slider__item,
+    .slider__container[data-step="3"] .slider__item {
+        width: calc(100% / 2);
+    }
+}
+@media screen and (max-width: 480px) {
+    .slider__item,
+    .slider__container[data-step="4"] .slider__item,
+    .slider__container[data-step="3"] .slider__item,
+    .slider__container[data-step="2"] .slider__item {
+        width: calc(100% / 1);
+    }
+}
+
+.slider__control {
+    border: none;
+    justify-content: center !;
+    margin-top: 20px;
+    opacity: 1 !important;
+    transform: translateY(-50%) scale(1.2) !important;
+    z-index: 10;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: #000;
+    background: #fff;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: all 0.3s;
+}
+
+.slider__control.prev {
+    left: 16px;
+}
+
+.slider__control.next {
+    right: 16px;
+}
+
+.slider__control:hover {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.2);
+}
+
+.slider__item img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-select: none;
+}
+.prev {
+    background-color: var(--orangered) !important;
+}
+.next {
+    background-color: var(--orangered) !important;
 }

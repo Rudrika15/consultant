@@ -27,18 +27,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap"
         rel="stylesheet" />
 
-    <link rel="stylesheet" href="{{ asset('visitors/fonts/icomoon/style.css') }}" />
-    <link rel="stylesheet" href="{{ asset('visitors/fonts/flaticon/font/flaticon.css') }}" />
-
-    <link rel="stylesheet" href="{{ asset('visitors/css/tiny-slider.css') }}" />
-    <link rel="stylesheet" href="{{ asset('visitors/css/aos.css') }}" />
-    <link rel="stylesheet" href="{{ asset('visitors/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('visitors/css/visitor.css') }}" />
 
+    {{-- <link rel="stylesheet" href="{{ asset('visitors/css/tiny-slider.css') }}" />
+    <link rel="stylesheet" href="{{ asset('visitors/css/aos.css') }}" />
+    --}}
     <link rel="stylesheet" href="//unpkg.com/a11y-slider@latest/dist/a11y-slider.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
     <!-- End of <body> -->
-    <script src="//unpkg.com/a11y-slider@latest/dist/a11y-slider.js"></script>
+
     <title>
         Consultant Cube
     </title>
@@ -47,63 +46,68 @@
 <body>
     <div class="container-fluid topcolor">
         <div class="container flex-wrap">
-            <div class="d-flex justify-content-between flex-wrap pt-3 gap-5">
-                <div class="d-flex gap-2  ms-5 mb-3">
-                    <i class="fa fa-envelope "></i>
+            <div class="d-flex justify-content-between flex-wrap p-3 gap-5">
+                <div class="d-flex gap-2">
+                    <i class="fa fa-envelope pt-lg-1"></i>
                     <span>connect@consultantcube.com</span>
-                    <i class="fa fa-phone "></i>
+                    <i class="fa fa-phone pt-lg-1"></i>
                     <span>7600891148</span>
 
                 </div>
                 <div class="d-flex gap-3 ">
-                    <i class="fa fa-facebook-f"></i>
-                    <i class="fa fa-instagram"></i>
-                    <i class="fa fa-linkedin"></i>
-                    <i class="fa fa-user-circle-o"></i>
-                    <span>Login</span>
-                    <i class="fa fa-plus"></i>
+                    <i class="fa fa-facebook-f pt-lg-1"></i>
+                    <i class="fa fa-instagram pt-lg-1"></i>
+                    <i class="fa fa-linkedin pt-lg-1"></i>
+                    <i class="fa fa-user-circle-o pt-lg-1">&nbsp;<span>Login</span></i>
+
+                    <i class="fa fa-plus pt-lg-1"></i>
                     <span>Sugn Up</span>
-                    <i class="fa fa-plus pt-1"></i>
+                    <i class="fa fa-plus pt-lg-1"></i>
                     <span> Become a Consultant</span>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container-fluid">
-        <nav class="navbar navbar-expand-sm  navbar-white bg-white">
-            <div class="container">
-                <a class="ms-5 me-5" href="{{ route('visitors.index') }}"><img class=""
-                        src="{{ asset('visitors/images/ConsultantLogo.jpg') }}" width="150px" height="50px"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto gap-3 mt-3 mb-3">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ route('visitors.index') }}">HOME</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('visitors.aboutus') }}">ABOUT US</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('visitors.membershipPlan') }}">MEMBERSHIP PLAN</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('visitors.corporateInquery') }}">CORPORATE INQUIRY</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">CONTACT US</a>
-                        </li>
+    <div style="top: 0; position: sticky; z-index: 1000">
+        <div class=" ">
+            <nav class="navbar navbar-expand-sm navbar-white bg-light ">
+                <div class="container">
+                    <a class="" href="{{ route('visitors.index') }}"><img class=""
+                            src="{{ asset('visitors/images/ConsultantLogo.jpg') }}" width="150px" height="50px"></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto gap-3 mt-3 mb-3">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page"
+                                    href="{{ route('visitors.index') }}">HOME</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('visitors.aboutus') }}">ABOUT US</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('visitors.membershipPlan') }}">MEMBERSHIP PLAN</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('visitors.corporateInquery') }}">CORPORATE
+                                    INQUIRY</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">CONTACT US</a>
+                            </li>
 
-                    </ul>
+                        </ul>
 
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </div>
-    @yield('content')
+            </nav>
 
+        </div>
+    </div>
+
+    @yield('content')
 
     <div class="footer mt-5">
         <div class="site-footer mt-5">
@@ -137,7 +141,7 @@
                         </ul>
                     </div>
                     <div class="policelink">
-                        <ul class="footerul" style="list-style-type: none;">
+                        <ul class="footerul mb-5" style="list-style-type: none;">
                             <h5>Police Link</h5>
                             <li class="mt-5">
                                 <i class="fa fa-caret-right"></i>
@@ -174,7 +178,6 @@
                     <i class="fa fa-linkedin pt-1"></i>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -182,12 +185,13 @@
 
 
 
-    <script src="{{ asset('visitors/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('visitors/js/tiny-slider.js') }}"></script>
-    <script src="{{ asset('visitors/js/aos.js') }}"></script>
-    <script src="{{ asset('visitors/js/navbar.js') }}"></script>
-    <script src="{{ asset('visitors/js/counter.js') }}"></script>
-    <script src="{{ asset('visitors/js/custom.js') }}"></script>
+    {{-- <script src="{{ asset('visitors/js/bootstrap.bundle.min.js') }}"></script> --}}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+    </script>
+
+
 </body>
 
 </html>

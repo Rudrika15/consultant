@@ -86,6 +86,7 @@
                                 icon: 'success',
                                 title: 'Created',
                                 text: response.message,
+                                ButtonColor: '#4e73df'
                             });
                             $('#sateForm').trigger("reset");
 

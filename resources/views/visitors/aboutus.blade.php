@@ -10,9 +10,9 @@
     </div>
     <div class="grid pt-4">
         <div class="container">
-            <a href="{{ route('visitors.index') }}" class="ms-5">HOME</a>
-            <span style="color:#005555">/</span>
-            <a href="{{ route('visitors.aboutus') }}" style="color:gray">ABOUT US</a>
+            <a href="{{ route('visitors.index') }}" class="ms-5" style="text-decoration: none;">HOME</a>
+            <span style="color:gray">/</span>
+            <a href="{{ route('visitors.aboutus') }}" style="color:gray;text-decoration: none;">ABOUT US</a>
         </div>
     </div>
     <div class="container mt-5 mb-5">
