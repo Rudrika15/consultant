@@ -59,10 +59,13 @@
                         <i class="fa fa-linkedin pt-lg-1"></i>
                     </div>
                     <div class="d-flex gap-3 login_links">
-                        <i class="fa fa-user-circle-o pt-lg-1">&nbsp;
-                            <span>Login</span></i>
+                        <i class="fa fa-user-circle-o pt-lg-1">
+                            <a href="{{ route('login') }}" class="text-white"
+                                style="text-decoration:none;">Login</a></i>
                         <i class="fa fa-plus pt-lg-1"></i>
-                        <span>Sugn Up</span>
+                        <a href="{{ route('register') }}" class="text-white" style="text-decoration:none;">Sign Up</a>
+                        </i>
+
                     </div>
                     <div class="d-flex gap-3 login_links">
                         <i class="fa fa-plus pt-lg-1"></i>
@@ -97,8 +100,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link"
-                                href="{{ route('visitors.corporateInquery') }}">{{ _('CORPORATE INQUIRY') }}
-                                INQUIRY</a>
+                                href="{{ route('visitors.corporateInquery') }}">{{ _('CORPORATE INQUIRY') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('visitors.contactus') }}">{{ _('CONTACT US') }}</a>
