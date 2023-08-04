@@ -22,4 +22,8 @@ class VisitorController extends Controller
     {
         return view('visitors.corporateInquery');
     }
+    public function contactus()
+    {
+        return view('visitors.contactus');
+    }
 }

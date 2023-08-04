@@ -1,17 +1,15 @@
 @extends('layouts.visitorApp')
 @section('content')
-    <div class="about">
-        <div class="container">
-            <h3 class="us ms-5">Membership Plan</h3>
-        </div>
+    <div class="membership">
+        <h3 class="membertext ms-lg-5">Membership Plan</h3>
         <img class="img" src="{{ asset('visitors/images/Backgroung-Web-banner-.png') }}" alt="" width="100%"
-            width="300px">
+            height="300px">
     </div>
     <div class="grid pt-4">
         <div class="container">
-            <a href="{{ route('visitors.index') }}" class="ms-5">HOME</a>
-            <span style="color:#005555">/</span>
-            <a href="{{ route('visitors.aboutus') }}" style="color:gray">MEMBERSHIP PLAN</a>
+            <a href="{{ route('visitors.index') }}" class="home_link">HOME</a>
+            <span class="span_arrow">/</span>
+            <a href="{{ route('visitors.membershipPlan') }}" class="membership_link">MEMBERSHIP PLAN</a>
         </div>
     </div>
     <div class="container mt-5 mb-5">

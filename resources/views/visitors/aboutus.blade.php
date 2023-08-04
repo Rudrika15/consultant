@@ -1,18 +1,15 @@
 @extends('layouts.visitorApp')
 @section('content')
     <div class="about">
-        <div class="container">
-            <h3 class="us ms-5">About us</h3>
-        </div>
+        <h3 class="us ms-lg-5">About us</h3>
         <img class="img" src="{{ asset('visitors/images/Backgroung-Web-banner-.png') }}" alt="" width="100%"
-            width="300px">
-
+            height="300px">
     </div>
     <div class="grid pt-4">
         <div class="container">
-            <a href="{{ route('visitors.index') }}" class="ms-5" style="text-decoration: none;">HOME</a>
-            <span style="color:gray">/</span>
-            <a href="{{ route('visitors.aboutus') }}" style="color:gray;text-decoration: none;">ABOUT US</a>
+            <a href="{{ route('visitors.index') }}" class="home_link">HOME</a>
+            <span class="span_arrow">/</span>
+            <a href="{{ route('visitors.aboutus') }}" class="about_us_link">ABOUT US</a>
         </div>
     </div>
     <div class="container mt-5 mb-5">

@@ -3,49 +3,105 @@
     --white: white;
     --black: black;
     --orangered: orangered;
+    --gray: gray;
 }
-.btn {
-    background-color: var(--purple) !important;
-}
-.topcolor {
-    background-color: var(--purple) !important;
-    color: var(--white) !important;
-}
-.sitecolor {
-    background-color: var(--white) !important;
-}
+
+/* Navbar */
+
 .menu {
     background-color: var(--white) !important;
     color: var(--purple) !important;
     margin-top: 5px !important;
 }
 .navbar-toggler-icon {
-    background-color: #333692;
-    color: white !important;
+    /* background-color: #333692; */
+    color: black !important;
 }
 .nav-link {
     font-size: 15px !important;
 }
+
+.btn {
+    background-color: var(--purple) !important;
+}
+/* Home */
+.home_link {
+    color: var(--purple);
+    text-decoration: none;
+}
+.span_arrow {
+    counter-reset: var(--purple);
+}
+.cube_orange {
+    position: relative;
+    margin-top: 100px;
+    height: 480px;
+    background-color: var(--orangered);
+}
+.cube_purple {
+    position: absolute;
+    top: 8px;
+    bottom: 5px;
+    width: 100%;
+    height: 460px;
+    background-color: var(--purple);
+}
+.person_section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.person_img_circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90px;
+    width: 90px;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 50%;
+    border: 2px solid var(--white);
+}
+.section_circle {
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+}
+/* About Us */
+.about {
+    position: relative;
+}
 .us {
     position: absolute;
-    margin-top: 100px !important;
+    left: 30px;
+    top: 130px !important;
     color: var(--white);
 }
-.img {
-    /* opacity: 0.3 !important;
-    background-color: #000000 !important; */
-}
-.grid {
-    height: 80px;
-    background-color: #efefef;
-    font-size: 20px;
+.about_us_link {
+    color: var(--gray);
+    text-decoration: none;
 }
 .pcolor {
-    color: gray;
+    color: var(--gray);
     font-size: 18px;
 }
+/* ---------------------------------------------- */
 
-/* Member ship */
+/* Membership */
+.membership {
+    position: relative;
+}
+.membertext {
+    position: absolute;
+    left: 30px;
+    top: 130px !important;
+    color: var(--white);
+}
+.membership_link {
+    color: var(--gray);
+    text-decoration: none;
+}
 .membership {
     width: 100%;
     height: 300px;
@@ -91,16 +147,22 @@
     font-size: 60px;
     color: var(--purple);
 }
+/* ------------------------------------------------------- */
 
-/* Get Started */
-
-.getstarted {
-    background-color: var(--purple);
-    height: 300px;
-    width: 100%;
-    color: white !important;
+/* Corporate Inqiry */
+.corporatehead {
+    position: relative;
 }
-/* Corporate */
+.corporatetext {
+    position: absolute;
+    left: 30px;
+    top: 130px !important;
+    color: var(--white);
+}
+.corporate_link {
+    color: var(--gray);
+    text-decoration: none;
+}
 .corporate {
     width: 100%;
     height: 300px;
@@ -109,8 +171,6 @@
     margin-left: 0 !important;
     margin-right: 0 !important;
 }
-
-/* Get In Touch */
 .getintouch {
     background-color: var(--purple);
     height: 600px;
@@ -118,12 +178,89 @@
 .formlabel {
     font-size: 20px;
 }
+.getinform {
+    padding-left: 80px;
+    padding-right: 80px;
+}
 .getinbutton {
     background-color: white !important;
     padding: 15px 40px !important;
     border-radius: 30px !important;
     font-size: 16px;
 }
+
+/* ------------------------------------------------------- */
+
+/* Contact Us */
+.contactus {
+    position: relative;
+}
+.contacttext {
+    position: absolute;
+    left: 30px;
+    top: 130px !important;
+    color: var(--white);
+}
+.contact_card {
+    border: none !important;
+    width: 25%;
+    border-radius: 10px;
+    height: 100%;
+}
+
+.phone {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90px;
+    width: 90px;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #f2f2f2;
+}
+.phoneicon {
+    color: var(--purple);
+    font-size: 40px;
+}
+.phone_font {
+    font-size: 12px !important;
+}
+.phoneno {
+    font-size: 15px !important;
+}
+.emailid {
+    font-size: 15px !important;
+}
+.address {
+    font-size: 15px !important;
+}
+/* --------------------------------------------------- */
+
+.topcolor {
+    background-color: var(--purple) !important;
+    color: var(--white) !important;
+    font-size: 13px;
+}
+.sitecolor {
+    background-color: var(--white) !important;
+}
+
+/* Genral style */
+
+.grid {
+    height: 80px;
+    background-color: #efefef;
+    font-size: 20px;
+}
+
+.getstarted {
+    background-color: var(--purple);
+    height: 300px;
+    width: 100%;
+    color: white !important;
+}
+
 /* Footer */
 .site-footer {
     background-color: var(--white);
@@ -148,11 +285,32 @@
     border-bottom: 1px dashed #313131 !important;
     padding: 10px 10px 10px 0px !important;
 }
+/* ---------------------------------------------------- */
 .consultantcategory {
     background-color: var(--purple);
-    height: 300px !important;
+    min-height: 300px !important;
 }
-
+.countrycard {
+    position: absolute !important;
+    top: 50% !important;
+    left: 10%;
+    right: 10%;
+    width: 80% !important;
+    background-color: green;
+}
+.slidertop {
+    position: absolute !important;
+    top: 70% !important;
+    width: 80% !important;
+    left: 10%;
+    right: 10%;
+}
+.prevnext {
+    display: flex !important;
+    gap: 20px !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
 /* Cansltant category */
 .catcard {
     border: none !important;
@@ -165,37 +323,28 @@
     -webkit-border-radius: 5px 5px 5px 5px !important;
     border-radius: 5px 5px 5px 5px !important;
 }
-
-.prev1 {
-    background-color: var(--orangered) !important;
-}
-.next1 {
-    background-color: var(--orangered) !important;
-}
-
-.tns-nav {
-    visibility: hidden !important;
-}
 .custom {
     position: sticky;
     top: 0;
 }
-
 /* Contry Card */
-.countrycard {
-    position: absolute !important;
-    top: 100% !important;
-    left: 10% !important;
-    right: 10% !important;
-    height: 100px !important;
-    color: gray !important;
-}
+
 .searchnowbtn {
     background-color: var(--orangered) !important;
     color: var(--white) !important;
 }
 /* Media query */
 @media only screen and (max-width: 600px) {
+    .toplinks {
+        display: flex;
+        flex-direction: column;
+        margin-left: auto;
+        padding-top: 0 !important;
+        gap: 0 !important;
+    }
+    .login_links {
+        right: 0 !important;
+    }
     .footerul {
         width: 280px !important;
     }
@@ -206,40 +355,60 @@
         align-items: center !important;
     }
     .us {
-        margin-top: 130px !important;
-        margin-left: 150px !important;
+        margin-left: 100px !important;
+    }
+    .membertext {
+        margin-left: 60px !important;
+    }
+    .corporatetext {
+        margin-left: 60px !important;
+    }
+    .contacttext {
+        margin-left: 80px !important;
     }
     .consultantcategory {
         height: 650px !important;
     }
-    .slider-container {
-        width: 100% !important;
-    }
-    .slider {
-        position: absolute !important;
-        top: -200% !important;
-        justify-content: center !important;
-        align-items: center !important;
-        /* right: 15px !important; */
-        width: 100% !important;
+    .categorytext {
+        position: absolute;
+        top: 50%;
     }
     .countrycard {
         position: absolute !important;
-        top: 55% !important;
-        /* left: 15% !important; */
-        min-height: 40% !important;
-        color: gray !important;
+        top: 20% !important;
+        left: 10%;
+        left: 10%;
+        width: 80% !important;
+        background-color: green;
     }
-    .categorytext {
+    .searchnowbtn {
+        width: 100% !important;
+    }
+    .slider-container {
+        width: 100% !important;
+    }
+    .slidertop {
+        top: 60% !important;
         position: absolute !important;
-        text-align: center;
-        top: 100% !important;
-        color: red !important;
     }
     .prevnext {
         display: flex !important;
-        gap: 5px !important;
+        gap: 20px !important;
         justify-content: center !important;
+        align-items: center !important;
+    }
+    .getinform {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+    .contact_card {
+        flex-wrap: wrap;
+    }
+    .cube_orange {
+        height: 880px;
+    }
+    .cube_purple {
+        height: 860px;
     }
 }
 
@@ -259,12 +428,7 @@
     overflow: hidden;
     scroll-behavior: smooth;
 }
-.slidertop {
-    position: absolute !important;
-    top: 930px !important;
-    /* left: 3% !important;
-    right: 5% !important; */
-}
+
 .slider__container.dragging {
     scroll-behavior: auto;
     cursor: grabbing;

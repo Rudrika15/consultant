@@ -1,21 +1,19 @@
 @extends('layouts.visitorApp')
 @section('content')
-    <div class="about">
-        <div class="container">
-            <h3 class="us ms-5">Corporate Inquiry</h3>
-        </div>
+    <div class="corporatehead">
+        <h3 class="corporatetext ms-lg-5">Corporate Inquiry</h3>
         <img class="img" src="{{ asset('visitors/images/Backgroung-Web-banner-.png') }}" alt="" width="100%"
-            width="300px">
+            height="300px">
     </div>
     <div class="grid pt-4">
         <div class="container">
-            <a href="{{ route('visitors.index') }}" class="ms-5">HOME</a>
-            <span style="color:#005555">/</span>
-            <a href="{{ route('visitors.corporateInquery') }}" style="color:gray">CORPORATE INQUERY</a>
+            <a href="{{ route('visitors.index') }}" class="home_link">HOME</a>
+            <span class="span_arrow">/</span>
+            <a href="{{ route('visitors.corporateInquery') }}" class="corporate_link">CORPORATE INQUERY</a>
         </div>
     </div>
     <div class="container">
-        <div class="row ms-5">
+        <div class="row ms-lg-5">
             <div class="col-lg-6 mt-5 mb-5">
                 <p class="pcolor">Your set of employees are not just an asset to your company. They are the next-line
                     leaders of your
@@ -44,7 +42,7 @@
                 </p>
             </div>
             <div class="col-lg-6 mt-5 mb-5">
-                <img src="{{ asset('visitors/images/goals.jpg') }}" alt="">
+                <img src="{{ asset('visitors/images/goals.jpg') }}" class="img-fluid" alt="">
             </div>
         </div>
 
@@ -52,18 +50,18 @@
             <h1 class="text-center text-white pt-5">Get In Touch</h1>
             <p class="text-center text-white">Send us your inquiry we will respond earliest</p>
             <form action="" class="mb-5">
-                <div class="row">
-                    <div class="col-lg-11 ms-5 mt-3">
+                <div class="row getinform">
+                    <div class="col-12 mt-3">
                         <label for="name" class="formlabel text-white">{{ _('Name') }}<span
                                 style="color: red">{{ _('*') }}</span></label>
                         <input type="text" id="name" name="name" class="form-control">
                     </div>
-                    <div class="col-lg-11 ms-5 mt-3">
+                    <div class="col-12 mt-3">
                         <label for="email" class="formlabel text-white">{{ _('Email') }}<span
                                 style="color: red">{{ _('*') }}</span></label>
                         <input type="email" id="email" name="email" class="form-control">
                     </div>
-                    <div class="col-lg-11 ms-5 mt-3">
+                    <div class="col-12 mt-3">
                         <label for="inquery" class="formlabel text-white">{{ _('Inquery') }}<span
                                 style="color: red">{{ _('*') }}</span></label>
                         <textarea id="inquiry" rows="10" name="inquiry" class="form-control"></textarea>
