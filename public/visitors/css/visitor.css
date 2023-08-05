@@ -2,8 +2,12 @@
     --purple: #333692;
     --white: white;
     --black: black;
-    --orangered: orangered;
+    --orangered: #f15a29;
     --gray: gray;
+    --darklightgray: rgb(181, 177, 177);
+    --lightgray: #dddddd;
+    --yellow: orange;
+    --green: green;
 }
 
 /* Navbar */
@@ -19,7 +23,6 @@
 .nav-link {
     font-size: 15px !important;
 }
-
 .btn {
     background-color: var(--purple) !important;
 }
@@ -67,6 +70,161 @@
     width: 90px;
     border-radius: 50%;
 }
+.featured_card {
+    position: relative;
+    width: 535px !important;
+    height: 218.91px !important;
+    border-radius: 0 !important;
+    background-color: #f5f5f5 !important;
+}
+.featured_profile {
+    position: absolute;
+    top: 31%;
+    left: 20px;
+}
+.featured_star {
+    text-decoration: none;
+    color: var(--darklightgray);
+}
+.featured_link {
+    background-color: var(--orangered);
+    color: var(--white);
+    text-decoration: none;
+    padding: 5px;
+    font-size: 12px;
+}
+.featured_pre {
+    font-size: 15px;
+    color: var(--gray);
+}
+.featured_menu {
+    border-left: 1px solid var(--lightgray);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.setting {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 54.72px;
+    border-bottom: 1px solid var(--lightgray);
+}
+.fa-gear {
+    color: var(--yellow);
+    font-size: 20px;
+    text-decoration: none;
+}
+.comment {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 54.72px;
+    border-bottom: 1px solid var(--lightgray);
+}
+.fa-comment-o {
+    color: var(--purple);
+    font-size: 20px;
+    text-decoration: none;
+}
+.file {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 54.72px;
+    border-bottom: 1px solid var(--lightgray);
+}
+.fa-file-text-o {
+    color: var(--green);
+    font-size: 20px;
+    text-decoration: none;
+}
+.heart {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 54.72px;
+    border-bottom: 1px solid var(--lightgray);
+}
+.fa-heart-o {
+    font-size: 20px;
+    text-decoration: none;
+}
+.trusted_porple {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    background-color: var(--purple);
+}
+.trusted_orange {
+    position: absolute;
+    top: 1%;
+    width: 100%;
+    height: 490px;
+    background-color: var(--orangered);
+}
+.trusted_white {
+    position: absolute;
+    top: 1%;
+    width: 100%;
+    height: 480px;
+    background-color: var(--white);
+}
+.providers {
+    background-color: var(--purple) !important;
+    width: 230px;
+    height: 180px !important;
+    border-radius: 0 !important;
+}
+.provider {
+    background-color: #7748ee;
+    padding: 6px;
+}
+.customer {
+    background-color: #62b815;
+    padding: 6px;
+}
+.job {
+    background-color: #feb92d;
+    padding: 6px;
+}
+.category {
+    background-color: #2dbefd;
+    padding: 6px;
+}
+.chooseus_purple {
+    background-color: var(--purple);
+    width: 100%;
+    height: 560px;
+}
+.chooseus_orange {
+    background-color: var(--orangered);
+    width: 100%;
+    height: 500px;
+}
+.choose_us {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.get_started-purple {
+    background-color: var(--purple);
+    width: 100%;
+    height: 300px;
+}
+.start_with_me {
+    color: var(--purple) !important;
+    font-size: 14px !important;
+}
+
 /* About Us */
 .about {
     position: relative;
@@ -341,6 +499,107 @@
         padding-top: 0 !important;
         gap: 0 !important;
     }
+    .featured_card {
+        height: 380px !important;
+        margin-top: 20px;
+    }
+    .featured_profile {
+        top: 5%;
+        left: 10%;
+    }
+
+    .image_constant {
+        position: absolute;
+        top: 30%;
+        left: 10%;
+    }
+    .featured_menu {
+        position: absolute;
+        border-left: none;
+        display: flex;
+        justify-content: center;
+        top: 55%;
+        left: 0;
+        flex-direction: row !important;
+        bottom: 0;
+    }
+    .setting {
+        border: 0;
+    }
+    .comment {
+        border: 0;
+    }
+    .file {
+        border: 0;
+    }
+    .heart {
+        border: 0;
+    }
+    .trusted_porple {
+        position: relative;
+        width: 100%;
+        height: 1170px;
+        background-color: var(--purple);
+    }
+    .trusted_orange {
+        position: absolute;
+        top: 1%;
+        width: 100%;
+        height: 1150px;
+        background-color: var(--orangered);
+    }
+    .trusted_white {
+        position: absolute;
+        top: 1%;
+        width: 100%;
+        height: 1130px;
+        background-color: var(--white);
+    }
+    .providers {
+        background-color: var(--purple) !important;
+        width: 330px;
+        height: 196.59px !important;
+        border-radius: 0 !important;
+    }
+    .providers h1 {
+        font-size: 50px;
+    }
+    .provider {
+        background-color: #7748ee;
+        padding: 6px;
+    }
+    .customer {
+        background-color: #62b815;
+        padding: 6px;
+    }
+    .job {
+        background-color: #feb92d;
+        padding: 6px;
+    }
+    .category {
+        background-color: #2dbefd;
+        padding: 6px;
+    }
+    .chooseus_orange {
+        background-color: var(--orangered);
+        width: 100%;
+        height: 1300px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .get_started-purple {
+        height: 500px;
+    }
+    .get_text {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .get_text h2 {
+        font-size: 40px !important;
+    }
+    .get_text p {
+        font-size: 20px !important;
+    }
     .login_links {
         right: 0 !important;
     }
@@ -521,3 +780,5 @@
 .next {
     background-color: var(--orangered) !important;
 }
+
+/* Featured Consultant Slider */
