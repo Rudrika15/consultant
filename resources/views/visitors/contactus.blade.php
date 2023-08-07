@@ -1,6 +1,6 @@
 @extends('layouts.visitorApp')
 @section('content')
-    <div style="background-color: #F7F8FA;">
+    <div class="main_page">
         <div class="about">
             <h3 class="contacttext ms-lg-5">Contact Us</h3>
             <img class="img" src="{{ asset('visitors/images/Backgroung-Web-banner-.png') }}" alt="" width="100%"
@@ -14,7 +14,7 @@
             </div>
         </div>
 
-        <div class="container">
+        <div class="phone-email-address  p-5">
             <div class="d-flex justify-content-center mt-5 mb-5 gap-5">
                 <div class="card contact_card">
                     <div class="card-body mb-5">
@@ -58,5 +58,63 @@
                 </div>
             </div>
         </div>
+        <div class="container mb-5">
+            <div class="contact-location">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Contact Us</h4>
+                        <form class="contact-form mt-5 mb-5">
+                            <div class="row">
+                                <div class="col-md-6 pt-4 input-container">
+                                    <i class="fa fa-user icon text-center"></i>
+                                    <input type="text" name="name" class="form-control input-field" placeholder="{{_('Name')}}">
+                                </div>
+                                <div class="col-md-6 pt-4 input-container">
+                                    <i class="fa fa-envelope icon text-center"></i>
+                                    <input type="text" name="name" class="form-control input-field" placeholder="{{_('Email')}}">
+                                </div>
+                                <div class="col-md-12 pt-4 input-container">
+                                    <i class="fa fa-phone icon text-center"></i>
+                                    <input type="text" name="name" class="form-control input-field" placeholder="{{_('Email')}}">
+                                </div>
+                                <div class="col-md-12 pt-4 input-container">
+                                    <i class="fa fa-edit icon text-center"></i>
+                                    <textarea name="comments" id="comments" class="form-control input-field" cols="30" rows="4">{{_('Comments')}}</textarea>
+                                </div>
+                                <div class="col-md-12 pt-4 input-container">
+                                    <i class="fa fa-edit icon text-center"></i>
+                                    <input type="text" name="name" class="form-control input-field" placeholder="{{_('Enter the code above here')}}">
+                                </div>
+                                <div class="col-2 pt-3">
+                                    <button type="submit" class="btn btn-submit fw-bold">Submit</button>
+                                </div>
+                                <div class="col-2 pt-3">
+                                    <button type="submit" class="btn btn-reset fw-bold">Reset</button>
+                                </div>
+                                
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Our Location</h4>
+                        <div id="googleMap" style="width:100%;height:400px;" class="mt-5"></div>
+
+                            <script>
+                            function myMap() {
+                            var mapProp= {
+                            center:new google.maps.LatLng(51.508742,-0.120850),
+                            zoom:5,
+                            };
+                            var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+                            }
+                            </script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     </div>
+   
 @endsection

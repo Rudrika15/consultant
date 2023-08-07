@@ -45,18 +45,18 @@ Route::get('/aboutus', [VisitorController::class, 'aboutus'])->name('visitors.ab
 Route::get('/membershipplan', [VisitorController::class, 'membershipPlan'])->name('visitors.membershipPlan');
 Route::get('/corporateInquery', [VisitorController::class, 'corporateInquery'])->name('visitors.corporateInquery');
 Route::get('/contactus', [VisitorController::class, 'contactus'])->name('visitors.contactus');
+Route::get('/signup/package', [VisitorController::class, 'signuppackage'])->name('visitors.signuppackage');
 
-
-
-
+// Route::get('fetchState',[RegisterController::class,'fetchState'])->name('fetchState');
+Route::post('fetchCity', [RegisterController::class, 'feachCity'])->name('feachCity');
+Route::post('city', [UserController::class, 'city'])->name('city');
 Auth::routes();
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/homepage', [App\Http\Controllers\HomeController::class, 'homePage'])->name('app');
 
-Route::post('fetchCity', [RegisterController::class, 'feachCity'])->name('feachCity');
-Route::post('city', [UserController::class, 'city'])->name('city');
+
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);

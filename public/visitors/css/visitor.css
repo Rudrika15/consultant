@@ -26,6 +26,33 @@
 .btn {
     background-color: var(--purple) !important;
 }
+
+/* for All  pages */
+
+.main_page{
+    background-color: #F7F8FA !important;
+    padding-bottom: 50px !important; 
+}
+.register-page{
+    padding: 20px;
+    margin-bottom: 30px;
+    background-color:var(--white);
+}
+.register-form{
+    border-radius: 0px !important;
+}
+.btn.btnsignup{
+    background-color: var(--orangered) !important;
+    color: var(--white) !important;
+    padding-left: 20px  !important;
+    padding-right: 20px !important;
+}
+.btn.btncancel{
+    background-color: var(--purple) !important;
+    color: var(--white) !important;
+    padding-left: 20px  !important;
+    padding-right: 20px !important;
+}
 /* Home */
 .home_link {
     color: var(--purple);
@@ -58,8 +85,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90px;
-    width: 90px;
+    height: 100px;
+    width: 100px;
     margin: 0 auto;
     text-align: center;
     border-radius: 50%;
@@ -69,6 +96,12 @@
     height: 90px;
     width: 90px;
     border-radius: 50%;
+}
+.fa-circle{
+    position: absolute;
+    top:-5px;
+    left:70px;
+    font-size: 28px;
 }
 .featured_card {
     position: relative;
@@ -158,6 +191,35 @@
 .fa-heart-o {
     font-size: 20px;
     text-decoration: none;
+}
+.previous_next_btn{
+    margin-top: 40px !important;
+    font-size: 12px !important;
+    border: 0 !important;
+}
+.carousel_previous{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--orangered);
+    color: var(--white);
+    height: 40px;
+    width: 40px;
+    border: 0;
+    font-size: 25px;
+    border-radius: 50%;
+}
+.carousel_next{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--orangered);
+    color: var(--white);
+    height: 40px;
+    width: 40px;
+    border: 0;
+    font-size: 25px;
+    border-radius: 50%;
 }
 .trusted_porple {
     position: relative;
@@ -349,6 +411,7 @@
 /* ------------------------------------------------------- */
 
 /* Contact Us */
+
 .contactus {
     position: relative;
 }
@@ -391,6 +454,59 @@
 }
 .address {
     font-size: 15px !important;
+}
+.contact-form{
+    padding-left: 20px;
+    border-radius: 0 !important;
+}
+.input-container {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  .icon {
+    padding: 5px !important;
+    border:1px solid #E1E1E1;
+    color:gray;
+    min-width: 40px;
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  .input-field {
+    border:1px solid #E1E1E1 !important; 
+    color: #E1E1E1;
+    width: 100%;
+    padding: 5px !important;
+    outline: none;
+    border-radius: 0 !important;
+  }
+  
+  .btn-submit{
+    background-color: var(--orangered) !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    border: 0;
+    color:var(--white) !important;
+  }
+  .btn-reset{
+    background-color: var(--purple) !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    border:0px;
+    color: var(--white) !important;
+  }
+.fa-user.contact_user{
+    background-color: #62b815 ;
+    width: 12%;
+    height: 60%;
+    padding-top: 10px;
+    position: absolute !important;
+    font-size: 16px !important;
 }
 /* --------------------------------------------------- */
 
@@ -449,7 +565,7 @@
 }
 .countrycard {
     position: absolute !important;
-    top: 50% !important;
+    top: 52.05% !important;
     left: 10%;
     right: 10%;
     width: 80% !important;
@@ -498,6 +614,10 @@
         margin-left: auto;
         padding-top: 0 !important;
         gap: 0 !important;
+    }
+    .person-text{
+        padding-left: 25px !important;
+        padding-right: 25px !important;
     }
     .featured_card {
         height: 380px !important;
@@ -629,7 +749,7 @@
     }
     .categorytext {
         position: absolute;
-        top: 50%;
+        top: 52%;
     }
     .countrycard {
         position: absolute !important;
@@ -646,7 +766,7 @@
         width: 100% !important;
     }
     .slidertop {
-        top: 60% !important;
+        top: 65% !important;
         position: absolute !important;
     }
     .prevnext {

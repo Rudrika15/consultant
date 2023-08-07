@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\State;
 use App\Models\City;
 use App\Models\Profile;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -88,5 +89,17 @@ class RegisterController extends Controller
         $profile->save();
 
         return $user;
+    }
+    public function fetchState()
+    {
+        $state = State::all();
+        return view('register',compact('state'));
+    }
+    public function fetchCity(Request $request)
+    {
+        $data['cities'] = City::where("stateId", $request->stateId)
+                                    ->get(["cityName", "id"]);
+                                      
+        return response()->json($data);
     }
 }

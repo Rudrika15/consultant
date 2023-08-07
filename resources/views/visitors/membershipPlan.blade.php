@@ -1,5 +1,6 @@
 @extends('layouts.visitorApp')
 @section('content')
+<div class="main_page">
     <div class="membership">
         <h3 class="membertext ms-lg-5">Membership Plan</h3>
         <img class="img" src="{{ asset('visitors/images/Backgroung-Web-banner-.png') }}" alt="" width="100%"
@@ -137,4 +138,6 @@
             <button class="btn bg-white text-center mt-4 mb-5">Start With Free</button>
         </div>
     </div>
+</div>
+   
 @endsection

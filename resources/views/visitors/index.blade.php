@@ -1,5 +1,6 @@
 @extends('layouts.visitorApp')
 @section('content')
+<div class="main_page">
     <div class="" style="position: relative;">
         <img src="{{ asset('visitors/images/home.png') }}" class="img-fluid w-100" height="700px" width="100%" alt="">
         {{-- Consultant Category --}}
@@ -152,30 +153,33 @@
             <div class="container mt-5">
                 <div class="row">
                     <div class="col-lg-4 person_section">
-                        <div class="person_img_circle">
+                        <div class="person_img_circle position-relative">
+                            <i class="fa fa-circle text-white"></i>
                             <img src="{{ asset('visitors/images/1-1.png') }}" alt="" width="60"
                                 height="50">
                         </div>
-                        <h5 class="text-white mt-4">Find your consulta</h5>
-                        <p class="text-white mt-2">We will enlist just the right
+                        <h5 class="person-text text-white mt-4">Find your consulta</h5>
+                        <p class=" person-text text-white mt-2">We will enlist just the right
                             ones based on your choices.</p>
                     </div>
                     <div class="col-lg-4  person_section">
-                        <div class="person_img_circle">
+                        <div class="person_img_circle position-relative">
+                            <i class="fa fa-circle text-white"></i>
                             <img src="{{ asset('visitors/images/2.png') }}" alt="" width="60"
                                 height="50">
                         </div>
-                        <h5 class="text-white mt-4">Find your consulta</h5>
-                        <p class="text-white mt-2">We will enlist just the right
+                        <h5 class="person-text text-white mt-4">Find your consulta</h5>
+                        <p class="person-text text-white mt-2">We will enlist just the right
                             ones based on your choices.</p>
                     </div>
                     <div class="col-lg-4  person_section">
-                        <div class="person_img_circle">
+                        <div class="person_img_circle position-relative">
+                            <i class="fa fa-circle text-white"></i>
                             <img src="{{ asset('visitors/images/3.png') }}" alt="" width="60"
                                 height="50">
                         </div>
-                        <h5 class="text-white mt-4">Find your consulta</h5>
-                        <p class="text-white mt-2">We will enlist just the right
+                        <h5 class="person-text text-white mt-4">Find your consulta</h5>
+                        <p class="person-text text-white mt-2">We will enlist just the right
                             ones based on your choices.</p>
                     </div>
                 </div>
@@ -324,19 +328,18 @@
                     </div>
                 </div>
             </div>
-
-            <div class="previous_next_btn">
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon bg-success" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon bg-success" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
+            <div class=" d-flex justify-content-center">
+                <div class="previous_next_btn">
+                    <button class="border-0 bg-white" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="prev">
+                        <span class="fa fa-angle-left carousel_previous"></span>
+                    </button>
+                    <button class="border-0 bg-white" type="button" data-bs-target="#carouselExampleControls"
+                        data-bs-slide="next">
+                        <span class="fa fa-angle-right carousel_next"></span>
+                    </button>
+                </div>
+            </div>        
         </div>
 
     </div>
@@ -484,6 +487,8 @@
 
     </div>
     {{-- Get Started Start --}}
+</div>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
     </script>

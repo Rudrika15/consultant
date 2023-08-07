@@ -1,5 +1,6 @@
 @extends('layouts.visitorApp')
 @section('content')
+<div class="main_page">
     <div class="about">
         <h3 class="us ms-lg-5">About us</h3>
         <img class="img" src="{{ asset('visitors/images/Backgroung-Web-banner-.png') }}" alt="" width="100%"
@@ -12,7 +13,7 @@
             <a href="{{ route('visitors.aboutus') }}" class="about_us_link">ABOUT US</a>
         </div>
     </div>
-    <div class="container mt-5 mb-5">
+    <div class="container mt-5 p-5">
         <div class="ms-5 me-5">
             <p class="pcolor">Nothing but change is constant! In this constantly
                 changing world, GROWTH is inevitable for everyone.
@@ -33,4 +34,5 @@
             </p>
         </div>
     </div>
+</div>
 @endsection

@@ -26,4 +26,8 @@ class VisitorController extends Controller
     {
         return view('visitors.contactus');
     }
+    public function signuppackage()
+    {
+        return view('visitors.signuppackage');
+    }
 }

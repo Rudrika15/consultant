@@ -149,10 +149,6 @@
                                 <i class="fa fa-caret-right"></i>
                                 <a href="" class="footerlink">Corporate Inquiry</a>
                             </li>
-                            <li>
-                                <i class="fa fa-caret-right"></i>
-                                <a href="{{ route('visitors.contactus') }}" class="footerlink">Corporate Inquiry</a>
-                            </li>
                         </ul>
                     </div>
                     <div class="policelink  mt-lg-0 mt-2">

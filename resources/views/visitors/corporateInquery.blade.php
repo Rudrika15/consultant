@@ -1,5 +1,6 @@
 @extends('layouts.visitorApp')
 @section('content')
+<div class="main_page">
     <div class="corporatehead">
         <h3 class="corporatetext ms-lg-5">Corporate Inquiry</h3>
         <img class="img" src="{{ asset('visitors/images/Backgroung-Web-banner-.png') }}" alt="" width="100%"
@@ -46,7 +47,7 @@
             </div>
         </div>
 
-        <div class="getintouch mt-5 mb-5">
+        <div class="getintouch mt-5">
             <h1 class="text-center text-white pt-5">Get In Touch</h1>
             <p class="text-center text-white">Send us your inquiry we will respond earliest</p>
             <form action="" class="mb-5">
@@ -84,4 +85,6 @@
                 console.error(error);
             });
     </script>
+</div>
+    
 @endsection

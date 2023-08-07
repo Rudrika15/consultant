@@ -24,6 +24,9 @@ return new class extends Migration
             $table->string('city');
             $table->string('pincode');
             $table->string('photo');
+            $table->string('company')->nullable(true);
+            $table->string('category')->nullable(true);;
+            $table->string('package')->nullable(true);;
             $table->string('status');
             $table->timestamps();
         });
