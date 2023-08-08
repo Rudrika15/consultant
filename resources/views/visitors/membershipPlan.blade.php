@@ -94,7 +94,7 @@
         <div class="d-flex justify-content-center gap-3 mt-5 flex-wrap">
             <div class="card allplancard shadow p-3 mb-5 bg-gray rounded mt-5">
                 <div class="card-body">
-                    <h5 class="text-center "><i class=" fa fa-user"></i></h5>
+                    <h5 class="text-center "><i class="fa fa-user profile-access-user"></i></h5>
                     <h5 class="card-text text-center">Profile Access</h5>
                 </div>
             </div>

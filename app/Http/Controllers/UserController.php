@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Profile;
-use App\Models\state;
+use App\Models\State;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use DB;
@@ -153,10 +153,8 @@ class UserController extends Controller
     public function profile($id = 0)
     {
         $id = Auth::user()->id;
-
         $profile = Profile::where('userId', '=', $id)->first();
-
-        $data['states'] = state::get(["stateName", "id"]);
+        $data['states'] = State::get(["stateName", "id"]);
         return view('profile', $data, compact('profile'));
     }
 

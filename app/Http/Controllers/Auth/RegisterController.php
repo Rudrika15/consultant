@@ -79,22 +79,26 @@ class RegisterController extends Controller
             'cityId' => $data['cityId'],
             'contactNo' => $data['contactNo'],
             'gender' => $data['gender'],
-            'birthdate' => $data['birthdate'],
+            'birthdate' => $data['birthdate'],   
         ]);
         $user->assignRole('Consultant');
-
         $profile = new Profile();
-        $profile->userId = $user->id;;
+        $profile->userId = $user->id;
+        $profile->type = $data['type'];
+        $profile->company = $data['company'];
+        $profile->category = $data['category'];
+        $profile->package = $data['package'];   
         $profile->status = 'Active';
         $profile->save();
 
         return $user;
     }
-    public function fetchState()
-    {
-        $state = State::all();
-        return view('register',compact('state'));
-    }
+
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
     public function fetchCity(Request $request)
     {
         $data['cities'] = City::where("stateId", $request->stateId)

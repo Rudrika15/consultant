@@ -18,7 +18,7 @@
             <div class="tab-pane fade show active" id="register" role="tabpanel" aria-labelledby="register">
                     <!-- Outer Row -->
                 
-                    <form action="" method="post">
+                    <form action="{{route('register')}}" method="post">
                         @csrf
                         <div class="row">
                         <div class="col-md-6 pt-4">
@@ -48,7 +48,7 @@
                             </span>
                             @enderror
                         </div>
-                        <div class="col-md-6 pt-4">
+                        <div class="col-md-3 pt-4">
                             <input id="password" type="password" class="form-control register-form  @error('password') is-invalid @enderror" name="password" placeholder="{{_('Password')}}" required autocomplete="new-password">
 
                             @error('password')
@@ -57,12 +57,22 @@
                             </span>
                             @enderror
                         </div>
+                        <div class="col-md-3 pt-4">
+                            <input id="password-confirm" type="password" class="form-control register-form" name="password_confirmation" placeholder="{{_('Confirm Password')}}" required autocomplete="new-password">
+
+                            @error('password_confirmation')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
                         <div class="col-md-6 pt-4">
                             <select class="form-select register-form" aria-label="Default select example" id="stateId" name="stateId" value="{{ old('stateId') }}" required autocomplete="stateId" >
                                 <option value="">-- Select State --</option>
-                                {{-- @foreach($state as $state)
-                                <option value="{{$state->id}}">{{$states->id}}</option>
-                                @endforeach --}}
+                                @foreach($states as $data)
+                                <option value="{{$data->id}}">{{$data->stateName}}</option>
+                                @endforeach
                             </select>
                             @error('stateId')
                             <span class="invalid-feedback" role="alert">
@@ -125,7 +135,7 @@
                             @enderror
                         </div>
                         <div class="col-md-6 pt-4">
-                            <label for="type">{{_('Select User')}}</label>
+                            <label for="type">{{_('Select User Type')}}</label>
                             <div class="row">
                                 <div class="col-md-2">
                                     <div class="form-check ">
@@ -152,7 +162,7 @@
                         </div>
                         <div id="become_consultant" class="row" style="display: none">
                             <div class="col-md-12 pt-4">
-                                <input id="company" type="text" class="form-control register-form  @error('company') is-invalid @enderror" name="company" placeholder="{{_('Company Name')}}" value="{{ old('company') }}" required autocomplete="company" >
+                                <input id="company" type="text" class="form-control register-form  " name="company" placeholder="{{_('Company Name')}}" >
     
                                 @error('company')
                                 <span class="invalid-feedback" role="alert">
@@ -162,8 +172,11 @@
                             </div>
     
                             <div class="col-md-6 pt-4">
-                                <select class="form-select register-form" aria-label="Default select example" id="category" name="category" value="{{ old('category') }}" required autocomplete="category" >
+                                <select class="form-select register-form" aria-label="Default select example" id="category" name="category" >
                                     <option value="">-- Select Category --</option>
+                                    @foreach ($categories as $data)
+                                        <option value={{$data->id}}>{{$data->catName}}</option>
+                                    @endforeach
                                 </select>
                                 @error('category')
                                 <span class="invalid-feedback" role="alert">
@@ -173,8 +186,11 @@
                             </div>
     
                             <div class="col-md-6 pt-4" id="packagediv">
-                                <select class="form-select register-form" aria-label="Default select example" id="package" name="package" value="{{ old('package') }}" required autocomplete="package" >
+                                <select class="form-select register-form" aria-label="Default select example" id="package" name="package" >
                                     <option value="">-- Select Package --</option>
+                                    @foreach ($packages as $data)
+                                         <option value={{$data->id}}>{{$data->title}}</option>
+                                    @endforeach
                                 </select>
                                 @error('package')
                                 <span class="invalid-feedback" role="alert">
@@ -238,51 +254,64 @@ $(function () {
         });
     });
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
     $(document).ready(function() {
 
-        // $('#state-dropdown').on('change', function () {
-        //         var idState = this.value;
-        //         $("#city-dropdown").html('');
-        //         $.ajax({
-        //             url: "{{url('api/fetch-cities')}}",
-        //             type: "POST",
-        //             data: {
-        //                 state_id: idState,
-        //                 _token: '{{csrf_token()}}'
-        //             },
-        //             dataType: 'json',
-        //             success: function (res) {
-        //                 $('#city-dropdown').html('<option value="">-- Select City --</option>');
-        //                 $.each(res.cities, function (key, value) {
-        //                     $("#city-dropdown").append('<option value="' + value
-        //                         .id + '">' + value.name + '</option>');
-        //                 });
-        //             }
-        //         });
-        //     });
-        // $('#stateId').on('change', function() {
-        //     var idState = this.value;
-        //     $("#cityId").html('');
-        //     $.ajax({
-        //         url: "{{url('fetchCity')}}",
-        //         type: "POST",
-        //         data: {
-        //             stateId: idState,
-        //             _token: '{{csrf_token()}}'
-        //         },
-        //         dataType: 'json',
-        //         success: function(res) {
-        //             $('#cityId').html('<option value="">-- Select City --</option>');
-        //             $.each(res.cities, function(key, value) {
-        //                 $("#cityId").append('<option value="' + value
-        //                     .id + '">' + value.cityName + '</option>');
-        //             });
-        //         }
-        //     });
+        $('#stateId').on('change', function() {
+            var idState = this.value;
+            $("#cityId").html('');
+            $.ajax({
+                url: "{{url('fetchCity')}}",
+                type: "POST",
+                data: {
+                    stateId: idState,
+                    _token: '{{csrf_token()}}'
+                },
+                dataType: 'json',
+                success: function(res) {
+                    $('#cityId').html('<option value="">-- Select City --</option>');
+                    $.each(res.cities, function(key, value) {
+                        $("#cityId").append('<option value="' + value
+                            .id + '">' + value.cityName + '</option>');
+                    });
+                }
+            });
 
-        // });
+        });
     });
 </script>
+{{-- <script>
+    $(document).ready(function () {
+
+        /*------------------------------------------
+        --------------------------------------------
+        State Dropdown Change Event
+        --------------------------------------------
+        --------------------------------------------*/
+        $('#stateId').on('change', function () {
+            var idState = this.value;
+            $("#cityId").html('');
+            $.ajax({
+                url: "{{url('fetchCity')}}",
+                type: "POST",
+                data: {
+                    stateId: idState,
+                    _token: '{{csrf_token()}}'
+                },
+                dataType: 'json',
+                success: function (res) {
+                    $('#cityId').html('<option value="">-- Select City --</option>');
+                    $.each(res.cities, function (key, value) {
+                        $("#cityId").append('<option value="' + value
+                            .id + '">' + value.cityName + '</option>');
+                    });
+                }
+            });
+        });
+
+    });
+</script> --}}
+
 @endsection

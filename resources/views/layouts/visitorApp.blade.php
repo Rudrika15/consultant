@@ -63,18 +63,43 @@
                         <i class="fa fa-instagram pt-lg-1"></i>
                         <i class="fa fa-linkedin pt-lg-1"></i>
                     </div>
+                   
                     <div class="d-flex gap-3 login_links">
                         <i class="fa fa-user-circle-o pt-lg-1">
-                            <a href="{{ route('login') }}" class="text-white"
-                                style="text-decoration:none;">Login</a></i>
-                        <i class="fa fa-plus pt-lg-1"></i>
-                        <a href="{{ route('register') }}" class="text-white" style="text-decoration:none;">Sign Up</a>
-                        </i>
-
+                            {{-- <a href="{{ route('login') }}" class="text-white"
+                                    style="text-decoration:none;">Login</a></i>
+                                    <i class="fa fa-plus pt-lg-1"></i>
+                                <a href="{{ route('register') }}" class="text-white" style="text-decoration:none;">Sign Up</a>
+                                    </i> --}}
+                            @if (Auth::user())
+                                <a href="{{ route('visitor.profile') }}" class="text-white"
+                                style="text-decoration:none;">{{Auth::user()->name}}</a></i>        
+                            @else
+                                <a href="{{ route('login') }}" class="text-white"
+                                    style="text-decoration:none;">Login</a></i>
+                                    <i class="fa fa-plus pt-lg-1"></i>
+                                <a href="{{ route('register') }}" class="text-white" style="text-decoration:none;">Sign Up</a>
+                                    </i>
+                            @endif    
                     </div>
                     <div class="d-flex gap-3 login_links">
-                        <i class="fa fa-plus pt-lg-1"></i>
-                        <span> Become a Consultant</span>
+                        @if (Auth::user())
+                            <a class="dropdown-item" href="#"
+                                    onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                    <i class="fa fa-sign-out"></i>
+                                    Logout
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
+                                @csrf
+                                </form>
+                        @else
+                            <i class="fa fa-plus pt-lg-1"></i>
+                            <span> Become a Consultant</span>
+                        @endif
+                        {{-- <i class="fa fa-plus pt-lg-1"></i>
+                            <span> Become a Consultant</span> --}}
                     </div>
                 </div>
             </div>
@@ -82,7 +107,7 @@
     </div>
     <div style="top: 0; position: sticky; z-index: 1000">
 
-        <nav class="navbar navbar-expand-sm navbar-white bg-light ">
+        <nav class="navbar navbar-expand-sm navbar-white bg-white">
             <div class="container">
                 <a class="" href="{{ route('visitors.index') }}"><img class=""
                         src="{{ asset('visitors/images/ConsultantLogo.jpg') }}" width="150px" height="50px"></a>

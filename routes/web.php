@@ -47,8 +47,8 @@ Route::get('/corporateInquery', [VisitorController::class, 'corporateInquery'])-
 Route::get('/contactus', [VisitorController::class, 'contactus'])->name('visitors.contactus');
 Route::get('/signup/package', [VisitorController::class, 'signuppackage'])->name('visitors.signuppackage');
 
-// Route::get('fetchState',[RegisterController::class,'fetchState'])->name('fetchState');
-Route::post('fetchCity', [RegisterController::class, 'feachCity'])->name('feachCity');
+Route::post('fetchCity', [RegisterController::class, 'fetchCity'])->name('fetchCity');
+
 Route::post('city', [UserController::class, 'city'])->name('city');
 Auth::routes();
 
@@ -69,6 +69,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('profile-update/{id?}', [UserController::class, 'profile'])->name('profile');
     Route::post('update', [UserController::class, 'profileUpdate'])->name('profile.update');
 
+    //For Visitors Profile
+    Route::get('visitor/profile',[VisitorController::class,'profile'])->name('visitor.profile');
     /*---------------------------Admin Panel ---------------------------------- */
 
     /* State */

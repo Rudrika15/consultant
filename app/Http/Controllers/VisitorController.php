@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VisitorController extends Controller
 {
@@ -29,5 +31,11 @@ class VisitorController extends Controller
     public function signuppackage()
     {
         return view('visitors.signuppackage');
+    }
+    public function profile(){
+        // $userId=Auth::user()->id;
+        // $profile=Profile::where('userId','=',$userId)->first();
+
+        return view('visitors.profile');
     }
 }
