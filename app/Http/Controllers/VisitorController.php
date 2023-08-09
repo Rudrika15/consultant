@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Models\Profile;
+use App\Models\State;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,9 +35,14 @@ class VisitorController extends Controller
         return view('visitors.signuppackage');
     }
     public function profile(){
-        // $userId=Auth::user()->id;
-        // $profile=Profile::where('userId','=',$userId)->first();
-
-        return view('visitors.profile');
+        
+        $data['states'] = State::get(["stateName", "id"]);
+        $userId=Auth::user()->id;
+        $profile=Profile::where('userId','=',$userId)->first();
+        return view('visitors.profile',$data,compact('profile'));
+    }
+    public function cityforprofile(Request $request){
+        $data['cities']=City::where("stateId",$request->stateId);
+        return response()->json($data);
     }
 }

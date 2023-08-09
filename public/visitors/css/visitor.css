@@ -61,10 +61,34 @@
     background-color: var(--white) !important;
     border-radius: 0 !important;
 }
-.fa.fa-user.profile-user{
-    color: var(--black) !important;
-    font-size: 25px !important;
+.profile-user{
+    color: var(--black);
+    font-size: 30px !important;
 }
+.cardtext{
+    border-bottom:1px solid #D2D2D2;   
+}
+.image-border{
+    position: relative;
+    padding: 40px;
+    border-style: dashed;
+    border-color:#D2D2D2;
+}
+.btn.select-image-button{
+    position: absolute;
+    top:142px;
+    left:0;
+    padding-left: 47px;
+    padding-right: 47px;
+    background-color: var(--orangered) !important;
+    color: var(--white);
+}
+span .updatetext{
+    color:var(--darklightgray) !important;
+}
+
+
+
 
 /* ------------------------------------------------------------- */
 .user-avatar
@@ -361,26 +385,32 @@
 .allplancard {
     border-radius: 10px !important;
 }
-.fa-user{
-    font-size: 60px !important;
-    color: var(--purple);
+.profile-access-user-img{
+    padding-left: 15px;
+    align-items: center ;
+    color: var(--purple) !important;
 }
-.fa-windows {
-    font-size: 60px;
-    color: var(--purple);
+.category_img{
+    padding-left: 40px;
+    align-items: center ;
+    color: var(--purple) !important;
 }
-.fa-handshake-o {
-    font-size: 60px;
-    color: var(--purple);
+.service_img{
+    padding-left: 40px;
+    align-items: center ;
+    color: var(--purple) !important;
 }
-.fa-quote-left {
-    font-size: 60px;
-    color: var(--purple);
+.quotation_img{
+    padding-left: 20px;
+    align-items: center ;
+    color: var(--purple) !important;
 }
-.fa-certificate {
-    font-size: 60px;
-    color: var(--purple);
+.certificate_img{
+    padding-left: 50px;
+    align-items: center ;
+    color: var(--purple) !important;
 }
+
 /* ------------------------------------------------------- */
 
 /* Corporate Inqiry */
@@ -482,9 +512,18 @@
     width: 100%;
     margin-bottom: 15px;
   }
-  
+  .abouttextarea{
+    width:100%;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+  .address_textarea{
+    width:100%;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
   .icon {
-    padding: 5px !important;
+    padding: 7px !important;
     border:1px solid #E1E1E1;
     color:gray;
     min-width: 40px;
@@ -503,16 +542,16 @@
   
   .btn-submit{
     background-color: var(--orangered) !important;
-    padding-left: 20px !important;
-    padding-right: 20px !important;
+    padding: 10px 40px !important;
     border: 0;
+    font-size: 20px !important;
     color:var(--white) !important;
   }
   .btn-reset{
     background-color: var(--purple) !important;
-    padding-left: 20px !important;
-    padding-right: 20px !important;
+    padding: 10px 40px !important;
     border:0px;
+    font-size: 20px !important;
     color: var(--white) !important;
   }
 .fa-user.contact_user{
@@ -803,6 +842,9 @@
     }
     .cube_purple {
         height: 860px;
+    }
+    .allplancard{
+        padding-top: -10px !important;
     }
 }
 

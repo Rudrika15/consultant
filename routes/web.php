@@ -71,6 +71,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     //For Visitors Profile
     Route::get('visitor/profile',[VisitorController::class,'profile'])->name('visitor.profile');
+    Route::post('visitor/profile/city',[VisitorController::class,'cityforprofile'])->name('visitors.cityforprofile');
+    
+    
+    
     /*---------------------------Admin Panel ---------------------------------- */
 
     /* State */
