@@ -15,10 +15,10 @@
                                     <i class="fa fa-user profile-user"><span class="ms-3 fw-bold">User Avatar</span></i> 
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-2">
+                                    <div class="col-md-4">
                                         <div class="image-border mt-4">
-                                            <img src="{{asset('visitors/images/select_image.jpg')}}" alt="" width="100px" height="100px">
-                                            <input type="button" class="btn select-image-button" value="Select Image">
+                                            <img id="preview-photo" src="{{ asset('profile/' . $profile->photo) }}" class="" alt="" width="100px" height="100px">
+                                            <input type="file" id="photo" name="photo" accept='image/*' onchange="readURL(this,'#preview-photo')" class="form-control mt-2">
                                         </div>
                                     </div>
                                     <div class="col-md-8">
@@ -260,6 +260,18 @@
     
             });
         });
+    </script>
+    <script>
+        function readURL(input, tgt) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    document.querySelector(tgt).setAttribute("src",
+                        e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
     </script>
 <script src="https://cdn.ckeditor.com/ckeditor5/38.1.1/classic/ckeditor.js"></script>
 <script>

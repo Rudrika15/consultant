@@ -70,11 +70,11 @@
 }
 .image-border{
     position: relative;
-    padding: 40px;
+    padding: 15px;
     border-style: dashed;
     border-color:#D2D2D2;
 }
-.btn.select-image-button{
+/* .btn.select-image-button{
     position: absolute;
     top:142px;
     left:0;
@@ -82,7 +82,7 @@
     padding-right: 47px;
     background-color: var(--orangered) !important;
     color: var(--white);
-}
+} */
 span .updatetext{
     color:var(--darklightgray) !important;
 }
