@@ -11,107 +11,156 @@ class VideoController extends Controller
 {
     function index($id)
     {
-        $video = Video::where('userId', '=', $id)->get();;
-        if (count($video) > 0) {
+        try{
+            $video = Video::where('userId', '=', $id)->get();;
+            if (count($video) > 0) {
+                return response([
+                    'success' => true,
+                    'message' => 'View All Video !',
+                    'status' => 200,
+                    'data' => $video
+                ]);
+            } else {
+                return response([
+                    'message' => 'No Data Found !',
+                    'data' => $video
+                ]);
+            }
+        }catch(\Exception $e){
             return response([
-                'success' => true,
-                'message' => 'View All Video !',
-                'status' => 200,
-                'data' => $video
-            ]);
-        } else {
-            return response([
-                'message' => 'No Data Found !',
-                'data' => $video
+                'success'=>false,
+                'message'=>'An error occurred while processing your request.',
+                'status'=>500,
+                'error'=>$e->getMessage()
             ]);
         }
+        
     }
     function store(Request $request)
     {
-        $rules = array(
-            'userId' => 'required',
-            'url' => 'required',
-        );
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return $validator->errors();
-        }
-        $video = new Video();
-        $video->userId = $request->userId;
-        $video->url = $request->url;
-        $video->status = 'Active';
-        if ($video->save()) {
+        try{
+            $rules = array(
+                'userId' => 'required',
+                'url' => 'required',
+            );
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return $validator->errors();
+            }
+            $video = new Video();
+            $video->userId = $request->userId;
+            $video->url = $request->url;
+            $video->status = 'Active';
+            if ($video->save()) {
+                return response([
+                    'success' => true,
+                    'message' => 'Video Created',
+                    'status' => 200,
+                    'data' => $video
+                ]);
+            } else {
+                return response([
+                    'message' => 'Video Not Created',
+                    'data' => $video
+                ]);
+            }
+        }catch(\Exception $e){
             return response([
-                'success' => true,
-                'message' => 'Video Created',
-                'status' => 200,
-                'data' => $video
-            ]);
-        } else {
-            return response([
-                'message' => 'Video Not Created',
-                'data' => $video
+                'success'=>false,
+                'message'=>'An error occurred while processing your request.',
+                'status'=>500,
+                'error'=>$e->getMessage()
             ]);
         }
+        
     }
     function update(Request $request, $id)
     {
-        $rules = array(
-            'url' => 'required',
-        );
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return $validator->errors();
-        }
-        $video = Video::find($id);
-        $video->url = $request->url;
-        $video->status = 'Active';
-        if ($video->save()) {
+        try{
+            $rules = array(
+                'url' => 'required',
+            );
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return $validator->errors();
+            }
+            $video = Video::find($id);
+            $video->url = $request->url;
+            $video->status = 'Active';
+            if ($video->save()) {
+                return response([
+                    'success' => true,
+                    'message' => 'Video Updated',
+                    'status' => 200,
+                    'data' => $video
+                ]);
+            } else {
+                return response([
+                    'message' => 'Video Not Updated',
+                    'data' => $video
+                ]);
+            }
+        }catch(\Exception $e){
             return response([
-                'success' => true,
-                'message' => 'Video Updated',
-                'status' => 200,
-                'data' => $video
-            ]);
-        } else {
-            return response([
-                'message' => 'Video Not Updated',
-                'data' => $video
+                'success'=>false,
+                'message'=>'An error occurred while processing your request.',
+                'status'=>500,
+                'error'=>$e->getMessage()
             ]);
         }
+        
     }
     function delete($id)
     {
-        $video = Video::find($id);
-        $video->status = "Deleted";
-        if ($video->save()) {
+        try{
+            $video = Video::find($id);
+            $video->status = "Deleted";
+            if ($video->save()) {
+                return response([
+                    'success' => true,
+                    'message' => 'Video Deleted !',
+                    'status' => 200,
+                    'data' => $video
+                ]);
+            } else {
+                return response([
+                    'message' => 'Video Not Deleted !',
+                    'data' => $video
+                ]);
+            }
+        }catch(\Exception $e){
             return response([
-                'success' => true,
-                'message' => 'Video Deleted !',
-                'status' => 200,
-                'data' => $video
-            ]);
-        } else {
-            return response([
-                'message' => 'Video Not Deleted !',
-                'data' => $video
+                'success'=>false,
+                'message'=>'An error occurred while processing your request.',
+                'status'=>500,
+                'error'=>$e->getMessage()
             ]);
         }
+        
     }
     function show($id)
     {
-        $video = Video::find($id);
-        if ($video) {
+        try{
+            $video = Video::find($id);
+            if ($video) {
+                return response([
+                    'success' => true,
+                    'message' => 'Show Video  !',
+                    'status' => 200,
+                    'data' => $video
+                ]);
+            } else {
+                return response([
+                    'message' => 'No Data Found !',
+                    'data' => $video
+                ]);
+            }
+        }catch(\Exception $e){
             return response([
-                'success' => true,
-                'message' => 'Show Video  !',
-                'status' => 200,
-                'data' => $video
-            ]);
-        } else {
-            return response([
-                'message' => 'No Data Found !',
-                'data' => $video
+                'success'=>false,
+                'message'=>'An error occurred while processing your request.',
+                'status'=>500,
+                'error'=>$e->getMessage()
             ]);
         }
     }

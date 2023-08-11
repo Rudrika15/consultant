@@ -13,84 +13,136 @@ class StateController extends Controller
 {
     public function index(Request $request)
     {
-        $state = state::where('status', '!=', "Deleted")
+        try{
+            $state = state::where('status', '!=', "Deleted")
             ->orderBy('id', 'DESC')
             ->get();
 
-        if (count($state) > 0) {
-            return response([
-                'success' => true,
-                'State' => $state,
-                'message' => 'State All View',
-                'Status' => 200
-            ]);
-            // return response($response, 200);
-        } else {
-            return response([
-                'message' => ['State Data No Found'],
-                'data' => $state,
-            ], 404);
-        }
-    }
-
-    public function store(Request $request)
-    {
-        $rules = array(
-            'stateName' => 'required',
-        );
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return $validator->errors();
-        }
-
-        $state = new state();
-
-        if ($state) {
-            $state->stateName = $request->stateName;
-            $state->status = 'Active';
-            $state->save();
-
-            if ($state) {
-                $response = [
+            if (count($state) > 0) {
+                return response([
                     'success' => true,
                     'State' => $state,
-                    'message' => 'State Inserted Sucessfully',
-                    'Status' => 201
-                ];
-                return response($response, 200);
+                    'message' => 'State All View',
+                    'Status' => 200
+                ]);
+                // return response($response, 200);
             } else {
                 return response([
                     'message' => ['State Data No Found'],
                     'data' => $state,
                 ], 404);
             }
-        }
+        }catch(\Exception $e){
+            return response([
+                'success'=>false,
+                'message'=>'An error occurred while processing your request.',
+                'status'=>500,
+                'error'=>$e->getMessage()
+            ]);
+        } 
+        
+    }
+
+    public function store(Request $request)
+    {
+        try{
+            $rules = array(
+                'stateName' => 'required',
+            );
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return $validator->errors();
+            }
+    
+            $state = new state();
+    
+            if ($state) {
+                $state->stateName = $request->stateName;
+                $state->status = 'Active';
+                $state->save();
+    
+                if ($state) {
+                    $response = [
+                        'success' => true,
+                        'State' => $state,
+                        'message' => 'State Inserted Sucessfully',
+                        'Status' => 201
+                    ];
+                    return response($response, 200);
+                } else {
+                    return response([
+                        'message' => ['State Data No Found'],
+                        'data' => $state,
+                    ], 404);
+                }
+            }
+        }catch(\Exception $e){
+            return response([
+                'success'=>false,
+                'message'=>'An error occurred while processing your request.',
+                'status'=>500,
+                'error'=>$e->getMessage()
+            ]);
+        } 
+        
     }
 
 
     public function update(Request $request, $id)
     {
-        $rules = array(
-            'stateName' => 'required',
-        );
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return $validator->errors();
-        }
-
-
-        $state = State::find($id);
-
-        if ($state) {
-            $state->stateName = $request->stateName;
-            $state->status = 'Active';
-            $state->save();
+        try{
+            $rules = array(
+                'stateName' => 'required',
+            );
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return $validator->errors();
+            }
+            $state = State::find($id);
+    
             if ($state) {
+                $state->stateName = $request->stateName;
+                $state->status = 'Active';
+                $state->save();
+                if ($state) {
+                    $response = [
+                        'success' => true,
+                        'State' => $state,
+                        'message' => 'State Updated Sucessfully',
+                        'Status' => 201
+                    ];
+                    return response($response, 200);
+                } else {
+                    return response([
+                        'message' => ['State Data No Found'],
+                        'data' => $state,
+                    ], 404);
+                }
+            }
+        }catch(\Exception $e){
+            return response([
+                'success'=>false,
+                'message'=>'An error occurred while processing your request.',
+                'status'=>500,
+                'error'=>$e->getMessage()
+            ]);
+        } 
+        
+    }
+
+    function delete($id, Request $request)
+    {
+        try{
+            $state = State::find($id);
+            $state->status = "Deleted";
+            if ($state) {
+                $state->save();
                 $response = [
                     'success' => true,
                     'State' => $state,
-                    'message' => 'State Updated Sucessfully',
-                    'Status' => 201
+                    'message' => 'State Deleted Sucessfully',
+                    'Status' => 204
+
                 ];
                 return response($response, 200);
             } else {
@@ -99,49 +151,45 @@ class StateController extends Controller
                     'data' => $state,
                 ], 404);
             }
-        }
-    }
-
-    function delete($id, Request $request)
-    {
-        $state = State::find($id);
-        $state->status = "Deleted";
-        if ($state) {
-            $state->save();
-            $response = [
-                'success' => true,
-                'State' => $state,
-                'message' => 'State Deleted Sucessfully',
-                'Status' => 204
-
-            ];
-            return response($response, 200);
-        } else {
+        }catch(\Exception $e){
             return response([
-                'message' => ['State Data No Found'],
-                'data' => $state,
-            ], 404);
-        }
+                'success'=>false,
+                'message'=>'An error occurred while processing your request.',
+                'status'=>500,
+                'error'=>$e->getMessage()
+            ]);
+        } 
+        
     }
 
     public function show($id)
     {
-        $state = State::find($id);
-        if ($state) {
-            $state->save();
-            $response = [
-                'success' => true,
-                'State' => $state,
-                'message' => 'State Show Sucessfully',
-                'Status' => 204
+        try{
+            $state = State::find($id);
+            if ($state) {
+                $state->save();
+                $response = [
+                    'success' => true,
+                    'State' => $state,
+                    'message' => 'State Show Sucessfully',
+                    'Status' => 204
 
-            ];
-            return response($response, 200);
-        } else {
+                ];
+                return response($response, 200);
+            } else {
+                return response([
+                    'message' => ['State Data No Found'],
+                    'data' => $state,
+                ], 404);
+            }
+        }catch(\Exception $e){
             return response([
-                'message' => ['State Data No Found'],
-                'data' => $state,
-            ], 404);
+                'success'=>false,
+                'message'=>'An error occurred while processing your request.',
+                'status'=>500,
+                'error'=>$e->getMessage()
+            ]);
         }
+        
     }
 }

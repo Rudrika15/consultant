@@ -86,8 +86,8 @@ class RegisterController extends Controller
         $profile->userId = $user->id;
         $profile->type = $data['type'];
         $profile->company = $data['company'];
-        $profile->category = $data['category'];
-        $profile->package = $data['package'];   
+        $profile->category = $data['categoryId'];
+        $profile->package = $data['packageId'];   
         $profile->status = 'Active';
         $profile->save();
 

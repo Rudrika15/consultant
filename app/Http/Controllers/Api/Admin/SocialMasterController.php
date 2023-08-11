@@ -11,95 +11,145 @@ class SocialMasterController extends Controller
 {
     public function index(Request $request)
     {
-        $socialMaster = SocialMaster::where('status', '!=', "Deleted")
+        try{
+            $socialMaster = SocialMaster::where('status', '!=', "Deleted")
             ->orderBy('id', 'DESC')
             ->get();
 
-        if (count($socialMaster) > 0) {
+            if (count($socialMaster) > 0) {
+                return response([
+                    'success' => true,
+                    'SocialMaster' => $socialMaster,
+                    'message' => 'SocialMaster All View',
+                    'Status' => 200
+                ]);
+                // return response($response, 200);
+            } else {
+                return response([
+                    'message' => ['SocialMaster Data No Found'],
+                    'data' => $socialMaster,
+                ], 404);
+            }
+        }catch(\Exception $e){
             return response([
-                'success' => true,
-                'SocialMaster' => $socialMaster,
-                'message' => 'SocialMaster All View',
-                'Status' => 200
+                'success'=>false,
+                'message'=>'An error occurred while processing your request.',
+                'status'=>500,
+                'error'=>$e->getMessage()
             ]);
-            // return response($response, 200);
-        } else {
-            return response([
-                'message' => ['SocialMaster Data No Found'],
-                'data' => $socialMaster,
-            ], 404);
-        }
+        } 
     }
 
     public function store(Request $request)
     {
-        $rules = array(
-            'title' => 'required',
-            'logo' => 'required',
-
-        );
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return $validator->errors();
-        }
-
-        $socialMaster = new SocialMaster();
-
-        if ($socialMaster) {
-            $socialMaster->title = $request->title;
-            if ($request->logo) {
-                $socialMaster->logo = time() . '.' . $request->logo->extension();
-                $request->logo->move(public_path('logo'),  $socialMaster->logo);
+        try{
+            $rules = array(
+                'title' => 'required',
+                'logo' => 'required',
+            );
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return $validator->errors();
             }
-            $socialMaster->status = 'Active';
-            $socialMaster->save();
-
+    
+            $socialMaster = new SocialMaster();
+    
             if ($socialMaster) {
-                $response = [
-                    'success' => true,
-                    'SocialMaster' => $socialMaster,
-                    'message' => 'SocialMaster Inserted Sucessfully',
-                    'Status' => 201
-                ];
-                return response($response, 200);
-            } else {
-                return response([
-                    'message' => ['SocialMaster Data No Found'],
-                    'data' => $socialMaster,
-                ], 404);
+                $socialMaster->title = $request->title;
+                if ($request->logo) {
+                    $socialMaster->logo = time() . '.' . $request->logo->extension();
+                    $request->logo->move(public_path('logo'),  $socialMaster->logo);
+                }
+                $socialMaster->status = 'Active';
+                $socialMaster->save();
+    
+                if ($socialMaster) {
+                    $response = [
+                        'success' => true,
+                        'SocialMaster' => $socialMaster,
+                        'message' => 'SocialMaster Inserted Sucessfully',
+                        'Status' => 201
+                    ];
+                    return response($response, 200);
+                } else {
+                    return response([
+                        'message' => ['SocialMaster Data No Found'],
+                        'data' => $socialMaster,
+                    ], 404);
+                }
             }
-        }
+        }catch(\Exception $e){
+            return response([
+                'success'=>false,
+                'message'=>'An error occurred while processing your request.',
+                'status'=>500,
+                'error'=>$e->getMessage()
+            ]);
+        } 
+        
     }
 
     public function update(Request $request, $id)
     {
-        $rules = array(
-            'title' => 'required',
-
-        );
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return $validator->errors();
-        }
-
-
-        $socialMaster = SocialMaster::find($id);
-
-        if ($socialMaster) {
-            $socialMaster->title = $request->title;
-            if ($request->logo) {
-                $socialMaster->logo = time() . '.' . $request->logo->extension();
-                $request->logo->move(public_path('logo'),  $socialMaster->logo);
+        try{
+            $rules = array(
+                'title' => 'required',
+    
+            );
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return $validator->errors();
             }
-            $socialMaster->status = 'Active';
-            $socialMaster->save();
-
+            $socialMaster = SocialMaster::find($id);
+    
             if ($socialMaster) {
+                $socialMaster->title = $request->title;
+                if ($request->logo) {
+                    $socialMaster->logo = time() . '.' . $request->logo->extension();
+                    $request->logo->move(public_path('logo'),  $socialMaster->logo);
+                }
+                $socialMaster->status = 'Active';
+                $socialMaster->save();
+    
+                if ($socialMaster) {
+                    $response = [
+                        'success' => true,
+                        'SocialMaster' => $socialMaster,
+                        'message' => 'SocialMaster Updated Sucessfully',
+                        'Status' => 201
+                    ];
+                    return response($response, 200);
+                } else {
+                    return response([
+                        'message' => ['SocialMaster Data No Found'],
+                        'data' => $socialMaster,
+                    ], 404);
+                }
+            }
+        }catch(\Exception $e){
+            return response([
+                'success'=>false,
+                'message'=>'An error occurred while processing your request.',
+                'status'=>500,
+                'error'=>$e->getMessage()
+            ]);
+        } 
+        
+    }
+
+    function delete($id, Request $request)
+    {
+        try{
+            $socialMaster = SocialMaster::find($id);
+            $socialMaster->status = "Deleted";
+            if ($socialMaster) {
+                $socialMaster->save();
                 $response = [
                     'success' => true,
                     'SocialMaster' => $socialMaster,
-                    'message' => 'SocialMaster Updated Sucessfully',
-                    'Status' => 201
+                    'message' => 'SocialMaster Deleted Sucessfully',
+                    'Status' => 204
+
                 ];
                 return response($response, 200);
             } else {
@@ -108,49 +158,45 @@ class SocialMasterController extends Controller
                     'data' => $socialMaster,
                 ], 404);
             }
-        }
-    }
-
-    function delete($id, Request $request)
-    {
-        $socialMaster = SocialMaster::find($id);
-        $socialMaster->status = "Deleted";
-        if ($socialMaster) {
-            $socialMaster->save();
-            $response = [
-                'success' => true,
-                'SocialMaster' => $socialMaster,
-                'message' => 'SocialMaster Deleted Sucessfully',
-                'Status' => 204
-
-            ];
-            return response($response, 200);
-        } else {
+        }catch(\Exception $e){
             return response([
-                'message' => ['SocialMaster Data No Found'],
-                'data' => $socialMaster,
-            ], 404);
-        }
+                'success'=>false,
+                'message'=>'An error occurred while processing your request.',
+                'status'=>500,
+                'error'=>$e->getMessage()
+            ]);
+        } 
+        
     }
 
     public function show($id)
     {
-        $socialMaster = SocialMaster::find($id);
-        if ($socialMaster) {
-            $socialMaster->save();
-            $response = [
-                'success' => true,
-                'SocialMaster' => $socialMaster,
-                'message' => 'SocialMaster Show Sucessfully',
-                'Status' => 204
+        try{
+            $socialMaster = SocialMaster::find($id);
+            if ($socialMaster) {
+                $socialMaster->save();
+                $response = [
+                    'success' => true,
+                    'SocialMaster' => $socialMaster,
+                    'message' => 'SocialMaster Show Sucessfully',
+                    'Status' => 204
 
-            ];
-            return response($response, 200);
-        } else {
+                ];
+                return response($response, 200);
+            } else {
+                return response([
+                    'message' => ['SocialMaster Data No Found'],
+                    'data' => $socialMaster,
+                ], 404);
+            }
+        }catch(\Exception $e){
             return response([
-                'message' => ['SocialMaster Data No Found'],
-                'data' => $socialMaster,
-            ], 404);
-        }
+                'success'=>false,
+                'message'=>'An error occurred while processing your request.',
+                'status'=>500,
+                'error'=>$e->getMessage()
+            ]);
+        } 
+        
     }
 }

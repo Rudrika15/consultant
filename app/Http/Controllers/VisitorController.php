@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\City;
 use App\Models\Profile;
 use App\Models\State;
@@ -12,7 +13,13 @@ class VisitorController extends Controller
 {
     public function index()
     {
-        return view('visitors.index');
+        $category=Category::all();
+        $data['states'] = State::get(["stateName", "id"]);
+        return view('visitors.index',$data,compact('category'));
+    }
+    public function fetchcityhome(Request $request){
+        $data['cities']=City::where('stateId','=',$request->stateId)->get();
+        return response()->json($data);
     }
     public function aboutus()
     {

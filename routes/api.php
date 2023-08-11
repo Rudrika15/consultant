@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\Consultant\PackageController;
 use App\Http\Controllers\Api\Consultant\SocialLinkController;
 use App\Http\Controllers\Api\Consultant\TimeController;
 use App\Http\Controllers\Api\Consultant\VideoController;
+use App\Http\Controllers\Api\OTPController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,7 +34,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+Route::post('/send-otp', [OTPController::class, 'sendOTP']);
 
 /* ---------------------------------- Admin Side ----------------------------------  */
 // login/register

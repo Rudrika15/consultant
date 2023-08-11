@@ -40,12 +40,15 @@ Route::get('/', function () {
 
 /* ---------------------- Visitors Side ----------------------------------- */
 
+
 Route::get('/', [VisitorController::class, 'index'])->name('visitors.index');
 Route::get('/aboutus', [VisitorController::class, 'aboutus'])->name('visitors.aboutus');
 Route::get('/membershipplan', [VisitorController::class, 'membershipPlan'])->name('visitors.membershipPlan');
 Route::get('/corporateInquery', [VisitorController::class, 'corporateInquery'])->name('visitors.corporateInquery');
 Route::get('/contactus', [VisitorController::class, 'contactus'])->name('visitors.contactus');
 Route::get('/signup/package', [VisitorController::class, 'signuppackage'])->name('visitors.signuppackage');
+// City for Home page
+Route::post('fetchcityhome', [VisitorController::class, 'fetchcityhome'])->name('fetchcityhome');
 
 Route::post('fetchCity', [RegisterController::class, 'fetchCity'])->name('fetchCity');
 

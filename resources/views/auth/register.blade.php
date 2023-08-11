@@ -172,13 +172,13 @@
                             </div>
     
                             <div class="col-md-6 pt-4">
-                                <select class="form-select register-form" aria-label="Default select example" id="category" name="category" >
+                                <select class="form-select register-form" aria-label="Default select example" id="categoryId" name="categoryId" >
                                     <option value="">-- Select Category --</option>
                                     @foreach ($categories as $data)
                                         <option value={{$data->id}}>{{$data->catName}}</option>
                                     @endforeach
                                 </select>
-                                @error('category')
+                                @error('categoryId')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -186,13 +186,13 @@
                             </div>
     
                             <div class="col-md-6 pt-4" id="packagediv">
-                                <select class="form-select register-form" aria-label="Default select example" id="package" name="package" >
+                                <select class="form-select register-form" aria-label="Default select example" id="packageId" name="packageId" >
                                     <option value="">-- Select Package --</option>
                                     @foreach ($packages as $data)
                                          <option value={{$data->id}}>{{$data->title}}</option>
                                     @endforeach
                                 </select>
-                                @error('package')
+                                @error('packageId')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

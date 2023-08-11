@@ -13,41 +13,30 @@
                 <form action="">
                     <div class="d-flex justify-content-evenly gap-3 pt-3 p-3 flex-lg-nowrap flex-wrap">
                         <div class="w-100">
-                            <select name="cars" id="cars" class="form-control">
-                                <option value="category">Category</option>
-                                <option value="volvo">Volvo</option>
-                                <option value="saab">Saab</option>
-                                <option value="opel">Opel</option>
-                                <option value="audi">Audi</option>
+                            <select name="categoryId" id="categoryId" class="form-control custom-select">
+                                <option selected>Category</option>
+                                @foreach ($category as $categories)
+                                    <option value="{{$categories->id}}">{{$categories->catName}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="w-100">
-                            <select name="cars" id="cars" class="form-control">
-                                <option value="contry">Country</option>
-                                <option value="volvo">Volvo</option>
-                                <option value="saab">Saab</option>
-                                <option value="opel">Opel</option>
-                                <option value="audi">Audi</option>
+                            <select name="stateId" id="stateId" class="form-control custom-select">
+                                <option>State</option>
+                                @foreach ($states as $data)
+                                    <option value="{{$data->id}}">{{$data->stateName}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="w-100">
-                            <select name="cars" id="cars" class="form-control">
-                                <option value="state">State</option>
-                                <option value="saab">Saab</option>
-                                <option value="opel">Opel</option>
-                                <option value="audi">Audi</option>
-                            </select>
-                        </div>
-                        <div class="w-100">
-                            <select name="cars" id="cars" class="form-control ">
-                                <option value="city">City</option>
-                                <option value="saab">Saab</option>
-                                <option value="opel">Opel</option>
-                                <option value="audi">Audi</option>
+                            <select name="cityId" id="cityId" class="form-control custom-select">
+                                <option value="">City</option>   
                             </select>
                         </div>
                         <div class="w-100 ">
-                            <button type="submit" class="btn searchnowbtn">{{ _('SEARCH NOW') }}</button>
+                            {{-- <a herf="{{route('time.index')}}" class="btn searchnowbtn">{{ _('SEARCH NOW') }}</a> --}}
+
+                            <a href="{{route('time.index')}}" class="btn searchnowbtn">{{ _('SEARCH NOW') }}</a>
                         </div>
                     </div>
 
@@ -579,4 +568,33 @@
             slider.addEventListener("mouseleave", dragStop);
         });
     </script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+    
+    $('#stateId').on('change', function() {
+        var idState = this.value;
+        $("#cityId").html('');
+        $.ajax({
+            url: "{{url('/fetchcityhome')}}",
+            type: "POST",
+            data: {
+                stateId: idState,
+                _token: '{{csrf_token()}}'
+            },
+            dataType: 'json',
+            success: function(res) {
+                $('#cityId').html('<option value="">City</option>');
+                $.each(res.cities, function(key, value) {
+                    $("#cityId").append('<option value="' + value
+                        .id + '">' + value.cityName + '</option>');
+                });
+            }
+        });
+
+    });
+});
+</script>
+
 @endsection

@@ -11,83 +11,137 @@ class LanguageMasterController extends Controller
 {
     public function index(Request $request)
     {
-        $languageMaster = LanguageMaster::where('status', '!=', "Deleted")
+        try{
+            $languageMaster = LanguageMaster::where('status', '!=', "Deleted")
             ->orderBy('id', 'DESC')
             ->get();
 
-        if (count($languageMaster) > 0) {
+            if (count($languageMaster) > 0) {
+                return response([
+                    'success' => true,
+                    'LanguageMaster' => $languageMaster,
+                    'message' => 'LanguageMaster All View',
+                    'Status' => 200
+                ]);
+                // return response($response, 200);
+            } else {
+                return response([
+                    'message' => ['LanguageMaster Data No Found'],
+                    'data' => $languageMaster,
+                ], 404);
+            }
+        }catch(\Exception $e){
             return response([
-                'success' => true,
-                'LanguageMaster' => $languageMaster,
-                'message' => 'LanguageMaster All View',
-                'Status' => 200
+                'success'=>false,
+                'message'=>'An error occurred while processing your request.',
+                'status'=>500,
+                'error'=>$e->getMessage()
             ]);
-            // return response($response, 200);
-        } else {
-            return response([
-                'message' => ['LanguageMaster Data No Found'],
-                'data' => $languageMaster,
-            ], 404);
         }
+        
     }
 
     public function store(Request $request)
     {
-        $rules = array(
-            'language' => 'required',
-        );
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return $validator->errors();
-        }
-
-        $languageMaster = new LanguageMaster();
-
-        if ($languageMaster) {
-            $languageMaster->language = $request->language;
-            $languageMaster->status = 'Active';
-            $languageMaster->save();
-
-            if ($languageMaster) {
-                $response = [
-                    'success' => true,
-                    'LanguageMaster' => $languageMaster,
-                    'message' => 'LanguageMaster Inserted Sucessfully',
-                    'Status' => 201
-                ];
-                return response($response, 200);
-            } else {
-                return response([
-                    'message' => ['LanguageMaster Data No Found'],
-                    'data' => $languageMaster,
-                ], 404);
+        try{
+            $rules = array(
+                'language' => 'required',
+            );
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return $validator->errors();
             }
+    
+            $languageMaster = new LanguageMaster();
+    
+            if ($languageMaster) {
+                $languageMaster->language = $request->language;
+                $languageMaster->status = 'Active';
+                $languageMaster->save();
+    
+                if ($languageMaster) {
+                    $response = [
+                        'success' => true,
+                        'LanguageMaster' => $languageMaster,
+                        'message' => 'LanguageMaster Inserted Sucessfully',
+                        'Status' => 201
+                    ];
+                    return response($response, 200);
+                } else {
+                    return response([
+                        'message' => ['LanguageMaster Data No Found'],
+                        'data' => $languageMaster,
+                    ], 404);
+                }
+            }
+        }catch(\Exception $e){
+            return response([
+                'success'=>false,
+                'message'=>'An error occurred while processing your request.',
+                'status'=>500,
+                'error'=>$e->getMessage()
+            ]);
         }
+        
     }
 
     public function update(Request $request, $id)
     {
-        $rules = array(
-            'language' => 'required',
-        );
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return $validator->errors();
-        }
-
-
-        $languageMaster = LanguageMaster::find($id);
-
-        if ($languageMaster) {
-            $languageMaster->language = $request->language;
-            $languageMaster->status = 'Active';
-            $languageMaster->save();
+        try{
+            $rules = array(
+                'language' => 'required',
+            );
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return $validator->errors();
+            }
+    
+    
+            $languageMaster = LanguageMaster::find($id);
+    
             if ($languageMaster) {
+                $languageMaster->language = $request->language;
+                $languageMaster->status = 'Active';
+                $languageMaster->save();
+                if ($languageMaster) {
+                    $response = [
+                        'success' => true,
+                        'LanguageMaster' => $languageMaster,
+                        'message' => 'LanguageMaster Updated Sucessfully',
+                        'Status' => 201
+                    ];
+                    return response($response, 200);
+                } else {
+                    return response([
+                        'message' => ['LanguageMaster Data No Found'],
+                        'data' => $languageMaster,
+                    ], 404);
+                }
+            }
+        }catch(\Exception $e){
+            return response([
+                'success'=>false,
+                'message'=>'An error occurred while processing your request.',
+                'status'=>500,
+                'error'=>$e->getMessage()
+            ]);
+        }
+        
+    }
+
+    function delete($id, Request $request)
+    {
+        try{
+            $languageMaster = LanguageMaster::find($id);
+            $languageMaster->status = "Deleted";
+            if ($languageMaster) {
+                $languageMaster->save();
                 $response = [
                     'success' => true,
                     'LanguageMaster' => $languageMaster,
-                    'message' => 'LanguageMaster Updated Sucessfully',
-                    'Status' => 201
+                    'message' => 'LanguageMaster Deleted Sucessfully',
+                    'Status' => 204
+
                 ];
                 return response($response, 200);
             } else {
@@ -96,49 +150,45 @@ class LanguageMasterController extends Controller
                     'data' => $languageMaster,
                 ], 404);
             }
-        }
-    }
-
-    function delete($id, Request $request)
-    {
-        $languageMaster = LanguageMaster::find($id);
-        $languageMaster->status = "Deleted";
-        if ($languageMaster) {
-            $languageMaster->save();
-            $response = [
-                'success' => true,
-                'LanguageMaster' => $languageMaster,
-                'message' => 'LanguageMaster Deleted Sucessfully',
-                'Status' => 204
-
-            ];
-            return response($response, 200);
-        } else {
+        }catch(\Exception $e){
             return response([
-                'message' => ['LanguageMaster Data No Found'],
-                'data' => $languageMaster,
-            ], 404);
+                'success'=>false,
+                'message'=>'An error occurred while processing your request.',
+                'status'=>500,
+                'error'=>$e->getMessage()
+            ]);
         }
+        
     }
 
     public function show($id)
     {
-        $languageMaster = LanguageMaster::find($id);
-        if ($languageMaster) {
-            $languageMaster->save();
-            $response = [
-                'success' => true,
-                'LanguageMaster' => $languageMaster,
-                'message' => 'LanguageMaster Show Sucessfully',
-                'Status' => 204
+        try{
+            $languageMaster = LanguageMaster::find($id);
+            if ($languageMaster) {
+                $languageMaster->save();
+                $response = [
+                    'success' => true,
+                    'LanguageMaster' => $languageMaster,
+                    'message' => 'LanguageMaster Show Sucessfully',
+                    'Status' => 204
 
-            ];
-            return response($response, 200);
-        } else {
+                ];
+                return response($response, 200);
+            } else {
+                return response([
+                    'message' => ['LanguageMaster Data No Found'],
+                    'data' => $languageMaster,
+                ], 404);
+            }
+        }catch(\Exception $e){
             return response([
-                'message' => ['LanguageMaster Data No Found'],
-                'data' => $languageMaster,
-            ], 404);
+                'success'=>false,
+                'message'=>'An error occurred while processing your request.',
+                'status'=>500,
+                'error'=>$e->getMessage()
+            ]);
         }
+        
     }
 }
