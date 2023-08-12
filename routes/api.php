@@ -122,6 +122,10 @@ Route::post('language/update/{id?}', [LanguageController::class, 'update']);
 Route::get('language/delete/{id?}', [LanguageController::class, 'delete']);
 Route::get('language/show/{id?}', [LanguageController::class, 'show']);
 
+Route::get('getLanguageList', [LanguageController::class, 'getLanguageList']);
+
+
+
 /*  Package  */
 Route::get('package/index/{id?}', [PackageController::class, 'index']);
 Route::post('package/store', [PackageController::class, 'store']);

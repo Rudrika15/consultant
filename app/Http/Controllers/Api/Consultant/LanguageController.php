@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\Consultant;
 
 use App\Http\Controllers\Controller;
 use App\Models\Language;
+use App\Models\LanguageMaster;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -12,7 +14,7 @@ class LanguageController extends Controller
     function index($id)
     {
         try{
-            $language = Language::with('language_masters')->where('userId', '=', $id)->get();;
+            $language = Language::with('')->where('userId', '=', $id)->get();;
             if (count($language) > 0) {
                 $responseData = [];
                 foreach ($language as $languageData) {
@@ -50,6 +52,25 @@ class LanguageController extends Controller
                 'error' => $e->getMessage(),
             ]);
         }
+    }
+    function getLanguageList(){
+        $languageList=User::with('language.language_masters')->get();
+        return response()->json($languageList);
+        // $languageList=Language::with('language_masters')->get();
+        // if(count($languageList)>0){
+        //     $responseData=[];
+        //     foreach($languageList as $languageListData){
+        //         if($languageListData->language_masters){
+        //             $responseData[]=[
+        //                 'languageId'=>$languageListData->language_masters->language
+        //             ];
+        //         }
+        //     }
+        // }
+        
+        //  return response()->json([
+        //     'data'=>$responseData   
+        // ]);
     }
     function store(Request $request)
     {
