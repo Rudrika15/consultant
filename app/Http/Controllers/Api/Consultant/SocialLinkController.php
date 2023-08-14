@@ -14,8 +14,8 @@ class SocialLinkController extends Controller
     function index($id)
     {
         try{
-            $socialLink = User::with('socialLink.social_masters')
-            ->where('id', '=', $id)
+            $socialLink = SocialLink::with('social_masters')
+            ->where('userId', '=', $id)
             ->get();
             if($socialLink){
                 return response([

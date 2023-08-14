@@ -14,9 +14,9 @@ class LanguageController extends Controller
     function index($id)
     {
         try{
-            $language = User::with('language.language_masters')
-            ->where('id', '=', $id)
-            ->get();
+            $language = Language::with('language_masters')
+                    ->where('userId', '=', $id)
+                    ->get();
             if($language){
                 return response([
                             'success' => true,
