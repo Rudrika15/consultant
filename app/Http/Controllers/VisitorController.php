@@ -9,6 +9,7 @@ use App\Models\State;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Expr\FuncCall;
 
 class VisitorController extends Controller
 {
@@ -54,16 +55,19 @@ class VisitorController extends Controller
         return response()->json($data);
     }
 
-    public function consultantList(Request $request){
+    public function consultantList(){
+        return view('visitors.consultantList');
+    }
+    public function findConsultantList(Request $request){
         $categoryId=$request->categoryId;
         $stateId=$request->stateId;
         $cityId=$request->cityId;
-        $consultant=Profile::with('user')
+        $consultant=Profile::with('user','states', 'cities', 'categories')
                     ->where('state','=',$stateId)
                     ->where('city','=',$cityId)
                     ->where('categoryId','=',$categoryId)
                     ->get();
 
-        return redirect("/consultantList");
+        return view('visitors.consultantList',compact('consultant'));
     }
 }

@@ -10,7 +10,7 @@
         {{-- County Card Live Search Start --}}
         <div class="card countrycard">
             <div class="card-body ">
-                <form action="{{route('consultantList')}}">
+                <form action="{{route('visitors.findConsultantList')}}">
                     <div class="d-flex justify-content-evenly gap-3 pt-3 p-3 flex-lg-nowrap flex-wrap">
                         <div class="w-100">
                             <select name="categoryId" id="categoryId" class="form-control custom-select">

@@ -12,4 +12,9 @@ class LanguageMaster extends Model
     {
         return $this->hasMany(User::class, 'id', 'userId');
     }
+
+    public function language()
+    {
+        return $this->hasMany(Language::class, 'languageId', 'id');
+    }
 }

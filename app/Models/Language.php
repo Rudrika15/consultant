@@ -10,7 +10,7 @@ class Language extends Model
     use HasFactory;
     public function language_masters()
     {
-        return $this->belongsTo(LanguageMaster::class, 'languageId');
+        return $this->hasMany(LanguageMaster::class,'id', 'languageId');
     }
     public function user()
     {

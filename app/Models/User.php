@@ -57,6 +57,10 @@ class User extends Authenticatable
 
     public function language()
     {
-        return $this->hasMany(Language::class, 'userId');
+        return $this->hasMany(Language::class, 'userId','id');
     }
+    public function socialLink(){
+        return $this->hasMany(SocialLink::class,'userId','id');
+    }
+    
 }

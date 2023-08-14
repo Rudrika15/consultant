@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Consultant;
 use App\Http\Controllers\Controller;
 use App\Models\SocialLink;
 use App\Models\SocialMaster;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -13,29 +14,32 @@ class SocialLinkController extends Controller
     function index($id)
     {
         try{
-            $socialLink = SocialLink::where('userId', '=', $id)->get();;
-            if (count($socialLink) > 0) {
+            $socialLink = User::with('socialLink.social_masters')
+            ->where('id', '=', $id)
+            ->get();
+            if($socialLink){
                 return response([
-                    'success' => true,
-                    'message' => 'View All SocialLink !',
-                    'status' => 200,
-                    'data' => $socialLink
-                ]);
-            } else {
-                return response([
-                    'message' => 'No Data Found !',
-                    'data' => $socialLink
-                ]);
+                            'success' => true,
+                            'message' => 'View All Socail Links !',
+                            'status' => 200,
+                            'data' => $socialLink
+                        ]);
+            }
+            else {
+                    return response([
+                        'message' => 'No Data Found !',
+                        'data' => $socialLink
+                    ]);
+            }
         }
-        }catch(\Exception $e){
+        catch(\Exception $e){
             return response([
                 'success'=>false,
                 'message'=>'An error occurred while processing your request.',
                 'status'=>500,
                 'error'=>$e->getMessage()
             ]);
-        }
-        
+        }    
     }
     public function getSocialLinkList(){
         $socialLink=SocialMaster::all();

@@ -10,7 +10,7 @@ class SocialLink extends Model
     use HasFactory;
     public function social_masters()
     {
-        return $this->belongsTo(SocialMaster::class, "socialMediaMasterId");
+        return $this->hasMany(SocialMaster::class,'id', 'socialMediaMasterId');
     }
     public function user()
     {

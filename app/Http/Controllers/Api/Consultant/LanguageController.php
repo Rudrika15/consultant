@@ -14,43 +14,31 @@ class LanguageController extends Controller
     function index($id)
     {
         try{
-            $language = Language::with('language_masters')->where('userId', '=', $id)->get();;
-            if (count($language) > 0) {
-                $responseData = [];
-                foreach ($language as $languageData) {
-                        if ($languageData->language_masters) {
-                            $responseData = [
-                                'id'=>$languageData->id,
-                                'userId'=>$languageData->userId,
-                                'languageId' => $languageData->languageId,
-                                'language' => $languageData->language_masters->language,
-                                'status'=>$languageData->status,
-                                'created_at'=>$languageData->created_at,
-                                'updated_at'=>$languageData->updated_at, 
-                            ];
-                        }
-                }
+            $language = User::with('language.language_masters')
+            ->where('id', '=', $id)
+            ->get();
+            if($language){
                 return response([
-                    'success' => true,
-                    'message' => 'View All Language !',
-                    'status' => 200,
-                    'data' => $responseData
-                ]);
-            } 
+                            'success' => true,
+                            'message' => 'View All Language !',
+                            'status' => 200,
+                            'data' => $language
+                        ]);
+            }
             else {
-                return response([
-                    'message' => 'No Data Found !',
-                    'data' => $language
-                ]);
+                    return response([
+                        'message' => 'No Data Found !',
+                        'data' => $language
+                    ]);
             }
         }
         catch (\Exception $e) {
-            return response([
-                'success' => false,
-                'message' => 'An error occurred while processing your request.',
-                'status' => 500,
-                'error' => $e->getMessage(),
-            ]);
+                return response([
+                    'success' => false,
+                    'message' => 'An error occurred while processing your request.',
+                    'status' => 500,
+                    'error' => $e->getMessage(),
+                ]);
         }
     }
     function getLanguageList(){
