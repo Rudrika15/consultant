@@ -7,9 +7,16 @@
                 <div class="col-md-3 mt-5">
                     <div class="card bg-white">
                         <div class="card-body">
-                            @foreach ($consultantData->user as $user)
-                            <p>{{$user->name}}</p>
+                            <div class="text-center">
+                                <img class="rounded-circle" src="{{url('/profile')}}/{{$consultantData->photo}}" alt="" widht="100" height="100">
+                            </div>
+                            <div class="card-title fw-bold text-center pt-2">
+                                @foreach ($consultantData->user as $user)
+                                <p>{{$user->name}} &nbsp;{{$user->lastName}}</p>
+                                
                             @endforeach
+                            </div>
+                            
                             @foreach ($consultantData->states as $state)
                             <p>{{$state->stateName}}</p>
                             @endforeach
