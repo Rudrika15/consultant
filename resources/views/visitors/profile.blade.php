@@ -7,7 +7,7 @@
                 <form action="{{route('profile.update')}}" enctype="multipart/form-data" method="post">
                     @csrf
                     <input type="hidden" name="id" id="id" value="{{$profile->id}}">
-
+                    <input type="hidden" name="userId" id="userId" value="{{Auth::user()->id}}">
                     <div class="col-md-12">
                         <div class="card user-avatar mt-5">
                             <div class="card-body">
@@ -55,7 +55,7 @@
                                                     <label class="fw-bold p-3" for="firstname" style="color:gray;">Last Name</label>
                                                     <div class="input-container">
                                                         <i class="fa fa-user icon text-center"></i>
-                                                        <input type="text" name="lastname" value="{{Auth::user()->lastName}}" class="form-control input-field" >
+                                                        <input type="text" name="lastName" value="{{Auth::user()->lastName}}" class="form-control input-field" >
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
@@ -159,7 +159,7 @@
                                                     <label class="fw-bold p-3" for="email" style="color:gray;">Website</label>
                                                     <div class="input-container">
                                                         <i class="fa fa-map-marker icon text-center"></i>
-                                                        <input type="text" name="website" id="website" value="{{$profile->webSite}}" class="form-control input-field">
+                                                        <input type="text" name="webSite" id="webSite" value="{{$profile->webSite}}" class="form-control input-field">
                                                     </div>
                                                 </div><div class="col-md-4">
                                                     <label class="fw-bold p-3" for="email" style="color:gray;">Map</label>
@@ -185,50 +185,72 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12 mt-5">
-                        <div class="card user-avatar mt-md-5">
-                            <div class="card-body">
-                                <div class="card-text cardtext p-3">
-                                    <i class="fa fa-lock profile-user"><span class="ms-3 fw-bold">Password</span></i> 
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label class="fw-bold p-3" for="email" style="color:gray;">Password</label>
-                                                    <div class="input-container">
-                                                        <i class="fa fa-map-marker icon text-center"></i>
-                                                        <input type="password" name="password" id="password" class="form-control input-field" placeholder="{{_('Password')}}">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label class="fw-bold p-3" for="pincode" style="color:gray;">Confirm Password</label>
-                                                    <div class="input-container">
-                                                        <i class="fa fa-map-marker icon text-center"></i>
-                                                        <input type="password" name="confirm_password" id="confirm_password" class="form-control input-field" placeholder="{{_('Confime Password')}}">
-                                                    </div>
-                                                </div>
-
-                                                {{-- <div class="col-2 pt-3">
-                                                    <button type="submit" class="btn btn-submit fw-bold">Submit</button>
-                                                </div>
-                                                <div class="col-2 pt-3">
-                                                    <button type="submit" class="btn btn-reset fw-bold">Reset</button>
-                                                </div> --}}
-                                                
-                                            </div>
-                                        
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
                     <div class="col-md-12 pt-5 text-center">
                         <button type="submit" class="btn btn-submit fw-bold">Submit</button>
                         <a href="{{route('visitor.profile')}}" class="btn btn-reset fw-bold">Reset</a>
+                    </div> 
+                </form>
+                <form action="{{route('changepassword')}}" method="POST">
+                    @csrf
+                    <div class="row">
+                       <input type="hidden" name="userOfId" id="userOfId" value="{{Auth::user()->id}}">
+                        <div class="col-md-12">
+                            <div class="card user-avatar mt-md-5">
+                                <div class="card-body">
+                                    <div class="card-text cardtext p-3">
+                                        <i class="fa fa-lock profile-user"><span class="ms-3 fw-bold">Password</span></i> 
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label class="fw-bold p-3" for="email" style="color:gray;">Email</label>
+                                                        <div class="input-container">
+                                                            <i class="fa fa-envelope icon text-center"></i>
+                                                            <input type="text" name="email" value="{{Auth::user()->email}}" class="form-control input-field">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="fw-bold p-3" for="email" style="color:gray;">Password</label>
+                                                        <div class="input-container">
+                                                            <i class="fa fa-lock icon text-center"></i>
+                                                            
+                                                            <input id="password" type="password" class="form-control register-form  @error('password') is-invalid @enderror" name="password" placeholder="{{_('Password')}}" required autocomplete="new-password">
+
+                                                                @error('password')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                                @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="fw-bold p-3" for="password_confirmation" style="color:gray;">Confirm Password</label>
+                                                        <div class="input-container">
+                                                            <i class="fa fa-lock icon text-center"></i>
+                                                            <input id="password-confirm" type="password" class="form-control register-form" name="password_confirmation" placeholder="{{_('Confirm Password')}}" required autocomplete="new-password">
+
+                                                            @error('password_confirmation')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                            @enderror                                                        
+                                                        </div>
+
+                                                        
+                                                    </div>
+                                                    <div class="col-md-6 pt-5">
+                                                        <button type="submit" class="btn btn-submit fw-bold">Submit</button>
+                                                        <a href="{{route('visitor.profile')}}" class="btn btn-reset fw-bold">Reset</a>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
                     </div>
                 </form>
             </div>

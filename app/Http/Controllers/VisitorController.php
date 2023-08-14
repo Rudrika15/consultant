@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\City;
 use App\Models\Profile;
 use App\Models\State;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -51,5 +52,18 @@ class VisitorController extends Controller
     public function cityforprofile(Request $request){
         $data['cities']=City::where("stateId",$request->stateId);
         return response()->json($data);
+    }
+
+    public function consultantList(Request $request){
+        $categoryId=$request->categoryId;
+        $stateId=$request->stateId;
+        $cityId=$request->cityId;
+        $consultant=Profile::with('user')
+                    ->where('state','=',$stateId)
+                    ->where('city','=',$cityId)
+                    ->where('categoryId','=',$categoryId)
+                    ->get();
+
+        return redirect("/consultantList");
     }
 }

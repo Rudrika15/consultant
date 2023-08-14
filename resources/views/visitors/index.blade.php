@@ -10,7 +10,7 @@
         {{-- County Card Live Search Start --}}
         <div class="card countrycard">
             <div class="card-body ">
-                <form action="">
+                <form action="{{route('consultantList')}}">
                     <div class="d-flex justify-content-evenly gap-3 pt-3 p-3 flex-lg-nowrap flex-wrap">
                         <div class="w-100">
                             <select name="categoryId" id="categoryId" class="form-control custom-select">
@@ -36,7 +36,7 @@
                         <div class="w-100 ">
                             {{-- <a herf="{{route('time.index')}}" class="btn searchnowbtn">{{ _('SEARCH NOW') }}</a> --}}
 
-                            <a href="{{route('time.index')}}" class="btn searchnowbtn">{{ _('SEARCH NOW') }}</a>
+                            <button type="submit" class="btn searchnowbtn">{{ _('SEARCH NOW') }}</a>
                         </div>
                     </div>
 

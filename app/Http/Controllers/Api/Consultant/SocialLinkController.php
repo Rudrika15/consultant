@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Consultant;
 
 use App\Http\Controllers\Controller;
 use App\Models\SocialLink;
+use App\Models\SocialMaster;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -35,6 +36,25 @@ class SocialLinkController extends Controller
             ]);
         }
         
+    }
+    public function getSocialLinkList(){
+        $socialLink=SocialMaster::all();
+        if($socialLink){
+            return response([
+                'success'=>true,
+                'message'=>'Social Link Dropdwon List',
+                'data'=>$socialLink
+            ]);
+        }
+        else{
+            return response([
+                'success'=>false,
+                'message'=>'An error occurred while processing your request.',
+                'data'=>$socialLink
+            ]);
+        }
+        
+
     }
     function store(Request $request)
     {

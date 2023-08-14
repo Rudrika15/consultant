@@ -14,7 +14,7 @@ class LanguageController extends Controller
     function index($id)
     {
         try{
-            $language = Language::with('')->where('userId', '=', $id)->get();;
+            $language = Language::with('language_masters')->where('userId', '=', $id)->get();;
             if (count($language) > 0) {
                 $responseData = [];
                 foreach ($language as $languageData) {
@@ -54,8 +54,13 @@ class LanguageController extends Controller
         }
     }
     function getLanguageList(){
-        $languageList=User::with('language.language_masters')->get();
-        return response()->json($languageList);
+        $languageList=LanguageMaster::all();
+        return response([
+            'success' => true,
+            'message' => 'Language List !',
+            'status' => 200,
+            'data' => $languageList
+        ]);
         // $languageList=Language::with('language_masters')->get();
         // if(count($languageList)>0){
         //     $responseData=[];

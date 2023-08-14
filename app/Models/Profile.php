@@ -12,4 +12,10 @@ class Profile extends Model
     {
         return $this->hasMany(User::class, 'id', 'userId');
     }
+    public function userstate(){
+        return $this->hasMany(User::class, 'id', 'state');
+    }
+    public function usercity(){
+        return $this->hasMany(User::class, 'id', 'city');
+    }
 }

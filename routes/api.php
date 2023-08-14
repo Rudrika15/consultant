@@ -121,7 +121,6 @@ Route::post('language/store', [LanguageController::class, 'store']);
 Route::post('language/update/{id?}', [LanguageController::class, 'update']);
 Route::get('language/delete/{id?}', [LanguageController::class, 'delete']);
 Route::get('language/show/{id?}', [LanguageController::class, 'show']);
-
 Route::get('getLanguageList', [LanguageController::class, 'getLanguageList']);
 
 
@@ -139,6 +138,7 @@ Route::post('socialLink/store', [SocialLinkController::class, 'store']);
 Route::post('socialLink/update/{id?}', [SocialLinkController::class, 'update']);
 Route::get('socialLink/delete/{id?}', [SocialLinkController::class, 'delete']);
 Route::get('socialLink/show/{id?}', [SocialLinkController::class, 'show']);
+Route::get('socialLink/getSocialLinkList',[SocialLinkController::class,'getSocialLinkList']);
 
 /*  Time  */
 Route::get('time/index/{id?}', [TimeController::class, 'index']);

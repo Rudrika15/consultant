@@ -160,6 +160,13 @@ class UserController extends Controller
 
     public function profileUpdate(Request $request)
     {
+        $userId=$request->userId;
+        $user=User::find($userId);
+        $user->name=$request->name;
+        $user->lastName=$request->lastName;
+        $user->email=$request->email;
+        $user->save();  
+
         $id = $request->id;
         $profile = Profile::find($id);
         $profile->about = $request->about;
@@ -177,6 +184,16 @@ class UserController extends Controller
         }
         $profile->status = 'Active';
         $profile->save();
-        return redirect('profile-update');
+        return redirect('visitor/profile');
     }
+    public function changepassword(Request $request){
+        $userOfId=$request->userOfId;
+        $user=User::find($userOfId);
+        $user->password=$request->password;
+        $user->save();
+
+        return redirect("visitor/profile");
+    }
+    
+
 }

@@ -45,7 +45,7 @@ class LanguageMasterController extends Controller
     {
         try{
             $rules = array(
-                'language' => 'required',
+                'language' => 'required|unique:language_masters,language',
             );
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
@@ -89,7 +89,7 @@ class LanguageMasterController extends Controller
     {
         try{
             $rules = array(
-                'language' => 'required',
+                'language' => 'required|unique:language_masters,language',
             );
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {

@@ -84,10 +84,13 @@ class RegisterController extends Controller
         $user->assignRole('Consultant');
         $profile = new Profile();
         $profile->userId = $user->id;
+        $profile->state=$data['stateId'];
+        $profile->city=$data['cityId'];
+        $profile->contactNo2=$data['contactNo'];
         $profile->type = $data['type'];
         $profile->company = $data['company'];
-        $profile->category = $data['categoryId'];
-        $profile->package = $data['packageId'];   
+        $profile->categoryId = $data['categoryId'];
+        $profile->packageId = $data['packageId'];   
         $profile->status = 'Active';
         $profile->save();
 

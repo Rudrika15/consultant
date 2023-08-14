@@ -47,6 +47,8 @@ Route::get('/membershipplan', [VisitorController::class, 'membershipPlan'])->nam
 Route::get('/corporateInquery', [VisitorController::class, 'corporateInquery'])->name('visitors.corporateInquery');
 Route::get('/contactus', [VisitorController::class, 'contactus'])->name('visitors.contactus');
 Route::get('/signup/package', [VisitorController::class, 'signuppackage'])->name('visitors.signuppackage');
+Route::get('/consultantList',[VisitorController::class,'consultantList'])->name('visitors.consultantList');
+
 // City for Home page
 Route::post('fetchcityhome', [VisitorController::class, 'fetchcityhome'])->name('fetchcityhome');
 
@@ -70,6 +72,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     // profile update
     Route::get('profile-update/{id?}', [UserController::class, 'profile'])->name('profile');
+    Route::post('changepassword',[UserController::class,'changepassword'])->name('changepassword');
     Route::post('update', [UserController::class, 'profileUpdate'])->name('profile.update');
 
     //For Visitors Profile
