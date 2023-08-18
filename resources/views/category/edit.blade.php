@@ -52,7 +52,15 @@
                 <span class="error">{{ $errors->first('catName') }}</span>
                 @endif
             </div>
+            <div class="form-label-group mt-3">
+                <label for="photo" class="fw-bold">Photo <sup class="text-danger">*</sup></label>
+                <input id="photo" type="file" name="photo" class="form-control" placeholder="photo">
+                <img id="preview-photo" src="{{ url('/category/' . $category->photo) }}" name="preview-photo" class="mt-3" width="100px" height="100px">
 
+                @if ($errors->has('photo'))
+                <span class="error">{{ $errors->first('photo') }}</span>
+                @endif
+            </div>
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
                 <button type="submit" class="btn btn-primary" id="">Submit</button>
             </div>
@@ -71,50 +79,52 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        $(document).ready(function() {
-            // Get the values you want to update
-            $("#categoryForm").submit(function(event) {
-                event.preventDefault();
-                var id = $('#id').val();
-                var catName = $('#catName').val();
-
-                $.ajax({
-                    url: "{{ route('category.update') }}",
-                    type: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}', // Include the CSRF token for Laravel security
-                        id: id,
-                        catName: catName
-                    },
-                    success: function(response) {
-                        if (response.success) {
-                            // Success message using SweetAlert
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Updated',
-                                text: response.message,
-                            });
-
-                        } else {
-                            // Error message using SweetAlert
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error',
-                                text: 'An error occurred!',
-                            });
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        // Error message using SweetAlert
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: 'An error occurred!',
-                        });
-                    }
-                });
-            });
+        $('#photo').change(function() {
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                $('#preview-photo').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
         });
+
+        $('#categoryForm').submit(function(e) {
+        e.preventDefault();
+        let formData = new FormData(this);
+
+        $.ajax({
+            type: 'POST',
+            url: "{{ route('category.update') }}",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                if (response.success) {
+                    // Success message using SweetAlert
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: response.message,
+                    }, 200);
+                    $('#categoryForm').trigger("reset");
+                } else {
+                    // Error message using SweetAlert
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'An error occurred!',
+                    });
+                }
+            },
+            error: function(xhr, status, error) {
+                // Error message using SweetAlert
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'An error occurred!',
+                });
+            }
+        });
+    });
     });
 </script>
 

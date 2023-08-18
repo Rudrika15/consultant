@@ -60,10 +60,15 @@ class CategoryController extends Controller
     {
         $this->validate($request, [
             'catName' => 'required',
+            'photo'=>'required'
         ]);
         try {
             $category = new Category();
             $category->catName = $request->catName;
+            if ($request->photo) {
+                $category->photo = time() . '.' . $request->photo->extension();
+                $request->photo->move(public_path('category'),  $category->photo);
+            }
             $category->status = 'Active';
 
             $category->save();
@@ -98,6 +103,10 @@ class CategoryController extends Controller
             $id = $request->id;
             $category = Category::find($id);
             $category->catName = $request->catName;
+            if ($request->photo) {
+                $category->photo = time() . '.' . $request->photo->extension();
+                $request->photo->move(public_path('category'),  $category->photo);
+            }
             $category->status = 'Active';
 
             $category->save();

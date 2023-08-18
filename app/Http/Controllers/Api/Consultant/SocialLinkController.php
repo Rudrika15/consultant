@@ -11,21 +11,65 @@ use Illuminate\Support\Facades\Validator;
 
 class SocialLinkController extends Controller
 {
-    function index($id)
-    {
+    // function index($id)
+    // {
+    //     try{
+    //         $socialLink = SocialLink::with('social_masters')
+    //         ->where('userId', '=', $id)
+    //         ->get();
+    //         if($socialLink){
+    //             return response([
+    //                         'success' => true,
+    //                         'message' => 'View All Socail Links !',
+    //                         'status' => 200,
+    //                         'data' => $socialLink
+    //                     ]);
+    //         }
+    //         else {
+    //                 return response([
+    //                     'message' => 'No Data Found !',
+    //                     'data' => $socialLink
+    //                 ]);
+    //         }
+    //     }
+    //     catch(\Exception $e){
+    //         return response([
+    //             'success'=>false,
+    //             'message'=>'An error occurred while processing your request.',
+    //             'status'=>500,
+    //             'error'=>$e->getMessage()
+    //         ]);
+    //     }    
+    // }
+    public function index($id){
         try{
             $socialLink = SocialLink::with('social_masters')
-            ->where('userId', '=', $id)
-            ->get();
-            if($socialLink){
-                return response([
+                ->where('userId', '=', $id)
+                ->get();
+
+                $socialLinkList = [];
+                foreach($socialLink as $socialLinkData){
+                    $socialLinkItem=[
+                        'id'=>$socialLinkData->id,
+                        'userId'=>$socialLinkData->userId,
+                        'socialMediaMasterId'=>$socialLinkData->socialMediaMasterId,
+                        'title'=>$socialLinkData->social_masters->title,
+                        'url'=>$socialLinkData->url,
+                        'status' => $socialLinkData->status,
+                        'created_at' => $socialLinkData->created_at,
+                        'updated_at' => $socialLinkData->updated_at,
+                    ];
+                    array_push($socialLinkList,$socialLinkItem);
+                }
+                if(count($socialLinkList)>0){
+                    return response([
                             'success' => true,
                             'message' => 'View All Socail Links !',
                             'status' => 200,
-                            'data' => $socialLink
-                        ]);
-            }
-            else {
+                            'data' => $socialLinkList
+                    ]);
+                }
+                else {
                     return response([
                         'message' => 'No Data Found !',
                         'data' => $socialLink
@@ -39,7 +83,7 @@ class SocialLinkController extends Controller
                 'status'=>500,
                 'error'=>$e->getMessage()
             ]);
-        }    
+        }
     }
     public function getSocialLinkList(){
         $socialLink=SocialMaster::all();

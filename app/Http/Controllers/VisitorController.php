@@ -19,6 +19,37 @@ class VisitorController extends Controller
         $data['states'] = State::get(["stateName", "id"]);
         return view('visitors.index',$data,compact('category'));
     }
+    
+
+    // public function search(Request $request){
+    //     if($request->ajax())
+    //     {
+    //         $output="";
+    //         $category=Category::where('catName','LIKE','%'.$request->search.'%')->get();
+    //         if($category)
+    //         {
+    //         foreach ($category as $key => $category) {
+    //         $output.='<select>'.
+    //         '<option value='.$category->id.'>'.$category->catName.'</option>'.
+    //         '</select>';
+    //         }
+    //         return Response($output);
+    //         }
+    //    }
+    // }
+    public function search(Request $request)
+        {
+            if ($request->ajax()) {
+                $output = [];
+                $categories = Category::where('catName', 'LIKE', '%' . $request->search . '%')->get();
+                
+                foreach ($categories as $category) {
+                    $output[] = ['id' => $category->id, 'catName' => $category->catName];
+                }
+
+                return response()->json($output);
+            }
+        }
     public function fetchcityhome(Request $request){
         $data['cities']=City::where('stateId','=',$request->stateId)->get();
         return response()->json($data);

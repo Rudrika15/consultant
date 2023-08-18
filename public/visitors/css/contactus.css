@@ -1,0 +1,123 @@
+:root {
+    --purple: #333692;
+    --white: white;
+    --black: black;
+    --orangered: #f15a29;
+    --gray: gray;
+    --darklightgray: rgb(181, 177, 177);
+    --lightgray: #dddddd;
+    --yellow: orange;
+    --green: green;
+}
+
+.contactus {
+    position: relative;
+}
+.contacttext {
+    position: absolute;
+    left: 30px;
+    top: 130px;
+    color: var(--white);
+}
+.contact_card {
+    border: none !important;
+    width: 80%;
+    border-radius: 10px;
+    height: 100%;
+}
+
+.phone {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90px;
+    width: 90px;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #f2f2f2;
+}
+.phoneicon {
+    color: var(--purple);
+    font-size: 40px;
+}
+.phone_font {
+    font-size: 12px;
+}
+.phoneno {
+    font-size: 15px;
+}
+.emailid {
+    font-size: 15px;
+}
+.address {
+    font-size: 15px;
+}
+.contact-form{
+    padding-left: 20px;
+    border-radius: 0;
+}
+.input-container {
+    padding-left: 15px;
+    padding-right: 15px;
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  .abouttextarea{
+    width:100%;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .address_textarea{
+    width:100%;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .icon {
+    padding: 7px;
+    border:1px solid #E1E1E1;
+    color:gray;
+    min-width: 40px;
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  .input-field {
+    border:1px solid #E1E1E1; 
+    color: #E1E1E1;
+    width: 100%;
+    padding: 5px;
+    outline: none;
+    border-radius: 0;
+  }
+  
+  .contact-submit-button{
+    background-color: var(--orangered) !important;
+    padding: 10px 40px;
+    border: 0;
+    font-size: 20px;
+    color:var(--white) !important;
+  }
+  .contact-submit-reset{
+    background-color: var(--purple) !important;
+    padding: 10px 40px;
+    border:0px;
+    font-size: 20px;
+    color: var(--white) !important;
+  }
+.fa-user.contact_user{
+    background-color: #62b815 ;
+    width: 12%;
+    height: 60%;
+    padding-top: 10px;
+    position: absolute;
+    font-size: 16px;
+}
+
+@media only screen and (max-width: 600px) {    
+    .contact_card {
+        flex-wrap: wrap;
+    }
+}

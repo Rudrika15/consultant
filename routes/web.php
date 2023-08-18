@@ -42,6 +42,7 @@ Route::get('/', function () {
 
 
 Route::get('/', [VisitorController::class, 'index'])->name('visitors.index');
+Route::get('/search',[VisitorController::class,'search'])->name('visitors.search');
 Route::get('/aboutus', [VisitorController::class, 'aboutus'])->name('visitors.aboutus');
 Route::get('/membershipplan', [VisitorController::class, 'membershipPlan'])->name('visitors.membershipPlan');
 Route::get('/corporateInquery', [VisitorController::class, 'corporateInquery'])->name('visitors.corporateInquery');

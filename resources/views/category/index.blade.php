@@ -47,6 +47,7 @@
                     <tr>
                         <th>Sr No</th>
                         <th>Category Name</th>
+                        <th>Photo</th>
                         <th>Status</th>
                         <th width="280px">Action</th>
                     </tr>
@@ -78,6 +79,17 @@
                 {
                     data: 'catName',
                     name: 'catName'
+                },
+                {
+                    data: 'photo',
+                    name: 'photo',
+                    render: function(data, type, full, meta) {
+                        // Check if the "data" is empty or null
+                        if (data) {
+                            return '<img src="{{url('/category')}}/'+ data + '" alt="Logo" style="max-width: 100px; max-height: 100px;">';
+                        }
+                        return 'No Photo'; // Display "No Logo" if data is empty or null
+                    }
                 },
                 {
                     data: 'status',

@@ -13,51 +13,60 @@
                 <a href="{{ route('visitors.contactus') }}" class="about_us_link">CONTACT US</a>
             </div>
         </div>
-
-        <div class="phone-email-address  p-5">
-            <div class="d-flex justify-content-center mt-5 mb-5 gap-5">
-                <div class="card contact_card">
-                    <div class="card-body mb-5">
-                        <div class="phone">
-                            <i class="fa fa-phone phoneicon"></i>
-                        </div>
-                        <div class="card-text text-center">
-                            <p class="phone_font fw-bold">Phone</p>
-                        </div>
-                        <div class="card-text text-center">
-                            <p class="phoneno">9632587412</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card contact_card">
-                    <div class="card-body mb-5">
-                        <div class="phone text-center">
-                            <i class="fa fa-phone phoneicon"></i>
-                        </div>
-                        <div class="card-text text-center">
-                            <p class="phone_font fw-bold">Email</p>
-                        </div>
-                        <div class="card-text text-center">
-                            <p class="emailid">consultantcube123@gmail.com</p>
+        <div class="container">
+            <div class="phone-email-address  p-5">
+                <div class="row mt-5">
+                    <div class="col-md-4">
+                        <div class="card contact_card ">
+                            <div class="card-body mb-5">
+                                <div class="phone">
+                                    <i class="fa fa-phone phoneicon"></i>
+                                </div>
+                                <div class="card-text text-center">
+                                    <p class="phone_font fw-bold">Phone</p>
+                                </div>
+                                <div class="card-text text-center">
+                                    <p class="phoneno">9632587412</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card contact_card">
-                    <div class="card-body mb-5">
-                        <div class="phone text-center">
-                            <i class="fa fa-phone phoneicon"></i>
-                        </div>
-                        <div class="card-text text-center">
-                            <p class="phone_font fw-bold">Address</p>
-                        </div>
-                        <div class="card-text text-center">
-                            <p class="address">1017 , Shilp Epitome, behind Rajpath club, off Sindhu bhavan road, Ahmedabad
-                            </p>
+                    <div class="col-md-4">
+                        <div class="card contact_card ">
+                            <div class="card-body mb-5">
+                                <div class="phone text-center">
+                                    <i class="fa fa-phone phoneicon"></i>
+                                </div>
+                                <div class="card-text text-center">
+                                    <p class="phone_font fw-bold">Email</p>
+                                </div>
+                                <div class="card-text text-center">
+                                    <p class="emailid">consultantcube123@gmail.com</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="card contact_card ">
+                            <div class="card-body">
+                                <div class="phone text-center">
+                                    <i class="fa fa-phone phoneicon"></i>
+                                </div>
+                                <div class="card-text text-center">
+                                    <p class="phone_font fw-bold">Address</p>
+                                </div>
+                                <div class="card-text text-center">
+                                    <p class="address">1017 , Shilp Epitome, behind Rajpath club, off Sindhu bhavan road, Ahmedabad
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </div>
+       
         <div class="container mb-5">
             <div class="contact-location">
                 <div class="row">
@@ -86,10 +95,10 @@
                                     <input type="text" name="name" class="form-control input-field" placeholder="{{_('Enter the code above here')}}">
                                 </div>
                                 <div class="col-2 pt-3">
-                                    <button type="submit" class="btn btn-submit fw-bold">Submit</button>
+                                    <button type="submit" class="btn contact-submit-button fw-bold">Submit</button>
                                 </div>
                                 <div class="col-2 pt-3">
-                                    <button type="submit" class="btn btn-reset fw-bold">Reset</button>
+                                    <button type="submit" class="btn contact-submit-reset fw-bold">Reset</button>
                                 </div>
                                 
                             </div>

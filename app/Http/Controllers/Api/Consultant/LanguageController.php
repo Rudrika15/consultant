@@ -11,36 +11,80 @@ use Illuminate\Support\Facades\Validator;
 
 class LanguageController extends Controller
 {
+    // function index($id)
+    // {
+    //     try{
+    //         $language = Language::with('language_masters')
+    //                 ->where('userId', '=', $id)
+    //                 ->get();
+    //         if($language){
+    //             return response([
+    //                         'success' => true,
+    //                         'message' => 'View All Language !',
+    //                         'status' => 200,
+    //                         'data' => $language
+    //                     ]);
+    //         }
+    //         else {
+    //                 return response([
+    //                     'message' => 'No Data Found !',
+    //                     'data' => $language
+    //                 ]);
+    //         }
+    //     }
+    //     catch (\Exception $e) {
+    //             return response([
+    //                 'success' => false,
+    //                 'message' => 'An error occurred while processing your request.',
+    //                 'status' => 500,
+    //                 'error' => $e->getMessage(),
+    //             ]);
+    //     }
+    // }
     function index($id)
     {
-        try{
-            $language = Language::with('language_masters')
-                    ->where('userId', '=', $id)
-                    ->get();
-            if($language){
-                return response([
-                            'success' => true,
-                            'message' => 'View All Language !',
-                            'status' => 200,
-                            'data' => $language
-                        ]);
+        try {
+            $languages = Language::with('language_masters')
+                ->where('userId', '=', $id)
+                ->get();
+
+            $languageList = [];
+
+            foreach ($languages as $language) {
+                $languageItem = [
+                    'id' => $language->id,
+                    'userId' => $language->userId,
+                    'languageId' => $language->languageId,
+                    'language' => $language->language_masters->language,
+                    'status' => $language->status,
+                    'created_at' => $language->created_at,
+                    'updated_at' => $language->updated_at,
+                ];
+                array_push($languageList, $languageItem);
             }
-            else {
-                    return response([
-                        'message' => 'No Data Found !',
-                        'data' => $language
-                    ]);
-            }
-        }
-        catch (\Exception $e) {
+            if (count($languageList) > 0) {
                 return response([
-                    'success' => false,
-                    'message' => 'An error occurred while processing your request.',
-                    'status' => 500,
-                    'error' => $e->getMessage(),
+                    'success' => true,
+                    'message' => 'View All Languages!',
+                    'status' => 200,
+                    'data' => $languageList,
                 ]);
+            } else {
+                return response([
+                    'message' => 'No Data Found!',
+                    'data' => [],
+                ]);
+            }
+        } catch (\Exception $e) {
+            return response([
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage(),
+            ]);
         }
     }
+
     function getLanguageList(){
         $languageList=LanguageMaster::all();
         return response([

@@ -1,0 +1,74 @@
+:root {
+    --purple: #333692;
+    --white: white;
+    --black: black;
+    --orangered: #f15a29;
+    --gray: gray;
+    --darklightgray: rgb(181, 177, 177);
+    --lightgray: #dddddd;
+    --yellow: orange;
+    --green: green;
+}
+.membership {
+    position: relative;
+}
+.membertext {
+    position: absolute;
+    left: 30px;
+    top: 130px;
+    color: var(--white);
+}
+.membership_link {
+    color: var(--gray);
+    text-decoration: none;
+}
+.membership {
+    width: 100%;
+    height: 300px;
+    color: var(--white);
+    background-color: var(--purple);
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+.allplan {
+    margin-top: 100px !important;
+}
+.fa-check {
+    color: var(--purple);
+}
+.membercard {
+    height: 100% !important;
+}
+.card-body {
+    font-size: 20px;
+}
+/* All plans include */
+
+.allplancard {
+    border-radius: 10px;
+}
+.profile-access-user-img{
+    padding-left: 15px;
+    align-items: center ;
+    color: var(--purple);
+}
+.category_img{
+    padding-left: 40px;
+    align-items: center ;
+    color: var(--purple);
+}
+.service_img{
+    padding-left: 40px;
+    align-items: center ;
+    color: var(--purple);
+}
+.quotation_img{
+    padding-left: 20px;
+    align-items: center ;
+    color: var(--purple) ;
+}
+.certificate_img{
+    padding-left: 50px;
+    align-items: center ;
+    color: var(--purple);
+}

@@ -2,126 +2,45 @@
 @section('content')
 <div class="main_page">
     <div class="" style="position: relative;">
-        <img src="{{ asset('visitors/images/home.png') }}" class="img-fluid w-100" height="700px" width="100%" alt="">
+        <img src="{{ asset('visitors/images/home.png') }}" class="img-fluid  w-100" height="700px" width="100%" alt="" style="opacity: 0.5;">
         {{-- Consultant Category --}}
         <div class="consultantcategory p-5 mb-5">
-            <h2 class="text-center categorytext text-white mt-5">Consultant Categories</h2>
+            <h2 class="text-center categorytext text-white mt-3">Consultant Categories</h2>
         </div>
         {{-- County Card Live Search Start --}}
-        <div class="card countrycard">
-            <div class="card-body ">
-                <form action="{{route('visitors.findConsultantList')}}">
-                    <div class="d-flex justify-content-evenly gap-3 pt-3 p-3 flex-lg-nowrap flex-wrap">
-                        <div class="w-100">
-                            <select name="categoryId" id="categoryId" class="form-control custom-select">
-                                <option selected>Category</option>
-                                @foreach ($category as $categories)
-                                    <option value="{{$categories->id}}">{{$categories->catName}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="w-100">
-                            <select name="stateId" id="stateId" class="form-control custom-select">
-                                <option>State</option>
-                                @foreach ($states as $data)
-                                    <option value="{{$data->id}}">{{$data->stateName}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="w-100">
-                            <select name="cityId" id="cityId" class="form-control custom-select">
-                                <option value="">City</option>   
-                            </select>
-                        </div>
-                        <div class="w-100 ">
-                            {{-- <a herf="{{route('time.index')}}" class="btn searchnowbtn">{{ _('SEARCH NOW') }}</a> --}}
-
-                            <button type="submit" class="btn searchnowbtn">{{ _('SEARCH NOW') }}</a>
-                        </div>
-                    </div>
-
-                </form>
+        {{-- <div class="card countrycard"> 
+            <div class="searchCategory w-50">
+                <input type="text" id="searchInput" placeholder="Search for categories">
+                <div id="categorySuggestions"></div>
+                <input type="hidden" id="selectedCategoryId">
+                    
             </div>
+        </div> --}}
+        <div class="">
+            <input type="text" id="searchInput" class="searchCategory" placeholder="Search for categories" class="mt-3 mb-3">
+                <button class="btn" id="searchbuttonofcategory">Search</button>
+                <div id="categorySuggestions" class="categorySuggestions" style="display:none;"></div>
+                <input type="hidden" id="selectedCategoryId">
         </div>
+         	
+        
         {{-- County Card Live Search End --}}
 
         {{-- Career Slider Start --}}
         <div class="container slidertop">
             <section class="slider">
                 <div class="slider__container" data-multislide="false" data-step="4">
-                    <div class="slider__item">
-                        <div class="card catcard ">
-                            <div class="card-img">
-                                <img src="{{ asset('visitors/images/career_transition.png') }}" alt=""
-                                    width="230px" height="188px">
+                    @foreach ($category as $categories)
+                        <div class="slider__item">
+                            <div class="card catcard ">
+                                <div class="card-img">
+                                    <img src="{{ url('category')}}/{{$categories->photo}}" alt=""
+                                        width="230px" height="188px">
+                                </div>
+                                <h5 class="mt-3">{{$categories->catName}}</h5>
                             </div>
-                            <h5 class="mt-3">Career Transition</h5>
                         </div>
-                    </div>
-                    <div class="slider__item">
-                        <div class="card catcard ">
-                            <div class="card-img">
-                                <img src="{{ asset('visitors/images/career_transition.png') }}" alt=""
-                                    width="230px" height="188px">
-                            </div>
-                            <h5 class="mt-3">Career Transition</h5>
-                        </div>
-                    </div>
-                    <div class="slider__item">
-                        <div class="card catcard ">
-                            <div class="card-img">
-                                <img src="{{ asset('visitors/images/career_transition.png') }}" alt=""
-                                    width="230px" height="188px">
-                            </div>
-                            <h5 class="mt-3">Career Transition</h5>
-                        </div>
-                    </div>
-                    <div class="slider__item">
-                        <div class="card catcard ">
-                            <div class="card-img">
-                                <img src="{{ asset('visitors/images/career_transition.png') }}" alt=""
-                                    width="230px" height="188px">
-                            </div>
-                            <h5 class="mt-3">Career Transition</h5>
-                        </div>
-                    </div>
-                    <div class="slider__item">
-                        <div class="card catcard ">
-                            <div class="card-img">
-                                <img src="{{ asset('visitors/images/career_transition.png') }}" alt=""
-                                    width="230px" height="188px">
-                            </div>
-                            <h5 class="mt-3">Career Transition</h5>
-                        </div>
-                    </div>
-                    <div class="slider__item">
-                        <div class="card catcard ">
-                            <div class="card-img">
-                                <img src="{{ asset('visitors/images/career_transition.png') }}" alt=""
-                                    width="230px" height="188px">
-                            </div>
-                            <h5 class="mt-3">Career Transition</h5>
-                        </div>
-                    </div>
-                    <div class="slider__item">
-                        <div class="card catcard ">
-                            <div class="card-img">
-                                <img src="{{ asset('visitors/images/career_transition.png') }}" alt=""
-                                    width="230px" height="188px">
-                            </div>
-                            <h5 class="mt-3">Career Transition</h5>
-                        </div>
-                    </div>
-                    <div class="slider__item">
-                        <div class="card catcard ">
-                            <div class="card-img">
-                                <img src="{{ asset('visitors/images/career_transition.png') }}" alt=""
-                                    width="230px" height="188px">
-                            </div>
-                            <h5 class="mt-3">Career Transition</h5>
-                        </div>
-                    </div>
-
+                    @endforeach
                 </div>
                 <div class="prevnext mt-3 mb-3">
                     <button class="slider__control prev fw-bold text-white"><i class="fa fa-angle-left"></i></button>
@@ -595,6 +514,57 @@
 
     });
 });
+</script>
+
+{{-- <script type="text/javascript">
+    $('#search').on('keyup',function(){
+        $value=$(this).val();
+        $.ajax({
+            type : 'get',
+            url : '{{URL::to('search')}}',
+            data:{'search':$value},
+            success:function(data){
+            $('select').html(data);
+            $('#search').
+            }
+        });
+    })
+</script> --}}
+
+<script>
+    $(document).ready(function() {
+        $('#searchInput').keyup(function() {
+            var searchQuery = $(this).val();
+
+            $.ajax({
+                type: 'GET',
+                url: '{{ route('visitors.search') }}',
+                data: { search: searchQuery },
+                success: function(data) {
+                    $('#categorySuggestions').show();
+                    var suggestions = $('#categorySuggestions');
+                    suggestions.empty();
+                    
+                    $.each(data, function(index, category) {
+                        suggestions.append('<div class="category-suggestion" data-id="' + category.id + '">' + category.catName + '</div>');
+                    });
+                }
+            });
+        });
+
+        $(document).on('click', '.category-suggestion', function() {
+            var categoryId = $(this).data('id');
+            var categoryName = $(this).text();
+
+            $('#searchInput').val(categoryName);
+            $('#selectedCategoryId').val(categoryId);
+
+            if($('#categorySuggestions').empty()){
+                $('#categorySuggestions').hide();
+            }
+
+        });
+    });
 </script>
 
 @endsection

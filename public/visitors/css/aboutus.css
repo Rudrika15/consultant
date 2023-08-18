@@ -1,0 +1,36 @@
+:root {
+    --purple: #333692;
+    --white: white;
+    --black: black;
+    --orangered: #f15a29;
+    --gray: gray;
+    --darklightgray: rgb(181, 177, 177);
+    --lightgray: #dddddd;
+    --yellow: orange;
+    --green: green;
+}
+
+/* About Us */
+.about {
+    position: relative;
+}
+.us {
+    position: absolute;
+    left: 30px;
+    top: 130px;
+    color: var(--white);
+}
+.about_us_link {
+    color: var(--gray);
+    text-decoration: none;
+}
+.pcolor {
+    color: var(--gray);
+    font-size: 18px;
+}
+
+@media only screen and (max-width: 600px) {
+    .us {
+        margin-left: 100px;
+    }
+}

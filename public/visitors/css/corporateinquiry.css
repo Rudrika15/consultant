@@ -1,0 +1,51 @@
+:root {
+    --purple: #333692;
+    --white: white;
+    --black: black;
+    --orangered: #f15a29;
+    --gray: gray;
+    --darklightgray: rgb(181, 177, 177);
+    --lightgray: #dddddd;
+    --yellow: orange;
+    --green: green;
+}
+
+.corporatehead {
+    position: relative;
+}
+.corporatetext {
+    position: absolute;
+    left: 30px;
+    top: 130px;
+    color: var(--white);
+}
+.corporate_link {
+    color: var(--gray);
+    text-decoration: none;
+}
+.corporate {
+    width: 100%;
+    height: 300px;
+    color: var(--white);
+    background-color: var(--purple);
+    margin-left: 0;
+    margin-right: 0;
+}
+.getintouch {
+    background-color: var(--purple);
+    height: 600px;
+}
+.formlabel {
+    font-size: 20px;
+}
+.getinform {
+    padding-left: 80px;
+    padding-right: 80px;
+}
+.getinbutton {
+    background-color: white;
+    padding: 15px 40px;
+    border-radius: 30px;
+    font-size: 16px;
+    border: none;
+}
