@@ -48,8 +48,8 @@ Route::get('/membershipplan', [VisitorController::class, 'membershipPlan'])->nam
 Route::get('/corporateInquery', [VisitorController::class, 'corporateInquery'])->name('visitors.corporateInquery');
 Route::get('/contactus', [VisitorController::class, 'contactus'])->name('visitors.contactus');
 Route::get('/signup/package', [VisitorController::class, 'signuppackage'])->name('visitors.signuppackage');
-Route::get('/consultantList',[VisitorController::class,'consultantList'])->name('visitors.consultantList');
-Route::get('/findConsultantList',[VisitorController::class,'findConsultantList'])->name('visitors.findConsultantList');
+Route::get('/consultantList/{id?}',[VisitorController::class,'consultantList'])->name('visitors.consultantList');
+Route::post('/findConsultantList',[VisitorController::class,'findConsultantList'])->name('visitors.findConsultantList');
 
 // City for Home page
 Route::post('fetchcityhome', [VisitorController::class, 'fetchcityhome'])->name('fetchcityhome');

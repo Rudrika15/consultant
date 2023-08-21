@@ -18,8 +18,11 @@ class Profile extends Model
     public function cities(){
         return $this->hasMany(City::class,'id','city');
     }
+    // public function categories(){
+    //     return $this->hasMany(Category::class,'id','categoryId');
+    // }
     public function categories(){
-        return $this->hasMany(Category::class,'id','categoryId');
+        return $this->belongsTo(Category::class,'categoryId');
     }
 
 }

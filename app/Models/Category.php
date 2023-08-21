@@ -12,4 +12,7 @@ class Category extends Model
     {
         return $this->hasMany(User::class, 'id', 'userId');
     }
+    public function profile(){
+        return $this->hasMany(Profile::class,'categoryId','id');
+    }
 }

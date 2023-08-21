@@ -20,23 +20,6 @@ class VisitorController extends Controller
         return view('visitors.index',$data,compact('category'));
     }
     
-
-    // public function search(Request $request){
-    //     if($request->ajax())
-    //     {
-    //         $output="";
-    //         $category=Category::where('catName','LIKE','%'.$request->search.'%')->get();
-    //         if($category)
-    //         {
-    //         foreach ($category as $key => $category) {
-    //         $output.='<select>'.
-    //         '<option value='.$category->id.'>'.$category->catName.'</option>'.
-    //         '</select>';
-    //         }
-    //         return Response($output);
-    //         }
-    //    }
-    // }
     public function search(Request $request)
         {
             if ($request->ajax()) {
@@ -85,20 +68,13 @@ class VisitorController extends Controller
         $data['cities']=City::where("stateId",$request->stateId);
         return response()->json($data);
     }
-
     public function consultantList(){
+        // $categoryid=Category::find($id);
         return view('visitors.consultantList');
     }
     public function findConsultantList(Request $request){
         $categoryId=$request->categoryId;
-        $stateId=$request->stateId;
-        $cityId=$request->cityId;
-        $consultant=Profile::with('user','states', 'cities', 'categories')
-                    ->where('state','=',$stateId)
-                    ->where('city','=',$cityId)
-                    ->where('categoryId','=',$categoryId)
-                    ->get();
-
+        $consultant=Profile::with('categories')->where('categoryId','=',$categoryId)->get();
         return view('visitors.consultantList',compact('consultant'));
     }
 }

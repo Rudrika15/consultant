@@ -16,12 +16,16 @@
                     
             </div>
         </div> --}}
-        <div class="">
-            <input type="text" id="searchInput" class="searchCategory" placeholder="Search for categories" class="mt-3 mb-3">
-                <button class="btn" id="searchbuttonofcategory">Search</button>
+        <form action="{{route('visitors.findConsultantList')}}" method="POST">
+            @csrf
+            <div class="">
+                
+                <input type="text" name="" id="searchInput" class="searchCategory" placeholder="&#xF002; What Do You Want To Learn ?" style="font-family:Arial, FontAwesome" class="mt-3 mb-3">
+                <button type="submit" class="btn" id="searchbuttonofcategory">Search</button>
                 <div id="categorySuggestions" class="categorySuggestions" style="display:none;"></div>
-                <input type="hidden" id="selectedCategoryId">
-        </div>
+                <input type="hidden" id="selectedCategoryId" name="categoryId">
+            </div>
+        </form>
          	
         
         {{-- County Card Live Search End --}}
@@ -546,7 +550,8 @@
                     suggestions.empty();
                     
                     $.each(data, function(index, category) {
-                        suggestions.append('<div class="category-suggestion" data-id="' + category.id + '">' + category.catName + '</div>');
+                        suggestions.append(
+                            '<div class="category-suggestion" data-id="' + category.id + '">' + category.catName + '</div>');
                     });
                 }
             });
