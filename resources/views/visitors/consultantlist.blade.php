@@ -22,15 +22,26 @@
 
 </head>
 <body>
+    <h1>{{$categoryid->catName}}</h1>
+    {{-- <img src="{{ url('category')}}/{{$consultantData->categories->photo}}" alt=""> --}}
+
+    {{-- @foreach ($consultant as $consultantData)
+    <h1>{{$consultantData->id}}</h1>
+    <h1>{{$consultantData->categories->catName}}</h1>
+    @endforeach --}}
     <div class="Top_div_of_consultant d-lg-none">
 
     </div>
+
+
+{{-- background-image:url('category/1692356352.jpg'); --}}
     <div class="back-img d-lg-block" style="
-        background-image: url('category/1692356352.jpg');
+        background-image: url('{{ asset('category/')}}/{{$consultantData->categories->photo}}');        
         height:100vh;width:100vw;background-size:cover;
         background-position:center;
         opacity: 0.5;z-index:-1;">
     </div>
+    
     <div class="cube-logo">
         <a class="" href="{{ route('visitors.index') }}"><img class=""
             src="{{ asset('visitors/images/ConsultantLogo.jpg') }}" width="150px" height="50px"></a>

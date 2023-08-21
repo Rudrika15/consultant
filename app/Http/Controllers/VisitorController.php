@@ -68,9 +68,9 @@ class VisitorController extends Controller
         $data['cities']=City::where("stateId",$request->stateId);
         return response()->json($data);
     }
-    public function consultantList(){
-        // $categoryid=Category::find($id);
-        return view('visitors.consultantList');
+    public function consultantList($id){
+        $categoryid=Category::find($id);
+        return view('visitors.consultantList',$categoryid);
     }
     public function findConsultantList(Request $request){
         $categoryId=$request->categoryId;

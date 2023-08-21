@@ -22,7 +22,7 @@ class Profile extends Model
     //     return $this->hasMany(Category::class,'id','categoryId');
     // }
     public function categories(){
-        return $this->belongsTo(Category::class,'categoryId');
+        return $this->hasOne(Category::class,'id','categoryId');
     }
 
 }
