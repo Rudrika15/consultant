@@ -138,7 +138,7 @@ Route::post('socialLink/store', [SocialLinkController::class, 'store']);
 Route::post('socialLink/update/{id?}', [SocialLinkController::class, 'update']);
 Route::get('socialLink/delete/{id?}', [SocialLinkController::class, 'delete']);
 Route::get('socialLink/show/{id?}', [SocialLinkController::class, 'show']);
-Route::get('socialLink/getSocialLinkList',[SocialLinkController::class,'getSocialLinkList']);
+Route::get('socialLink/getSocialLinkList', [SocialLinkController::class, 'getSocialLinkList']);
 
 /*  Time  */
 Route::get('time/index/{id?}', [TimeController::class, 'index']);
