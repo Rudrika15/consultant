@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\City;
+use App\Models\Inquiry;
 use App\Models\Profile;
 use App\Models\State;
 use App\Models\User;
@@ -49,6 +50,31 @@ class VisitorController extends Controller
     {
         return view('visitors.corporateInquery');
     }
+    public function inqueryStore(Request $request){
+        try{
+            $validateData=$request->validate([
+                'name'=>'required',
+                'email'=>'required',
+                'inquiry'=>'required',
+            ]);
+    
+            $inquiry=new Inquiry();
+            $inquiry->name=$request->name;
+            $inquiry->email=$request->email;
+            $inquiry->inquiry=$request->inquiry;
+    
+            $inquiry->save();
+    
+            return response()->json([
+                'success' => true,
+                'message' => 'Inquiry Created Successfully!',
+                'data'=>$inquiry
+            ]);
+        } catch (\Throwable $th) {
+            //throw $th;    
+            return view('servererror');
+        }
+    }
     public function contactus()
     {
         return view('visitors.contactus');
@@ -68,10 +94,7 @@ class VisitorController extends Controller
         $data['cities']=City::where("stateId",$request->stateId);
         return response()->json($data);
     }
-    public function consultantList($id){
-        $categoryid=Category::find($id);
-        return view('visitors.consultantList',$categoryid);
-    }
+
     public function findConsultantList(Request $request){
         $categoryId=$request->categoryId;
         $consultant=Profile::with('categories')->where('categoryId','=',$categoryId)->get();

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Admin\InquiryController;
 use App\Http\Controllers\Admin\LanguageMasterController;
 use App\Http\Controllers\Admin\SocialMasterController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -46,6 +47,10 @@ Route::get('/search',[VisitorController::class,'search'])->name('visitors.search
 Route::get('/aboutus', [VisitorController::class, 'aboutus'])->name('visitors.aboutus');
 Route::get('/membershipplan', [VisitorController::class, 'membershipPlan'])->name('visitors.membershipPlan');
 Route::get('/corporateInquery', [VisitorController::class, 'corporateInquery'])->name('visitors.corporateInquery');
+Route::post('corporateInquery-inqueryStore', [VisitorController::class, 'inqueryStore'])->name('corporateInquery.inqueryStore');
+
+
+
 Route::get('/contactus', [VisitorController::class, 'contactus'])->name('visitors.contactus');
 Route::get('/signup/package', [VisitorController::class, 'signuppackage'])->name('visitors.signuppackage');
 Route::get('/consultantList/{id?}',[VisitorController::class,'consultantList'])->name('visitors.consultantList');
@@ -142,6 +147,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('time-delete/{id?}', [TimeController::class, 'delete'])->name('time.delete');
 
 
+    // /* Corporate Inquiry */
+    Route::get('corparateInquiry-index',[InquiryController::class,'index'])->name('corparateInquiry.index');
 
     /* ------------------------Consultant Panele ---------------------------------- */
 

@@ -111,6 +111,11 @@
                             <i class="bi bi-dribbble"></i>
                             <span>Social Media Master</span></a>
                     </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{route('corparateInquiry.index')}}">
+                            <i class="bi bi-dribbble"></i>
+                            <span>Inquiry</span></a>
+                    </li>
 
                     <li class="nav-item">
                         <a class="nav-link collapsed" style="color: #014272; font-weight: 700;" href="#"

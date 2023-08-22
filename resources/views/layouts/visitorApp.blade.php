@@ -21,6 +21,16 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 
+
+    <!-- For Sweet Alert  for css-->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!--  For Sweet Alert  for js-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+
+    <!-- alert msg -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- Option 1: Include in HTML -->
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
@@ -47,10 +57,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <!-- End of <body> -->
+<!-- End of <body> -->
 
     <title>
         Consultant Cube
@@ -169,12 +176,12 @@
                             <h5>Site Link</h5>
                             <li class="mt-lg-5 mt-3">
                                 <i class="fa fa-caret-right"></i>
-                                <a href="" class="footerlink">Contact Us</a>
+                                <a href="{{route('visitors.contactus')}}" class="footerlink">Contact Us</a>
 
                             </li>
                             <li>
                                 <i class="fa fa-caret-right"></i>
-                                <a href="" class="footerlink">About Us</a>
+                                <a href="{{route('visitors.aboutus')}}" class="footerlink">About Us</a>
                             </li>
                             <li>
                                 <i class="fa fa-caret-right"></i>
@@ -182,7 +189,7 @@
                             </li>
                             <li>
                                 <i class="fa fa-caret-right"></i>
-                                <a href="" class="footerlink">Corporate Inquiry</a>
+                                <a href="{{route('visitors.corporateInquery')}}" class="footerlink">Corporate Inquiry</a>
                             </li>
                         </ul>
                     </div>
@@ -237,6 +244,7 @@
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
     </script>
 
+    
 
 </body>
 

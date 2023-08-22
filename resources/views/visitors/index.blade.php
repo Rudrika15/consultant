@@ -19,9 +19,8 @@
         <form action="{{route('visitors.findConsultantList')}}" method="POST">
             @csrf
             <div class="">
-                
                 <input type="text" name="" id="searchInput" class="searchCategory" placeholder="&#xF002; What Do You Want To Learn ?" style="font-family:Arial, FontAwesome" class="mt-3 mb-3">
-                <button type="submit" class="btn" id="searchbuttonofcategory">Search</button>
+                <button type="submit" value="" class="btn" id="searchbuttonofcategory">Search</button>
                 <div id="categorySuggestions" class="categorySuggestions" style="display:none;"></div>
                 <input type="hidden" id="selectedCategoryId" name="categoryId">
             </div>

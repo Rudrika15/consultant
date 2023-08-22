@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\CityController;
+use App\Http\Controllers\Api\Admin\InquiryController;
 use App\Http\Controllers\Api\Admin\LanguageMasterController;
 use App\Http\Controllers\Api\Admin\RegisterController;
 use App\Http\Controllers\Api\Admin\SocialMasterController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\Api\Consultant\VideoController;
 use App\Http\Controllers\Api\OTPController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Contracts\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +77,9 @@ Route::post('socialMaster-store', [SocialMasterController::class, 'store']);
 Route::post('socialMaster-update/{id?}', [SocialMasterController::class, 'update']);
 Route::get('socialMaster-delete/{id?}', [SocialMasterController::class, 'delete']);
 Route::get('socialMaster-show/{id?}', [SocialMasterController::class, 'show']);
+
+/* Inquiry */
+Route::get('corporate-inquiry-index',[InquiryController::class,'index']);
 
 /* profile */
 Route::get('consultant-profile/{id?}', [RegisterController::class, 'consultantProfile']);

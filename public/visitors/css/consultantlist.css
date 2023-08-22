@@ -42,8 +42,13 @@
     margin-left:5%;
     width: 120px;
 }
+/* .image-for-consul-list{
+    width: 14px !important;
+} */
 #card_matches_img{
-    margin-top:10px !important;
+    margin-top:5px !important;
+    margin-bottom:5px !important;
+    border: 5px solid var(--white) !important;
 }
 .form-control .input_consultact_card{
     /* display: flex;

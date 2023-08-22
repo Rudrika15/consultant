@@ -22,21 +22,18 @@
 
 </head>
 <body>
-    <h1>{{$categoryid->catName}}</h1>
+    {{-- <h1>{{$consultant->categories->catName}}</h1> --}}
     {{-- <img src="{{ url('category')}}/{{$consultantData->categories->photo}}" alt=""> --}}
 
-    {{-- @foreach ($consultant as $consultantData)
-    <h1>{{$consultantData->id}}</h1>
-    <h1>{{$consultantData->categories->catName}}</h1>
-    @endforeach --}}
+    
     <div class="Top_div_of_consultant d-lg-none">
 
     </div>
 
+    {{-- background-image: url('{{ asset('category/')}}/{{$consultantData->categories->photo}}');         --}}
 
-{{-- background-image:url('category/1692356352.jpg'); --}}
     <div class="back-img d-lg-block" style="
-        background-image: url('{{ asset('category/')}}/{{$consultantData->categories->photo}}');        
+        background-image:url('category/1692356352.jpg');
         height:100vh;width:100vw;background-size:cover;
         background-position:center;
         opacity: 0.5;z-index:-1;">
@@ -49,19 +46,16 @@
         <a href="{{ route('visitors.index') }}" class="fa fa-arrow-circle-left" id="fa-arrow-circle-left"></a>
     <div class="card text-center" id="consultant_list_card">
         <div class="p-0 m-0" id="card_macthed_grid">
-            <div class="d-flex justify-content-between flex-wrap">
-                <div class="">
+            <div class="row p-0 m-0">
+                <div class="col-md-3">
                     <p class="" id="matches_found">Matches Found</p>
                 </div>
-                <div class="">
-                    <img src="{{asset('category/1692356352.jpg')}}" id="card_matches_img" alt="" widht="50px" height="50px">
-                </div>
-                <div class="">
-                    <img src="{{asset('category/1692356352.jpg')}}" id="card_matches_img" alt="" widht="50px" height="50px">
-                </div>
-                <div class="">
-                    <img src="{{asset('category/1692356352.jpg')}}" id="card_matches_img" alt="" widht="50px" height="50px">
-                </div>
+                @foreach ($consultant as $consultantData)
+                    <div class="col-2  image-for-consul-list">
+                        {{-- /admin_img/{{$gallerys->photo}} --}}
+                        <img src="/profile/{{$consultantData->photo}}" id="card_matches_img" class="" alt="" widht="50px" height="50px">
+                    </div>
+                @endforeach
             </div>
 
         </div>
