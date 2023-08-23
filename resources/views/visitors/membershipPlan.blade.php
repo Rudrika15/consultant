@@ -15,21 +15,20 @@
     </div>
     <div class="container mt-5 mb-5">
         <div class="row mb-5">
-            <div class="col-lg-4">
-                <div class="card membercard shadow p-3 mb-5 bg-body rounded">
-                    <div class="card-body text-center">
-                        <h3 class="card-title text-center">Free</h3>
-                        <p class="card-text mt-5"><i class="fa fa-check"></i>Profile Name</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Coaching/Category</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Add Your Services</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Maximum 5 Quotations</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Full profile</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Certificate update</p>
-                        <a href="#" class="btn btn-primary mb-5 mt-5">Apply Now</a>
-                    </div>
+        @foreach ($adminpackage as $adminpackage)
+        <div class="col-lg-4">
+            <div class="card membercard shadow p-3 mb-5 bg-body rounded">
+                <div class="card-body text-center">
+                    <h3 class="card-title text-center">{{$adminpackage->title}}</h3>
+                    {{-- <i class="fa fa-check"></i> --}}
+                    <p class="card-text mt-5">{!!$adminpackage->details!!}</p>
+                    <a href="#" class="btn btn-primary mb-5 mt-5">Apply Now</a>
                 </div>
             </div>
-            <div class="col-lg-4">
+        </div>
+        @endforeach
+            
+            {{-- <div class="col-lg-4">
                 <div class="card membercard shadow p-3 mb-5 bg-body rounded">
                     <div class="card-body text-center">
                         <h3 class="card-title text-center">Silver</h3>
@@ -53,8 +52,8 @@
                         <a href="#" class="btn btn-primary mt-5 mb-5">Apply Now</a>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4">
+            </div> --}}
+            {{-- <div class="col-lg-4">
                 <div class="card membercard shadow p-3 mb-5 bg-body rounded">
                     <div class="card-body text-center">
                         <h3 class="card-title text-center">Gold</h3>
@@ -82,7 +81,7 @@
 
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
     {{-- All Panls Include --}}

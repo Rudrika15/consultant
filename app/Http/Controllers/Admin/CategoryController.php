@@ -29,7 +29,7 @@ class CategoryController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
             }
-            return view('category.index');
+            return view('admin.category.index');
         } catch (\Throwable $th) {
             //throw $th;    
             return view('servererror');
@@ -50,7 +50,7 @@ class CategoryController extends Controller
     {
         try {
             $category = Category::all();
-            return view('category.create', compact('category'));
+            return view('admin.category.create', compact('category'));
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -87,7 +87,7 @@ class CategoryController extends Controller
     {
         try {
             $category = Category::find($id);
-            return view('category.edit', compact('category'));
+            return view('admin.category.edit', compact('category'));
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');

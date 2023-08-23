@@ -35,7 +35,7 @@ class CityController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
             }
-            return view('city.index');
+            return view('admin.city.index');
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -58,7 +58,7 @@ class CityController extends Controller
             $state = State::where('status', '!=', 'Deleted')->get();
             $city = City::with('state')
                 ->get(['cities.*']);
-            return view('city.create', compact('city', 'state'));
+            return view('admin.city.create', compact('city', 'state'));
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -94,7 +94,7 @@ class CityController extends Controller
         try {
             $city = City::find($id);
             $state = State::where('status', '!=', 'Deleted')->get();
-            return view('city.edit', compact('city', 'state'));
+            return view('admin.city.edit', compact('city', 'state'));
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');

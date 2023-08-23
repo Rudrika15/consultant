@@ -112,6 +112,11 @@
                             <span>Social Media Master</span></a>
                     </li>
                     <li class="nav-item active">
+                        <a class="nav-link" href="{{route('adminpackage.index')}}">
+                            <i class="bi bi-dribbble"></i>
+                            <span>Admin Package</span></a>
+                    </li>
+                    <li class="nav-item active">
                         <a class="nav-link" href="{{route('corparateInquiry.index')}}">
                             <i class="bi bi-dribbble"></i>
                             <span>Inquiry</span></a>

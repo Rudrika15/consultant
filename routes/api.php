@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Admin\AdminPackageController;
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\CityController;
 use App\Http\Controllers\Api\Admin\InquiryController;
@@ -77,6 +78,13 @@ Route::post('socialMaster-store', [SocialMasterController::class, 'store']);
 Route::post('socialMaster-update/{id?}', [SocialMasterController::class, 'update']);
 Route::get('socialMaster-delete/{id?}', [SocialMasterController::class, 'delete']);
 Route::get('socialMaster-show/{id?}', [SocialMasterController::class, 'show']);
+
+/*  Admin Package */
+Route::get('adminpackage-index',[AdminPackageController::class,'index']);
+Route::post('adminpackage-store',[AdminPackageController::class,'store']);
+Route::post('adminpackage-update/{id?}',[AdminPackageController::class,'update']);
+Route::get('adminpackage-delete/{id?}',[AdminPackageController::class,'delete']);
+Route::get('adminpackage-show/{id?}',[AdminPackageController::class,'show']);
 
 /* Inquiry */
 Route::get('corporate-inquiry-index',[InquiryController::class,'index']);

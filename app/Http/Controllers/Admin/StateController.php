@@ -30,7 +30,7 @@ class StateController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
             }
-            return view('state.index');
+            return view('admin.state.index');
         } catch (\Throwable $th) {
             //throw $th;    
             return view('servererror');
@@ -52,7 +52,7 @@ class StateController extends Controller
         try {
             $state = State::all();
 
-            return view('state.create', compact('state'));
+            return view('admin.state.create', compact('state'));
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -86,7 +86,7 @@ class StateController extends Controller
     {
         try {
             $state = State::find($id);
-            return view('state.edit', compact('state'));
+            return view('admin.state.edit', compact('state'));
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -135,3 +135,4 @@ class StateController extends Controller
         }
     }
 }
+    

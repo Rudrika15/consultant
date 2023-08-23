@@ -27,7 +27,7 @@ class SocialMasterController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
             }
-            return view('socialMaster.index');
+            return view('admin.socialMaster.index');
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -48,7 +48,7 @@ class SocialMasterController extends Controller
     {
         try {
             $socialMaster = SocialMaster::all();
-            return view('socialMaster.create', compact('socialMaster'));
+            return view('admin.socialMaster.create', compact('socialMaster'));
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -87,7 +87,7 @@ class SocialMasterController extends Controller
     {
         try {
             $socialMaster = SocialMaster::find($id);
-            return view('socialMaster.edit', compact('socialMaster'));
+            return view('admin.socialMaster.edit', compact('socialMaster'));
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');

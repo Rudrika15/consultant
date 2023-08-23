@@ -49,8 +49,10 @@
             <div class="row p-0 m-0">
                 <div class="col-md-3">
                     <p class="" id="matches_found">Matches Found</p>
+                    {{-- <h1>{{$countconsultant->id}}</h1> --}}
                 </div>
                 @foreach ($consultant as $consultantData)
+                
                     <div class="col-2  image-for-consul-list">
                         {{-- /admin_img/{{$gallerys->photo}} --}}
                         <img src="/profile/{{$consultantData->photo}}" id="card_matches_img" class="" alt="" widht="50px" height="50px">
@@ -61,9 +63,17 @@
         </div>
         <div class="card-body">
             <p class="text-center">What Is Your Location ?</p>
-            <form action="">
+            <form>
+                {{-- <div class="">
+                    <input type="text" name="" id="searchInputCity" class="searchCategory" placeholder="&#xF002; What Do You Want To Learn ?" style="font-family:Arial, FontAwesome" class="mt-3 mb-3">
+                    <button type="submit" value="" class="btn" id="searchbuttonofcategory">Search</button>
+                    <div id="citySuggestions" class="citySuggestions" style="display:none;"></div>
+                    <input type="hidden" id="selectedCityId" name="cityId">
+                </div> --}}
                 <div class="">
-                    <input type="text" class="form-control mt-5" placeholder="Enter Your Lovation Or Pincode">
+                    <input type="text" id="searchInputCity"  class="form-control mt-5" placeholder="Enter Your Lovation Or Pincode">
+                    <div id="citySuggestions" class="citySuggestions" style="display:none;"></div>
+                    <input type="hidden" id="selectedCityId" name="cityId">
                 </div>
                 <div class="mt-2">
                     <a href="" class="card-link" style="text-decoration: none;">Are You Inside India ?</a>
@@ -91,7 +101,53 @@
             @endforeach
             
         </div> --}}
-    
+
+        <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('#searchInputCity').keyup(function() {
+                    var searchQuery = $(this).val();
+        
+                    $.ajax({
+                        type: 'GET',
+                        url: '{{ route('visitors.searchCity') }}',
+                        data: { search: searchQuery },
+                        success: function(data) {
+                            $('#citySuggestions').show();
+                            var suggestions = $('#citySuggestions');
+                            suggestions.empty();
+                            
+                            $.each(data, function(index, city) {
+                                suggestions.append(
+                                    '<div class="city-suggestion" data-id="' + city.id + '">' + city.cityName + '</div>');
+                            });
+                        }
+                    });
+                });
+        
+                $(document).on('click', '.city-suggestion', function() {
+                    var cityId = $(this).data('id');
+                    var cityName = $(this).text();
+        
+                    $('#searchInputCity').val(cityName);
+                    $('#selectedCityId').val(cityId);
+        
+                    if($('#citySuggestions').empty()){
+                        $('#citySuggestions').hide();
+                    }
+        
+                });
+            });
+        </script>
+
+
 </body>
 </html>
     

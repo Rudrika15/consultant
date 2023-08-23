@@ -23,7 +23,7 @@ class InquiryController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
             }
-            return view('inquiry.index');
+            return view('admin.inquiry.index');
         } catch (\Throwable $th) {
              //throw $th;    
             return view('servererror');

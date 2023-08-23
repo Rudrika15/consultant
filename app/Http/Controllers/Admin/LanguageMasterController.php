@@ -29,7 +29,7 @@ class LanguageMasterController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
             }
-            return view('languageMaster.index');
+            return view('admin.languageMaster.index');
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -50,7 +50,7 @@ class LanguageMasterController extends Controller
     {
         try {
             $languageMaster = LanguageMaster::all();
-            return view('languageMaster.create', compact('languageMaster'));
+            return view('admin.languageMaster.create', compact('languageMaster'));
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -84,7 +84,7 @@ class LanguageMasterController extends Controller
     {
         try {
             $languageMaster = LanguageMaster::find($id);
-            return view('languageMaster.edit', compact('languageMaster'));
+            return view('admin.languageMaster.edit', compact('languageMaster'));
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');

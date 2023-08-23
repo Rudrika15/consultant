@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminPackageController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\InquiryController;
@@ -55,6 +56,7 @@ Route::get('/contactus', [VisitorController::class, 'contactus'])->name('visitor
 Route::get('/signup/package', [VisitorController::class, 'signuppackage'])->name('visitors.signuppackage');
 Route::get('/consultantList/{id?}',[VisitorController::class,'consultantList'])->name('visitors.consultantList');
 Route::post('/findConsultantList',[VisitorController::class,'findConsultantList'])->name('visitors.findConsultantList');
+Route::get('/searchCity',[VisitorController::class,'searchCity'])->name('visitors.searchCity');
 
 // City for Home page
 Route::post('fetchcityhome', [VisitorController::class, 'fetchcityhome'])->name('fetchcityhome');
@@ -146,6 +148,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('time-update', [TimeController::class, 'update'])->name('time.update');
     Route::get('time-delete/{id?}', [TimeController::class, 'delete'])->name('time.delete');
 
+    // /* Admin Package */
+    Route::get('adminpackage-index',[AdminPackageController::class,'index'])->name('adminpackage.index');
+    Route::get('adminpackage/{id}/view',[AdminPackageController::class,'view'])->name('adminpackage.view');
+
+    Route::get('adminpackage-create',[AdminPackageController::class,'create'])->name('adminpackage.create');
+    Route::post('adminpackage-store',[AdminPackageController::class,'store'])->name('adminpackage.store');
+    Route::get('adminpackage-edit/{id?}',[AdminPackageController::class,'edit'])->name('adminpackage.edit');
+    Route::post('adminpackage-update',[AdminPackageController::class,'update'])->name('adminpackage.update');
+    Route::get('adminpackage-delete/{id?}',[AdminPackageController::class,'delete'])->name('adminpackage.delete');
 
     // /* Corporate Inquiry */
     Route::get('corparateInquiry-index',[InquiryController::class,'index'])->name('corparateInquiry.index');

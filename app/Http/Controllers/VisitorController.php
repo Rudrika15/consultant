@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdminPackage;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Inquiry;
@@ -44,8 +45,10 @@ class VisitorController extends Controller
     }
     public function membershipPlan()
     {
-        return view('visitors.membershipPlan');
+        $adminpackage=AdminPackage::all();
+        return view('visitors.membershipPlan',compact('adminpackage'));
     }
+
     public function corporateInquery()
     {
         return view('visitors.corporateInquery');
@@ -98,6 +101,17 @@ class VisitorController extends Controller
     public function findConsultantList(Request $request){
         $categoryId=$request->categoryId;
         $consultant=Profile::with('categories')->where('categoryId','=',$categoryId)->get();
-        return view('visitors.consultantList',compact('consultant'));
+        $countconsultant=count($consultant);
+        return view('visitors.consultantList',compact('consultant','countconsultant'));
+    }
+    public function searchCity(Request $request){
+        if($request->ajax()){
+            $output=[];
+            $city=City::where('cityName','LIKE','%'.$request->search.'%')->get();
+            foreach($city as $cities){
+                $output[]=['id'=>$cities->id,'cityName'=>$cities->cityName];
+            }
+            return response()->json($output);
+        }
     }
 }
