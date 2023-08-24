@@ -33,7 +33,9 @@
     {{-- background-image: url('{{ asset('category/')}}/{{$consultantData->categories->photo}}');         --}}
 
     <div class="back-img d-lg-block" style="
-        background-image:url('category/1692356352.jpg');
+        /* background-image:url('category/1692356352.jpg'); */
+        background-image: url('{{ asset('category/')}}/{{$categoryphoto->photo}}');
+
         height:100vh;width:100vw;background-size:cover;
         background-position:center;
         opacity: 0.5;z-index:-1;">
@@ -46,30 +48,29 @@
         <a href="{{ route('visitors.index') }}" class="fa fa-arrow-circle-left" id="fa-arrow-circle-left"></a>
     <div class="card text-center" id="consultant_list_card">
         <div class="p-0 m-0" id="card_macthed_grid">
-            <div class="row p-0 m-0">
-                <div class="col-md-3">
+            <div class="d-flex jistify-content-center">
+                <div class="">
                     <p class="" id="matches_found">Matches Found</p>
                     {{-- <h1>{{$countconsultant->id}}</h1> --}}
                 </div>
                 @foreach ($consultant as $consultantData)
-                
-                    <div class="col-2  image-for-consul-list">
+                    <div class="image-for-consul-list">
                         {{-- /admin_img/{{$gallerys->photo}} --}}
                         <img src="/profile/{{$consultantData->photo}}" id="card_matches_img" class="" alt="" widht="50px" height="50px">
+                        
                     </div>
                 @endforeach
+                <div class="fw-bold d-flex justify-content-end">
+                    <div id="countconsultant">
+                        <p class="fa fa-arrow-left">&nbsp;<span style="font-size: 24px;">{{$countconsultant}}</span></p>
+                    </div>
+                </div>
             </div>
 
         </div>
         <div class="card-body">
             <p class="text-center">What Is Your Location ?</p>
-            <form>
-                {{-- <div class="">
-                    <input type="text" name="" id="searchInputCity" class="searchCategory" placeholder="&#xF002; What Do You Want To Learn ?" style="font-family:Arial, FontAwesome" class="mt-3 mb-3">
-                    <button type="submit" value="" class="btn" id="searchbuttonofcategory">Search</button>
-                    <div id="citySuggestions" class="citySuggestions" style="display:none;"></div>
-                    <input type="hidden" id="selectedCityId" name="cityId">
-                </div> --}}
+            <form class="">
                 <div class="">
                     <input type="text" id="searchInputCity"  class="form-control mt-5" placeholder="Enter Your Lovation Or Pincode">
                     <div id="citySuggestions" class="citySuggestions" style="display:none;"></div>

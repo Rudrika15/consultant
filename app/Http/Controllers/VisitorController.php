@@ -100,9 +100,10 @@ class VisitorController extends Controller
 
     public function findConsultantList(Request $request){
         $categoryId=$request->categoryId;
+        $categoryphoto=Category::find($categoryId);
         $consultant=Profile::with('categories')->where('categoryId','=',$categoryId)->get();
         $countconsultant=count($consultant);
-        return view('visitors.consultantList',compact('consultant','countconsultant'));
+        return view('visitors.consultantList',compact('consultant','countconsultant','categoryphoto'));
     }
     public function searchCity(Request $request){
         if($request->ajax()){

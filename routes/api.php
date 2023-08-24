@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\Consultant\PackageController;
 use App\Http\Controllers\Api\Consultant\SocialLinkController;
 use App\Http\Controllers\Api\Consultant\TimeController;
 use App\Http\Controllers\Api\Consultant\VideoController;
+use App\Http\Controllers\Api\Consultant\WorkshopController;
 use App\Http\Controllers\Api\OTPController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -166,3 +167,10 @@ Route::post('video/store', [VideoController::class, 'store']);
 Route::post('video/update/{id?}', [VideoController::class, 'update']);
 Route::get('video/delete/{id?}', [VideoController::class, 'delete']);
 Route::get('video/show/{id?}', [VideoController::class, 'show']);
+
+/* Workshop */
+Route::get('workshop/index/{id?}',[WorkshopController::class,'index']);
+Route::post('workshop/store',[WorkshopController::class,'store']);
+Route::post('workshop/update/{id?}',[WorkshopController::class,'update']);
+Route::get('workshop/delete/{id?}',[WorkshopController::class,'delete']);
+Route::get('workshop/show/{id?}',[WorkshopController::class,'show']);

@@ -185,9 +185,9 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12 pt-5 text-center">
-                        <button type="submit" class="btn btn-submit fw-bold">Submit</button>
-                        <a href="{{route('visitor.profile')}}" class="btn btn-reset fw-bold">Reset</a>
+                    <div class="col-md-12 pt-5 mb-5 text-center">
+                        <button type="submit" class="btn fw-bold" id="profile-update-submit">Submit</button>
+                        <a href="{{route('visitor.profile')}}" class="btn fw-bold" id="profile-update-reset">Reset</a>
                     </div> 
                 </form>
                 <form action="{{route('changepassword')}}" method="POST">
@@ -239,9 +239,9 @@
 
                                                         
                                                     </div>
-                                                    <div class="col-md-6 pt-5">
-                                                        <button type="submit" class="btn btn-submit fw-bold">Submit</button>
-                                                        <a href="{{route('visitor.profile')}}" class="btn btn-reset fw-bold">Reset</a>
+                                                    <div class="col-md-6 pt-5 mb-3 text-center">
+                                                        <button type="submit" class="btn  fw-bold" id="password-submit">Submit</button>
+                                                        <a href="{{route('visitor.profile')}}" class="btn fw-bold" id="password-reset">Reset</a>
                                                     </div>
                                                 </div>
                                         </div>

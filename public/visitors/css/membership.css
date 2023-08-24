@@ -72,3 +72,9 @@
     align-items: center ;
     color: var(--purple);
 }
+#adminpackage-title{
+    color: var(--purple);
+}
+#adminpackage-price{
+    color: var(--purple);
+}

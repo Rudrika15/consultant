@@ -42,6 +42,16 @@
     margin-left:5%;
     width: 120px;
 }
+#countconsultant{
+    text-align: left;
+    margin-top:5px !important;
+    margin-bottom:5px !important;
+    padding-top: 5px;
+    padding-left: 5px;
+    width: 50px;
+    height: 50px;
+    border: 5px solid var(--white) !important;
+}
 /* .image-for-consul-list{
     width: 14px !important;
 } */
@@ -63,7 +73,20 @@
     border: none;
     border-radius: 5px;
 }
-
+#citySuggestions{
+    position: absolute !important; 
+    width: 95%;
+    height: 40%;
+    background-color:var(--white);
+       overflow: scroll;
+    border-radius: 5px;
+    padding-top: 10px;
+   
+}
+#citySuggestions:focus{
+    height: 18% !important;
+    overflow: scroll !important;
+}
 
 @media only screen and (max-width: 600px) {
     .Top_div_of_consultant{
@@ -92,12 +115,27 @@
         background-color:var(--white);
         height: 550px !important;
         width:360px !important;
-    
     }
-   /* #card_macthed_grid{
-        background-color: var(--lightgray);
-        height: 70px;
-        width:400px !important;
-        flex-wrap: wrap !important;
-    }   */
+    #citySuggestions{
+        position: absolute !important; 
+        width: 92%;
+        height: 30%;
+        background-color:var(--white);
+        overflow: scroll;
+        border-radius: 5px;
+        padding-top: 10px;
+       
+    }
+  
 }
+/* @media only screen and (min-width: 600px) {
+    #consultant_list_card{
+        left:0;
+        position: absolute;
+        top:80px !important;
+        
+        background-color:var(--white);
+        height: 550px !important;
+        width:600px !important;
+    }
+} */

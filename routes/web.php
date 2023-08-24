@@ -21,6 +21,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\Admin\StateController;
+use App\Http\Controllers\Consultant\WorkshopController;
 use App\Models\Attachment;
 use Illuminate\Support\Facades\Route;
 
@@ -234,4 +235,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('achievement-edit/{id?}', [AchievementController::class, 'edit'])->name('achievement.edit');
     Route::post('achievement-update', [AchievementController::class, 'update'])->name('achievement.update');
     Route::get('achievement-delete/{id?}', [AchievementController::class, 'delete'])->name('achievement.delete');
-});
+
+    /* Workshop */
+    Route::get('workshop-index',[WorkshopController::class,'index'])->name('workshop.index');
+    Route::get('workshop/{id}/view', [WorkshopController::class, 'view'])->name('workshop.view');
+
+    Route::get('workshop-create',[WorkshopController::class,'create'])->name('workshop.create');
+    Route::post('workshop-store',[WorkshopController::class,'store'])->name('workshop.store');
+    Route::get('workshop-edit/{id?}',[WorkshopController::class,'edit'])->name('workshop.edit');
+    Route::post('workshop-update',[WorkshopController::class,'update'])->name('workshop.update');
+    Route::get('workshop-delete/{id?}',[WorkshopController::class,'delete'])->name('workshop.delete');
+
+}); 

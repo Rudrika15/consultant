@@ -187,6 +187,12 @@
                             <i class="fas fa-fw fa-tachometer-alt"></i>
                             <span>Achievement</span></a>
                     </li>
+                    
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{route('workshop.index')}}">
+                            <i class="fas fa-laptop-house"></i>
+                            <span>Workshop</span></a>
+                    </li>
                 @endrole
 
                 <!-- Divider -->

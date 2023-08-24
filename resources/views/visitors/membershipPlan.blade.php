@@ -19,7 +19,9 @@
         <div class="col-lg-4">
             <div class="card membercard shadow p-3 mb-5 bg-body rounded">
                 <div class="card-body text-center">
-                    <h3 class="card-title text-center">{{$adminpackage->title}}</h3>
+                    <h3 class="card-title text-center" id="adminpackage-title">{{$adminpackage->title}}<hr></h3>
+                    <h4 class="card-title text-center" id="adminpackage-price">{{$adminpackage->price}}</h4>
+
                     {{-- <i class="fa fa-check"></i> --}}
                     <p class="card-text mt-5">{!!$adminpackage->details!!}</p>
                     <a href="#" class="btn btn-primary mb-5 mt-5">Apply Now</a>
@@ -27,61 +29,7 @@
             </div>
         </div>
         @endforeach
-            
-            {{-- <div class="col-lg-4">
-                <div class="card membercard shadow p-3 mb-5 bg-body rounded">
-                    <div class="card-body text-center">
-                        <h3 class="card-title text-center">Silver</h3>
-
-                        <p class="card-text mt-5"><i class="fa fa-check"></i>Profile Name</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Consulting Call Booking (Per Booking 10%
-                            Administration Fee)</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Coaching/Category</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Full Profile Page</p>
-                        <p class="card-text"><i class="fa fa-check"></i>video on profile page</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Upload of certificates & awards</p>
-
-                        <p class="card-text"><i class="fa fa-check"></i>Part of Elite Networking community</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Show as Featured coach on home page & other relevant
-                            pages</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Determine Your Services</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Social Media Promotion</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Unlimited Quotations</p>
-
-
-                        <a href="#" class="btn btn-primary mt-5 mb-5">Apply Now</a>
-                    </div>
-                </div>
-            </div> --}}
-            {{-- <div class="col-lg-4">
-                <div class="card membercard shadow p-3 mb-5 bg-body rounded">
-                    <div class="card-body text-center">
-                        <h3 class="card-title text-center">Gold</h3>
-                        <p class="card-text mt-5"><i class="fa fa-check"></i>Profile Name</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Consulting Call Booking
-                            (Per Booking 5% Administration Fee)</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Coaching/Category</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Full Profile Page</p>
-                        <p class="card-text"><i class="fa fa-check"></i>video on profile page</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Upload of certificates & awards</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Part of Elite Networking community</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Show as Featured coach on home page & other relevant
-                            pages</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Determine Your Services</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Feature in Promotion & Publicity Campaign on social
-                            media and other platforms</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Publish unlimited events/news</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Publish unlimited Article/Blogs</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Available For Webinar and WorkShop Promotion</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Paid Promotions</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Staff Members</p>
-                        <p class="card-text"><i class="fa fa-check"></i>Unlimited Quotations</p>
-
-                        <a href="#" class="btn btn-primary mt-5 mb-5">Apply Now</a>
-
-                    </div>
-                </div>
-            </div> --}}
+        
         </div>
     </div>
     {{-- All Panls Include --}}
@@ -93,8 +41,10 @@
         <div class="d-flex justify-content-center cardgap gap-lg-3 mt-lg-5 flex-wrap">
             <div class="card allplancard shadow p-3 mb-5 bg-gray rounded mt-5">
                 <div class="card-body">
+                    <a href="{{route('visitor.profile')}}" style="text-decoration: none;color:black;">
                     <img  class="text-center profile-access-user-img" src="{{asset('visitors/images/profile_access_user.png')}}">
                     <h5 class="card-text text-center">Profile Access</h5>
+                    </a>
                 </div>
             </div>
             <div class="card allplancard shadow p-3 mb-5 bg-gray rounded mt-lg-5">
