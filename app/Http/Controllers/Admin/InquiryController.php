@@ -19,6 +19,10 @@ class InquiryController extends Controller
 
                 return DataTables::of($data)
                     ->addIndexColumn()
+                    ->addColumn('action',function($row){
+                        $view = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm me-1 ">View</a>';
+                                    return $view;
+                    })
                     
                     ->rawColumns(['action'])
                     ->make(true);
@@ -28,5 +32,9 @@ class InquiryController extends Controller
              //throw $th;    
             return view('servererror');
         }
+    }
+    public function view($id){
+        $inquiry=Inquiry::findOrFail($id);
+        return response()->json($inquiry);
     }
 }

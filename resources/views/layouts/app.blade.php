@@ -113,15 +113,24 @@
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="{{route('adminpackage.index')}}">
-                            <i class="bi bi-dribbble"></i>
+                            <i class="bi bi-bookmark-star-fill"></i>
                             <span>Admin Package</span></a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="{{route('corparateInquiry.index')}}">
-                            <i class="bi bi-dribbble"></i>
+                            <i class="bi bi-gear-fill"></i>
                             <span>Inquiry</span></a>
                     </li>
-
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{route('adminworkshop.index')}}">
+                            <i class="fas fa-laptop-house"></i>
+                            <span>Workshop</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{route('slider.index')}}">
+                            <i class="fas fa-sliders-h"></i>
+                            <span>Slider</span></a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link collapsed" style="color: #014272; font-weight: 700;" href="#"
                             data-toggle="collapse" data-target="#collapseSetting" aria-expanded="true"

@@ -79,8 +79,9 @@
                                         @if (Route::has('password.request'))
                                         <a class="small bluetext" href="{{ route('password.request') }}">Forgot Password?</a>
                                         @endif
-                                    </div>
+                                        <a class="small bluetext" href="{{ route('register') }}">Create New Account</a>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -20,9 +20,9 @@ class CategoryController extends Controller
             if (count($category) > 0) {
                 return response([
                     'success' => true,
-                    'Category' => $category,
+                    'status' => 200,
                     'message' => 'Category All View',
-                    'Status' => 200
+                    'data' => $category,
                 ]);
                 // return response($response, 200);
             } else {

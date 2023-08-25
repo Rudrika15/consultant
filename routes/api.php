@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\Api\Admin\AdminPackageController;
+use App\Http\Controllers\Api\Admin\AdminWorkshopController;
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\CityController;
 use App\Http\Controllers\Api\Admin\InquiryController;
 use App\Http\Controllers\Api\Admin\LanguageMasterController;
 use App\Http\Controllers\Api\Admin\RegisterController;
+use App\Http\Controllers\Api\Admin\SliderController;
 use App\Http\Controllers\Api\Admin\SocialMasterController;
 use App\Http\Controllers\Api\Admin\StateController;
 use App\Http\Controllers\Api\Consultant\AchievementController;
@@ -14,6 +16,7 @@ use App\Http\Controllers\Api\Consultant\CertificateController;
 use App\Http\Controllers\Api\Consultant\GalleryController;
 use App\Http\Controllers\Api\Consultant\LanguageController;
 use App\Http\Controllers\Api\Consultant\PackageController;
+use App\Http\Controllers\Api\Consultant\PayamnetGetWayController;
 use App\Http\Controllers\Api\Consultant\SocialLinkController;
 use App\Http\Controllers\Api\Consultant\TimeController;
 use App\Http\Controllers\Api\Consultant\VideoController;
@@ -87,8 +90,18 @@ Route::post('adminpackage-update/{id?}',[AdminPackageController::class,'update']
 Route::get('adminpackage-delete/{id?}',[AdminPackageController::class,'delete']);
 Route::get('adminpackage-show/{id?}',[AdminPackageController::class,'show']);
 
+/*  Slider */
+Route::get('slider-index',[SliderController::class,'index']);
+Route::post('slider-store',[SliderController::class,'store']);
+Route::post('slider-update/{id?}',[SliderController::class,'update']);
+Route::get('slider-delete/{id?}',[SliderController::class,'delete']);
+Route::get('slider-show/{id?}',[SliderController::class,'show']);
+
 /* Inquiry */
 Route::get('corporate-inquiry-index',[InquiryController::class,'index']);
+
+/* Workshop */
+Route::get('workshoplist-index',[AdminWorkshopController::class,'index']);
 
 /* profile */
 Route::get('consultant-profile/{id?}', [RegisterController::class, 'consultantProfile']);
@@ -174,3 +187,6 @@ Route::post('workshop/store',[WorkshopController::class,'store']);
 Route::post('workshop/update/{id?}',[WorkshopController::class,'update']);
 Route::get('workshop/delete/{id?}',[WorkshopController::class,'delete']);
 Route::get('workshop/show/{id?}',[WorkshopController::class,'show']);
+
+/* Paymnet get way */
+Route::post('payament-get-way/{id?}',[PayamnetGetWayController::class,'userplantype']);

@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admin_packages', function (Blueprint $table) {
+        Schema::create('sliders', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->float('price');
-            $table->string('details');
-            $table->string('status')->default('Active');
+            $table->string('photo');
+            $table->string('type');
+            $table->string('status')->default("Active");
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('admin_packages');
+        Schema::dropIfExists('sliders');
     }
 };

@@ -132,7 +132,7 @@ class AchievementController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'achievement Deleted Successfully!',
+                'message' => 'Achievement Deleted Successfully!',
             ], 200);
         } catch (\Throwable $th) {
             //throw $th;

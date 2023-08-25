@@ -20,11 +20,21 @@
             <div class="card membercard shadow p-3 mb-5 bg-body rounded">
                 <div class="card-body text-center">
                     <h3 class="card-title text-center" id="adminpackage-title">{{$adminpackage->title}}<hr></h3>
-                    <h4 class="card-title text-center" id="adminpackage-price">{{$adminpackage->price}}</h4>
+                    <h4 class="card-title text-center" id="adminpackage-price">
+                        @if ($adminpackage->price>0)
+                            <i class='fa fa-rupee'></i>{{$adminpackage->price}}
+                        @else
+                            <p>-</p>
+                        @endif
+                    </h4>
 
                     {{-- <i class="fa fa-check"></i> --}}
                     <p class="card-text mt-5">{!!$adminpackage->details!!}</p>
-                    <a href="#" class="btn btn-primary mb-5 mt-5">Apply Now</a>
+                    @if ($adminpackage->title==="Free")
+                        <a href="" class="btn btn-primary mb-5 mt-5">Apply Now</a>
+                    @else
+                        <a href="{{route('paymentgetway')}}/{{$adminpackage->id}}" class="btn btn-primary mb-5 mt-5">Apply Now</a>
+                    @endif
                 </div>
             </div>
         </div>

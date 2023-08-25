@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('contactNo')->nullable();
             $table->string('gender')->nullable();
             $table->string('birthdate')->nullable();
+            $table->string('planType')->default('Free');
             $table->string('status');
             $table->rememberToken();
             $table->timestamps();

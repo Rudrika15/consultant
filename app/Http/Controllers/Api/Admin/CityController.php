@@ -19,12 +19,13 @@ class CityController extends Controller
             ->get();
 
             if (count($city) > 0) {
-                return response([
+                $response = [
                     'success' => true,
+                    'status' => 200,
+                    'message' => 'City List !',
                     'City' => $city,
-                    'message' => 'City All View',
-                    'Status' => 200
-                ]);
+
+                ];
                 // return response($response, 200);
             } else {
                 return response([
@@ -65,9 +66,10 @@ class CityController extends Controller
                 if ($city) {
                     $response = [
                         'success' => true,
+                        'status' => 200,
+                        'message' => 'City Created Successfully !',
                         'City' => $city,
-                        'message' => 'City Inserted Sucessfully',
-                        'Status' => 201
+    
                     ];
                     return response($response, 200);
                 } else {
@@ -109,9 +111,10 @@ class CityController extends Controller
                 if ($city) {
                     $response = [
                         'success' => true,
+                        'status' => 200,
+                        'message' => 'City Updated Successfully !',
                         'City' => $city,
-                        'message' => 'City Updated Sucessfully',
-                        'Status' => 201
+    
                     ];
                     return response($response, 200);
                 } else {
@@ -141,9 +144,9 @@ class CityController extends Controller
                 $city->save();
                 $response = [
                     'success' => true,
-                    'City' => $city,
+                    'status' => 200,
                     'message' => 'City Deleted Sucessfully',
-                    'Status' => 204
+                    'City' => $city,
 
                 ];
                 return response($response, 200);
@@ -172,9 +175,9 @@ class CityController extends Controller
                 $city->save();
                 $response = [
                     'success' => true,
+                    'status' => 200,
+                    'message' => 'Single City !',
                     'City' => $city,
-                    'message' => 'City Show Sucessfully',
-                    'Status' => 204
 
                 ];
                 return response($response, 200);

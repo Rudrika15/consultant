@@ -45,6 +45,8 @@
     <link rel="stylesheet" href="{{asset('visitors/css/membership.css')}}">
     <link rel="stylesheet" href="{{asset('visitors/css/corporateinquiry.css')}}">
     <link rel="stylesheet" href="{{asset('visitors/css/contactus.css')}}">
+    <link rel="stylesheet" href="{{asset('visitors/css/paymentgetway.css')}}">
+
     {{-- <link rel="stylesheet" href="{{asset('visitors/css/aboutus.css')}}">
     <link rel="stylesheet" href="{{asset('visitors/css/aboutus.css')}}">
     <link rel="stylesheet" href="{{asset('visitors/css/aboutus.css')}}"> --}}

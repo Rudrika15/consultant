@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminPackageController;
+use App\Http\Controllers\Admin\AdminWorkshopController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\InquiryController;
 use App\Http\Controllers\Admin\LanguageMasterController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SocialMasterController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Consultant\AttachmentController;
@@ -24,6 +26,7 @@ use App\Http\Controllers\Admin\StateController;
 use App\Http\Controllers\Consultant\WorkshopController;
 use App\Models\Attachment;
 use Illuminate\Support\Facades\Route;
+use League\Flysystem\Visibility;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,11 +88,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('changepassword',[UserController::class,'changepassword'])->name('changepassword');
     Route::post('update', [UserController::class, 'profileUpdate'])->name('profile.update');
 
+    
     //For Visitors Profile
     Route::get('visitor/profile',[VisitorController::class,'profile'])->name('visitor.profile');
     Route::post('visitor/profile/city',[VisitorController::class,'cityforprofile'])->name('visitors.cityforprofile');
     
-    
+    Route::get('paymentgetway/{id?}',[VisitorController::class,'paymentgetway'])->name('paymentgetway');
+    Route::post('userplantype',[VisitorController::class,'userplantype'])->name('userplantype');
     
     /*---------------------------Admin Panel ---------------------------------- */
 
@@ -159,9 +164,26 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('adminpackage-update',[AdminPackageController::class,'update'])->name('adminpackage.update');
     Route::get('adminpackage-delete/{id?}',[AdminPackageController::class,'delete'])->name('adminpackage.delete');
 
+    /* Slider */
+    Route::get('slider-index',[SliderController::class,'index'])->name('slider.index');
+    Route::get('slider-create',[SliderController::class,'create'])->name('slider.create');
+    Route::post('slider-store',[SliderController::class,'store'])->name('slider.store');
+    Route::get('slider-edit/{id?}',[SliderController::class,'edit'])->name('slider.edit');
+    Route::post('slider-update',[SliderController::class,'update'])->name('slider.update');
+    Route::get('slider-delete/{id?}',[SliderController::class,'delete'])->name('slider.delete');
+    Route::get('slider/{id}/view',[SliderController::class,'view'])->name('slider.view');
+
+
     // /* Corporate Inquiry */
     Route::get('corparateInquiry-index',[InquiryController::class,'index'])->name('corparateInquiry.index');
+    Route::get('corporateInquiry/{id}/view',[InquiryController::class,'view'])->name('corparateInquiry.view');
+    /* Workshop */
+    Route::get('adminworkshop-index',[AdminWorkshopController::class,'index'])->name('adminworkshop.index');
+    Route::get('adminworkshop/{id}/view',[AdminWorkshopController::class,'view'])->name('adminworkshop.view');
 
+    
+    
+    
     /* ------------------------Consultant Panele ---------------------------------- */
 
     // /* Language */

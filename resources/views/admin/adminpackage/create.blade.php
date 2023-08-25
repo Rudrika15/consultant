@@ -54,7 +54,7 @@
                 </div>
                 <div class="form-label-group mt-3">
                     <label for="price" class="fw-bold">Price<sup class="text-danger">*</sup></label>
-                    <input id="price" type="text" name="price" class="form-control" placeholder="price">
+                    <input id="price" type="text" name="price" class="form-control" placeholder="Enter price in number">
                     @if ($errors->has('price'))
                         <span class="error">{{ $errors->first('price') }}</span>
                     @endif

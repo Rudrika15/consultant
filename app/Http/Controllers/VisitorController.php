@@ -16,14 +16,20 @@ use PhpParser\Node\Expr\FuncCall;
 class VisitorController extends Controller
 {
     public function index()
-    {
-        $category=Category::all();
-        $data['states'] = State::get(["stateName", "id"]);
-        return view('visitors.index',$data,compact('category'));
+    {   
+        try{
+            $category=Category::all();
+            $data['states'] = State::get(["stateName", "id"]);
+            return view('visitors.index',$data,compact('category'));
+        }catch (\Throwable $th) {
+            //throw $th;
+            return view('servererror');
+        }
     }
     
     public function search(Request $request)
-        {
+    {
+        try{
             if ($request->ajax()) {
                 $output = [];
                 $categories = Category::where('catName', 'LIKE', '%' . $request->search . '%')->get();
@@ -34,24 +40,53 @@ class VisitorController extends Controller
 
                 return response()->json($output);
             }
+        }catch (\Throwable $th) {
+            //throw $th;
+            return view('servererror');
         }
+            
+    }
     public function fetchcityhome(Request $request){
-        $data['cities']=City::where('stateId','=',$request->stateId)->get();
-        return response()->json($data);
+        try{
+            $data['cities']=City::where('stateId','=',$request->stateId)->get();
+            return response()->json($data);
+        }catch (\Throwable $th) {
+            //throw $th;
+            return view('servererror');
+        }
+        
     }
     public function aboutus()
     {
-        return view('visitors.aboutus');
+        try{
+            return view('visitors.aboutus');
+        }catch (\Throwable $th) {
+            //throw $th;
+            return view('servererror');
+        }
+        
     }
     public function membershipPlan()
     {
-        $adminpackage=AdminPackage::all();
-        return view('visitors.membershipPlan',compact('adminpackage'));
+        try{
+            $adminpackage=AdminPackage::all();
+            return view('visitors.membershipPlan',compact('adminpackage'));
+        }catch (\Throwable $th) {
+            //throw $th;
+            return view('servererror');
+        }
+        
     }
 
     public function corporateInquery()
     {
-        return view('visitors.corporateInquery');
+        try{
+            return view('visitors.corporateInquery');
+        }catch (\Throwable $th) {
+            //throw $th;
+            return view('servererror');
+        }
+        
     }
     public function inqueryStore(Request $request){
         try{
@@ -80,32 +115,65 @@ class VisitorController extends Controller
     }
     public function contactus()
     {
-        return view('visitors.contactus');
+        try{
+            return view('visitors.contactus');
+        }catch (\Throwable $th) {
+            //throw $th;
+            return view('servererror');
+        }
+        
     }
     public function signuppackage()
     {
-        return view('visitors.signuppackage');
+        try{
+            return view('visitors.signuppackage');
+        }catch (\Throwable $th) {
+            //throw $th;
+            return view('servererror');
+        }
+        
     }
     public function profile(){
-        
-        $data['states'] = State::get(["stateName", "id"]);
-        $userId=Auth::user()->id;
-        $profile=Profile::where('userId','=',$userId)->first();
-        return view('visitors.profile',$data,compact('profile'));
+        try{
+            $data['states'] = State::get(["stateName", "id"]);
+            $userId=Auth::user()->id;
+            $profile=Profile::where('userId','=',$userId)->first();
+            return view('visitors.profile',$data,compact('profile'));
+        }catch (\Throwable $th) {
+            //throw $th;
+            return view('servererror');
+        }
     }
     public function cityforprofile(Request $request){
-        $data['cities']=City::where("stateId",$request->stateId);
-        return response()->json($data);
+        try{
+            $data['cities']=City::where("stateId",$request->stateId);
+            return response()->json($data);
+        }catch (\Throwable $th) {
+            //throw $th;
+            return view('servererror');
+        }
     }
 
     public function findConsultantList(Request $request){
-        $categoryId=$request->categoryId;
-        $categoryphoto=Category::find($categoryId);
-        $consultant=Profile::with('categories')->where('categoryId','=',$categoryId)->get();
-        $countconsultant=count($consultant);
-        return view('visitors.consultantList',compact('consultant','countconsultant','categoryphoto'));
+        try{
+            $categoryId=$request->categoryId;
+            $categoryphoto=Category::find($categoryId);
+            $consultant=Profile::with('categories')->where('categoryId','=',$categoryId)->get();
+            $countconsultant=count($consultant);
+            return view('visitors.consultantList',compact('consultant','countconsultant','categoryphoto'));
+        
+        }catch (\Throwable $th) {
+            //throw $th;
+            return view('servererror');
+        }
     }
     public function searchCity(Request $request){
+        try{
+
+        }catch (\Throwable $th) {
+            //throw $th;
+            return view('servererror');
+        }
         if($request->ajax()){
             $output=[];
             $city=City::where('cityName','LIKE','%'.$request->search.'%')->get();
@@ -114,5 +182,31 @@ class VisitorController extends Controller
             }
             return response()->json($output);
         }
+    }
+    public function paymentgetway($id){
+        try{
+            $plantitleId=AdminPackage::find($id);
+            return view('visitors.paymentgetway',compact('plantitleId'));
+        }catch (\Throwable $th) {
+            //throw $th;
+            return view('servererror');
+        }
+        
+    }
+    public function userplantype(Request $request){
+        try{
+            $userId=Auth::user()->id;
+            $user=User::find($userId);
+            $user->plantype=$request->planType;
+            $user->save();
+            return response()->json([
+                'success' => true,
+                'message' => 'Payment Successfully!',
+            ], 200);
+        }catch (\Throwable $th) {
+            //throw $th;
+            return view('servererror');
+        }
+        
     }
 }

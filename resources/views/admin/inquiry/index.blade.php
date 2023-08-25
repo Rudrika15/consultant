@@ -48,7 +48,8 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Inquiry</th>
-                            <th>Status</th>  
+                            <th>Status</th>
+                            <th>Action</th>  
                         </tr>
                     </thead>
                     <tbody>
@@ -87,9 +88,38 @@
                         data: 'status',
                         name: 'status'
                     },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false,
+                    },
                     
                 ]
             });
+            $(document).on('click', '.edit', function() {
+            var row = $(this).closest('tr');
+            var data = table.row(row).data();
+            var inquiryId = data.id;
+
+            $.ajax({
+                url: "{{ url('corporateInquiry') }}" + '/' + inquiryId + '/view',
+                type: 'GET',
+                success: function(response) {
+                    // Handle the Ajax response here
+                    console.log(response); // Check the response in the browser console
+                    $('#dataTableDiv').hide();
+                    $('#add').hide();
+                    $('#back').show();
+                    $('#viewDataDiv').html('<strong>Name:</strong> '+response.name +'<br><strong>Eamil:</strong> ' + response.email + '<br><strong>Inquiry:</strong> ' + response.inquiry  + '<br><strong>Satus:</strong> '+ response.status);
+
+                },
+                error: function(error) {
+                    // Handle the error response here
+                    console.log(error); // Check the error in the browser console
+                }
+            });
+        });
         });
     </script>
 @endsection
