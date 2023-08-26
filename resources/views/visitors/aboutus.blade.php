@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="container mt-5 p-5">
-        <div class="ms-5 me-5">
+        <div class="ms-lg-5 me-lg-5">
             <p class="pcolor">Nothing but change is constant! In this constantly
                 changing world, GROWTH is inevitable for everyone.
                 From one who is already successful to one starting

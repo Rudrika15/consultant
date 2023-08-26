@@ -84,7 +84,7 @@
                     </div>
                    
                     <div class="d-flex gap-3 login_links">
-                        <i class="fa fa-user-circle-o pt-lg-1">
+                        <i class="fa fa-user-circle-o pt-1">
                             {{-- <a href="{{ route('login') }}" class="text-white"
                                     style="text-decoration:none;">Login</a></i>
                                     <i class="fa fa-plus pt-lg-1"></i>
@@ -96,7 +96,7 @@
                             @else
                                 <a href="{{ route('login') }}" class="text-white"
                                     style="text-decoration:none;">Login</a></i>
-                                    <i class="fa fa-plus pt-lg-1"></i>
+                                    <i class="fa fa-plus pt-1"></i>
                                 <a href="{{ route('register') }}" class="text-white" style="text-decoration:none;">Sign Up</a>
                                     </i>
                             @endif    
@@ -114,7 +114,7 @@
                                 @csrf
                                 </form>
                         @else
-                            <i class="fa fa-plus pt-lg-1"></i>
+                            <i class="fa fa-plus pt-1"></i>
                             <span> Become a Consultant</span>
                         @endif
                         {{-- <i class="fa fa-plus pt-lg-1"></i>

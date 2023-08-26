@@ -501,6 +501,7 @@ span .updatetext{
     .toplinks {
         display: flex;
         flex-direction: column;
+        align-items: end;
         margin-left: auto;
         padding-top: 0 !important;
         gap: 0 !important;

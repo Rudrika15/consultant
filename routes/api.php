@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\Admin\SocialMasterController;
 use App\Http\Controllers\Api\Admin\StateController;
 use App\Http\Controllers\Api\Consultant\AchievementController;
 use App\Http\Controllers\Api\Consultant\AttachmentController;
+use App\Http\Controllers\Api\Consultant\CategoryConsultantController;
 use App\Http\Controllers\Api\Consultant\CertificateController;
 use App\Http\Controllers\Api\Consultant\GalleryController;
 use App\Http\Controllers\Api\Consultant\LanguageController;
@@ -91,7 +92,7 @@ Route::get('adminpackage-delete/{id?}',[AdminPackageController::class,'delete'])
 Route::get('adminpackage-show/{id?}',[AdminPackageController::class,'show']);
 
 /*  Slider */
-Route::get('slider-index',[SliderController::class,'index']);
+Route::get('slider-index/{id}',[SliderController::class,'index']);
 Route::post('slider-store',[SliderController::class,'store']);
 Route::post('slider-update/{id?}',[SliderController::class,'update']);
 Route::get('slider-delete/{id?}',[SliderController::class,'delete']);
@@ -107,7 +108,11 @@ Route::get('workshoplist-index',[AdminWorkshopController::class,'index']);
 Route::get('consultant-profile/{id?}', [RegisterController::class, 'consultantProfile']);
 Route::post('consultant-update/{id?}', [RegisterController::class, 'update']);
 
-
+/* Consultant categorywise */
+Route::get('consultant_wise_category/{id?}',[CategoryConsultantController::class,'consultant_wise_category']);
+Route::get('category-wise-consultant/{id?}',[CategoryConsultantController::class,'category_wise_consultant']);
+Route::get('user_details/{id?}',[CategoryConsultantController::class,'user_details']);
+Route::get('isFeatured/{isFeatured}',[CategoryConsultantController::class,'isFeatured']);
 
 
 /*-----------------------------------  Consultant Side  ----------------------------------------*/

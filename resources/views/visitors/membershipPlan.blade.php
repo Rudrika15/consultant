@@ -16,7 +16,7 @@
     <div class="container mt-5 mb-5">
         <div class="row mb-5">
         @foreach ($adminpackage as $adminpackage)
-        <div class="col-lg-4">
+        <div class="col-lg-4 mt-2">
             <div class="card membercard shadow p-3 mb-5 bg-body rounded">
                 <div class="card-body text-center">
                     <h3 class="card-title text-center" id="adminpackage-title">{{$adminpackage->title}}<hr></h3>
@@ -27,7 +27,6 @@
                             <p>-</p>
                         @endif
                     </h4>
-
                     {{-- <i class="fa fa-check"></i> --}}
                     <p class="card-text mt-5">{!!$adminpackage->details!!}</p>
                     @if ($adminpackage->title==="Free")

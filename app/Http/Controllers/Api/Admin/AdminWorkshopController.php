@@ -10,7 +10,7 @@ class AdminWorkshopController extends Controller
 {
     public function index(){
         try{
-            $workshop=Workshop::where('status','!=',"Deleted")->get();
+            $workshop=Workshop::with('users')->where('status','!=',"Deleted")->get();
             if (count($workshop) > 0) {
                 return response([
                     'success' => true,

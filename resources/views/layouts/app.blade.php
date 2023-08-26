@@ -82,6 +82,11 @@
 
                 <!-- Settings -->
                 @hasrole('Admin|Manager')
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ route('consultant.index') }}">
+                        <i class="bi bi-device-ssd-fill"></i>
+                        <span>Consultant</span></a>
+                </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="{{ route('state.index') }}">
                             <i class="bi bi-device-ssd-fill"></i>

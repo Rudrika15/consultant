@@ -61,5 +61,6 @@ class User extends Authenticatable
     }
     public function socialLink(){
         return $this->hasMany(SocialLink::class,'userId','id');
-    }    
+    } 
+       
 }

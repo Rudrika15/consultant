@@ -25,8 +25,9 @@ return new class extends Migration
             $table->string('pincode');
             $table->string('photo');
             $table->string('company')->nullable(true);
-            $table->string('categoryId')->nullable(true);;
-            $table->string('packageId')->nullable(true);;
+            $table->string('categoryId')->nullable(true);
+            $table->string('packageId')->nullable(true);
+            $table->string('isFeatured')->default("No");
             $table->string('status');
             $table->timestamps();
         });

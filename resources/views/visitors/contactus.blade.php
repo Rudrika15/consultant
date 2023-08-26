@@ -17,7 +17,7 @@
             <div class="phone-email-address  p-5">
                 <div class="row mt-5">
                     <div class="col-md-4">
-                        <div class="card contact_card ">
+                        <div class="card contact_card mt-3">
                             <div class="card-body mb-5">
                                 <div class="phone">
                                     <i class="fa fa-phone phoneicon"></i>
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card contact_card ">
+                        <div class="card contact_card mt-3">
                             <div class="card-body mb-5">
                                 <div class="phone text-center">
                                     <i class="fa fa-phone phoneicon"></i>
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card contact_card ">
+                        <div class="card contact_card mt-3">
                             <div class="card-body">
                                 <div class="phone text-center">
                                     <i class="fa fa-phone phoneicon"></i>
@@ -71,7 +71,7 @@
             <div class="contact-location">
                 <div class="row">
                     <div class="col-md-6">
-                        <h4>Contact Us</h4>
+                        <h4 class="pt-3">Contact Us</h4>
                         <form class="contact-form mt-5 mb-5">
                             <div class="row">
                                 <div class="col-md-6 pt-4 input-container">
@@ -94,10 +94,10 @@
                                     <i class="fa fa-edit icon text-center"></i>
                                     <input type="text" name="name" class="form-control input-field" placeholder="{{_('Enter the code above here')}}">
                                 </div>
-                                <div class="col-2 pt-3">
+                                <div class="col-3 pt-3">
                                     <button type="submit" class="btn contact-submit-button fw-bold">Submit</button>
                                 </div>
-                                <div class="col-2 pt-3">
+                                <div class="col-3 pt-3">
                                     <button type="submit" class="btn contact-submit-reset fw-bold">Reset</button>
                                 </div>
                                 

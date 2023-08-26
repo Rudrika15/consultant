@@ -10,9 +10,12 @@ use Illuminate\Support\Facades\Validator;
 class SliderController extends Controller
 {
     
-    public function index(){
+    public function index($type){
         try{
-            $slider=Slider::where('status','!=','Deleted')->get();
+            
+            $slider=Slider::where('status','!=','Deleted')
+            ->where('type','=',$type)
+            ->get();
             if (count($slider) > 0) {
                 return response([
                     'success' => true,

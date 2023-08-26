@@ -12,6 +12,10 @@ class Profile extends Model
     {
         return $this->hasMany(User::class, 'id', 'userId');
     }
+    public function users()
+    {
+        return $this->belongsTo(User::class,'userId');
+    }
     public function states(){
         return $this->hasMany(State::class,'id','state');
     }
@@ -24,5 +28,7 @@ class Profile extends Model
     public function categories(){
         return $this->hasOne(Category::class,'id','categoryId');
     }
-
+    public function packages(){
+        return $this->hasOne(Package::class,'id','packageId');
+    }
 }

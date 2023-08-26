@@ -4,13 +4,14 @@ use App\Http\Controllers\Admin\AdminPackageController;
 use App\Http\Controllers\Admin\AdminWorkshopController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Admin\ConsultantController;
 use App\Http\Controllers\Admin\InquiryController;
 use App\Http\Controllers\Admin\LanguageMasterController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SocialMasterController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Consultant\AttachmentController;
-use App\Http\Controllers\Consultant\ConsultantController;
+// use App\Http\Controllers\Consultant\ConsultantController;
 use App\Http\Controllers\Consultant\GalleryController;
 use App\Http\Controllers\Consultant\LanguageController;
 use App\Http\Controllers\Consultant\PackageController;
@@ -181,7 +182,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('adminworkshop-index',[AdminWorkshopController::class,'index'])->name('adminworkshop.index');
     Route::get('adminworkshop/{id}/view',[AdminWorkshopController::class,'view'])->name('adminworkshop.view');
 
-    
+    /* Consultant List  */
+    Route::get('consultant-index',[ConsultantController::class,'index'])->name('consultant.index');
+
     
     
     /* ------------------------Consultant Panele ---------------------------------- */

@@ -118,6 +118,9 @@
 
 @media only screen and (max-width: 600px) {    
     .contact_card {
-        flex-wrap: wrap;
+        border: none !important;
+        width: 100%;
+        border-radius: 10px;
+        height: 100%;
     }
 }
