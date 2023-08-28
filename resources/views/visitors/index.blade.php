@@ -38,7 +38,7 @@
                             <div class="card catcard ">
                                 <div class="card-img">
                                     <img src="{{ url('category')}}/{{$categories->photo}}" alt=""
-                                        width="230px" height="188px">
+                                        width="200px" height="188px">
                                 </div>
                                 <h5 class="mt-3">{{$categories->catName}}</h5>
                             </div>
@@ -58,7 +58,7 @@
 
     {{-- How Consultant Cube Works Start --}}
     <div class="cube_orange">
-        <div class="cube_purple">
+        <div class="cube_purple text-center">
             <h3 class="text-center text-white mt-5">How Consultant Cube Works</h3>
             <p class="text-center text-white mt-3">A platform to find right consultant</p>
             <div class="container mt-5">
@@ -257,7 +257,7 @@
 
     {{-- Featured Consultants End --}}
 
-    {{-- Trusted by thousands of people all over the world Start --}}
+    {{-- Trust  ed by thousands of people all over the world Start --}}
 
     <div class="trusted_porple mt-5">
         <div class="trusted_orange">

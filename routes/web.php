@@ -55,8 +55,6 @@ Route::get('/membershipplan', [VisitorController::class, 'membershipPlan'])->nam
 Route::get('/corporateInquery', [VisitorController::class, 'corporateInquery'])->name('visitors.corporateInquery');
 Route::post('corporateInquery-inqueryStore', [VisitorController::class, 'inqueryStore'])->name('corporateInquery.inqueryStore');
 
-
-
 Route::get('/contactus', [VisitorController::class, 'contactus'])->name('visitors.contactus');
 Route::get('/signup/package', [VisitorController::class, 'signuppackage'])->name('visitors.signuppackage');
 Route::get('/consultantList/{id?}',[VisitorController::class,'consultantList'])->name('visitors.consultantList');

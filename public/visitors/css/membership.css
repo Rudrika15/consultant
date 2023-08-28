@@ -48,27 +48,27 @@
     border-radius: 10px;
 }
 .profile-access-user-img{
-    padding-left: 15px;
+    
     align-items: center ;
     color: var(--purple);
 }
 .category_img{
-    padding-left: 40px;
+    
     align-items: center ;
     color: var(--purple);
 }
 .service_img{
-    padding-left: 40px;
+    
     align-items: center ;
     color: var(--purple);
 }
 .quotation_img{
-    padding-left: 20px;
+    
     align-items: center ;
     color: var(--purple) ;
 }
 .certificate_img{
-    padding-left: 50px;
+    
     align-items: center ;
     color: var(--purple);
 }
@@ -77,4 +77,12 @@
 }
 #adminpackage-price{
     color: var(--purple);
+}
+@media only screen and (max-width: 600px) {
+    #allpanlcard-with{
+        width: 60%;
+        margin-left: 20%;
+
+    }
+
 }

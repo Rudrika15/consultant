@@ -200,7 +200,7 @@ span .updatetext{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 50px;
+    width: 45px;
     height: 54.72px;
     border-bottom: 1px solid var(--lightgray);
 }
@@ -214,7 +214,7 @@ span .updatetext{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 50px;
+    width: 45px;
     height: 54.72px;
     border-bottom: 1px solid var(--lightgray);
 }
@@ -228,7 +228,7 @@ span .updatetext{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 50px;
+    width: 45px;
     height: 54.72px;
     border-bottom: 1px solid var(--lightgray);
 }
@@ -242,7 +242,7 @@ span .updatetext{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 50px;
+    width: 45px;
     height: 54.72px;
     border-bottom: 1px solid var(--lightgray);
 }
@@ -421,7 +421,7 @@ span .updatetext{
 }
 .searchCategory {
     position: absolute !important;
-    top: 45.05% !important;
+    top: 42.05% !important;
     left: 5%;
     right: 10%;
     width: 35% !important;
@@ -430,16 +430,16 @@ span .updatetext{
 #searchInput{
     border-radius: 5px;
     width: 100%;
-    padding: 22px;
+    padding: 15px;
     border: 2px solid var(--orangered);
 }
 #searchbuttonofcategory{
     background-color: var(--purple);
     color: var(--white);
     position: absolute;
-    top:527px;
+    top: 42.05% !important;
     left:41%;
-    padding: 21px 60px;
+    padding: 15px 60px;
     border-radius: 5px;
 }
 #searchInput:focus{
@@ -447,7 +447,7 @@ span .updatetext{
 }
 .categorySuggestions{
     position: absolute !important;
-    top: 52% !important;
+    top: 48% !important;
     left: 5%;
     width: 35%;
     height: 18%;
@@ -457,12 +457,10 @@ span .updatetext{
     padding-top: 10px;
     padding-left: 20px !important;
 }
-#selectedCategoryId{
-    
-}
+
 .slidertop {
     position: absolute !important;
-    top: 70% !important;
+    top: 67% !important;
     width: 80% !important;
     left: 10%;
     right: 10%;
@@ -477,7 +475,7 @@ span .updatetext{
 .catcard {
     background-color: #F7F8FA !important;
     border: none !important;
-    width: 250px !important;
+    width: 220px !important;
 }
 .card-img {
     border: 10px solid #fff !important;
@@ -661,7 +659,7 @@ span .updatetext{
         background-color: var(--white) !important;
         color: var(--purple);
         position:  absolute;
-        top:300px;
+        top:270px !important;
         left:33%;
         padding: 20px 40px;
         border-radius: 35px;
@@ -683,7 +681,7 @@ span .updatetext{
     }
     .slidertop {
         top: 55% !important;
-        left: 35px;
+        left: 40px;
         position: absolute !important;
     }
     .prevnext {
@@ -820,3 +818,91 @@ span .updatetext{
 }
 
 /* Featured Consultant Slider */
+
+
+/* @media  screen and (max-width: 1536px) {
+    
+    .searchCategory {
+        position: absolute !important;
+        top: 35.05% !important;
+        left: 5%;
+        right: 10%;
+        width: 35% !important;
+    
+    }
+    #searchInput{
+        border-radius: 5px;
+        width: 100%;
+        padding: 15px;
+        border: 2px solid var(--orangered);
+    }
+    #searchbuttonofcategory{
+        background-color: var(--purple);
+        color: var(--white);
+        position: absolute;
+        top: 40.05% !important;
+        left:41%;
+        padding: 15px 60px;
+        font-size: 18px;
+        border-radius: 5px;
+    }
+    #searchInput:focus{
+        border: 3px solid var(--purple) !important;
+    }
+    .categorySuggestions{
+        position: absolute !important;
+        top: 47.50% !important;
+        left: 5%;
+        width: 35%;
+        height: 18%;
+        background-color:var(--white);
+        overflow: scroll;
+        border-radius: 5px;
+        padding-top: 10px;
+        padding-left: 20px !important;
+    }
+    
+} */
+@media  screen and (min-width: 1680px) {
+    /* insert styles here */
+    /* .searchCategory {
+        position: absolute !important;
+        top: 30.05% !important;
+        left: 5%;
+        right: 10%;
+        width: 35% !important;
+    
+    }
+    #searchInput{
+        border-radius: 5px;
+        width: 100%;
+        padding: 15px;
+        border: 2px solid var(--orangered);
+    }
+    #searchbuttonofcategory{
+        background-color: var(--purple);
+        color: var(--white);
+        position: absolute;
+        top: 40.05% !important;
+        left:41%;
+        padding: 15px 60px;
+        font-size: 18px;
+        border-radius: 5px;
+    }
+    #searchInput:focus{
+        border: 3px solid var(--purple) !important;
+    }
+    .categorySuggestions{
+        position: absolute !important;
+        top: 47.50% !important;
+        left: 5%;
+        width: 35%;
+        height: 18%;
+        background-color:var(--white);
+        overflow: scroll;
+        border-radius: 5px;
+        padding-top: 10px;
+        padding-left: 20px !important;
+    } */
+    
+}

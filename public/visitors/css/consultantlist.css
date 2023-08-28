@@ -17,19 +17,19 @@
 }
 #fa-arrow-circle-left{
     position: absolute !important;
-    top:115px;
-    left:430px; 
-    font-size: 50px;
+    top:85px;
+    left:330px; 
+    font-size: 45px;
     color: var(--white);
     text-decoration: none;
 }
 #consultant_list_card{
     position: absolute;
-    top:100px !important;
-    left: 500px;
+    top:70px !important;
+    left: 390px;
     background-color:var(--white);
-    height: 550px !important;
-    width: 550px !important;
+    height: 480px !important;
+    width: 450px !important;
 
 }
 #card_macthed_grid{

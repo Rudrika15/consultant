@@ -42,7 +42,7 @@
         </div>
     </div>
     {{-- All Panls Include --}}
-    <div class="container allplan">
+    {{-- <div class="container allplan">
         <div class="text-center mt-5">
             <h1>All Plans Include</h1>
             <h5>Bring your people together under your brand on your terms !</h5>
@@ -77,6 +77,50 @@
             </div>
             <div class="card allplancard shadow p-3 mb-5 bg-body rounded mt-lg-5">
                 <div class="card-body">
+                    <img src="{{asset('visitors/images/cerificate_img.png')}}" alt="" class="certificate_img">
+                    <h5 class="card-text text-center">Add Your Certificates</h5>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <a href="#" class="btn btn-primary text-center mt-lg-5 mb-lg-5">Apply Now</a>
+        </div>
+    </div> --}}
+    <div class="container allplan">
+        <div class="text-center mt-5">
+            <h1>All Plans Include</h1>
+            <h5>Bring your people together under your brand on your terms !</h5>
+        </div>
+        <div class="row cardgap gap-lg-4 mt-lg-5 ms-lg-5 flex-wrap">
+            <div class="col-md-2 card allplancard  shadow p-lg-3 mb-5 bg-gray rounded mt-5" id="allpanlcard-with">
+                <div class="card-body text-center">
+                    <a href="{{route('visitor.profile')}}" style="text-decoration: none;color:black;">
+                    <img  class="text-center profile-access-user-img" src="{{asset('visitors/images/profile_access_user.png')}}">
+                    <h5 class="card-text text-center">Profile Access</h5>
+                    </a>
+                </div>
+            </div>
+            <div class=" col-md-2 card allplancard shadow p-lg-3 mb-5 bg-gray rounded mt-lg-5" id="allpanlcard-with">
+                <div class="card-body text-center">
+                    <img src="{{asset('visitors/images/windows_img.png')}}" alt="" class="category_img">
+                    <h5 class="card-text text-center">Add Your Category</h5>
+                </div>
+            </div>
+            <div class="col-md-2 card allplancard shadow p-3 mb-5 bg-body rounded mt-lg-5" id="allpanlcard-with">
+                <div class="card-body text-center">
+                    <img src="{{asset('visitors/images/service_img.png')}}" alt="" class="service_img">
+                    <h5 class="card-text text-center">Add Your Services</h5>
+                </div>
+            </div>
+            <div class="col-md-2 card allplancard shadow p-3 mb-5 bg-body rounded mt-lg-5" id="allpanlcard-with">
+                <div class="card-body text-center">
+                    <img src="{{asset('visitors/images/quotation_img.png')}}" alt="" class="quotation_img">
+                    <h5 class="card-text text-center">Get Quotations
+                    </h5>
+                </div>
+            </div>
+            <div class="col-md-2 card allplancard shadow p-3 mb-5 bg-body rounded mt-lg-5" id="allpanlcard-with">
+                <div class="card-body text-center">
                     <img src="{{asset('visitors/images/cerificate_img.png')}}" alt="" class="certificate_img">
                     <h5 class="card-text text-center">Add Your Certificates</h5>
                 </div>
