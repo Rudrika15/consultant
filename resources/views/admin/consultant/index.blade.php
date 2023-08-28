@@ -28,10 +28,10 @@
     <!-- /.box-title -->
     <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
         <div class="">
-            <h4 class="">Consultant</h4>
+            <h4 class="">Consultant List</h4>
         </div>
         <div class="">
-            <a href="" id="add" class="btn btnback btn-sm">ADD</a>
+            
             <a href="" id="back" class="btn btnback  btn-sm" style="display:none;">BACK</a>
 
             <!-- /.sub-menu -->
@@ -48,14 +48,11 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Contact No</th>
-                        
                         <th>Plan Type</th>
                         <th>About</th>
-                        
                         <th>photo</th>
                         <th>Type</th>
                         <th>Company Name</th>
-                        
                         <th>Category</th>
                         <th>Package</th>
                         <th>Is Featured</th>
@@ -125,8 +122,8 @@
                     name: 'profile.categories.catName'
                 },
                 {
-                    data: 'profile.packageId',
-                    name: 'profile.packageId'
+                    data: 'profile.packages.title',
+                    name: 'profile.packages.title'
                 },
                 {
                     data: 'profile.isFeatured',
@@ -150,29 +147,40 @@
             ]
         });
 
-        // $(document).on('click', '.edit', function() {
-        //     var row = $(this).closest('tr');
-        //     var data = table.row(row).data();
-        //     var cityId = data.id;
+        $(document).on('click', '.edit', function() {
+            var row = $(this).closest('tr');
+            var data = table.row(row).data();
+            var consultantId = data.id;
 
-        //     $.ajax({
-        //         url: "{{ url('city') }}" + '/' + cityId + '/view',
-        //         type: 'GET',
-        //         success: function(response) {
-        //             // Handle the Ajax response here
-        //             console.log(response); // Check the response in the browser console
-        //             $('#dataTableDiv').hide();
-        //             $('#add').hide();
-        //             $('#back').show();
-        //             $('#viewDataDiv').html('<strong>City Name:</strong> ' + response.cityName + '<br>' + '<strong>State Name:</strong> ' + response.state.stateName + '<br>' + '<strong>Satus:</strong> ' + response.status);
+            $.ajax({
+                url: "{{ url('consultant') }}" + '/' + consultantId + '/view',
+                type: 'GET',
+                success: function(response) {
+                    // Handle the Ajax response here
+                    console.log(response); // Check the response in the browser console
+                    $('#dataTableDiv').hide();
+                    $('#add').hide();
+                    $('#back').show();
+                    $('#viewDataDiv').html('<strong>Name:</strong>' + response.name + 
+                        '<br>' + '<strong>Emai:</strong> ' + response.email +
+                        '<br>' + '<strong>Contact No:</strong> ' + response.contactNo +
+                        '<br>' + '<strong>Plan Type:</strong> ' + response.planType +
+                        '<br>' + '<strong>About:</strong> ' + response.profile.about +
+                        '<br>' + '<br><strong>Photo:</strong><img src="{{url('/profile')}}/' + response.profile.photo + '" width="100px" height="100px" class="ms-3">' +
+                        '<br>' + '<strong>Type:</strong> ' + response.profile.type +
+                        '<br>' + '<strong>Company:</strong> ' + response.profile.company   +
+                        '<br>' + '<strong>Category:</strong> ' + response.profile.categories.catName +
+                        '<br>' + '<strong>Package:</strong> ' + response.profile.packages.title +
+                        '<br>' + '<strong>Is Featured:</strong> ' + response.profile.ifFeatured +
+                        '<br>' + '<strong>Status:</strong> ' + response.status);
 
-        //         },
-        //         error: function(error) {
-        //             // Handle the error response here
-        //             console.log(error); // Check the error in the browser console
-        //         }
-        //     });
-        // });
+                },
+                error: function(error) {
+                    // Handle the error response here
+                    console.log(error); // Check the error in the browser console
+                }
+            });
+        });
 
         // $('body').on('click', '.delete', function(event) {
         //     event.preventDefault();

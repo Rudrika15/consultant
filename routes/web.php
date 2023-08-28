@@ -182,6 +182,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     /* Consultant List  */
     Route::get('consultant-index',[ConsultantController::class,'index'])->name('consultant.index');
+    Route::get('consultant/{id}/view', [ConsultantController::class, 'view'])->name('consultant.view');
 
     
     

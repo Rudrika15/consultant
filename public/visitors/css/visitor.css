@@ -656,13 +656,13 @@ span .updatetext{
         border: none;
     }
     #searchbuttonofcategory{
-        background-color: var(--white) !important;
-        color: var(--purple);
+        background-color: var(--orangered) !important;
+        color: var(--white);
         position:  absolute;
         top:270px !important;
         left:33%;
-        padding: 20px 40px;
-        border-radius: 35px;
+        padding: 15px 40px;
+        border-radius:5px;
     }
     .categorySuggestions{
         position: absolute !important;
@@ -819,12 +819,30 @@ span .updatetext{
 
 /* Featured Consultant Slider */
 
-
-/* @media  screen and (max-width: 1536px) {
-    
+@media only screen and (min-width:500px){
+    /* For Increase Screen */
+    /* .main_page{
+        background-color: pink !important;
+    }  */
+}
+@media only screen and (min-width:1000px){
+    /* For Increase Screen */
+    .main_page{
+        /* background-color: green !important; */
+    } 
+}
+@media only screen and (min-width:1300px){
+    /* For Dicrease Screen */
+    .main_page{
+        /* background-color: red !important; */
+    } 
+    .consultantcategory {
+        background-color: var(--purple);
+        min-height: 300px !important;
+    }
     .searchCategory {
         position: absolute !important;
-        top: 35.05% !important;
+        top: 45.05% !important;
         left: 5%;
         right: 10%;
         width: 35% !important;
@@ -833,17 +851,17 @@ span .updatetext{
     #searchInput{
         border-radius: 5px;
         width: 100%;
-        padding: 15px;
+        padding: 22px;
         border: 2px solid var(--orangered);
     }
     #searchbuttonofcategory{
         background-color: var(--purple);
         color: var(--white);
         position: absolute;
-        top: 40.05% !important;
+        top: 45.05% !important;
         left:41%;
-        padding: 15px 60px;
-        font-size: 18px;
+        font-size: 20px;
+        padding: 18px 60px;
         border-radius: 5px;
     }
     #searchInput:focus{
@@ -851,7 +869,7 @@ span .updatetext{
     }
     .categorySuggestions{
         position: absolute !important;
-        top: 47.50% !important;
+        top: 52% !important;
         left: 5%;
         width: 35%;
         height: 18%;
@@ -862,47 +880,19 @@ span .updatetext{
         padding-left: 20px !important;
     }
     
-} */
-@media  screen and (min-width: 1680px) {
-    /* insert styles here */
-    /* .searchCategory {
+    .slidertop {
         position: absolute !important;
-        top: 30.05% !important;
-        left: 5%;
+        top: 70% !important;
+        width: 80% !important;
+        left: 10%;
         right: 10%;
-        width: 35% !important;
-    
     }
-    #searchInput{
-        border-radius: 5px;
-        width: 100%;
-        padding: 15px;
-        border: 2px solid var(--orangered);
+    .prevnext {
+        display: flex !important;
+        gap: 20px !important;
+        justify-content: center !important;
+        align-items: center !important;
     }
-    #searchbuttonofcategory{
-        background-color: var(--purple);
-        color: var(--white);
-        position: absolute;
-        top: 40.05% !important;
-        left:41%;
-        padding: 15px 60px;
-        font-size: 18px;
-        border-radius: 5px;
-    }
-    #searchInput:focus{
-        border: 3px solid var(--purple) !important;
-    }
-    .categorySuggestions{
-        position: absolute !important;
-        top: 47.50% !important;
-        left: 5%;
-        width: 35%;
-        height: 18%;
-        background-color:var(--white);
-        overflow: scroll;
-        border-radius: 5px;
-        padding-top: 10px;
-        padding-left: 20px !important;
-    } */
     
 }
+

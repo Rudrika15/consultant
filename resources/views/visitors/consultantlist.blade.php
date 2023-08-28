@@ -56,13 +56,13 @@
                 @foreach ($consultant as $consultantData)
                     <div class="image-for-consul-list">
                         {{-- /admin_img/{{$gallerys->photo}} --}}
-                        <img src="/profile/{{$consultantData->photo}}" id="card_matches_img" class="" alt="" widht="50px" height="50px">
+                        <img src="/profile/{{$consultantData->photo}}" id="card_matches_img" class="" alt="" widht="40px" height="40px">
                         
                     </div>
                 @endforeach
                 <div class="fw-bold d-flex justify-content-end">
                     <div id="countconsultant">
-                        <p class="fa fa-arrow-left">&nbsp;<span style="font-size: 24px;">{{$countconsultant}}</span></p>
+                        <p class="fa fa-arrow-left">&nbsp;<span style="font-size: 20px;">{{$countconsultant}}</span></p>
                     </div>
                 </div>
             </div>

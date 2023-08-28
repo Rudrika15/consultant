@@ -193,12 +193,12 @@
 
                     <li class="nav-item active">
                         <a class="nav-link" href="{{ route('certificate.index') }}">
-                            <i class="fas fa-fw fa-tachometer-alt"></i>
+                            <i class="fas fa-certificate"></i>
                             <span>Certificate</span></a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="{{ route('achievement.index') }}">
-                            <i class="fas fa-fw fa-tachometer-alt"></i>
+                            <i class="fas fa-award"></i>
                             <span>Achievement</span></a>
                     </li>
                     
@@ -403,18 +403,16 @@
                                     <span
                                         class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                                     <?php
-                                    
-                                    $name = Auth::user()->name;
-                                    $lastName = Auth::user()->lastName;
+                                        $name = Auth::user()->name;
+                                        $lastName = Auth::user()->lastName;
+                                        $profile=Auth::user('profile');
                                     ?>
-                                    @if (isset(Auth::user()->profile_photo))
+                                    @if (isset(Auth::user()->id))
                                         <img class="img-profile rounded-circle"
-                                            src="{{ url('profile') }}/{{ auth::user()->profile_photo }}">
+                                            src="{{ url('profile') }}/{{$profile->profile->photo }}">
                                     @else
                                         <span class="img-profile rounded-circle"><?php echo $name[0], $lastName[0]; ?></span>
                                     @endif
-
-
                                 </a>
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

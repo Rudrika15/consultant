@@ -42,4 +42,24 @@ class ConsultantController extends Controller
             return view('servererror');
         }
     }
+    public function view(Request $request, $id)
+    {
+        try {
+            $user = User::with('profile')
+                    ->with('profile.states')
+                    ->with('profile.cities')
+                    ->with('profile.categories')
+                    ->with('profile.packages')
+                    ->where('status', '!=', 'Deleted')
+                    ->whereHas('roles', function ($query) {
+                        $query->where('name', 'Consultant');
+                    })
+                    ->orderBy('id', 'DESC')
+                    ->findOrFail($id);
+            return response()->json($user);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return view('servererror');
+        }
+    }
 }
