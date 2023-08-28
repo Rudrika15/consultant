@@ -63,12 +63,7 @@
                         <th>Action</th>
                     </tr>
                 </thead>
-                <!-- <tr>
-                    <td>
-                        <a href="">Edit</a>
-                        <a href="">Delete</a>
-                    </td>
-                </tr> -->
+                
                 <tbody>
                 </tbody>
             </table>

@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "c20f3d18-6ea1-4922-81e1-13fb3d4f70e1",
-		"name": "Consultant",
+		"_postman_id": "12bbdd21-8754-465c-8f2d-3bd9cd4b5b94",
+		"name": "Admin_Consultant",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "26910447"
+		"_exporter_id": "26731935"
 	},
 	"item": [
 		{
@@ -625,7 +625,7 @@
 							"formdata": [
 								{
 									"key": "language",
-									"value": "Franch",
+									"value": "Telugu",
 									"type": "text"
 								},
 								{
@@ -659,7 +659,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/languageMaster-update/4?language=tamil&status=Active",
+							"raw": "http://127.0.0.1:8000/api/languageMaster-update/3?language=Bagoli&status=Active",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -671,12 +671,12 @@
 							"path": [
 								"api",
 								"languageMaster-update",
-								"4"
+								"3"
 							],
 							"query": [
 								{
 									"key": "language",
-									"value": "tamil"
+									"value": "Bagoli"
 								},
 								{
 									"key": "status",
@@ -1003,6 +1003,374 @@
 								"api",
 								"consultant-update",
 								"15"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Inquiry",
+			"item": [
+				{
+					"name": "inquiry list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/corporate-inquiry-index",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"corporate-inquiry-index"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin Package",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/adminpackage-index",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"adminpackage-index"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Api demo",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "125",
+									"type": "text"
+								},
+								{
+									"key": "details",
+									"value": "Api Demo",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/adminpackage-store",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"adminpackage-store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update/id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Update",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "details",
+									"value": "Update Api",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/adminpackage-update/5",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"adminpackage-update",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/adminpackage-delete/5",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"adminpackage-delete",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/adminpackage-show/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"adminpackage-show",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Workshop",
+			"item": [
+				{
+					"name": "Workshop List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/workshoplist-index",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"workshoplist-index"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Slider",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/slider-index/inner",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"slider-index",
+								"inner"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "type",
+									"value": "Home",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/D:/Laravel/consultant/consultant/public/gallery/1690534378.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/slider-store",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"slider-store"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update/id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "type",
+									"value": "Home",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/slider-update/5",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"slider-update",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/slider-delete/5",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"slider-delete",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/slider-show/5",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"slider-show",
+								"5"
 							]
 						}
 					},
