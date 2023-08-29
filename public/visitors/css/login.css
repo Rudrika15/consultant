@@ -1,0 +1,38 @@
+:root {
+    --purple: #333692;
+    --white: white;
+    --black: black;
+    --orangered: #f15a29;
+    --gray: gray;
+    --darklightgray: rgb(181, 177, 177);
+    --lightgray: #dddddd;
+    --yellow: orange;
+    --green: green;
+}
+#staticBackdropLabel{
+    color: var(--purple);
+}
+.modal-content{
+    background-color: var(--white) !important;
+    color: var(--white);
+}
+#btn-secondary-close{
+    padding: 10px 40px;
+    color: var(--white);
+    background-color: var(--orangered) !important;
+}
+#btn-primary-login{
+    padding: 10px 40px;
+    color: var(--white);
+    background-color: var(--purple);
+}
+#forgot-link{
+    text-decoration: none;
+}
+#create-new-account-link{
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 600px) {
+
+}

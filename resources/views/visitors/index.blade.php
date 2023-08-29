@@ -1,6 +1,7 @@
 @extends('layouts.visitorApp')
 @section('content')
 <div class="main_page">
+
     <div class="" style="position: relative;">
         <img src="{{ asset('visitors/images/home.png') }}" class="img-fluid  w-100" height="700px" width="100%" alt="" style="opacity: 0.5;">
         {{-- Consultant Category --}}
@@ -398,6 +399,10 @@
 
     </div>
     {{-- Get Started Start --}}
+
+
+    
+    
 </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
@@ -517,6 +522,8 @@
 
     });
 });
+
+
 </script>
 
 {{-- <script type="text/javascript">
@@ -570,5 +577,26 @@
         });
     });
 </script>
+
+<script type="text/javascript">
+    $(function () {
+      
+      $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+      });
+      
+      $('#createNewProduct').click(function () {
+          $('#saveBtn').val("create-product");
+          $('#product_id').val('');
+          $('#productForm').trigger("reset");
+          $('#modelHeading').html("Create New Product");
+          $('#ajaxModel').modal('show');
+      });
+        
+      
+    });
+  </script>
 
 @endsection

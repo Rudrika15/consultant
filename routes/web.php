@@ -25,6 +25,8 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\Admin\StateController;
 use App\Http\Controllers\Consultant\WorkshopController;
+use App\Http\Controllers\RazorpayController;
+use App\Http\Controllers\RazorpayPaymentController;
 use App\Models\Attachment;
 use Illuminate\Support\Facades\Route;
 use League\Flysystem\Visibility;
@@ -74,10 +76,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/homepage', [App\Http\Controllers\HomeController::class, 'homePage'])->name('app');
 
 
-
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
+
+    // Route::get('razorpay-payment', [RazorpayPaymentController::class, 'index']);
+    Route::post('razorpay-payment', [RazorpayPaymentController::class, 'store'])->name('razorpay.payment.store');
 
 
     // Route::get('consultantRegister', [ConsultantController::class, 'consultantRegister'])->name('consultantRegister');

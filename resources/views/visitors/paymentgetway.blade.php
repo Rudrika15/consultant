@@ -59,15 +59,26 @@
                             <div class="col-md-12 mt-5 mb-5">
                                 <button class="btn btn-success">Submit</button>
                             </div>
+          s                  
                         </form>
                 </div>
-
-                {{-- <div class="text-center mt-5 vl-netbanking" id="upiForm" style="display:none;">
-                    <h2 class="pt-5">UPI</h2>
-                        <form action="">
-                            
-                        </form>
-                </div> --}}
+                <div class="card-body text-center">
+                    <form action="{{ route('razorpay.payment.store') }}" method="POST" >
+                        @csrf
+                        <script src="https://checkout.razorpay.com/v1/checkout.js"
+                                data-key="{{ env('RAZORPAY_KEY') }}"
+                                data-amount="50000"
+                                data-buttontext="Pay 100 INR"
+                                data-name="ConsultantCube.com"
+                                data-description="Rozerpay"
+                                data-image="{{url('/visitors/images/ConsultantLogo.jpg')}}"
+                                data-prefill.name="name"
+                                data-email="{{Auth::user()->email}}"
+                                
+                                data-theme.color="#333692">
+                        </script>
+                    </form>
+                </div>
             </div>
           </div>
     </div>
