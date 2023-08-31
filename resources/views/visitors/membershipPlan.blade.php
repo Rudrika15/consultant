@@ -33,28 +33,28 @@
                     @if ($adminpackage->title==="Free")
                         <a href="" class="btn btn-primary mb-5 mt-5">Apply Now</a>
                        
-                        @else
+                    @elseif(isset(Auth::user()->id))
                         {{-- <a href="{{route('paymentgetway')}}/{{$adminpackage->id}}" class="btn btn-primary mb-5 mt-5">Apply Now</a> --}}
                         
-                            <div class="card-body text-center">
-                                <form action="{{ route('razorpay.payment.store') }}" method="POST" >
-                                    @csrf
-                                    <script src="https://checkout.razorpay.com/v1/checkout.js"
-                                            data-key="{{ env('RAZORPAY_KEY') }}"
-                                            data-amount="{{$adminpackage->price * 100}}"
-                                            data-buttontext=""
-                                            data-name="ConsultantCube.com"
-                                            data-description="Rozerpay"
-                                            data-image="{{url('/visitors/images/ConsultantLogo.jpg')}}"
-                                            data-prefill.name="name"
-                                            data-prefill.email="email"
-                                            data-theme.color="#333692">
-                                    </script>
-                                    <button class="custom-razorpay-button">Apply Now</button>
-                                </form>
-                            </div>
-                            
-                        @endif
+                                <div class="card-body text-center">
+                                    <form action="{{ route('razorpay.payment.store') }}" method="POST" >
+                                        @csrf
+                                        <script src="https://checkout.razorpay.com/v1/checkout.js"
+                                                data-key="{{ env('RAZORPAY_KEY') }}"
+                                                data-amount="{{$adminpackage->price * 100}}"
+                                                data-buttontext=""
+                                                data-name="ConsultantCube.com"
+                                                data-description="Rozerpay"
+                                                data-image="{{url('/visitors/images/ConsultantLogo.jpg')}}"
+                                                data-prefill.name="name"
+                                                data-theme.color="#333692">
+                                        </script>
+                                        <button class="custom-razorpay-button">Apply Now</button>
+                                    </form>
+                                </div>
+                    @else
+                        <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-primary mb-5 mt-5">Apply Now</a> 
+                    @endif
                         
                 </div>
             </div>

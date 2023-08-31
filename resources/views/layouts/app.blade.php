@@ -11,6 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Consultant Cube</title>
 
+    <link rel="stylesheet" href="{{asset('visitors/css/payment.css')}}">
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('asset/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -32,6 +33,9 @@
     <link rel="stylesheet" type="text/css"
         href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
 
+        {{-- Fa fa Font --}}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
     <!-- For Sweet Alert  for css-->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -206,6 +210,11 @@
                         <a class="nav-link" href="{{route('workshop.index')}}">
                             <i class="fas fa-laptop-house"></i>
                             <span>Workshop</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{route('upgradeplan.index')}}">
+                            <i class="fas fa-wallet"></i>
+                            <span>Upgrade Plan</span></a>
                     </li>
                 @endrole
 

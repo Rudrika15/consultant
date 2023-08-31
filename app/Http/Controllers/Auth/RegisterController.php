@@ -81,13 +81,19 @@ class RegisterController extends Controller
             'gender' => $data['gender'],
             'birthdate' => $data['birthdate'],   
         ]);
-        $user->assignRole('Consultant');
+        
         $profile = new Profile();
         $profile->userId = $user->id;
         $profile->state=$data['stateId'];
         $profile->city=$data['cityId'];
         $profile->contactNo2=$data['contactNo'];
-        $profile->type = $data['type'];
+        if($data['type']=="Consultant"){
+            $user->assignRole('Consultant');
+            $profile->type =$data['type']; 
+        }else{
+            $user->assignRole('User');
+            $profile->type =$data['type']; 
+        }
         $profile->company = $data['company'];
         $profile->categoryId = $data['categoryId'];
         $profile->packageId = $data['packageId'];   

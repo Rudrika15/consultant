@@ -9,6 +9,7 @@ use Session;
 use Exception;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Auth;
   
 class RazorpayPaymentController extends Controller
 {
@@ -38,9 +39,9 @@ class RazorpayPaymentController extends Controller
                     'r_payment_id' => $response['id'],
                     'method' => $response['method'],
                     'currency' => $response['currency'],
-                    'user_email' => $response['email'],
-                    'userId' => $response['userId'],
-                    'amount' => $response['amount'],
+                    'user_email' => Auth::user()->email,
+                    'userId'=>Auth::user()->id,
+                    'amount' => $response['amount']/100,
                     'json_response' => json_encode((array)$response)
                 ]);
             } catch(Exceptio $e) {

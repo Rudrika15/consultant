@@ -24,6 +24,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\Admin\StateController;
+use App\Http\Controllers\Consultant\UpgradePlanController;
 use App\Http\Controllers\Consultant\WorkshopController;
 use App\Http\Controllers\RazorpayController;
 use App\Http\Controllers\RazorpayPaymentController;
@@ -275,5 +276,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('workshop-edit/{id?}',[WorkshopController::class,'edit'])->name('workshop.edit');
     Route::post('workshop-update',[WorkshopController::class,'update'])->name('workshop.update');
     Route::get('workshop-delete/{id?}',[WorkshopController::class,'delete'])->name('workshop.delete');
+
+    /* Upgrade Plan */
+    Route::get('upgradeplan-index',[UpgradePlanController::class,'index'])->name('upgradeplan.index');
+    Route::get('upgradeplan/{id}/view', [UpgradePlanController::class, 'view'])->name('upgradeplan.view');
+    Route::post('consultant-razorpay-payment', [UpgradePlanController::class, 'store'])->name('consultant.razorpay.payment.store');
+    Route::get('upgradeplan-paymentpage/{id?}',[UpgradePlanController::class,'paymentpage'])->name('consultant.upgradeplan.paymentpage');
 
 }); 

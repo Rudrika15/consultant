@@ -139,7 +139,7 @@
                             <div class="row">
                                 <div class="col-md-2">
                                     <div class="form-check ">
-                                        <input class="form-check-input" type="radio" name="type" id="user" value="user" checked>
+                                        <input class="form-check-input" type="radio" name="type" id="user" value="User" checked>
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             {{ __('User') }}
                                         </label>
@@ -147,7 +147,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="type" id="consultant" value="consultant">
+                                        <input class="form-check-input" type="radio" name="type" id="consultant" value="Consultant">
                                         <label class="form-check-label" for="flexRadioDefault2">
                                             {{ __('Become Consultant') }}
                                         </label>

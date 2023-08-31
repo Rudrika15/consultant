@@ -25,7 +25,7 @@
                             <a href="{{ route('visitor.profile') }}" class="text-white"
                             style="text-decoration:none;">{{Auth::user()->name}}</a></i>        
                         @else
-                            <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop"class="text-white"
+                            <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="text-white"
                                 style="text-decoration:none;">Login</a></i>
                                 <i class="fa fa-plus pt-1"></i>
                             <a href="{{ route('register') }}" class="text-white" style="text-decoration:none;">Sign Up</a>
