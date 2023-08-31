@@ -17,10 +17,10 @@ class RazorpayPaymentController extends Controller
      *
      * @return response()
      */
-    public function index(): View
-    {        
-        return view('visitors.razorpayView');
-      }
+    // public function index(): View
+    // {        
+    //     return view('visitors.razorpayView');
+    //   }
   
     /**
      * Write code on Method

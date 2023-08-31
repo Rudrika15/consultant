@@ -62,7 +62,7 @@
           s                  
                         </form>
                 </div>
-                <div class="card-body text-center">
+                {{-- <div class="card-body text-center">
                     <form action="{{ route('razorpay.payment.store') }}" method="POST" >
                         @csrf
                         <script src="https://checkout.razorpay.com/v1/checkout.js"
@@ -78,7 +78,7 @@
                                 data-theme.color="#333692">
                         </script>
                     </form>
-                </div>
+                </div> --}}
             </div>
           </div>
     </div>

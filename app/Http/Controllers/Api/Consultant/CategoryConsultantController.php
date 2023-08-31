@@ -64,8 +64,30 @@ class CategoryConsultantController extends Controller
     }
     public function user_details($id){
         try{
-            $user=User::with('profile.states')->with('profile.cities')->with('profile.categories')->with('profile.packages')->where('id','=',$id)->get();
-            if($user){
+            $user=User::with('states')
+                ->with('cities')
+                ->with('profile')    
+                ->with('profile.categories')
+                ->with('packages')
+                ->with('language')
+                ->with('socialLink')
+                ->with('time')
+                ->with('gallery')
+                ->with('video')
+                ->with('attachments')
+                ->with('certificate')
+                ->with('achievement')
+                ->with('workshop')
+                ->where('id','=',$id)->get();
+                if($user){
+                foreach($user as $data){
+                    $data->profile->about=strip_tags($data->profile->about);
+                    $data->profile->address=strip_tags($data->profile->address);
+
+                    foreach($data->workshop as $workshop){
+                        $workshop->detail=strip_tags($workshop->detail);
+                    }
+                }      
                 return response([
                     'success' => true,
                     'status' => 200,
@@ -91,6 +113,8 @@ class CategoryConsultantController extends Controller
         try{
             $user=Profile::where('isFeatured','=',$isFeatured)->get();
             if($user){
+                
+
                 return response([
                     'success' => true,
                     'status' => 200,

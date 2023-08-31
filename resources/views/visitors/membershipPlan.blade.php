@@ -48,13 +48,12 @@
                                             data-image="{{url('/visitors/images/ConsultantLogo.jpg')}}"
                                             data-prefill.name="name"
                                             data-prefill.email="email"
-                                            
                                             data-theme.color="#333692">
                                     </script>
                                     <button class="custom-razorpay-button">Apply Now</button>
                                 </form>
                             </div>
-                        
+                            
                         @endif
                         
                 </div>
