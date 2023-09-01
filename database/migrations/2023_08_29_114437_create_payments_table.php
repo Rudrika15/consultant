@@ -15,11 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('r_payment_id');
             $table->integer('userId');
-            $table->string('method');
-            $table->string('currency');
-            $table->string('user_email');
+            $table->string('method')->nullable(true);
+            $table->string('currency')->nullable(true);
+            $table->string('user_email')->nullable(true);
+            $table->string('package');
             $table->string('amount');
-            $table->longText('json_response');
+            $table->longText('json_response')->nullable(true);
             $table->timestamps();
         });
     }

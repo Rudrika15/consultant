@@ -140,6 +140,12 @@
                             <i class="fas fa-sliders-h"></i>
                             <span>Slider</span></a>
                     </li>
+                    
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{route('admin.lead.index')}}">
+                            <i class="fas fa-archive"></i>
+                            <span>Leads</span></a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link collapsed" style="color: #014272; font-weight: 700;" href="#"
                             data-toggle="collapse" data-target="#collapseSetting" aria-expanded="true"
@@ -215,6 +221,11 @@
                         <a class="nav-link" href="{{route('upgradeplan.index')}}">
                             <i class="fas fa-wallet"></i>
                             <span>Upgrade Plan</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{route('consultant.lead.index')}}">
+                            <i class="fas fa-archive"></i>
+                            <span>Leads</span></a>
                     </li>
                 @endrole
 
@@ -430,7 +441,11 @@
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Update my Profile
                                     </a>
-
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ route('visitors.index') }}">
+                                        <i class="fas fa-sign-in-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                       Back To Home
+                                    </a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#"
                                         onclick="event.preventDefault();

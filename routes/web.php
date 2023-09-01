@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminLeadController;
 use App\Http\Controllers\Admin\AdminPackageController;
 use App\Http\Controllers\Admin\AdminWorkshopController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -24,6 +25,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\Admin\StateController;
+use App\Http\Controllers\Consultant\LeadController;
 use App\Http\Controllers\Consultant\UpgradePlanController;
 use App\Http\Controllers\Consultant\WorkshopController;
 use App\Http\Controllers\RazorpayController;
@@ -101,6 +103,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('userplantype',[VisitorController::class,'userplantype'])->name('userplantype');
     
     /*---------------------------Admin Panel ---------------------------------- */
+
+    /* Leade List */
+    Route::get('lead-index',[AdminLeadController::class,'index'])->name('admin.lead.index');
+
 
     /* State */
     Route::get('state-index', [StateController::class, 'index'])->name('state.index');
@@ -279,8 +285,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     /* Upgrade Plan */
     Route::get('upgradeplan-index',[UpgradePlanController::class,'index'])->name('upgradeplan.index');
-    Route::get('upgradeplan/{id}/view', [UpgradePlanController::class, 'view'])->name('upgradeplan.view');
     Route::post('consultant-razorpay-payment', [UpgradePlanController::class, 'store'])->name('consultant.razorpay.payment.store');
-    Route::get('upgradeplan-paymentpage/{id?}',[UpgradePlanController::class,'paymentpage'])->name('consultant.upgradeplan.paymentpage');
 
+    /* Lead  */
+    Route::get('consultant-lead-index',[LeadController::class,'index'])->name('consultant.lead.index');
+ 
 }); 

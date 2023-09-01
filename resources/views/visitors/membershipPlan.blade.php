@@ -31,7 +31,7 @@
                     <p class="card-text mt-5">{!!$adminpackage->details!!}</p>
                     
                     @if ($adminpackage->title==="Free")
-                        <a href="" class="btn btn-primary mb-5 mt-5">Apply Now</a>
+                        <a class="btn btn-primary mb-5 mt-5">Apply Now</a>
                        
                     @elseif(isset(Auth::user()->id))
                         {{-- <a href="{{route('paymentgetway')}}/{{$adminpackage->id}}" class="btn btn-primary mb-5 mt-5">Apply Now</a> --}}
@@ -39,17 +39,18 @@
                                 <div class="card-body text-center">
                                     <form action="{{ route('razorpay.payment.store') }}" method="POST" >
                                         @csrf
+                                        <input type="hidden" name="package" value="{{$adminpackage->title}}">
                                         <script src="https://checkout.razorpay.com/v1/checkout.js"
                                                 data-key="{{ env('RAZORPAY_KEY') }}"
                                                 data-amount="{{$adminpackage->price * 100}}"
-                                                data-buttontext=""
+                                                data-buttontext="Apply Now"
                                                 data-name="ConsultantCube.com"
                                                 data-description="Rozerpay"
                                                 data-image="{{url('/visitors/images/ConsultantLogo.jpg')}}"
                                                 data-prefill.name="name"
+                                                
                                                 data-theme.color="#333692">
                                         </script>
-                                        <button class="custom-razorpay-button">Apply Now</button>
                                     </form>
                                 </div>
                     @else

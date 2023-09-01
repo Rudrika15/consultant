@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Admin\AdminLeadController;
 use App\Http\Controllers\Api\Admin\AdminPackageController;
 use App\Http\Controllers\Api\Admin\AdminWorkshopController;
 use App\Http\Controllers\Api\Admin\CategoryController;
@@ -11,9 +12,11 @@ use App\Http\Controllers\Api\Admin\SliderController;
 use App\Http\Controllers\Api\Admin\SocialMasterController;
 use App\Http\Controllers\Api\Admin\StateController;
 use App\Http\Controllers\Api\Consultant\AchievementController;
+use App\Http\Controllers\Api\Consultant\AdminPackageController as ConsultantAdminPackageController;
 use App\Http\Controllers\Api\Consultant\AttachmentController;
 use App\Http\Controllers\Api\Consultant\CategoryConsultantController;
 use App\Http\Controllers\Api\Consultant\CertificateController;
+use App\Http\Controllers\Api\Consultant\ConsultantLeadController;
 use App\Http\Controllers\Api\Consultant\GalleryController;
 use App\Http\Controllers\Api\Consultant\LanguageController;
 use App\Http\Controllers\Api\Consultant\PackageController;
@@ -23,6 +26,7 @@ use App\Http\Controllers\Api\Consultant\TimeController;
 use App\Http\Controllers\Api\Consultant\VideoController;
 use App\Http\Controllers\Api\Consultant\WorkshopController;
 use App\Http\Controllers\Api\OTPController;
+use App\Http\Controllers\Api\User\SearchCategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Contracts\Role;
@@ -44,6 +48,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/send-otp', [OTPController::class, 'sendOTP']);
 
+Route::get('search-category/{category?}',[SearchCategoryController::class,'search_category']);
+Route::get('user_search_category/{id?}/{category?}',[SearchCategoryController::class,'user_search_category']);
 /* ---------------------------------- Admin Side ----------------------------------  */
 // login/register
 Route::post('/register', [RegisterController::class, 'register']);
@@ -114,6 +120,8 @@ Route::get('category-wise-consultant/{id?}',[CategoryConsultantController::class
 Route::get('user_details/{id?}',[CategoryConsultantController::class,'user_details']);
 Route::get('isFeatured/{isFeatured}',[CategoryConsultantController::class,'isFeatured']);
 
+/* Leads List */
+Route::get('leads-list',[AdminLeadController::class,'index']);
 
 /*-----------------------------------  Consultant Side  ----------------------------------------*/
 
@@ -193,5 +201,9 @@ Route::post('workshop/update/{id?}',[WorkshopController::class,'update']);
 Route::get('workshop/delete/{id?}',[WorkshopController::class,'delete']);
 Route::get('workshop/show/{id?}',[WorkshopController::class,'show']);
 
-/* Paymnet get way */
-Route::post('payament-get-way/{id?}',[PayamnetGetWayController::class,'userplantype']);
+/* Leads List */
+Route::get('consultant-leads-list/{id?}',[ConsultantLeadController::class,'index']);
+
+/* Admin Package List */
+Route::get('admin_package_detail',[ConsultantAdminPackageController::class,'admin_package_detail']);
+Route::post('upgrade_plan',[ConsultantAdminPackageController::class,'upgrade_plan']);

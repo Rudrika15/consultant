@@ -6,6 +6,7 @@ use App\Models\AdminPackage;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Inquiry;
+use App\Models\Lead;
 use App\Models\Profile;
 use App\Models\State;
 use App\Models\User;
@@ -160,6 +161,13 @@ class VisitorController extends Controller
             $categoryphoto=Category::find($categoryId);
             $consultant=Profile::with('categories')->where('categoryId','=',$categoryId)->get();
             $countconsultant=count($consultant);
+            if(isset(Auth::user()->id)){
+                $leads=new Lead();
+                $leads->userId=Auth::user()->id;
+                $leads->categoryId=$categoryphoto->id;
+                $leads->save();
+            }
+            
             return view('visitors.consultantList',compact('consultant','countconsultant','categoryphoto'));
         
         }catch (\Throwable $th) {

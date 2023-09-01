@@ -1,3 +1,11 @@
 #paymentplancard{
     border: 1px solid #345BCB !important;
 }
+.razorpay-payment-button{
+    background-color:#345BCB ;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    font-size: 16px;
+    padding: 6px 15px;
+}

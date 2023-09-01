@@ -8,19 +8,11 @@
         <div class="consultantcategory p-5 mb-5">
             <h2 class="text-center categorytext text-white mt-3">Consultant Categories</h2>
         </div>
-        {{-- County Card Live Search Start --}}
-        {{-- <div class="card countrycard"> 
-            <div class="searchCategory w-50">
-                <input type="text" id="searchInput" placeholder="Search for categories">
-                <div id="categorySuggestions"></div>
-                <input type="hidden" id="selectedCategoryId">
-                    
-            </div>
-        </div> --}}
+        
         <form action="{{route('visitors.findConsultantList')}}" method="POST">
             @csrf
             <div class="">
-                <input type="text" name="" id="searchInput" class="searchCategory" placeholder="&#xF002; What Do You Want To Learn ?" style="font-family:Arial, FontAwesome" class="mt-3 mb-3">
+                <input type="text" name="" id="searchInput" class="searchCategory" placeholder="&#xF002; What Do You Want To Learn ?" style="font-family:Arial, FontAwesome" class="mt-3 mb-3" autocomplete="off">
                 <button type="submit" value="" class="btn" id="searchbuttonofcategory">Search</button>
                 <div id="categorySuggestions" class="categorySuggestions" style="display:none;"></div>
                 <input type="hidden" id="selectedCategoryId" name="categoryId">
