@@ -46,7 +46,7 @@
                             </form>
                     @else
                         <i class="fa fa-plus pt-1"></i>
-                        <span> Become a Consultant</span>
+                        <a href="{{ route('register') }}" id="#becomecomsultanttype" style="text-decoration:none;color:white;">Become a Consultant</a>
                     @endif
                     {{-- <i class="fa fa-plus pt-lg-1"></i>
                         <span> Become a Consultant</span> --}}

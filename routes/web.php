@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\StateController;
 use App\Http\Controllers\Consultant\LeadController;
 use App\Http\Controllers\Consultant\UpgradePlanController;
 use App\Http\Controllers\Consultant\WorkshopController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RazorpayController;
 use App\Http\Controllers\RazorpayPaymentController;
 use App\Models\Attachment;
@@ -196,6 +197,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('consultant/{id}/view', [ConsultantController::class, 'view'])->name('consultant.view');
     Route::get('consultant-edit/{id?}', [ConsultantController::class, 'edit'])->name('consultant.edit');
     Route::post('consultant-update',[ConsultantController::class,'update'])->name('consultant.update');
+    Route::get('homeconsultant',[HomeController::class,'countconsultant'])->name('consultant.countconsultant');
 
     
     

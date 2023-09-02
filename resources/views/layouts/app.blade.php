@@ -12,6 +12,8 @@
     <title>Consultant Cube</title>
 
     <link rel="stylesheet" href="{{asset('visitors/css/payment.css')}}">
+    <link rel="stylesheet" href="{{ asset('admin/css/admin.css') }}" />
+
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('asset/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -86,147 +88,11 @@
 
                 <!-- Settings -->
                 @hasrole('Admin|Manager')
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ route('consultant.index') }}">
-                        <i class="bi bi-device-ssd-fill"></i>
-                        <span>Consultant</span></a>
-                </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('state.index') }}">
-                            <i class="bi bi-device-ssd-fill"></i>
-                            <span>State</span></a>
-                    </li>
-
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('city.index') }}">
-                            <i class="bi bi-patch-exclamation-fill"></i>
-                            <span>City</span></a>
-                    </li>
-
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('category.index') }}">
-                            <i class="bi bi-bookmark-star-fill"></i>
-                            <span>Category</span></a>
-                    </li>
-
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('languageMaster.index') }}">
-                            <i class="bi bi-translate"></i>
-                            <span>Language Master</span></a>
-                    </li>
-
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('socialMaster.index') }}">
-                            <i class="bi bi-dribbble"></i>
-                            <span>Social Media Master</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{route('adminpackage.index')}}">
-                            <i class="bi bi-bookmark-star-fill"></i>
-                            <span>Admin Package</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{route('corparateInquiry.index')}}">
-                            <i class="bi bi-gear-fill"></i>
-                            <span>Inquiry</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{route('adminworkshop.index')}}">
-                            <i class="fas fa-laptop-house"></i>
-                            <span>Workshop</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{route('slider.index')}}">
-                            <i class="fas fa-sliders-h"></i>
-                            <span>Slider</span></a>
-                    </li>
-                    
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{route('admin.lead.index')}}">
-                            <i class="fas fa-archive"></i>
-                            <span>Leads</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" style="color: #014272; font-weight: 700;" href="#"
-                            data-toggle="collapse" data-target="#collapseSetting" aria-expanded="true"
-                            aria-controls="collapsePages">
-                            <i class="bi bi-gear-fill" style="color: #fff;"></i>
-                            <span style="color: #fff;">Settings</span>
-                        </a>
-                        <div id="collapseSetting" class="collapse" aria-labelledby="headingPages"
-                            data-parent="#accordionSidebar">
-                            <div class="bg-white py-2 collapse-inner rounded">
-
-                                <a class="collapse-item" href="{{ route('roles.index') }}"> Role Managment</a>
-                                <a class="collapse-item" href="{{ route('users.index') }}"> Users Managment</a>
-
-                            </div>
-                        </div>
-                    </li>
+                    @include('layouts.adminmenu')
                 @endhasrole
-                @role('Consultant')
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('time.index') }}">
-                            <i class="bi bi-alarm-fill"></i>
-                            <span>Time</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('language.index') }}">
-                            <i class="fa fa-language"></i>
-                            <span>Language</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('gallery.index') }}">
-                            <i class="bi bi-book-fill"></i>
-                            <span>Gallery</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('video.index') }}">
-                            <i class="bi bi-camera-video-fill"></i>
-                            <span>Video</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('attachment.index') }}">
-                            <i class="bi bi-bar-chart-fill"></i>
-                            <span>Attachments</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('socialLink.index') }}">
-                            <i class="bi bi-dribbble"></i>
-                            <span>Social Link</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('package.index') }}">
-                            <i class="fas fa-fw fa-tachometer-alt"></i>
-                            <span>Package</span></a>
-                    </li>
 
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('certificate.index') }}">
-                            <i class="fas fa-certificate"></i>
-                            <span>Certificate</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('achievement.index') }}">
-                            <i class="fas fa-award"></i>
-                            <span>Achievement</span></a>
-                    </li>
-                    
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{route('workshop.index')}}">
-                            <i class="fas fa-laptop-house"></i>
-                            <span>Workshop</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{route('upgradeplan.index')}}">
-                            <i class="fas fa-wallet"></i>
-                            <span>Upgrade Plan</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{route('consultant.lead.index')}}">
-                            <i class="fas fa-archive"></i>
-                            <span>Leads</span></a>
-                    </li>
+                @role('Consultant')
+                    @include('layouts.consultantmenu')
                 @endrole
 
                 <!-- Divider -->
