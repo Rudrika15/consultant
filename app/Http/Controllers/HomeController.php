@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\About;
 use App\Models\Achievement;
 use App\Models\AdminPackage;
 use App\Models\Attachment;
 use App\Models\Category;
 use App\Models\Certificate;
 use App\Models\City;
+use App\Models\Contactus;
 use App\Models\Gallery;
 use App\Models\Inquiry;
 use App\Models\Language;
@@ -55,43 +57,50 @@ class HomeController extends Controller
                     ->get();
             $consultantcount=count($consultant);
 
-            $state=State::all();
+            $state=State::where('status', '!=', 'Deleted')->get();
             $statecount=count($state);
 
-            $city=City::all();
+            $city=City::where('status', '!=', 'Deleted')->get();
             $citycount=count($city);
 
-            $category=Category::all();
+            $category=Category::where('status', '!=', 'Deleted')->get();
             $categorycount=count($category);
 
-            $language=LanguageMaster::all();
+            $language=LanguageMaster::where('status', '!=', 'Deleted')->get();
             $languagecount=count($language);
 
-            $socialmaster=SocialMaster::all();
+            $socialmaster=SocialMaster::where('status', '!=', 'Deleted')->get();
             $socialmastercount=count($socialmaster);
 
-            $adminpackage=AdminPackage::all();
+            $adminpackage=AdminPackage::where('status', '!=', 'Deleted')->get();
             $adminpackagecount=count($adminpackage);
 
-            $inquiry=Inquiry::all();
+            $inquiry=Inquiry::where('status', '!=', 'Deleted')->get();
             $inquirycount=count($inquiry);
 
-            $workshop=Workshop::all();
+            $workshop=Workshop::where('status', '!=', 'Deleted')->get();
             $workshopcount=count($workshop);
 
-            $slider=Slider::all();
+            $slider=Slider::where('status', '!=', 'Deleted')->get();
             $slidercount=count($slider);
 
-            $leads=Lead::all();
+            $leads=Lead::where('status', '!=', 'Deleted')->get();
             $leadscount=count($leads);
                 
-            $users=User::all();
+            $users=User::where('status', '!=', 'Deleted')->get();
             $userscount=count($users);
+
+            $contactus=Contactus::where('status', '!=', 'Deleted')->get();
+            $contactuscount=count($contactus);
+
+            $about=About::where('status', '!=', 'Deleted')->get();
+            $aboutcount=count($about);
 
             return view('home',compact('consultantcount','statecount',
                         'citycount','categorycount','languagecount',
                         'socialmastercount','adminpackagecount','inquirycount',
-                        'workshopcount','slidercount','leadscount','userscount'));
+                        'workshopcount','slidercount','leadscount','userscount',
+                        'contactuscount','aboutcount'));
         } elseif (Auth::user()->hasRole('Consultant')) {
             $userId=Auth::user()->id;
             

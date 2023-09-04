@@ -3,8 +3,15 @@
     <div class="main_page">
         <div class="about">
             <h3 class="contacttext ms-lg-5">Contact Us</h3>
-            <img class="img" src="{{ asset('visitors/images/Backgroung-Web-banner-.png') }}" alt="" width="100%"
-                height="300px">
+            <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" data-interval="500">
+                <div class="carousel-inner">
+                    @foreach ($sliderinner as $sliderinner)
+                        <div class="carousel-item">
+                            <img src="{{url('/slider/'.$sliderinner->photo)}}" class="d-block w-100 img" height="300px" alt="...">
+                        </div>
+                    @endforeach  
+                </div>
+            </div>
         </div>
         <div class="grid pt-4">
             <div class="container">
@@ -72,28 +79,41 @@
                 <div class="row">
                     <div class="col-md-6">
                         <h4 class="pt-3">Contact Us</h4>
-                        <form class="contact-form mt-5 mb-5">
+                        <form id="contactUsForm" class="contact-form mt-5 mb-5">
                             <div class="row">
+                                @csrf
                                 <div class="col-md-6 pt-4 input-container">
                                     <i class="fa fa-user icon text-center"></i>
-                                    <input type="text" name="name" class="form-control input-field" placeholder="{{_('Name')}}">
+                                    <input type="text" id="name" name="name" class="form-control input-field" placeholder="{{_('Name')}}">
+                                    @if ($errors->has('name'))
+                                        <span class="error">{{ $errors->first('title') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-6 pt-4 input-container">
                                     <i class="fa fa-envelope icon text-center"></i>
-                                    <input type="text" name="name" class="form-control input-field" placeholder="{{_('Email')}}">
+                                    <input type="email" id="email" name="email" class="form-control input-field" placeholder="{{_('Email')}}">
+                                    @if ($errors->has('email'))
+                                        <span class="error">{{ $errors->first('title') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-12 pt-4 input-container">
                                     <i class="fa fa-phone icon text-center"></i>
-                                    <input type="text" name="name" class="form-control input-field" placeholder="{{_('Email')}}">
+                                    <input type="text" id="phone" name="phone" class="form-control input-field" placeholder="{{_('Phone')}}">
+                                    @if ($errors->has('phone'))
+                                        <span class="error">{{ $errors->first('title') }}</span>
+                                    @endif
                                 </div>
                                 <div class="col-md-12 pt-4 input-container">
                                     <i class="fa fa-edit icon text-center"></i>
                                     <textarea name="comments" id="comments" class="form-control input-field" cols="30" rows="4">{{_('Comments')}}</textarea>
+                                    @if ($errors->has('comments'))
+                                        <span class="error">{{ $errors->first('title') }}</span>
+                                    @endif
                                 </div>
-                                <div class="col-md-12 pt-4 input-container">
-                                    <i class="fa fa-edit icon text-center"></i>
-                                    <input type="text" name="name" class="form-control input-field" placeholder="{{_('Enter the code above here')}}">
-                                </div>
+                                    <div class="col-md-12 pt-4 input-container">
+                                        <i class="fa fa-edit icon text-center"></i>
+                                        <input type="text"  class="form-control input-field" placeholder="{{_('Enter the code above here')}}">
+                                    </div>
                                 <div class="col-3 pt-3">
                                     <button type="submit" class="btn contact-submit-button fw-bold">Submit</button>
                                 </div>
@@ -125,5 +145,69 @@
         </div>
         
     </div>
-   
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myCarousel').find('.carousel-item').first().addClass('active');
+        });
+    </script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        
+
+        $('#contactUsForm').submit(function(e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+            $.ajax({
+                type: 'POST',
+                url: "{{ url('contactus-store')}}",
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    if (response.success) {
+                        // Success message using SweetAlert
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: response.message,
+                        },200);
+                        $('#contactUsForm').trigger("reset");
+                    } else {
+                        // Error message using SweetAlert
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'An error occurred!',
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Error message using SweetAlert
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'An error occurred!',
+                    });
+                }
+            });
+        });
+    });
+</script>
+<link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
 @endsection

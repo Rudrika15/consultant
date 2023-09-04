@@ -1,10 +1,26 @@
 @extends('layouts.visitorApp')
 @section('content')
 <div class="main_page">
+    
 
     <div class="" style="position: relative;">
-        <img src="{{ asset('visitors/images/home.png') }}" class="img-fluid  w-100" height="700px" width="100%" alt="" style="opacity: 0.5;">
+        {{-- <img src="{{ asset('visitors/images/home.png') }}" class="img-fluid  w-100" height="700px" width="100%" alt="" style="opacity: 0.5;"> --}}
         {{-- Consultant Category --}}
+        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" data-interval="500">
+            <div class="carousel-inner">
+                @foreach ($sliderhome as $sliderhome)
+                    <div class="carousel-item">
+                        <img src="{{url('/slider/'.$sliderhome->photo)}}" class="d-block w-100" height="700px" alt="...">
+                    </div>
+                @endforeach  
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#myCarousel').find('.carousel-item').first().addClass('active');
+            });
+        </script>
         <div class="consultantcategory p-5 mb-5">
             <h2 class="text-center categorytext text-white mt-3">Consultant Categories</h2>
         </div>

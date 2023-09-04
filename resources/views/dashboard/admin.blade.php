@@ -182,17 +182,34 @@
                 </div>
             </a>
         </div>
-       
+        
+        <div class="col-4">
+            <a href="{{ route('about.index') }}" id="admin-dashborad-card-link">
+                <div class="card shadow p-3 mb-5 bg-white rounded" id="Admin-dashborad-card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8 mt-3">
+                                <h5 id="admin-card-heading" class="fw-bold">About</h5>                          
+                            </div>
+                            <div class="col-4">
+                                <h1 class="fw-bold">{{$aboutcount}} </h1>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+            </a>
+        </div>
     <div class="col-4">
-        <a href="{{ route('users.index') }}" id="admin-dashborad-card-link">
+        <a href="{{ route('contactus.index') }}" id="admin-dashborad-card-link">
             <div class="card shadow p-3 mb-5 bg-white rounded" id="Admin-dashborad-card">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-8 mt-3">
-                            <h5 id="admin-card-heading" class="fw-bold">Users</h5>                         
+                            <h5 id="admin-card-heading" class="fw-bold">Contactus</h5>                         
                         </div>
                         <div class="col-4">
-                            <h1 class="fw-bold">{{$userscount}} </h1>
+                            <h1 class="fw-bold">{{$contactuscount}} </h1>
                         </div>
                     </div>
                 

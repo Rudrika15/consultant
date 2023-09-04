@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('userId');
             $table->string('title');
             $table->string('file');
-            $table->string('status');
+            $table->string('status')->default('Active');
             $table->timestamps();
         });
     }

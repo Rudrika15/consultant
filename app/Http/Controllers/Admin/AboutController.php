@@ -3,18 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\AdminPackage;
+use App\Models\About;
 use Illuminate\Http\Request;
 use DataTables;
 use Illuminate\Support\Facades\URL;
-use Laravel\Ui\Presets\React;
 
-class AdminPackageController extends Controller
+class AboutController extends Controller
 {
     public function index(Request $request){
         try{
             if ($request->ajax()) {
-                $data = AdminPackage::where('status', '!=', 'Deleted')
+                $data = About::where('status', '!=', 'Deleted')
                     ->orderBy('id', 'DESC')
                     ->get();
     
@@ -22,14 +21,14 @@ class AdminPackageController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function ($row) {
                         $view = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm me-1 ">View</a>';
-                        $btn = '<a href="' . URL::route('adminpackage.edit', $row->id) . '" class="btn btn-primary btn-sm me-1">Edit</a>';
-                        $btn = $btn . '<a href="' . URL::route('adminpackage.delete', $row->id) . '" class="btn btn-danger btn-sm me-1 delete">Delete</a>';
+                        $btn = '<a href="' . URL::route('about.edit', $row->id) . '" class="btn btn-primary btn-sm me-1">Edit</a>';
+                        $btn = $btn . '<a href="' . URL::route('about.delete', $row->id) . '" class="btn btn-danger btn-sm me-1 delete">Delete</a>';
                         return $view.''.$btn;
                     })
                     ->rawColumns(['action'])
                     ->make(true);
             }
-            return view('admin.adminpackage.index');
+            return view('admin.about.index');
         }catch (\Throwable $th) {
             //throw $th;    
             return view('servererror');
@@ -39,8 +38,8 @@ class AdminPackageController extends Controller
     public function view(Request $request, $id)
     {
         try {
-            $category = AdminPackage::findOrFail($id);
-            return response()->json($category);
+            $about = About::findOrFail($id);
+            return response()->json($about);
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -48,7 +47,7 @@ class AdminPackageController extends Controller
     }
     public function create(){
         try{
-            return view('admin.adminpackage.create');
+            return view('admin.about.create');
         }catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -58,20 +57,16 @@ class AdminPackageController extends Controller
     public function store(Request $request){
         try{
             $validateData=$request->validate([
-                'title'=>'required',
-                'price'=>'required',
-                'details'=>'required',
+                'about'=>'required',
             ]);
     
-            $adminpackage=new AdminPackage();
-            $adminpackage->title=$request->title;
-            $adminpackage->price=$request->price;
-            $adminpackage->details=$request->details;
-            $adminpackage->save();
+            $about=new About();
+            $about->about=$request->about;
+            $about->save();
             
             $response = [
                 'success' => true,
-                'message' => 'Admin Package Created Successfully!',
+                'message' => 'About Created Successfully!',
             ];
     
             return response()->json($response);
@@ -83,8 +78,8 @@ class AdminPackageController extends Controller
     }
     public function edit($id){
         try{
-            $adminpackage=AdminPackage::find($id);
-            return view('admin.adminpackage.edit',compact('adminpackage'));
+            $about=About::find($id);
+            return view('admin.about.edit',compact('about'));
         }catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -94,21 +89,17 @@ class AdminPackageController extends Controller
     public function update(Request $request){
         try{
             $validateData=$request->validate([
-                'title'=>'required',
-                'price'=>'required',
-                'details'=>'required',
+                'about'=>'required',
             ]);
-            $id=$request->adminpackageId;
-            $adminpackage=AdminPackage::find($id);
-            $adminpackage->title=$request->title;
-            $adminpackage->price=$request->price;
-            $adminpackage->details=$request->details;
-            $adminpackage->status="Active";
-            $adminpackage->save();
+            $id=$request->aboutId;
+            $about=About::find($id);
+            $about->about=$request->about;
+            $about->status="Active";
+            $about->save();
             
             $response = [
                 'success' => true,
-                'message' => 'Admin Package Updated Successfully!',
+                'message' => 'About Updated Successfully!',
             ];
     
             return response()->json($response);
@@ -121,12 +112,12 @@ class AdminPackageController extends Controller
     public function delete($id)
     {
         try {
-            $adminpackage = AdminPackage::find($id);
-            $adminpackage->status = "Deleted";
-            $adminpackage->save();
+            $about = About::find($id);
+            $about->status = "Deleted";
+            $about->save();
             $response = [
                 'success' => true,
-                'message' => 'Admin Package Deleted Successfully!',
+                'message' => 'About Deleted Successfully!',
             ];
 
             return response()->json($response);

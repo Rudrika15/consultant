@@ -3,8 +3,18 @@
 <div class="main_page">
     <div class="about">
         <h3 class="us ms-lg-5">About us</h3>
-        <img class="img" src="{{ asset('visitors/images/Backgroung-Web-banner-.png') }}" alt="" width="100%"
-            height="300px">
+        {{-- sliderinner --}}
+        {{-- <img class="img" src="{{ asset('visitors/images/Backgroung-Web-banner-.png') }}" alt="" width="100%"
+            height="300px"> --}}
+            <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" data-interval="500">
+                <div class="carousel-inner">
+                    @foreach ($sliderinner as $sliderinner)
+                        <div class="carousel-item">
+                            <img src="{{url('/slider/'.$sliderinner->photo)}}" class="d-block w-100 img" height="300px" alt="...">
+                        </div>
+                    @endforeach  
+                </div>
+            </div>
     </div>
     <div class="grid pt-4">
         <div class="container">
@@ -15,24 +25,17 @@
     </div>
     <div class="container mt-5 p-5">
         <div class="ms-lg-5 me-lg-5">
-            <p class="pcolor">Nothing but change is constant! In this constantly
-                changing world, GROWTH is inevitable for everyone.
-                From one who is already successful to one starting
-                just now. Each of us needs a guiding factor in form
-                of a mentor, coach, or a CONSULTANT.
-            </p>
-            <p class="pcolor">
-                Consultant Cube provides the much-needed platform where
-                individuals, businesses, start-ups, giants, or
-                consultants themselves can have easy access to finding
-                their respective Consultants from various domains.
-            </p>
-            <p class="pcolor">
-                Our simple yet appealing global platform lets the
-                clients connect with the respective Consultants and
-                meet their precise requirements in their own cube.
-            </p>
+            @foreach ($about as $aboutData)
+            <p class="pcolor">{!!$aboutData->about!!}</p>
+            @endforeach
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $('#myCarousel').find('.carousel-item').first().addClass('active');
+                });
+            </script>
 @endsection

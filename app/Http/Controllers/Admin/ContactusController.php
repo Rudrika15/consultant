@@ -3,17 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Inquiry;
+use App\Models\Contactus;
 use Illuminate\Http\Request;
 use DataTables;
-use Illuminate\Support\Facades\URL;
-class InquiryController extends Controller
+
+class ContactusController extends Controller
 {
-    //
     public function index(Request $request){
         try {
             if ($request->ajax()) {
-                $data = Inquiry::where('status', '!=', 'Deleted')
+                $data = Contactus::where('status', '!=', 'Deleted')
                     ->orderBy('id', 'DESC')
                     ->get();
 
@@ -27,7 +26,7 @@ class InquiryController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
             }
-            return view('admin.inquiry.index');
+            return view('admin.contactus.index');
         } catch (\Throwable $th) {
              //throw $th;    
             return view('servererror');
@@ -35,11 +34,12 @@ class InquiryController extends Controller
     }
     public function view($id){
         try{
-            $inquiry=Inquiry::findOrFail($id);
-            return response()->json($inquiry);
+            $contactus=Contactus::findOrFail($id);
+            return response()->json($contactus);
         }catch (\Throwable $th) {
             //throw $th;    
            return view('servererror');
        }   
     }
+    
 }

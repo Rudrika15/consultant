@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('language_masters', function (Blueprint $table) {
             $table->id();
             $table->string('language');
-            $table->string('status');
+            $table->string('status')->default('Active');;
             $table->timestamps();
         });
     }

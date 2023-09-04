@@ -72,7 +72,7 @@
             <p class="text-center">What Is Your Location ?</p>
             <form class="">
                 <div class="">
-                    <input type="text" id="searchInputCity"  class="form-control mt-5" placeholder="Enter Your Lovation Or Pincode">
+                    <input type="text" id="searchInputCity"  class="form-control mt-5" placeholder="Enter Your Location Or Pincode" autocomplete="off">
                     <div id="citySuggestions" class="citySuggestions" style="display:none;"></div>
                     <input type="hidden" id="selectedCityId" name="cityId">
                 </div>

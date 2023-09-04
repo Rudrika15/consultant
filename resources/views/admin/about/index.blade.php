@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('header','Admin Package')
+@section('header','About')
 @section('content')
 
 {{-- Message --}}
@@ -28,10 +28,10 @@
     <!-- /.box-title -->
     <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
         <div class="">
-            <h4 class="">Admin Package</h4>
+            <h4 class="">About</h4>
         </div>
         <div class="">
-            <a href="{{ route('adminpackage.create') }}" id="add" class="btn btnback btn-sm">ADD</a>
+            <a href="{{ route('about.create') }}" id="add" class="btn btnback btn-sm">ADD</a>
 
             <a href="" id="back" class="btn btnback  btn-sm" style="display:none;">BACK</a>
 
@@ -46,9 +46,7 @@
                 <thead>
                     <tr>
                         <th>Sr No</th>
-                        <th>Title</th>
-                        <th>Price</th>
-                        <th>Details</th>
+                        <th>About Details</th>
                         <th>Status</th>
                         <th width="280px">Action</th>
                     </tr>
@@ -72,32 +70,25 @@
         var table = $('.data-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('adminpackage.index') }}",
+            ajax: "{{ route('about.index') }}",
             columns: [{
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex'
                 },
+                
                 {
-                    data: 'title',
-                    name: 'title'
-                },
-                {
-                    data: 'price',
-                    name: 'price'
-                },
-                {
-                    data: 'details',
-                    name: 'details',
+                    data: 'about',
+                    name: 'about',
                     render: function(data, type, row) {
                     // Create a temporary container
-                    var tempContainer = $('<div>').html(data);
+                        var tempContainer = $('<div>').html(data);
 
-                    // Get the text content of the container (excluding HTML tags)
-                    var textContent = tempContainer.text();
+                        // Get the text content of the container (excluding HTML tags)
+                        var textContent = tempContainer.text();
 
-                    // Return the cleaned text content
-                    return textContent;
-            }
+                        // Return the cleaned text content
+                        return textContent;
+                    }
                 },
                 {
                     data: 'status',
@@ -115,10 +106,10 @@
         $(document).on('click', '.edit', function() {
             var row = $(this).closest('tr');
             var data = table.row(row).data();
-            var adminpackageId = data.id;
+            var aboutId = data.id;
 
             $.ajax({
-                url: "{{ url('adminpackage') }}" + '/' + adminpackageId + '/view',
+                url: "{{ url('about') }}" + '/' + aboutId + '/view',
                 type: 'GET',
                 success: function(response) {
                     // Handle the Ajax response here
@@ -126,7 +117,7 @@
                     $('#dataTableDiv').hide();
                     $('#add').hide();
                     $('#back').show();
-                    $('#viewDataDiv').html('<strong>Title:</strong> ' + response.title +'<br><strong>Price</strong>'+response.price +'<br><strong>Details</strong>' + response.details +'<br><strong>Satus:</strong> ' + response.status);
+                    $('#viewDataDiv').html('<strong>About</strong>' + response.about +'<br><strong>Satus:</strong> ' + response.status);
 
                 },
                 error: function(error) {
@@ -154,7 +145,7 @@
                 if (result.isConfirmed) {
                     // AJAX request to delete the record
                     $.ajax({
-                        url: '/adminpackage-delete' + '/' + id,
+                        url: '/about-delete' + '/' + id,
                         method: 'GET',
                         data: {
                             _token: "{{ csrf_token() }}",

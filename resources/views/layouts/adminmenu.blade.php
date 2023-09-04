@@ -1,8 +1,33 @@
-<li class="nav-item active">
-    <a class="nav-link" href="{{ route('consultant.index') }}">
-        <i class="bi bi-device-ssd-fill"></i>
-        <span>Consultant</span></a>
-</li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ route('consultant.index') }}">
+            <i class="bi bi-device-ssd-fill"></i>
+            <span>Consultant</span></a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{{route('admin.lead.index')}}">
+            <i class="fas fa-archive"></i>
+            <span>Leads</span></a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{{route('contactus.index')}}">
+            <i class="fas fa-phone-alt"></i>
+            <span>Contact us</span></a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{{route('about.index')}}">
+            <i class="fas fa-phone-alt"></i>
+            <span>About us</span></a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{{route('corparateInquiry.index')}}">
+            <i class="bi bi-gear-fill"></i>
+            <span>Inquiry</span></a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{{route('adminworkshop.index')}}">
+            <i class="fas fa-laptop-house"></i>
+            <span>Workshop</span></a>
+    </li>
     <li class="nav-item active">
         <a class="nav-link" href="{{ route('state.index') }}">
             <i class="bi bi-device-ssd-fill"></i>
@@ -37,27 +62,14 @@
             <i class="bi bi-bookmark-star-fill"></i>
             <span>Admin Package</span></a>
     </li>
-    <li class="nav-item active">
-        <a class="nav-link" href="{{route('corparateInquiry.index')}}">
-            <i class="bi bi-gear-fill"></i>
-            <span>Inquiry</span></a>
-    </li>
-    <li class="nav-item active">
-        <a class="nav-link" href="{{route('adminworkshop.index')}}">
-            <i class="fas fa-laptop-house"></i>
-            <span>Workshop</span></a>
-    </li>
+    
     <li class="nav-item active">
         <a class="nav-link" href="{{route('slider.index')}}">
             <i class="fas fa-sliders-h"></i>
             <span>Slider</span></a>
     </li>
     
-    <li class="nav-item active">
-        <a class="nav-link" href="{{route('admin.lead.index')}}">
-            <i class="fas fa-archive"></i>
-            <span>Leads</span></a>
-    </li>
+    
     <li class="nav-item">
         <a class="nav-link colla
         psed" style="color: #014272; font-weight: 700;" href="#"

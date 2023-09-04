@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\About;
 use App\Models\AdminPackage;
 use App\Models\Category;
 use App\Models\City;
+use App\Models\Contactus;
 use App\Models\Inquiry;
 use App\Models\Lead;
 use App\Models\Profile;
+use App\Models\Slider;
 use App\Models\State;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -21,7 +24,8 @@ class VisitorController extends Controller
         try{
             $category=Category::all();
             $data['states'] = State::get(["stateName", "id"]);
-            return view('visitors.index',$data,compact('category'));
+            $sliderhome=Slider::where('type','=',"Home")->get();
+            return view('visitors.index',$data,compact('category','sliderhome'));
         }catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -60,7 +64,9 @@ class VisitorController extends Controller
     public function aboutus()
     {
         try{
-            return view('visitors.aboutus');
+            $sliderinner=Slider::where('type','=',"Inner")->get();
+            $about=About::all();
+            return view('visitors.aboutus',compact('sliderinner','about'));
         }catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -70,8 +76,9 @@ class VisitorController extends Controller
     public function membershipPlan()
     {
         try{
+            $sliderinner=Slider::where('type','=',"Inner")->get();
             $adminpackage=AdminPackage::all();
-            return view('visitors.membershipPlan',compact('adminpackage'));
+            return view('visitors.membershipPlan',compact('adminpackage','sliderinner'));
         }catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -82,7 +89,8 @@ class VisitorController extends Controller
     public function corporateInquery()
     {
         try{
-            return view('visitors.corporateInquery');
+            $sliderinner=Slider::where('type','=',"Inner")->get();
+            return view('visitors.corporateInquery',compact('sliderinner'));
         }catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -117,12 +125,32 @@ class VisitorController extends Controller
     public function contactus()
     {
         try{
-            return view('visitors.contactus');
+            $sliderinner=Slider::where('type','=',"Inner")->get();
+            return view('visitors.contactus',compact('sliderinner'));
         }catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }
         
+    }
+    public function contantus_store(Request $request){
+
+        $validateData=$request->validate([
+            'name'=>'required',
+            'email'=>'required',
+            'phone'=>'required',
+            'comments'=>'required',
+        ]);
+        $contactus=new Contactus();
+        $contactus->name=$request->name;
+        $contactus->email=$request->email;
+        $contactus->phone=$request->phone;
+        $contactus->comments=$request->comments;
+        $contactus->save();
+        return response()->json([
+            'success'=>true,
+            'message'=>'Contact created Sucessfully!'
+        ]);
     }
     public function signuppackage()
     {
@@ -217,4 +245,5 @@ class VisitorController extends Controller
         }
         
     }
+   
 }

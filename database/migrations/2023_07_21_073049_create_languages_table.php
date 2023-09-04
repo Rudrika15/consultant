@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('userId');
             $table->integer('languageId');
-            $table->string('status');
+            $table->string('status')->default('Active');;
             $table->timestamps();
         });
     }

@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\AdminLeadController;
 use App\Http\Controllers\Admin\AdminPackageController;
 use App\Http\Controllers\Admin\AdminWorkshopController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\ConsultantController;
+use App\Http\Controllers\Admin\ContactusController;
 use App\Http\Controllers\Admin\InquiryController;
 use App\Http\Controllers\Admin\LanguageMasterController;
 use App\Http\Controllers\Admin\SliderController;
@@ -62,6 +64,8 @@ Route::get('/corporateInquery', [VisitorController::class, 'corporateInquery'])-
 Route::post('corporateInquery-inqueryStore', [VisitorController::class, 'inqueryStore'])->name('corporateInquery.inqueryStore');
 
 Route::get('/contactus', [VisitorController::class, 'contactus'])->name('visitors.contactus');
+Route::post('contactus-store',[VisitorController::class,'contantus_store'])->name('contactus.store');
+
 Route::get('/signup/package', [VisitorController::class, 'signuppackage'])->name('visitors.signuppackage');
 Route::get('/consultantList/{id?}',[VisitorController::class,'consultantList'])->name('visitors.consultantList');
 Route::post('/findConsultantList',[VisitorController::class,'findConsultantList'])->name('visitors.findConsultantList');
@@ -192,6 +196,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('adminworkshop-index',[AdminWorkshopController::class,'index'])->name('adminworkshop.index');
     Route::get('adminworkshop/{id}/view',[AdminWorkshopController::class,'view'])->name('adminworkshop.view');
 
+    /* Contactus List */
+    Route::get('contactus-index',[ContactusController::class,'index'])->name('contactus.index');
+    Route::get('contactus/{id}/view',[ContactusController::class,'view'])->name('contactus.view');
+
+    
     /* Consultant List  */
     Route::get('consultant-index',[ConsultantController::class,'index'])->name('consultant.index');
     Route::get('consultant/{id}/view', [ConsultantController::class, 'view'])->name('consultant.view');
@@ -199,7 +208,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('consultant-update',[ConsultantController::class,'update'])->name('consultant.update');
     Route::get('homeconsultant',[HomeController::class,'countconsultant'])->name('consultant.countconsultant');
 
+    /* About  */
     
+    Route::get('about-index',[AboutController::class,'index'])->name('about.index');
+    Route::get('about/{id}/view',[AboutController::class,'view'])->name('about.view');
+
+    Route::get('about-create',[AboutController::class,'create'])->name('about.create');
+    Route::post('about-store',[AboutController::class,'store'])->name('about.store');
+    Route::get('about-edit/{id?}',[AboutController::class,'edit'])->name('about.edit');
+    Route::post('about-update',[AboutController::class,'update'])->name('about.update');
+    Route::get('about-delete/{id?}',[AboutController::class,'delete'])->name('about.delete');
+
     
     /* ------------------------Consultant Panele ---------------------------------- */
 

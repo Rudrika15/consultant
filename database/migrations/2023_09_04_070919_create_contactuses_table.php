@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('videos', function (Blueprint $table) {
+        Schema::create('contactuses', function (Blueprint $table) {
             $table->id();
-            $table->integer('userId');
-            $table->string('url');
-            $table->string('status')->default('Active');;
+            $table->string('name');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('comments');
+            $table->string('status')->default("Active");
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('videos');
+        Schema::dropIfExists('contactuses');
     }
 };
