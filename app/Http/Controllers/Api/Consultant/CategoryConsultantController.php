@@ -38,7 +38,7 @@ class CategoryConsultantController extends Controller
     }
     public function category_wise_consultant($id){
         try{
-            $category=Category::with('profile')->where('id','=',$id)->get();
+            $category=Category::with('profile')->with('profile.user')->where('id','=',$id)->get();
             if($category){
                 return response([
                     'success' => true,
