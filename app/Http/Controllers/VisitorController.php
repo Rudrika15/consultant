@@ -9,6 +9,7 @@ use App\Models\City;
 use App\Models\Contactus;
 use App\Models\Inquiry;
 use App\Models\Lead;
+use App\Models\Pincode;
 use App\Models\Profile;
 use App\Models\Slider;
 use App\Models\State;
@@ -205,19 +206,35 @@ class VisitorController extends Controller
     }
     public function searchCity(Request $request){
         try{
-
+            if($request->ajax()){
+                $output=[];
+                $pincode=Pincode::where('pincode','LIKE','%'.$request->search.'%')
+                    ->orWhereHas('city',function($query) use ($request){
+                        $query->where('cityName','LIKE','%'.$request->search.'%');
+                    })
+                    ->get();
+                foreach($pincode as $pincodes){
+                    $city = City::find($pincodes->cityId); 
+                    
+                        $output[]=[
+                            'id'=>$pincodes->id,
+                            'pincode'=>$pincodes->pincode,
+                            'areaName'=>$pincodes->areaName,
+                            'cityName' => $city->cityName,
+                        ];
+                }
+                
+                return response()->json($output);
+            }
         }catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
-        }
-        if($request->ajax()){
-            $output=[];
-            $city=City::where('cityName','LIKE','%'.$request->search.'%')->get();
-            foreach($city as $cities){
-                $output[]=['id'=>$cities->id,'cityName'=>$cities->cityName];
-            }
-            return response()->json($output);
-        }
+        }  
+    }
+    public function serachwithdata(Request $request){
+        $categoryId=$request->categoryId;
+        $pincodeId=$request->pincodeId;
+        $cityId=$request->cityId;
     }
     public function paymentgetway($id){
         try{

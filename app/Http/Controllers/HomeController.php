@@ -16,6 +16,7 @@ use App\Models\Language;
 use App\Models\LanguageMaster;
 use App\Models\Lead;
 use App\Models\Package;
+use App\Models\Pincode;
 use App\Models\Slider;
 use App\Models\SocialLink;
 use App\Models\SocialMaster;
@@ -96,11 +97,14 @@ class HomeController extends Controller
             $about=About::where('status', '!=', 'Deleted')->get();
             $aboutcount=count($about);
 
+            $pincode=Pincode::where('status', '!=', 'Deleted')->get();
+            $pincodecount=count($pincode);
+
             return view('home',compact('consultantcount','statecount',
                         'citycount','categorycount','languagecount',
                         'socialmastercount','adminpackagecount','inquirycount',
                         'workshopcount','slidercount','leadscount','userscount',
-                        'contactuscount','aboutcount'));
+                        'contactuscount','aboutcount','pincodecount'));
         } elseif (Auth::user()->hasRole('Consultant')) {
             $userId=Auth::user()->id;
             

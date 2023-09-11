@@ -204,7 +204,7 @@ class UserController extends Controller
             }
             $profile->status = 'Active';
             $profile->save();
-            return redirect('visitor/profile');
+            return redirect('/home');
         } 
     }
     public function changepassword(Request $request){

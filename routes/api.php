@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\CityController;
 use App\Http\Controllers\Api\Admin\InquiryController;
 use App\Http\Controllers\Api\Admin\LanguageMasterController;
+use App\Http\Controllers\Api\Admin\PincodeController;
 use App\Http\Controllers\Api\Admin\RegisterController;
 use App\Http\Controllers\Api\Admin\SliderController;
 use App\Http\Controllers\Api\Admin\SocialMasterController;
@@ -122,6 +123,18 @@ Route::get('isFeatured/{isFeatured}',[CategoryConsultantController::class,'isFea
 
 /* Leads List */
 Route::get('leads-list',[AdminLeadController::class,'index']);
+
+
+/*  Pincode */
+Route::get('pincode-index',[PincodeController::class,'index']);
+Route::post('pincode-store',[PincodeController::class,'store']);
+Route::post('pincode-update/{id?}',[PincodeController::class,'update']);
+Route::get('pincode-delete/{id?}',[PincodeController::class,'delete']);
+Route::get('pincode-show/{id?}',[PincodeController::class,'show']);
+
+
+
+
 
 /*-----------------------------------  Consultant Side  ----------------------------------------*/
 

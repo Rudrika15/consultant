@@ -39,6 +39,11 @@
             <i class="bi bi-patch-exclamation-fill"></i>
             <span>City</span></a>
     </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{{route('pincode.index')}}">
+            <i class="bi bi-patch-exclamation-fill"></i>
+            <span>Pincode</span></a>
+    </li>
 
     <li class="nav-item active">
         <a class="nav-link" href="{{ route('category.index') }}">

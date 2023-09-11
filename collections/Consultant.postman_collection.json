@@ -1900,15 +1900,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/consultant_wise_category/39",
-							"protocol": "http",
+							"raw": "https://consultantcube.psolution.in/api/consultant_wise_category/39",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"consultantcube",
+								"psolution",
+								"in"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"consultant_wise_category",
@@ -1929,19 +1927,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/category-wise-consultant/8",
-							"protocol": "http",
+							"raw": "https://consultantcube.psolution.in/api/category-wise-consultant/5",
+							"protocol": "https",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"consultantcube",
+								"psolution",
+								"in"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"category-wise-consultant",
-								"8"
+								"5"
 							]
 						}
 					},
@@ -2000,6 +1996,82 @@
 								"api",
 								"isFeatured",
 								"No"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Upgrade Paln",
+			"item": [
+				{
+					"name": "Admin package list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin_package_detail",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin_package_detail"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upgrade plan",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "r_payment_id",
+									"value": "12",
+									"type": "text"
+								},
+								{
+									"key": "userId",
+									"value": "44",
+									"type": "text"
+								},
+								{
+									"key": "package",
+									"value": "Silver",
+									"type": "text"
+								},
+								{
+									"key": "amount",
+									"value": "500",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/upgrade_plan",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"upgrade_plan"
 							]
 						}
 					},

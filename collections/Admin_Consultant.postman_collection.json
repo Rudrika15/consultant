@@ -906,7 +906,7 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/consultant-profile/10",
+							"raw": "http://127.0.0.1:8000/api/consultant-profile/14",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -918,7 +918,7 @@
 							"path": [
 								"api",
 								"consultant-profile",
-								"10"
+								"14"
 							]
 						}
 					},
@@ -1238,7 +1238,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/slider-index/inner",
+							"raw": "http://127.0.0.1:8000/api/slider-index/home",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1250,7 +1250,7 @@
 							"path": [
 								"api",
 								"slider-index",
-								"inner"
+								"home"
 							]
 						}
 					},
@@ -1371,6 +1371,85 @@
 								"api",
 								"slider-show",
 								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Details",
+			"item": [
+				{
+					"name": "User Details /userId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://consultantcube.psolution.in/api/user_details/14",
+							"protocol": "https",
+							"host": [
+								"consultantcube",
+								"psolution",
+								"in"
+							],
+							"path": [
+								"api",
+								"user_details",
+								"14"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Leads",
+			"item": [
+				{
+					"name": "Leads List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/leads-list",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"leads-list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Leads list of consultant category / userId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/consultant-leads-list/14",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"consultant-leads-list",
+								"14"
 							]
 						}
 					},

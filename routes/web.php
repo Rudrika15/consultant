@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ConsultantController;
 use App\Http\Controllers\Admin\ContactusController;
 use App\Http\Controllers\Admin\InquiryController;
 use App\Http\Controllers\Admin\LanguageMasterController;
+use App\Http\Controllers\Admin\PincodeController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SocialMasterController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -70,6 +71,8 @@ Route::get('/signup/package', [VisitorController::class, 'signuppackage'])->name
 Route::get('/consultantList/{id?}',[VisitorController::class,'consultantList'])->name('visitors.consultantList');
 Route::post('/findConsultantList',[VisitorController::class,'findConsultantList'])->name('visitors.findConsultantList');
 Route::get('/searchCity',[VisitorController::class,'searchCity'])->name('visitors.searchCity');
+
+Route::post('/serachwithdata',[VisitorController::class,'serachwithdata'])->name('visitors.serachwithdata');
 
 // City for Home page
 Route::post('fetchcityhome', [VisitorController::class, 'fetchcityhome'])->name('fetchcityhome');
@@ -219,7 +222,19 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('about-update',[AboutController::class,'update'])->name('about.update');
     Route::get('about-delete/{id?}',[AboutController::class,'delete'])->name('about.delete');
 
-    
+    /* Pincode */
+
+    Route::get('pincode-index',[PincodeController::class,'index'])->name('pincode.index');
+    Route::get('pincode-create',[PincodeController::class,'create'])->name('pincode.create');
+    Route::post('pincode-store',[PincodeController::class,'store'])->name('pincode.store');
+    Route::get('pincode-edit/{id?}',[PincodeController::class,'edit'])->name('pincode.edit');
+    Route::post('pincode-update',[PincodeController::class,'update'])->name('pincode.update');
+    Route::get('pincode-delete/{id?}',[PincodeController::class,'delete'])->name('pincode.delete');
+    Route::get('pincode/{id}/view',[PincodeController::class,'view'])->name('pincode.view');
+
+
+
+
     /* ------------------------Consultant Panele ---------------------------------- */
 
     // /* Language */

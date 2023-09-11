@@ -1,0 +1,63 @@
+{
+	"info": {
+		"_postman_id": "8546e4a3-c256-42b2-8b6e-f8a9e96f8c89",
+		"name": "User",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26731935"
+	},
+	"item": [
+		{
+			"name": "Search Category With leads",
+			"item": []
+		},
+		{
+			"name": "Search Category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/search-category/tran",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"search-category",
+						"tran"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Store leads with search category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/user_search_category/44/Education",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"user_search_category",
+						"44",
+						"Education"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
