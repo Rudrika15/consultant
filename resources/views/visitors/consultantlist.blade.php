@@ -71,27 +71,27 @@
         <div class="card-body">
             <h3 class="text-center"><u>{{$categoryphoto->catName}}</u></h3>
             <form class="">
+                @csrf
                 <div class="">
                     <input type="hidden" value="{{$categoryphoto->id}}" name="categoryId">
                     <input type="text" id="searchInputCity" name="pincodeId"  class="form-control mt-5" placeholder="Enter Your Location Or Pincode" autocomplete="off">
+                    
                     <div id="citySuggestions" class="citySuggestions" style="display:none;">
                     
                     </div>
+                    
                     <input type="hidden" id="selectedCityId" name="cityId">
                 </div>
                 <div class="mt-2">
                     <a href="" class="card-link" style="text-decoration: none;">Are You Inside India ?</a>
                 </div>
                 <div class="mt-5">
-                    @if (Auth::user())
-                        <button class="back">Back</button>
-                    @else
+                   
                         <button type="submit" class="btn next" id="btn_card_next">Submit</button>
-                    @endif
+                   
                     
                 </div>
-            </form>
-            
+            </form>            
             <div class="mt-5 mb-0">
                 <p>Are you a Tutor?</p>
                 <a href="" style="text-decoration: none;">Create Free Profile</a>
@@ -101,39 +101,9 @@
         </div>
     </div>
 
-    <div class="card registratinform text-center" id="consultant_list_card" style="display:none;">
-        <div class="p-0 m-0" id="card_macthed_grid">
-            <h3 class="text-center pt-2"><u>Registation</u></h3>
-        </div>
-        <div class="card-body">
-            <form action="">
-                <div class="row">
-                    <div class="col-md-6 mt-5">
-
-                        <input type="text" class="form-control" placeholder="First Name">
-                    </div>
-                    <div class="col-md-6 mt-5">
-                        <input type="text" class="form-control" placeholder="Last Name">
-                    </div>
-                    <div class="col-md-12 mt-5">
-                        <input type="email" class="form-control" placeholder="Email">
-                    </div>
-                    <div class="col-md-6 mt-5">
-                        <input type="password" class="form-control" placeholder="Password">
-                    </div>
-                    <div class="col-md-6 mt-5">
-
-                        <input type="password" class="form-control" placeholder="Confirm Password">
-                    </div>
-                    <div class="text-center mt-5">
-                        <button class="btn text-white">Submit</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script>
+    {{-- <script>
         $(document).ready(function(){
           $("#btn_card_next").click(function(){
             $(".registratinform").show();
@@ -143,7 +113,7 @@
             $("p").show();
           });
         });
-        </script>
+        </script> --}}
         
         
 <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -156,6 +126,8 @@
 
         <script>
             $(document).ready(function() {
+
+                $('.register').hide();
                 $('#searchInputCity').keyup(function() {
                     var searchQuery = $(this).val();
         
@@ -169,9 +141,22 @@
                             suggestions.empty();
                             
                             $.each(data, function(index, pincode) {
-                                suggestions.append(
-                                    '<div class="city-suggestion" data-id="' + pincode.id + '">' + '<p>'+ '(' +pincode.pincode +')&nbsp;,&nbsp;&nbsp;' + pincode.areaName +'&nbsp;,&nbsp;&nbsp;' + pincode.cityName  + '</p>'+'</div>');
+                                    suggestions.append(
+                                        '<div class="city-suggestion" data-id="' + pincode.id + '">' + '<p>'+ '(' +pincode.pincode +')&nbsp;,&nbsp;&nbsp;' + pincode.areaName +'&nbsp;,&nbsp;&nbsp;' + pincode.cityName  + '</p>'+'</div>');
+
                             });
+                            $('#btn_card_next').click(function(e) {
+                                e.preventDefault(); 
+                                var searchInputCity = $('#searchInputCity').val();
+                                var categoryId = {{$categoryphoto->id}}; // Assuming you have the category ID
+                                var pincodeId = $('#selectedCityId').val(); // You can set cityId here if needed
+
+                                // Redirect to the registration page with search details as query parameters
+                                window.location.href = "{{ route('visitors.visitorsRegister') }}?searchInputCity=" + encodeURIComponent(searchInputCity) +
+                                                "&categoryId=" + categoryId + 
+                                                "&pincodeId=" + encodeURIComponent(pincodeId); 
+                                                
+                                });
                         }
                     });
                 });
@@ -179,14 +164,19 @@
                 $(document).on('click', '.city-suggestion', function() {
                     var pincodeId = $(this).data('id');
                     var pincode = $(this).text();
+                    //var cityId = $(this).text();
+                    
 
                     $('#searchInputCity').val(pincode);
-                    //$('#selectedCityId').val(cityId);
+                    $('#selectedCityId').val(pincodeId);
         
                     if($('#citySuggestions').empty()){
                         $('#citySuggestions').hide();
                     }
         
+                });
+                $(document).ready(function() {
+                   
                 });
             });
         </script>

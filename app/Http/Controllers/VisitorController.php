@@ -16,6 +16,7 @@ use App\Models\State;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Ui\Presets\React;
 use PhpParser\Node\Expr\FuncCall;
 
 class VisitorController extends Controller
@@ -196,7 +197,8 @@ class VisitorController extends Controller
                 $leads->categoryId=$categoryphoto->id;
                 $leads->save();
             }
-            
+           
+           
             return view('visitors.consultantList',compact('consultant','countconsultant','categoryphoto'));
         
         }catch (\Throwable $th) {
@@ -206,6 +208,7 @@ class VisitorController extends Controller
     }
     public function searchCity(Request $request){
         try{
+            
             if($request->ajax()){
                 $output=[];
                 $pincode=Pincode::where('pincode','LIKE','%'.$request->search.'%')
@@ -213,6 +216,7 @@ class VisitorController extends Controller
                         $query->where('cityName','LIKE','%'.$request->search.'%');
                     })
                     ->get();
+                   
                 foreach($pincode as $pincodes){
                     $city = City::find($pincodes->cityId); 
                     
@@ -223,18 +227,79 @@ class VisitorController extends Controller
                             'cityName' => $city->cityName,
                         ];
                 }
-                
                 return response()->json($output);
+                
             }
+            
+            
         }catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }  
     }
+
+    public function visitorsRegister(Request $request){
+        $categoryId=$request->categoryId;
+            $categoryphoto=Category::find($categoryId);
+            $consultant=Profile::with('categories')->where('categoryId','=',$categoryId)->get();
+            $countconsultant=count($consultant);
+            
+            $searchInputCity = $request->input('searchInputCity');
+            $categoryId = $request->input('categoryId');
+            $pincode=$request->pincodeId;  
+            $pincodeId=Pincode::with('city')->where('id','=',$pincode)->first();
+            $cityId=$pincodeId->cityId;
+            if (isset(Auth::user()->id)) 
+            {
+                    $leads=new Lead();
+                    $leads->userId=Auth::user()->id;
+                    $leads->categoryId=$categoryId;
+                    $leads->cityId=$cityId;
+                    $leads->save();
+                    return redirect('/'); 
+            }   
+        return view('visitors.visitorsRegister',compact('consultant','countconsultant','categoryphoto'));
+    }
+
+    // Visitor Rgister Store
+    public function regitrationStore(Request $request){
+        $this->validate($request,[
+            'name'=>'required',
+            'email'=>'required',
+            'lastName'=>'required',
+            'password'=>'required',
+        ]);
+
+        $categoryId = $request->categoryId;
+        $pincodeId=$request->pincodeId;
+        
+        $pincodeId=Pincode::with('city')->where('id','=',$pincodeId)->first();
+        $cityId=$pincodeId->cityId;
+        
+        $user=new User();
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->lastName=$request->lastName;
+        $user->password=$request->password;
+        $user->assignRole('User');
+        $user->save();
+
+        Auth::login($user);
+
+        if(isset(Auth::user()->id)){
+            $leads=new Lead();
+            $leads->userId=Auth::user()->id;
+            $leads->categoryId=$categoryId;
+            $leads->cityId=$cityId;
+            $leads->save();
+        }
+        return redirect('/');
+    }
     public function serachwithdata(Request $request){
         $categoryId=$request->categoryId;
         $pincodeId=$request->pincodeId;
         $cityId=$request->cityId;
+        return   $categoryId.''.$pincodeId.''. $cityId;
     }
     public function paymentgetway($id){
         try{

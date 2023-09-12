@@ -47,32 +47,33 @@
     </div>
         <a href="{{ route('visitors.index') }}" class="fa fa-arrow-circle-left" id="fa-arrow-circle-left"></a>
     
-    <div class="card registratinform text-center" id="consultant_list_card" style="display:none;">
+    <div class="card registratinform text-center" id="consultant_list_card">
         <div class="p-0 m-0" id="card_macthed_grid">
             <h3 class="text-center pt-2"><u>Registation</u></h3>
         </div>
+       
         <div class="card-body">
-            <form action="">
+            <form action="{{route('visitors.regitrationStore')}}" method="POST">
+                @csrf
+                <input type="hidden" name="pincodeId" id="pincodeId" value="{{request()->pincodeId}}">
+                <input type="hidden" name="categoryId" id="categoryId" value="{{request()->categoryId}}">
+                    
                 <div class="row">
                     <div class="col-md-6 mt-5">
-
-                        <input type="text" class="form-control" placeholder="First Name">
+                        <input type="text" name="name" class="form-control" placeholder="First Name">
                     </div>
                     <div class="col-md-6 mt-5">
-                        <input type="text" class="form-control" placeholder="Last Name">
+                        <input type="text" name="lastName" class="form-control" placeholder="Last Name">
                     </div>
                     <div class="col-md-12 mt-5">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input type="email" name="email" class="form-control" placeholder="Email">
                     </div>
                     <div class="col-md-6 mt-5">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input type="password" name="password" class="form-control" placeholder="Password">
                     </div>
-                    <div class="col-md-6 mt-5">
-
-                        <input type="password" class="form-control" placeholder="Confirm Password">
-                    </div>
+                    
                     <div class="text-center mt-5">
-                        <button class="btn text-white">Submit</button>
+                        <button type="submit" class="btn text-white">Submit</button>
                     </div>
                 </div>
             </form>
@@ -94,4 +95,3 @@
 </body>
 </html>
     
-{{-- @endsection --}}

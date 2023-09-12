@@ -69,8 +69,18 @@ Route::post('contactus-store',[VisitorController::class,'contantus_store'])->nam
 
 Route::get('/signup/package', [VisitorController::class, 'signuppackage'])->name('visitors.signuppackage');
 Route::get('/consultantList/{id?}',[VisitorController::class,'consultantList'])->name('visitors.consultantList');
-Route::post('/findConsultantList',[VisitorController::class,'findConsultantList'])->name('visitors.findConsultantList');
+Route::match(['get', 'post'],'/findConsultantList',[VisitorController::class,'findConsultantList'])->name('visitors.findConsultantList');
+
 Route::get('/searchCity',[VisitorController::class,'searchCity'])->name('visitors.searchCity');
+
+Route::get('/visitorsRegister',[VisitorController::class,'visitorsRegister'])->name('visitors.visitorsRegister');
+Route::post('/regitrationStore',[VisitorController::class,'regitrationStore'])->name('visitors.regitrationStore');
+
+
+
+
+
+
 
 Route::post('/serachwithdata',[VisitorController::class,'serachwithdata'])->name('visitors.serachwithdata');
 
