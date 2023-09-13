@@ -11,6 +11,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Consultant Cube</title>
 
+    <link rel="stylesheet" href="{{asset('visitors/css/payment.css')}}">
+    <link rel="stylesheet" href="{{ asset('admin/css/admin.css') }}" />
+
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('asset/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -26,6 +29,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css">
 
+        {{-- Fa fa Font --}}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
     <!-- For Sweet Alert  for css-->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -76,128 +82,11 @@
 
                 <!-- Settings -->
                 @hasrole('Admin|Manager')
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('consultant.index') }}">
-                            <i class="bi bi-device-ssd-fill"></i>
-                            <span>Consultant</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('state.index') }}">
-                            <i class="bi bi-device-ssd-fill"></i>
-                            <span>State</span></a>
-                    </li>
-
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('city.index') }}">
-                            <i class="bi bi-patch-exclamation-fill"></i>
-                            <span>City</span></a>
-                    </li>
-
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('category.index') }}">
-                            <i class="bi bi-bookmark-star-fill"></i>
-                            <span>Category</span></a>
-                    </li>
-
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('languageMaster.index') }}">
-                            <i class="bi bi-translate"></i>
-                            <span>Language Master</span></a>
-                    </li>
-
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('socialMaster.index') }}">
-                            <i class="bi bi-dribbble"></i>
-                            <span>Social Media Master</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('adminpackage.index') }}">
-                            <i class="bi bi-bookmark-star-fill"></i>
-                            <span>Admin Package</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('corparateInquiry.index') }}">
-                            <i class="bi bi-gear-fill"></i>
-                            <span>Inquiry</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('adminworkshop.index') }}">
-                            <i class="fas fa-laptop-house"></i>
-                            <span>Workshop</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('slider.index') }}">
-                            <i class="fas fa-sliders-h"></i>
-                            <span>Slider</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" style="color: #014272; font-weight: 700;" href="#" data-toggle="collapse" data-target="#collapseSetting" aria-expanded="true" aria-controls="collapsePages">
-                            <i class="bi bi-gear-fill" style="color: #fff;"></i>
-                            <span style="color: #fff;">Settings</span>
-                        </a>
-                        <div id="collapseSetting" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                            <div class="bg-white py-2 collapse-inner rounded">
-
-                                <a class="collapse-item" href="{{ route('roles.index') }}"> Role Managment</a>
-                                <a class="collapse-item" href="{{ route('users.index') }}"> Users Managment</a>
-
-                            </div>
-                        </div>
-                    </li>
+                    @include('layouts.adminmenu')
                 @endhasrole
+
                 @role('Consultant')
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('time.index') }}">
-                            <i class="bi bi-alarm-fill"></i>
-                            <span>Time</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('language.index') }}">
-                            <i class="fa fa-language"></i>
-                            <span>Language</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('gallery.index') }}">
-                            <i class="bi bi-book-fill"></i>
-                            <span>Gallery</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('video.index') }}">
-                            <i class="bi bi-camera-video-fill"></i>
-                            <span>Video</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('attachment.index') }}">
-                            <i class="bi bi-bar-chart-fill"></i>
-                            <span>Attachments</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('socialLink.index') }}">
-                            <i class="bi bi-dribbble"></i>
-                            <span>Social Link</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('package.index') }}">
-                            <i class="fas fa-fw fa-tachometer-alt"></i>
-                            <span>Package</span></a>
-                    </li>
-
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('certificate.index') }}">
-                            <i class="fas fa-fw fa-tachometer-alt"></i>
-                            <span>Certificate</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('achievement.index') }}">
-                            <i class="fas fa-fw fa-tachometer-alt"></i>
-                            <span>Achievement</span></a>
-                    </li>
-
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('workshop.index') }}">
-                            <i class="fas fa-laptop-house"></i>
-                            <span>Workshop</span></a>
-                    </li>
+                    @include('layouts.consultantmenu')
                 @endrole
 
                 <!-- Divider -->
@@ -381,17 +270,16 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                                     <?php
-                                    
-                                    $name = Auth::user()->name;
-                                    $lastName = Auth::user()->lastName;
+                                        $name = Auth::user()->name;
+                                        $lastName = Auth::user()->lastName;
+                                        $profile=Auth::user('profile');
                                     ?>
-                                    @if (isset(Auth::user()->profile_photo))
-                                        <img class="img-profile rounded-circle" src="{{ url('profile') }}/{{ auth::user()->profile_photo }}">
+                                    @if (isset(Auth::user()->id))
+                                        <img class="img-profile rounded-circle"
+                                            src="{{ url('profile') }}/{{$profile->profile->photo }}">
                                     @else
                                         <span class="img-profile rounded-circle"><?php echo $name[0], $lastName[0]; ?></span>
                                     @endif
-
-
                                 </a>
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -399,7 +287,11 @@
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Update my Profile
                                     </a>
-
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ route('visitors.index') }}">
+                                        <i class="fas fa-sign-in-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                       Back To Home
+                                    </a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

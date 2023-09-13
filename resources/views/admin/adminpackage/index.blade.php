@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('header','Category')
+@section('header','Admin Package')
 @section('content')
 
 {{-- Message --}}

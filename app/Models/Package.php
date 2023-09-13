@@ -10,6 +10,6 @@ class Package extends Model
     use HasFactory;
     public function user()
     {
-        return $this->hasMany(User::class, 'id', 'userId');
+        return $this->hasMany(User::class,'userId','id');
     }
 }

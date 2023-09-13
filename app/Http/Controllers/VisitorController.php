@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\About;
 use App\Models\AdminPackage;
 use App\Models\Category;
 use App\Models\City;
+use App\Models\Contactus;
 use App\Models\Inquiry;
+use App\Models\Lead;
+use App\Models\Pincode;
 use App\Models\Profile;
+use App\Models\Slider;
 use App\Models\State;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Ui\Presets\React;
 use PhpParser\Node\Expr\FuncCall;
 
 class VisitorController extends Controller
@@ -20,7 +26,8 @@ class VisitorController extends Controller
         try{
             $category=Category::all();
             $data['states'] = State::get(["stateName", "id"]);
-            return view('visitors.index',$data,compact('category'));
+            $sliderhome=Slider::where('type','=',"Home")->get();
+            return view('visitors.index',$data,compact('category','sliderhome'));
         }catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -59,7 +66,9 @@ class VisitorController extends Controller
     public function aboutus()
     {
         try{
-            return view('visitors.aboutus');
+            $sliderinner=Slider::where('type','=',"Inner")->get();
+            $about=About::all();
+            return view('visitors.aboutus',compact('sliderinner','about'));
         }catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -69,8 +78,9 @@ class VisitorController extends Controller
     public function membershipPlan()
     {
         try{
+            $sliderinner=Slider::where('type','=',"Inner")->get();
             $adminpackage=AdminPackage::all();
-            return view('visitors.membershipPlan',compact('adminpackage'));
+            return view('visitors.membershipPlan',compact('adminpackage','sliderinner'));
         }catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -81,7 +91,8 @@ class VisitorController extends Controller
     public function corporateInquery()
     {
         try{
-            return view('visitors.corporateInquery');
+            $sliderinner=Slider::where('type','=',"Inner")->get();
+            return view('visitors.corporateInquery',compact('sliderinner'));
         }catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -116,12 +127,32 @@ class VisitorController extends Controller
     public function contactus()
     {
         try{
-            return view('visitors.contactus');
+            $sliderinner=Slider::where('type','=',"Inner")->get();
+            return view('visitors.contactus',compact('sliderinner'));
         }catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }
         
+    }
+    public function contantus_store(Request $request){
+
+        $validateData=$request->validate([
+            'name'=>'required',
+            'email'=>'required',
+            'phone'=>'required',
+            'comments'=>'required',
+        ]);
+        $contactus=new Contactus();
+        $contactus->name=$request->name;
+        $contactus->email=$request->email;
+        $contactus->phone=$request->phone;
+        $contactus->comments=$request->comments;
+        $contactus->save();
+        return response()->json([
+            'success'=>true,
+            'message'=>'Contact created Sucessfully!'
+        ]);
     }
     public function signuppackage()
     {
@@ -160,6 +191,14 @@ class VisitorController extends Controller
             $categoryphoto=Category::find($categoryId);
             $consultant=Profile::with('categories')->where('categoryId','=',$categoryId)->get();
             $countconsultant=count($consultant);
+            if(isset(Auth::user()->id)){
+                $leads=new Lead();
+                $leads->userId=Auth::user()->id;
+                $leads->categoryId=$categoryphoto->id;
+                $leads->save();
+            }
+           
+           
             return view('visitors.consultantList',compact('consultant','countconsultant','categoryphoto'));
         
         }catch (\Throwable $th) {
@@ -169,19 +208,106 @@ class VisitorController extends Controller
     }
     public function searchCity(Request $request){
         try{
-
+            
+            if($request->ajax()){
+                $output=[];
+                $pincode=Pincode::where('pincode','LIKE','%'.$request->search.'%')
+                    ->orWhereHas('city',function($query) use ($request){
+                        $query->where('cityName','LIKE','%'.$request->search.'%');
+                    })
+                    ->get();
+                   
+                foreach($pincode as $pincodes){
+                    $city = City::find($pincodes->cityId); 
+                    
+                        $output[]=[
+                            'id'=>$pincodes->id,
+                            'pincode'=>$pincodes->pincode,
+                            'areaName'=>$pincodes->areaName,
+                            'cityName' => $city->cityName,
+                        ];
+                }
+                return response()->json($output);
+                
+            }
+            
+            
         }catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
+        }  
+    }
+    
+    public function visitorsRegister(Request $request){
+            $categoryId=$request->categoryId;
+            $categoryphoto=Category::find($categoryId);
+            $consultant=Profile::with('categories')->where('categoryId','=',$categoryId)->get();
+            $countconsultant=count($consultant);
+            
+            $searchInputCity = $request->input('searchInputCity');
+            $categoryId = $request->input('categoryId');
+            $pincode=$request->pincodeId;  
+            $pincodeId=Pincode::with('city')->where('id','=',$pincode)->first();
+            $cityId=$pincodeId->cityId;
+            $category=$categoryId;
+            if (isset(Auth::user()->id)) 
+            {
+                    $leads=new Lead();
+                    $leads->userId=Auth::user()->id;
+                    $leads->categoryId=$categoryId;
+                    $leads->cityId=$cityId;
+                    $leads->save();
+                    //return redirect()->route('visitors.nearByConsultantList',[$categoryId]); 
+                    return redirect('/');
+            }   
+        return view('visitors.visitorsRegister',compact('consultant','countconsultant','categoryphoto'));
+    }
+    public function nearByConsultantList(Request $request){
+        $categoryId=$request->categoryId;
+        return $categoryphoto=Category::find($categoryId);
+        $consultant=Profile::with('categories')->where('categoryId','=',$categoryId)->get();
+        $countconsultant=count($consultant);
+        //return view('visitors.nearByConsultantList',compact('categoryphoto','consultant','countconsultant'));
+}
+    // Visitor Rgister Store
+    public function regitrationStore(Request $request){
+        $this->validate($request,[
+            'name'=>'required',
+            'email'=>'required',
+            'lastName'=>'required',
+            'password'=>'required',
+        ]);
+
+        $categoryId = $request->categoryId;
+        $pincodeId=$request->pincodeId;
+        
+        $pincodeId=Pincode::with('city')->where('id','=',$pincodeId)->first();
+        $cityId=$pincodeId->cityId;
+        
+        $user=new User();
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->lastName=$request->lastName;
+        $user->password=$request->password;
+        $user->assignRole('User');
+        $user->save();
+
+        Auth::login($user);
+
+        if(isset(Auth::user()->id)){
+            $leads=new Lead();
+            $leads->userId=Auth::user()->id;
+            $leads->categoryId=$categoryId;
+            $leads->cityId=$cityId;
+            $leads->save();
         }
-        if($request->ajax()){
-            $output=[];
-            $city=City::where('cityName','LIKE','%'.$request->search.'%')->get();
-            foreach($city as $cities){
-                $output[]=['id'=>$cities->id,'cityName'=>$cities->cityName];
-            }
-            return response()->json($output);
-        }
+        return redirect('/');
+    }
+    public function serachwithdata(Request $request){
+        $categoryId=$request->categoryId;
+        $pincodeId=$request->pincodeId;
+        $cityId=$request->cityId;
+        return   $categoryId.''.$pincodeId.''. $cityId;
     }
     public function paymentgetway($id){
         try{
@@ -209,4 +335,5 @@ class VisitorController extends Controller
         }
         
     }
+   
 }

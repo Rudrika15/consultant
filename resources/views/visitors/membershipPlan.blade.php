@@ -3,8 +3,15 @@
 <div class="main_page">
     <div class="membership">
         <h3 class="membertext ms-lg-5">Membership Plan</h3>
-        <img class="img" src="{{ asset('visitors/images/Backgroung-Web-banner-.png') }}" alt="" width="100%"
-            height="300px">
+        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" data-interval="500">
+            <div class="carousel-inner">
+                @foreach ($sliderinner as $sliderinner)
+                    <div class="carousel-item">
+                        <img src="{{url('/slider/'.$sliderinner->photo)}}" class="d-block w-100 img" height="300px" alt="...">
+                    </div>
+                @endforeach  
+            </div>
+        </div>
     </div>
     <div class="grid pt-4">
         <div class="container">
@@ -29,11 +36,34 @@
                     </h4>
                     {{-- <i class="fa fa-check"></i> --}}
                     <p class="card-text mt-5">{!!$adminpackage->details!!}</p>
+                    
                     @if ($adminpackage->title==="Free")
-                        <a href="" class="btn btn-primary mb-5 mt-5">Apply Now</a>
+                        <a class="btn btn-primary mb-5 mt-5">Apply Now</a>
+                       
+                    @elseif(isset(Auth::user()->id))
+                        {{-- <a href="{{route('paymentgetway')}}/{{$adminpackage->id}}" class="btn btn-primary mb-5 mt-5">Apply Now</a> --}}
+                        
+                                <div class="card-body text-center">
+                                    <form action="{{ route('razorpay.payment.store') }}" method="POST" >
+                                        @csrf
+                                        <input type="hidden" name="package" value="{{$adminpackage->title}}">
+                                        <script src="https://checkout.razorpay.com/v1/checkout.js"
+                                                data-key="{{ env('RAZORPAY_KEY') }}"
+                                                data-amount="{{$adminpackage->price * 100}}"
+                                                data-buttontext="Apply Now"
+                                                data-name="ConsultantCube.com"
+                                                data-description="Rozerpay"
+                                                data-image="{{url('/visitors/images/ConsultantLogo.jpg')}}"
+                                                data-prefill.name="name"
+                                                
+                                                data-theme.color="#333692">
+                                        </script>
+                                    </form>
+                                </div>
                     @else
-                        <a href="{{route('paymentgetway')}}/{{$adminpackage->id}}" class="btn btn-primary mb-5 mt-5">Apply Now</a>
+                        <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-primary mb-5 mt-5">Apply Now</a> 
                     @endif
+                        
                 </div>
             </div>
         </div>
@@ -42,7 +72,7 @@
         </div>
     </div>
     {{-- All Panls Include --}}
-    <div class="container allplan">
+    {{-- <div class="container allplan">
         <div class="text-center mt-5">
             <h1>All Plans Include</h1>
             <h5>Bring your people together under your brand on your terms !</h5>
@@ -85,6 +115,50 @@
         <div class="d-flex justify-content-center">
             <a href="#" class="btn btn-primary text-center mt-lg-5 mb-lg-5">Apply Now</a>
         </div>
+    </div> --}}
+    <div class="container allplan">
+        <div class="text-center mt-5">
+            <h1>All Plans Include</h1>
+            <h5>Bring your people together under your brand on your terms !</h5>
+        </div>
+        <div class="row cardgap gap-lg-4 mt-lg-5 ms-lg-5 flex-wrap">
+            <div class="col-md-2 card allplancard  shadow p-lg-3 mb-5 bg-gray rounded mt-5" id="allpanlcard-with">
+                <div class="card-body text-center">
+                    <a href="{{route('visitor.profile')}}" style="text-decoration: none;color:black;">
+                    <img  class="text-center profile-access-user-img" src="{{asset('visitors/images/profile_access_user.png')}}">
+                    <h5 class="card-text text-center">Profile Access</h5>
+                    </a>
+                </div>
+            </div>
+            <div class=" col-md-2 card allplancard shadow p-lg-3 mb-5 bg-gray rounded mt-lg-5" id="allpanlcard-with">
+                <div class="card-body text-center">
+                    <img src="{{asset('visitors/images/windows_img.png')}}" alt="" class="category_img">
+                    <h5 class="card-text text-center">Add Your Category</h5>
+                </div>
+            </div>
+            <div class="col-md-2 card allplancard shadow p-3 mb-5 bg-body rounded mt-lg-5" id="allpanlcard-with">
+                <div class="card-body text-center">
+                    <img src="{{asset('visitors/images/service_img.png')}}" alt="" class="service_img">
+                    <h5 class="card-text text-center">Add Your Services</h5>
+                </div>
+            </div>
+            <div class="col-md-2 card allplancard shadow p-3 mb-5 bg-body rounded mt-lg-5" id="allpanlcard-with">
+                <div class="card-body text-center">
+                    <img src="{{asset('visitors/images/quotation_img.png')}}" alt="" class="quotation_img">
+                    <h5 class="card-text text-center">Get Quotations
+                    </h5>
+                </div>
+            </div>
+            <div class="col-md-2 card allplancard shadow p-3 mb-5 bg-body rounded mt-lg-5" id="allpanlcard-with">
+                <div class="card-body text-center">
+                    <img src="{{asset('visitors/images/cerificate_img.png')}}" alt="" class="certificate_img">
+                    <h5 class="card-text text-center">Add Your Certificates</h5>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <a href="#" class="btn btn-primary text-center mt-lg-5 mb-lg-5">Apply Now</a>
+        </div>
     </div>
     <div class="getstarted mt-5">
         <h1 class="text-center text-white pt-5">Get Started For Free</h1>
@@ -97,5 +171,10 @@
         </div>
     </div>
 </div>
-   
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#myCarousel').find('.carousel-item').first().addClass('active');
+    });
+</script> 
 @endsection

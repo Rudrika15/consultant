@@ -1,12 +1,16 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\AdminLeadController;
 use App\Http\Controllers\Admin\AdminPackageController;
 use App\Http\Controllers\Admin\AdminWorkshopController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\ConsultantController;
+use App\Http\Controllers\Admin\ContactusController;
 use App\Http\Controllers\Admin\InquiryController;
 use App\Http\Controllers\Admin\LanguageMasterController;
+use App\Http\Controllers\Admin\PincodeController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SocialMasterController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -24,7 +28,12 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\Admin\StateController;
+use App\Http\Controllers\Consultant\LeadController;
+use App\Http\Controllers\Consultant\UpgradePlanController;
 use App\Http\Controllers\Consultant\WorkshopController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RazorpayController;
+use App\Http\Controllers\RazorpayPaymentController;
 use App\Models\Attachment;
 use Illuminate\Support\Facades\Route;
 use League\Flysystem\Visibility;
@@ -55,13 +64,27 @@ Route::get('/membershipplan', [VisitorController::class, 'membershipPlan'])->nam
 Route::get('/corporateInquery', [VisitorController::class, 'corporateInquery'])->name('visitors.corporateInquery');
 Route::post('corporateInquery-inqueryStore', [VisitorController::class, 'inqueryStore'])->name('corporateInquery.inqueryStore');
 
-
-
 Route::get('/contactus', [VisitorController::class, 'contactus'])->name('visitors.contactus');
+Route::post('contactus-store',[VisitorController::class,'contantus_store'])->name('contactus.store');
+
 Route::get('/signup/package', [VisitorController::class, 'signuppackage'])->name('visitors.signuppackage');
 Route::get('/consultantList/{id?}',[VisitorController::class,'consultantList'])->name('visitors.consultantList');
-Route::post('/findConsultantList',[VisitorController::class,'findConsultantList'])->name('visitors.findConsultantList');
+Route::match(['get', 'post'],'/findConsultantList',[VisitorController::class,'findConsultantList'])->name('visitors.findConsultantList');
+
 Route::get('/searchCity',[VisitorController::class,'searchCity'])->name('visitors.searchCity');
+
+Route::get('/visitorsRegister',[VisitorController::class,'visitorsRegister'])->name('visitors.visitorsRegister');
+Route::post('/regitrationStore',[VisitorController::class,'regitrationStore'])->name('visitors.regitrationStore');
+Route::get('/nearByConsultantList',[VisitorController::class,'nearByConsultantList'])->name('visitors.nearByConsultantList');
+
+
+
+
+
+
+
+
+Route::post('/serachwithdata',[VisitorController::class,'serachwithdata'])->name('visitors.serachwithdata');
 
 // City for Home page
 Route::post('fetchcityhome', [VisitorController::class, 'fetchcityhome'])->name('fetchcityhome');
@@ -76,10 +99,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/homepage', [App\Http\Controllers\HomeController::class, 'homePage'])->name('app');
 
 
-
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
+
+    // Route::get('razorpay-payment', [RazorpayPaymentController::class, 'index']);
+    Route::post('razorpay-payment', [RazorpayPaymentController::class, 'store'])->name('razorpay.payment.store');
 
 
     // Route::get('consultantRegister', [ConsultantController::class, 'consultantRegister'])->name('consultantRegister');
@@ -98,6 +123,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('userplantype',[VisitorController::class,'userplantype'])->name('userplantype');
     
     /*---------------------------Admin Panel ---------------------------------- */
+
+    /* Leade List */
+    Route::get('lead-index',[AdminLeadController::class,'index'])->name('admin.lead.index');
+
 
     /* State */
     Route::get('state-index', [StateController::class, 'index'])->name('state.index');
@@ -182,11 +211,42 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('adminworkshop-index',[AdminWorkshopController::class,'index'])->name('adminworkshop.index');
     Route::get('adminworkshop/{id}/view',[AdminWorkshopController::class,'view'])->name('adminworkshop.view');
 
-    /* Consultant List  */
-    Route::get('consultant-index',[ConsultantController::class,'index'])->name('consultant.index');
+    /* Contactus List */
+    Route::get('contactus-index',[ContactusController::class,'index'])->name('contactus.index');
+    Route::get('contactus/{id}/view',[ContactusController::class,'view'])->name('contactus.view');
 
     
+    /* Consultant List  */
+    Route::get('consultant-index',[ConsultantController::class,'index'])->name('consultant.index');
+    Route::get('consultant/{id}/view', [ConsultantController::class, 'view'])->name('consultant.view');
+    Route::get('consultant-edit/{id?}', [ConsultantController::class, 'edit'])->name('consultant.edit');
+    Route::post('consultant-update',[ConsultantController::class,'update'])->name('consultant.update');
+    Route::get('homeconsultant',[HomeController::class,'countconsultant'])->name('consultant.countconsultant');
+
+    /* About  */
     
+    Route::get('about-index',[AboutController::class,'index'])->name('about.index');
+    Route::get('about/{id}/view',[AboutController::class,'view'])->name('about.view');
+
+    Route::get('about-create',[AboutController::class,'create'])->name('about.create');
+    Route::post('about-store',[AboutController::class,'store'])->name('about.store');
+    Route::get('about-edit/{id?}',[AboutController::class,'edit'])->name('about.edit');
+    Route::post('about-update',[AboutController::class,'update'])->name('about.update');
+    Route::get('about-delete/{id?}',[AboutController::class,'delete'])->name('about.delete');
+
+    /* Pincode */
+
+    Route::get('pincode-index',[PincodeController::class,'index'])->name('pincode.index');
+    Route::get('pincode-create',[PincodeController::class,'create'])->name('pincode.create');
+    Route::post('pincode-store',[PincodeController::class,'store'])->name('pincode.store');
+    Route::get('pincode-edit/{id?}',[PincodeController::class,'edit'])->name('pincode.edit');
+    Route::post('pincode-update',[PincodeController::class,'update'])->name('pincode.update');
+    Route::get('pincode-delete/{id?}',[PincodeController::class,'delete'])->name('pincode.delete');
+    Route::get('pincode/{id}/view',[PincodeController::class,'view'])->name('pincode.view');
+
+
+
+
     /* ------------------------Consultant Panele ---------------------------------- */
 
     // /* Language */
@@ -271,4 +331,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('workshop-update',[WorkshopController::class,'update'])->name('workshop.update');
     Route::get('workshop-delete/{id?}',[WorkshopController::class,'delete'])->name('workshop.delete');
 
+    /* Upgrade Plan */
+    Route::get('upgradeplan-index',[UpgradePlanController::class,'index'])->name('upgradeplan.index');
+    Route::post('consultant-razorpay-payment', [UpgradePlanController::class, 'store'])->name('consultant.razorpay.payment.store');
+
+    /* Lead  */
+    Route::get('consultant-lead-index',[LeadController::class,'index'])->name('consultant.lead.index');
+ 
 }); 

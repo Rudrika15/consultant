@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Consultant Cube</title>
 
     {{-- Bootstrap Links --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -46,7 +46,7 @@
             src="{{ asset('visitors/images/ConsultantLogo.jpg') }}" width="150px" height="50px"></a>
     </div>
         <a href="{{ route('visitors.index') }}" class="fa fa-arrow-circle-left" id="fa-arrow-circle-left"></a>
-    <div class="card text-center" id="consultant_list_card">
+    <div class="card consultant-list-card text-center" id="consultant_list_card">
         <div class="p-0 m-0" id="card_macthed_grid">
             <div class="d-flex jistify-content-center">
                 <div class="">
@@ -56,33 +56,42 @@
                 @foreach ($consultant as $consultantData)
                     <div class="image-for-consul-list">
                         {{-- /admin_img/{{$gallerys->photo}} --}}
-                        <img src="/profile/{{$consultantData->photo}}" id="card_matches_img" class="" alt="" widht="50px" height="50px">
+                        <img src="/profile/{{$consultantData->photo}}" id="card_matches_img" class="" alt="" widht="40px" height="40px">
                         
                     </div>
                 @endforeach
                 <div class="fw-bold d-flex justify-content-end">
                     <div id="countconsultant">
-                        <p class="fa fa-arrow-left">&nbsp;<span style="font-size: 24px;">{{$countconsultant}}</span></p>
+                        <p class="fa fa-arrow-left">&nbsp;<span style="font-size: 20px;">{{$countconsultant}}</span></p>
                     </div>
                 </div>
             </div>
 
         </div>
         <div class="card-body">
-            <p class="text-center">What Is Your Location ?</p>
+            <h3 class="text-center"><u>{{$categoryphoto->catName}}</u></h3>
             <form class="">
+                @csrf
                 <div class="">
-                    <input type="text" id="searchInputCity"  class="form-control mt-5" placeholder="Enter Your Lovation Or Pincode">
-                    <div id="citySuggestions" class="citySuggestions" style="display:none;"></div>
+                    <input type="hidden" value="{{$categoryphoto->id}}" name="categoryId">
+                    <input type="text" id="searchInputCity" name="pincodeId"  class="form-control mt-5" placeholder="Enter Your Location Or Pincode" autocomplete="off">
+                    
+                    <div id="citySuggestions" class="citySuggestions" style="display:none;">
+                    
+                    </div>
+                    
                     <input type="hidden" id="selectedCityId" name="cityId">
                 </div>
                 <div class="mt-2">
                     <a href="" class="card-link" style="text-decoration: none;">Are You Inside India ?</a>
                 </div>
                 <div class="mt-5">
-                    <button class="" id="btn_card_next">Next</button>
+                   
+                        <button type="submit" class="btn next" id="btn_card_next">Submit</button>
+                   
+                    
                 </div>
-            </form>
+            </form>            
             <div class="mt-5 mb-0">
                 <p>Are you a Tutor?</p>
                 <a href="" style="text-decoration: none;">Create Free Profile</a>
@@ -90,20 +99,24 @@
             
             {{-- <a class="text-end">End aligned text on all viewport sizes.</a> --}}
         </div>
-      </div>
+    </div>
 
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    {{-- <script>
+        $(document).ready(function(){
+          $("#btn_card_next").click(function(){
+            $(".registratinform").show();
+            $(".consultant-list-card").hide();
+          });
+          $("#show").click(function(){
+            $("p").show();
+          });
+        });
+        </script> --}}
         
-        {{-- <img src="{{asset('category/1692356352.jpg')}}" alt="" class="img-fluid" width="100%" height="730px"> --}}
-        {{-- <div class="container">
-            
-            @foreach ($consultant as $consultantData)
-            <h1>{{$consultantData->id}}</h1>
-            <h1>{{$consultantData->categories->catName[1]}}</h1>
-            @endforeach
-            
-        </div> --}}
-
-        <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+        
+<link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
@@ -113,6 +126,8 @@
 
         <script>
             $(document).ready(function() {
+
+                $('.register').hide();
                 $('#searchInputCity').keyup(function() {
                     var searchQuery = $(this).val();
         
@@ -125,25 +140,43 @@
                             var suggestions = $('#citySuggestions');
                             suggestions.empty();
                             
-                            $.each(data, function(index, city) {
-                                suggestions.append(
-                                    '<div class="city-suggestion" data-id="' + city.id + '">' + city.cityName + '</div>');
+                            $.each(data, function(index, pincode) {
+                                    suggestions.append(
+                                        '<div class="city-suggestion" data-id="' + pincode.id + '">' + '<p>'+ '(' +pincode.pincode +')&nbsp;,&nbsp;&nbsp;' + pincode.areaName +'&nbsp;,&nbsp;&nbsp;' + pincode.cityName  + '</p>'+'</div>');
+
                             });
+                            $('#btn_card_next').click(function(e) {
+                                e.preventDefault(); 
+                                var searchInputCity = $('#searchInputCity').val();
+                                var categoryId = {{$categoryphoto->id}}; // Assuming you have the category ID
+                                var pincodeId = $('#selectedCityId').val(); // You can set cityId here if needed
+
+                                // Redirect to the registration page with search details as query parameters
+                                window.location.href = "{{ route('visitors.visitorsRegister') }}?searchInputCity=" + encodeURIComponent(searchInputCity) +
+                                                "&categoryId=" + categoryId + 
+                                                "&pincodeId=" + encodeURIComponent(pincodeId); 
+                                                
+                                });
                         }
                     });
                 });
         
                 $(document).on('click', '.city-suggestion', function() {
-                    var cityId = $(this).data('id');
-                    var cityName = $(this).text();
-        
-                    $('#searchInputCity').val(cityName);
-                    $('#selectedCityId').val(cityId);
+                    var pincodeId = $(this).data('id');
+                    var pincode = $(this).text();
+                    //var cityId = $(this).text();
+                    
+
+                    $('#searchInputCity').val(pincode);
+                    $('#selectedCityId').val(pincodeId);
         
                     if($('#citySuggestions').empty()){
                         $('#citySuggestions').hide();
                     }
         
+                });
+                $(document).ready(function() {
+                   
                 });
             });
         </script>

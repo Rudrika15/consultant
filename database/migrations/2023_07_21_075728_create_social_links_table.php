@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('userId');
             $table->integer('socialMediaMasterId');
             $table->string('url');
-            $table->string('status');
+            $table->string('status')->default('Active');;
             $table->timestamps();
         });
     }

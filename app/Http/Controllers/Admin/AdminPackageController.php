@@ -118,7 +118,7 @@ class AdminPackageController extends Controller
         }
         
     }
-    function delete($id)
+    public function delete($id)
     {
         try {
             $adminpackage = AdminPackage::find($id);

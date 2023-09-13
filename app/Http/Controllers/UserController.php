@@ -160,31 +160,52 @@ class UserController extends Controller
 
     public function profileUpdate(Request $request)
     {
-        $userId=$request->userId;
-        $user=User::find($userId);
-        $user->name=$request->name;
-        $user->lastName=$request->lastName;
-        $user->email=$request->email;
-        $user->save();  
-
-        $id = $request->id;
-        $profile = Profile::find($id);
-        $profile->about = $request->about;
-        $profile->contactNo2 = $request->contactNo2;
-        $profile->skypeId = $request->skypeId;
-        $profile->webSite = $request->webSite;
-        $profile->map = $request->map;
-        $profile->address = $request->address;
-        $profile->state = $request->stateId;
-        $profile->city = $request->cityId;
-        $profile->pincode = $request->pincode;
-        if ($request->photo) {
-            $profile->photo = time() . '.' . $request->photo->extension();
-            $request->photo->move(public_path('profile'),  $profile->photo);
+        if($userId=$request->userId){
+                $user=User::find($userId);
+                $user->name=$request->name;
+                $user->lastName=$request->lastName;
+                $user->email=$request->email;
+                $user->save(); 
+                
+                $id = $request->id;
+                $profile = Profile::find($id);
+                $profile->about = $request->about;
+                $profile->contactNo2 = $request->contactNo2;
+                $profile->skypeId = $request->skypeId;
+                $profile->webSite = $request->webSite;
+                $profile->map = $request->map;
+                $profile->address = $request->address;
+                $profile->state = $request->stateId;
+                $profile->city = $request->cityId;
+                $profile->pincode = $request->pincode;
+                if ($request->photo) {
+                    $profile->photo = time() . '.' . $request->photo->extension();
+                    $request->photo->move(public_path('profile'),  $profile->photo);
+                }
+                $profile->status = 'Active';
+                $profile->save();
+                return redirect('visitor/profile');
         }
-        $profile->status = 'Active';
-        $profile->save();
-        return redirect('visitor/profile');
+        else{
+            $id = $request->id;
+            $profile = Profile::find($id);
+            $profile->about = $request->about;
+            $profile->contactNo2 = $request->contactNo2;
+            $profile->skypeId = $request->skypeId;
+            $profile->webSite = $request->webSite;
+            $profile->map = $request->map;
+            $profile->address = $request->address;
+            $profile->state = $request->stateId;
+            $profile->city = $request->cityId;
+            $profile->pincode = $request->pincode;
+            if ($request->photo) {
+                $profile->photo = time() . '.' . $request->photo->extension();
+                $request->photo->move(public_path('profile'),  $profile->photo);
+            }
+            $profile->status = 'Active';
+            $profile->save();
+            return redirect('/home');
+        } 
     }
     public function changepassword(Request $request){
         $userOfId=$request->userOfId;

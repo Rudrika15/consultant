@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('catName');
             $table->string('photo');
-            $table->string('status');
+            $table->string('status')->default('Active');;
             $table->timestamps();
         });
     }

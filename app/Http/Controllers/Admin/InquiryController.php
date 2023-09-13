@@ -34,7 +34,12 @@ class InquiryController extends Controller
         }
     }
     public function view($id){
-        $inquiry=Inquiry::findOrFail($id);
-        return response()->json($inquiry);
+        try{
+            $inquiry=Inquiry::findOrFail($id);
+            return response()->json($inquiry);
+        }catch (\Throwable $th) {
+            //throw $th;    
+           return view('servererror');
+       }   
     }
 }

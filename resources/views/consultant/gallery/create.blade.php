@@ -90,9 +90,7 @@
             reader.readAsDataURL(this.files[0]);
         });
         $('#galleryForm').submit(function(e) {
-
             e.preventDefault();
-
             var formData = new FormData(this);
 
             $.ajax({

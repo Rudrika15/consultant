@@ -100,9 +100,12 @@ class RegisterController extends Controller
 
         try{
             $userId = $request->userId;
-            $consultantProfile = Profile::where('userId', '=', $id)->first();
+            $consultantProfile = Profile::with('users')->where('userId', '=', $id)->first();
             if ($consultantProfile) {
+                $consultantProfile->about=strip_tags($consultantProfile->about);
+                $consultantProfile->address=strip_tags($consultantProfile->address);
                 $consultantProfile->save();
+                
                 $response = [
                     'success' => true,
                     'ConsultantProfile' => $consultantProfile,

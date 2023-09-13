@@ -1,25 +1,34 @@
 @extends('layouts.visitorApp')
 @section('content')
 <div class="main_page">
+    
+
     <div class="" style="position: relative;">
-        <img src="{{ asset('visitors/images/home.png') }}" class="img-fluid  w-100" height="700px" width="100%" alt="" style="opacity: 0.5;">
+        {{-- <img src="{{ asset('visitors/images/home.png') }}" class="img-fluid  w-100" height="700px" width="100%" alt="" style="opacity: 0.5;"> --}}
         {{-- Consultant Category --}}
+        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" data-interval="500">
+            <div class="carousel-inner">
+                @foreach ($sliderhome as $sliderhome)
+                    <div class="carousel-item">
+                        <img src="{{url('/slider/'.$sliderhome->photo)}}" class="d-block w-100" height="700px" alt="...">
+                    </div>
+                @endforeach  
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#myCarousel').find('.carousel-item').first().addClass('active');
+            });
+        </script>
         <div class="consultantcategory p-5 mb-5">
             <h2 class="text-center categorytext text-white mt-3">Consultant Categories</h2>
         </div>
-        {{-- County Card Live Search Start --}}
-        {{-- <div class="card countrycard"> 
-            <div class="searchCategory w-50">
-                <input type="text" id="searchInput" placeholder="Search for categories">
-                <div id="categorySuggestions"></div>
-                <input type="hidden" id="selectedCategoryId">
-                    
-            </div>
-        </div> --}}
+        
         <form action="{{route('visitors.findConsultantList')}}" method="POST">
             @csrf
             <div class="">
-                <input type="text" name="" id="searchInput" class="searchCategory" placeholder="&#xF002; What Do You Want To Learn ?" style="font-family:Arial, FontAwesome" class="mt-3 mb-3">
+                <input type="text" name="" id="searchInput" class="searchCategory" placeholder="&#xF002; What Do You Want To Learn ?" style="font-family:Arial, FontAwesome" class="mt-3 mb-3" autocomplete="off">
                 <button type="submit" value="" class="btn" id="searchbuttonofcategory">Search</button>
                 <div id="categorySuggestions" class="categorySuggestions" style="display:none;"></div>
                 <input type="hidden" id="selectedCategoryId" name="categoryId">
@@ -38,7 +47,7 @@
                             <div class="card catcard ">
                                 <div class="card-img">
                                     <img src="{{ url('category')}}/{{$categories->photo}}" alt=""
-                                        width="230px" height="188px">
+                                        width="200px" height="188px">
                                 </div>
                                 <h5 class="mt-3">{{$categories->catName}}</h5>
                             </div>
@@ -58,7 +67,7 @@
 
     {{-- How Consultant Cube Works Start --}}
     <div class="cube_orange">
-        <div class="cube_purple">
+        <div class="cube_purple text-center">
             <h3 class="text-center text-white mt-5">How Consultant Cube Works</h3>
             <p class="text-center text-white mt-3">A platform to find right consultant</p>
             <div class="container mt-5">
@@ -257,7 +266,7 @@
 
     {{-- Featured Consultants End --}}
 
-    {{-- Trusted by thousands of people all over the world Start --}}
+    {{-- Trust  ed by thousands of people all over the world Start --}}
 
     <div class="trusted_porple mt-5">
         <div class="trusted_orange">
@@ -398,6 +407,10 @@
 
     </div>
     {{-- Get Started Start --}}
+
+
+    
+    
 </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
@@ -517,6 +530,8 @@
 
     });
 });
+
+
 </script>
 
 {{-- <script type="text/javascript">
@@ -570,5 +585,26 @@
         });
     });
 </script>
+
+<script type="text/javascript">
+    $(function () {
+      
+      $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+      });
+      
+      $('#createNewProduct').click(function () {
+          $('#saveBtn').val("create-product");
+          $('#product_id').val('');
+          $('#productForm').trigger("reset");
+          $('#modelHeading').html("Create New Product");
+          $('#ajaxModel').modal('show');
+      });
+        
+      
+    });
+  </script>
 
 @endsection

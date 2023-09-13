@@ -139,7 +139,7 @@
                             <div class="row">
                                 <div class="col-md-2">
                                     <div class="form-check ">
-                                        <input class="form-check-input" type="radio" name="type" id="user" value="user" checked>
+                                        <input class="form-check-input" type="radio" name="type" id="user" value="User" checked>
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             {{ __('User') }}
                                         </label>
@@ -147,7 +147,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="type" id="consultant" value="consultant">
+                                        <input class="form-check-input" type="radio" name="type" id="consultant" value="Consultant">
                                         <label class="form-check-label" for="flexRadioDefault2">
                                             {{ __('Become Consultant') }}
                                         </label>
@@ -235,7 +235,13 @@
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-
+<script>
+    $(document).ready(function(){
+        $("#becomecomsultanttype").click(function(){
+            $("#user").hide();
+        });
+    });
+    </script>
 <script>
 $(function () {
         $("#consultant").click(function () {
@@ -252,6 +258,11 @@ $(function () {
                 $("#become_consultant").hide();
             }
         });
+        $("#hide").click(function(){
+            $("p").hide();
+        });
+
+        
     });
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('day');
             $table->string('time');
             $table->integer('userId');
-            $table->string('status');
+            $table->string('status')->default('Active');;
             $table->timestamps();
         });
     }
