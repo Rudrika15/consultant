@@ -237,9 +237,9 @@ class VisitorController extends Controller
             return view('servererror');
         }  
     }
-
+    
     public function visitorsRegister(Request $request){
-        $categoryId=$request->categoryId;
+            $categoryId=$request->categoryId;
             $categoryphoto=Category::find($categoryId);
             $consultant=Profile::with('categories')->where('categoryId','=',$categoryId)->get();
             $countconsultant=count($consultant);
@@ -249,6 +249,7 @@ class VisitorController extends Controller
             $pincode=$request->pincodeId;  
             $pincodeId=Pincode::with('city')->where('id','=',$pincode)->first();
             $cityId=$pincodeId->cityId;
+            $category=$categoryId;
             if (isset(Auth::user()->id)) 
             {
                     $leads=new Lead();
@@ -256,11 +257,18 @@ class VisitorController extends Controller
                     $leads->categoryId=$categoryId;
                     $leads->cityId=$cityId;
                     $leads->save();
-                    return redirect('/'); 
+                    //return redirect()->route('visitors.nearByConsultantList',[$categoryId]); 
+                    return redirect('/');
             }   
         return view('visitors.visitorsRegister',compact('consultant','countconsultant','categoryphoto'));
     }
-
+    public function nearByConsultantList(Request $request){
+        $categoryId=$request->categoryId;
+        return $categoryphoto=Category::find($categoryId);
+        $consultant=Profile::with('categories')->where('categoryId','=',$categoryId)->get();
+        $countconsultant=count($consultant);
+        //return view('visitors.nearByConsultantList',compact('categoryphoto','consultant','countconsultant'));
+}
     // Visitor Rgister Store
     public function regitrationStore(Request $request){
         $this->validate($request,[

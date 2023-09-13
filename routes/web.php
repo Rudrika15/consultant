@@ -75,6 +75,8 @@ Route::get('/searchCity',[VisitorController::class,'searchCity'])->name('visitor
 
 Route::get('/visitorsRegister',[VisitorController::class,'visitorsRegister'])->name('visitors.visitorsRegister');
 Route::post('/regitrationStore',[VisitorController::class,'regitrationStore'])->name('visitors.regitrationStore');
+Route::get('/nearByConsultantList',[VisitorController::class,'nearByConsultantList'])->name('visitors.nearByConsultantList');
+
 
 
 
