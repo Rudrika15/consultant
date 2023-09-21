@@ -43,13 +43,17 @@ use Spatie\Permission\Contracts\Role;
 |
 */
 
+// Route::get('visitor-search-category/{category?}',[SearchCategoryController::class,'visitor_search_category']);
+
+Route::get('search-category/{category?}',[SearchCategoryController::class,'search_category']);
+Route::get('visitor-user_search_category/{category?}',[SearchCategoryController::class,'visitor_user_search_category']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 Route::post('/send-otp', [OTPController::class, 'sendOTP']);
 
-Route::get('search-category/{category?}',[SearchCategoryController::class,'search_category']);
 Route::get('user_search_category/{id?}/{category?}',[SearchCategoryController::class,'user_search_category']);
 /* ---------------------------------- Admin Side ----------------------------------  */
 // login/register

@@ -27,7 +27,7 @@ class SearchCategoryController extends Controller
                     'data' => $category
                 ]);
             }
-        }catch(\Exception $e){
+        } catch(\Exception $e){
             return response([
                 'success'=>false,
                 'message'=>'An error occurred while processing your request.',
@@ -38,7 +38,7 @@ class SearchCategoryController extends Controller
     }
 
     public function user_search_category(Request $request,$id,$category){
-        // try{
+        try{
 
             $category=Category::where("catName",'=',$category)->get();
             
@@ -71,13 +71,15 @@ class SearchCategoryController extends Controller
             }
             
                 
-        // }catch(\Exception $e){
-        //     return response([
-        //         'success'=>false,
-        //         'message'=>'An error occurred while processing your request.',
-        //         'status'=>500,
-        //         'error'=>$e->getMessage()
-        //     ]);
-        // }
+        }catch(\Exception $e){
+            return response([
+                'success'=>false,
+                'message'=>'An error occurred while processing your request.',
+                'status'=>500,
+                'error'=>$e->getMessage()
+            ]);
+        }
     }
+
+    
 }
