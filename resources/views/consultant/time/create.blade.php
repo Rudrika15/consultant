@@ -22,32 +22,36 @@
 </div>
 @endif
 
-
-
 <div class="card">
-    <!-- /.box-title -->
-    <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
 
         <div class="">
             <h4 class="">Create Time</h4>
         </div>
         <div class="">
             <a href="{{ route('time.index') }}" class="btn btnback btn-sm">BACK</a>
-
-            <!-- /.sub-menu -->
         </div>
     </div>
-    <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
         <form class="form-group" id="timeForm" name="timeForm" enctype="multipart/form-data">
             @csrf
 
             <div class="form-label-group mt-3">
-                <label for="time" class="fw-bold">Time <sup class="text-danger">*</sup></label>
-                <input id="time" type="time" name="time" class="form-control" placeholder="time">
-                @if ($errors->has('time'))
-                <span class="error">{{ $errors->first('time') }}</span>
+                <label for="start_time" class="fw-bold">Start Time <sup class="text-danger">*</sup></label>
+                <input id="start_time" type="time" name="start_time" class="form-control" placeholder="Start Time"
+                    required>
+                @if ($errors->has('start_time'))
+                <span class="error">{{ $errors->first('start_time') }}</span>
+                @endif
+            </div>
+
+            <div class="form-label-group mt-3">
+                <label for="end_time" class="fw-bold">End Time <sup class="text-danger">*</sup></label>
+                <input id="end_time" type="time" name="end_time" class="form-control" placeholder="End Time" required>
+                @if ($errors->has('end_time'))
+                <span class="error">{{ $errors->first('end_time') }}</span>
                 @endif
             </div>
 
@@ -74,12 +78,7 @@
             </div>
 
         </form>
-
-        <!-- </div> -->
     </div>
-
-    <!-- Collapsable Card Example -->
-
 </div>
 
 <script type="text/javascript">
@@ -98,9 +97,7 @@
                 type: "POST",
                 dataType: 'json',
                 success: function(response) {
-                    // window.open("/time-index", "_self");
                     if (response.success) {
-                        // Success message using SweetAlert
                         Swal.fire({
                             icon: 'success',
                             title: 'Success',
@@ -108,7 +105,6 @@
                         });
                         $('#timeForm').trigger("reset");
                     } else {
-                        // Error message using SweetAlert
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
@@ -117,7 +113,6 @@
                     }
                 },
                 error: function(xhr, status, error) {
-                    // Error message using SweetAlert
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',

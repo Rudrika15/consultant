@@ -25,4 +25,12 @@ class City extends Model
     {
         return $this->hasMany(User::class, 'id', 'userId');
     }
+    public function profile()
+    {
+        return $this->hasMany(Profile::class, 'city', 'id');
+    }
+    public function category()
+    {
+        return $this->hasMany(Category::class, 'id', 'categoryId');
+    }
 }

@@ -26,12 +26,13 @@
 
 <div class="card">
     <!-- /.box-title -->
-    <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
         <div class="">
             <h4 class="">Consultant List</h4>
         </div>
         <div class="">
-            
+
             <a href="" id="back" class="btn btnback  btn-sm" style="display:none;">BACK</a>
 
             <!-- /.sub-menu -->
@@ -50,17 +51,17 @@
                         <th>Contact No</th>
                         <th>Plan Type</th>
                         <th>About</th>
-                        <th>photo</th>
+                        <th>Photo</th>
                         <th>Type</th>
                         <th>Company Name</th>
                         <th>Category</th>
                         <th>Package</th>
                         <th>Is Featured</th>
-                        <th>status</th> 
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
-                
+
                 <tbody>
                 </tbody>
             </table>
@@ -75,6 +76,7 @@
         return confirm("Are you sure you want to delete?");
     }
 </script>
+
 <script type="text/javascript">
     $(function() {
         var table = $('.data-table').DataTable({
@@ -117,10 +119,12 @@
                     data: 'profile.company',
                     name: 'profile.company'
                 },
+
                 {
-                    data: 'profile.categories.catName',
-                    name: 'profile.categories.catName'
+                    data: 'profile.categoryId.catName',
+                    name: 'profile.categoryId.catName'
                 },
+
                 {
                     data: 'profile.packages.title',
                     name: 'profile.packages.title'

@@ -58,33 +58,44 @@ Route::get('/', function () {
 
 
 Route::get('/', [VisitorController::class, 'index'])->name('visitors.index');
-Route::get('/search',[VisitorController::class,'search'])->name('visitors.search');
+Route::get('/search', [VisitorController::class, 'search'])->name('visitors.search');
 Route::get('/aboutus', [VisitorController::class, 'aboutus'])->name('visitors.aboutus');
 Route::get('/membershipplan', [VisitorController::class, 'membershipPlan'])->name('visitors.membershipPlan');
 Route::get('/corporateInquery', [VisitorController::class, 'corporateInquery'])->name('visitors.corporateInquery');
 Route::post('corporateInquery-inqueryStore', [VisitorController::class, 'inqueryStore'])->name('corporateInquery.inqueryStore');
 
 Route::get('/contactus', [VisitorController::class, 'contactus'])->name('visitors.contactus');
-Route::post('contactus-store',[VisitorController::class,'contantus_store'])->name('contactus.store');
+Route::post('contactus-store', [VisitorController::class, 'contantus_store'])->name('contactus.store');
 
 Route::get('/signup/package', [VisitorController::class, 'signuppackage'])->name('visitors.signuppackage');
-Route::get('/consultantList/{id?}',[VisitorController::class,'consultantList'])->name('visitors.consultantList');
-Route::match(['get', 'post'],'/findConsultantList',[VisitorController::class,'findConsultantList'])->name('visitors.findConsultantList');
+Route::get('/consultantList/{id?}', [VisitorController::class, 'consultantList'])->name('visitors.consultantList');
+// Route::match(['get', 'post'], '/findConsultantList', [VisitorController::class, 'findConsultantList'])->name('visitors.findConsultantList');
+Route::match(['get', 'post'], '/findConsultantList', [VisitorController::class, 'findConsultantList'])->name('visitors.findConsultantList');
 
-Route::get('/searchCity',[VisitorController::class,'searchCity'])->name('visitors.searchCity');
-
-Route::get('/visitorsRegister',[VisitorController::class,'visitorsRegister'])->name('visitors.visitorsRegister');
-Route::post('/regitrationStore',[VisitorController::class,'regitrationStore'])->name('visitors.regitrationStore');
-Route::get('/nearByConsultantList',[VisitorController::class,'nearByConsultantList'])->name('visitors.nearByConsultantList');
+Route::get('/detail', [VisitorController::class, 'detail'])->name('visitors.detail');
+Route::get('/review/{id?}', [VisitorController::class, 'review'])->name('visitors.review');
 
 
-
-
-
+// pericular category detail
+Route::get('category-detail/{id?}', [VisitorController::class, 'categoryDetail'])->name('visitors.categoryDetail');
+Route::get('consultant-detail/{id?}', [VisitorController::class, 'consultantDetail'])->name('visitors.consultantDetail');
 
 
 
-Route::post('/serachwithdata',[VisitorController::class,'serachwithdata'])->name('visitors.serachwithdata');
+Route::get('/searchCity', [VisitorController::class, 'searchCity'])->name('visitors.searchCity');
+
+Route::get('/visitorsRegister', [VisitorController::class, 'visitorsRegister'])->name('visitors.visitorsRegister');
+Route::post('/regitrationStore', [VisitorController::class, 'regitrationStore'])->name('visitors.regitrationStore');
+Route::get('/nearByConsultantList', [VisitorController::class, 'nearByConsultantList'])->name('visitors.nearByConsultantList');
+
+
+
+
+
+
+
+
+Route::post('/serachwithdata', [VisitorController::class, 'serachwithdata'])->name('visitors.serachwithdata');
 
 // City for Home page
 Route::post('fetchcityhome', [VisitorController::class, 'fetchcityhome'])->name('fetchcityhome');
@@ -103,7 +114,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
 
-    // Route::get('razorpay-payment', [RazorpayPaymentController::class, 'index']);
+    Route::get('razorpay-payment', [RazorpayPaymentController::class, 'index']);
     Route::post('razorpay-payment', [RazorpayPaymentController::class, 'store'])->name('razorpay.payment.store');
 
 
@@ -111,21 +122,21 @@ Route::group(['middleware' => ['auth']], function () {
 
     // profile update
     Route::get('profile-update/{id?}', [UserController::class, 'profile'])->name('profile');
-    Route::post('changepassword',[UserController::class,'changepassword'])->name('changepassword');
+    Route::post('changepassword', [UserController::class, 'changepassword'])->name('changepassword');
     Route::post('update', [UserController::class, 'profileUpdate'])->name('profile.update');
 
-    
+
     //For Visitors Profile
-    Route::get('visitor/profile',[VisitorController::class,'profile'])->name('visitor.profile');
-    Route::post('visitor/profile/city',[VisitorController::class,'cityforprofile'])->name('visitors.cityforprofile');
-    
-    Route::get('paymentgetway/{id?}',[VisitorController::class,'paymentgetway'])->name('paymentgetway');
-    Route::post('userplantype',[VisitorController::class,'userplantype'])->name('userplantype');
-    
+    Route::get('visitor/profile', [VisitorController::class, 'profile'])->name('visitor.profile');
+    Route::post('visitor/profile/city', [VisitorController::class, 'cityforprofile'])->name('visitors.cityforprofile');
+
+    Route::get('paymentgetway/{id?}', [VisitorController::class, 'paymentgetway'])->name('paymentgetway');
+    Route::post('userplantype', [VisitorController::class, 'userplantype'])->name('userplantype');
+
     /*---------------------------Admin Panel ---------------------------------- */
 
     /* Leade List */
-    Route::get('lead-index',[AdminLeadController::class,'index'])->name('admin.lead.index');
+    Route::get('lead-index', [AdminLeadController::class, 'index'])->name('admin.lead.index');
 
 
     /* State */
@@ -185,64 +196,64 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('time-delete/{id?}', [TimeController::class, 'delete'])->name('time.delete');
 
     // /* Admin Package */
-    Route::get('adminpackage-index',[AdminPackageController::class,'index'])->name('adminpackage.index');
-    Route::get('adminpackage/{id}/view',[AdminPackageController::class,'view'])->name('adminpackage.view');
+    Route::get('adminpackage-index', [AdminPackageController::class, 'index'])->name('adminpackage.index');
+    Route::get('adminpackage/{id}/view', [AdminPackageController::class, 'view'])->name('adminpackage.view');
 
-    Route::get('adminpackage-create',[AdminPackageController::class,'create'])->name('adminpackage.create');
-    Route::post('adminpackage-store',[AdminPackageController::class,'store'])->name('adminpackage.store');
-    Route::get('adminpackage-edit/{id?}',[AdminPackageController::class,'edit'])->name('adminpackage.edit');
-    Route::post('adminpackage-update',[AdminPackageController::class,'update'])->name('adminpackage.update');
-    Route::get('adminpackage-delete/{id?}',[AdminPackageController::class,'delete'])->name('adminpackage.delete');
+    Route::get('adminpackage-create', [AdminPackageController::class, 'create'])->name('adminpackage.create');
+    Route::post('adminpackage-store', [AdminPackageController::class, 'store'])->name('adminpackage.store');
+    Route::get('adminpackage-edit/{id?}', [AdminPackageController::class, 'edit'])->name('adminpackage.edit');
+    Route::post('adminpackage-update', [AdminPackageController::class, 'update'])->name('adminpackage.update');
+    Route::get('adminpackage-delete/{id?}', [AdminPackageController::class, 'delete'])->name('adminpackage.delete');
 
     /* Slider */
-    Route::get('slider-index',[SliderController::class,'index'])->name('slider.index');
-    Route::get('slider-create',[SliderController::class,'create'])->name('slider.create');
-    Route::post('slider-store',[SliderController::class,'store'])->name('slider.store');
-    Route::get('slider-edit/{id?}',[SliderController::class,'edit'])->name('slider.edit');
-    Route::post('slider-update',[SliderController::class,'update'])->name('slider.update');
-    Route::get('slider-delete/{id?}',[SliderController::class,'delete'])->name('slider.delete');
-    Route::get('slider/{id}/view',[SliderController::class,'view'])->name('slider.view');
+    Route::get('slider-index', [SliderController::class, 'index'])->name('slider.index');
+    Route::get('slider-create', [SliderController::class, 'create'])->name('slider.create');
+    Route::post('slider-store', [SliderController::class, 'store'])->name('slider.store');
+    Route::get('slider-edit/{id?}', [SliderController::class, 'edit'])->name('slider.edit');
+    Route::post('slider-update', [SliderController::class, 'update'])->name('slider.update');
+    Route::get('slider-delete/{id?}', [SliderController::class, 'delete'])->name('slider.delete');
+    Route::get('slider/{id}/view', [SliderController::class, 'view'])->name('slider.view');
 
 
     // /* Corporate Inquiry */
-    Route::get('corparateInquiry-index',[InquiryController::class,'index'])->name('corparateInquiry.index');
-    Route::get('corporateInquiry/{id}/view',[InquiryController::class,'view'])->name('corparateInquiry.view');
+    Route::get('corparateInquiry-index', [InquiryController::class, 'index'])->name('corparateInquiry.index');
+    Route::get('corporateInquiry/{id}/view', [InquiryController::class, 'view'])->name('corparateInquiry.view');
     /* Workshop */
-    Route::get('adminworkshop-index',[AdminWorkshopController::class,'index'])->name('adminworkshop.index');
-    Route::get('adminworkshop/{id}/view',[AdminWorkshopController::class,'view'])->name('adminworkshop.view');
+    Route::get('adminworkshop-index', [AdminWorkshopController::class, 'index'])->name('adminworkshop.index');
+    Route::get('adminworkshop/{id}/view', [AdminWorkshopController::class, 'view'])->name('adminworkshop.view');
 
     /* Contactus List */
-    Route::get('contactus-index',[ContactusController::class,'index'])->name('contactus.index');
-    Route::get('contactus/{id}/view',[ContactusController::class,'view'])->name('contactus.view');
+    Route::get('contactus-index', [ContactusController::class, 'index'])->name('contactus.index');
+    Route::get('contactus/{id}/view', [ContactusController::class, 'view'])->name('contactus.view');
 
-    
+
     /* Consultant List  */
-    Route::get('consultant-index',[ConsultantController::class,'index'])->name('consultant.index');
+    Route::get('consultant-index', [ConsultantController::class, 'index'])->name('consultant.index');
     Route::get('consultant/{id}/view', [ConsultantController::class, 'view'])->name('consultant.view');
     Route::get('consultant-edit/{id?}', [ConsultantController::class, 'edit'])->name('consultant.edit');
-    Route::post('consultant-update',[ConsultantController::class,'update'])->name('consultant.update');
-    Route::get('homeconsultant',[HomeController::class,'countconsultant'])->name('consultant.countconsultant');
+    Route::post('consultant-update', [ConsultantController::class, 'update'])->name('consultant.update');
+    Route::get('homeconsultant', [HomeController::class, 'countconsultant'])->name('consultant.countconsultant');
 
     /* About  */
-    
-    Route::get('about-index',[AboutController::class,'index'])->name('about.index');
-    Route::get('about/{id}/view',[AboutController::class,'view'])->name('about.view');
 
-    Route::get('about-create',[AboutController::class,'create'])->name('about.create');
-    Route::post('about-store',[AboutController::class,'store'])->name('about.store');
-    Route::get('about-edit/{id?}',[AboutController::class,'edit'])->name('about.edit');
-    Route::post('about-update',[AboutController::class,'update'])->name('about.update');
-    Route::get('about-delete/{id?}',[AboutController::class,'delete'])->name('about.delete');
+    Route::get('about-index', [AboutController::class, 'index'])->name('about.index');
+    Route::get('about/{id}/view', [AboutController::class, 'view'])->name('about.view');
+
+    Route::get('about-create', [AboutController::class, 'create'])->name('about.create');
+    Route::post('about-store', [AboutController::class, 'store'])->name('about.store');
+    Route::get('about-edit/{id?}', [AboutController::class, 'edit'])->name('about.edit');
+    Route::post('about-update', [AboutController::class, 'update'])->name('about.update');
+    Route::get('about-delete/{id?}', [AboutController::class, 'delete'])->name('about.delete');
 
     /* Pincode */
 
-    Route::get('pincode-index',[PincodeController::class,'index'])->name('pincode.index');
-    Route::get('pincode-create',[PincodeController::class,'create'])->name('pincode.create');
-    Route::post('pincode-store',[PincodeController::class,'store'])->name('pincode.store');
-    Route::get('pincode-edit/{id?}',[PincodeController::class,'edit'])->name('pincode.edit');
-    Route::post('pincode-update',[PincodeController::class,'update'])->name('pincode.update');
-    Route::get('pincode-delete/{id?}',[PincodeController::class,'delete'])->name('pincode.delete');
-    Route::get('pincode/{id}/view',[PincodeController::class,'view'])->name('pincode.view');
+    Route::get('pincode-index', [PincodeController::class, 'index'])->name('pincode.index');
+    Route::get('pincode-create', [PincodeController::class, 'create'])->name('pincode.create');
+    Route::post('pincode-store', [PincodeController::class, 'store'])->name('pincode.store');
+    Route::get('pincode-edit/{id?}', [PincodeController::class, 'edit'])->name('pincode.edit');
+    Route::post('pincode-update', [PincodeController::class, 'update'])->name('pincode.update');
+    Route::get('pincode-delete/{id?}', [PincodeController::class, 'delete'])->name('pincode.delete');
+    Route::get('pincode/{id}/view', [PincodeController::class, 'view'])->name('pincode.view');
 
 
 
@@ -322,20 +333,19 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('achievement-delete/{id?}', [AchievementController::class, 'delete'])->name('achievement.delete');
 
     /* Workshop */
-    Route::get('workshop-index',[WorkshopController::class,'index'])->name('workshop.index');
+    Route::get('workshop-index', [WorkshopController::class, 'index'])->name('workshop.index');
     Route::get('workshop/{id}/view', [WorkshopController::class, 'view'])->name('workshop.view');
 
-    Route::get('workshop-create',[WorkshopController::class,'create'])->name('workshop.create');
-    Route::post('workshop-store',[WorkshopController::class,'store'])->name('workshop.store');
-    Route::get('workshop-edit/{id?}',[WorkshopController::class,'edit'])->name('workshop.edit');
-    Route::post('workshop-update',[WorkshopController::class,'update'])->name('workshop.update');
-    Route::get('workshop-delete/{id?}',[WorkshopController::class,'delete'])->name('workshop.delete');
+    Route::get('workshop-create', [WorkshopController::class, 'create'])->name('workshop.create');
+    Route::post('workshop-store', [WorkshopController::class, 'store'])->name('workshop.store');
+    Route::get('workshop-edit/{id?}', [WorkshopController::class, 'edit'])->name('workshop.edit');
+    Route::post('workshop-update', [WorkshopController::class, 'update'])->name('workshop.update');
+    Route::get('workshop-delete/{id?}', [WorkshopController::class, 'delete'])->name('workshop.delete');
 
     /* Upgrade Plan */
-    Route::get('upgradeplan-index',[UpgradePlanController::class,'index'])->name('upgradeplan.index');
+    Route::get('upgradeplan-index', [UpgradePlanController::class, 'index'])->name('upgradeplan.index');
     Route::post('consultant-razorpay-payment', [UpgradePlanController::class, 'store'])->name('consultant.razorpay.payment.store');
 
     /* Lead  */
-    Route::get('consultant-lead-index',[LeadController::class,'index'])->name('consultant.lead.index');
- 
-}); 
+    Route::get('consultant-lead-index', [LeadController::class, 'index'])->name('consultant.lead.index');
+});

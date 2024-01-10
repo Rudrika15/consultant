@@ -26,12 +26,13 @@
 
 <div class="card">
     <!-- /.box-title -->
-    <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
         <div class="">
             <h4 class="">Slider</h4>
         </div>
         <div class="">
-            <a href="{{ route('slider.create') }}" id="add" class="btn btnback btn-sm">ADD</a>
+            <a href="{{ route('slider.create') }}" id="add" class="btn btnback btn-primary ">ADD</a>
 
             <a href="" id="back" class="btn btnback  btn-sm" style="display:none;">BACK</a>
 

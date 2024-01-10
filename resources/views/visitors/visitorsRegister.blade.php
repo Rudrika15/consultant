@@ -31,15 +31,23 @@
     </div>
 
     {{-- background-image: url('{{ asset('category/')}}/{{$consultantData->categories->photo}}');         --}}
-
+    
+    @if (isset($categoryphoto->photo))
     <div class="back-img d-lg-block" style="
-        /* background-image:url('category/1692356352.jpg'); */
         background-image: url('{{ asset('category/')}}/{{$categoryphoto->photo}}');
 
         height:100vh;width:100vw;background-size:cover;
         background-position:center;
         opacity: 0.5;z-index:-1;">
     </div>
+    @else
+    <div class="back-img d-lg-block" style="
+        height:100vh;width:100vw;background-size:cover;
+        background-position:center;
+        opacity: 0.5;z-index:-1;">
+    </div>
+    @endif
+    
     
     <div class="cube-logo">
         <a class="" href="{{ route('visitors.index') }}"><img class=""
@@ -60,16 +68,28 @@
                     
                 <div class="row">
                     <div class="col-md-6 mt-5">
-                        <input type="text" name="name" class="form-control" placeholder="First Name">
+                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="First Name">
+                        @if ($errors->has('name'))
+                            <span class="error text-danger">{{ $errors->first('name') }}</span>
+                        @endif
                     </div>
                     <div class="col-md-6 mt-5">
-                        <input type="text" name="lastName" class="form-control" placeholder="Last Name">
+                        <input type="text" name="lastName" class="form-control @error('lastName') is-invalid @enderror" placeholder="Last Name">
+                        @if ($errors->has('lastName'))
+                            <span class="error text-danger">{{ $errors->first('lastName') }}</span>
+                        @endif
                     </div>
                     <div class="col-md-12 mt-5">
-                        <input type="email" name="email" class="form-control" placeholder="Email">
+                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email">
+                        @if ($errors->has('email'))
+                            <span class="error text-danger">{{ $errors->first('email') }}</span>
+                        @endif
                     </div>
-                    <div class="col-md-6 mt-5">
-                        <input type="password" name="password" class="form-control" placeholder="Password">
+                    <div class="col-md-12 mt-5">
+                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password">
+                        @if ($errors->has('password'))
+                            <span class="error text-danger">{{ $errors->first('password') }}</span>
+                        @endif
                     </div>
                     
                     <div class="text-center mt-5">

@@ -16,10 +16,15 @@
     <meta name="description" content="" />
     <meta name="keywords" content="bootstrap, bootstrap5" />
 
+    <link rel="stylesheet" href="https://codepen.io/chriscoyier/pen/gHnGD.scss">
+    <link rel="stylesheet" href="https://codepen.io/chriscoyier/pen/gHnGD.html">
+    <link rel="stylesheet" href="https://codepen.io/chriscoyier/pen/gHnGD.css">
+
+    <script src="https://codepen.io/chriscoyier/pen/gHnGD.js"></script>
     {{-- Font Awsome Link --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
 
     <!-- For Sweet Alert  for css-->
@@ -32,7 +37,8 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Option 1: Include in HTML -->
-    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    {{--
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -49,11 +55,13 @@
     <link rel="stylesheet" href="{{asset('visitors/css/login.css')}}">
 
 
-    {{-- <link rel="stylesheet" href="{{asset('visitors/css/aboutus.css')}}">
+    {{--
+    <link rel="stylesheet" href="{{asset('visitors/css/aboutus.css')}}">
     <link rel="stylesheet" href="{{asset('visitors/css/aboutus.css')}}">
     <link rel="stylesheet" href="{{asset('visitors/css/aboutus.css')}}"> --}}
 
-    {{-- <link rel="stylesheet" href="{{ asset('visitors/css/tiny-slider.css') }}" />
+    {{--
+    <link rel="stylesheet" href="{{ asset('visitors/css/tiny-slider.css') }}" />
     <link rel="stylesheet" href="{{ asset('visitors/css/aos.css') }}" />
     --}}
 
@@ -61,7 +69,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-<!-- End of <body> -->
+    <!-- End of <body> -->
 
     <title>
         Consultant Cube
@@ -83,22 +91,22 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto gap-3 mt-2 mb-2">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page"
-                                href="{{ route('visitors.index') }}">{{ _('HOME') }}</a>
+                            <a class="nav-link active" aria-current="page" href="{{ route('visitors.index') }}">HOME</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('visitors.aboutus') }}">{{ _('ABOUT US') }}</a>
+                            <a class="nav-link" href="{{ route('visitors.aboutus') }}">ABOUT US</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link"
-                                href="{{ route('visitors.membershipPlan') }}">{{ _('MEMBERSHIP PLAN') }}</a>
+                            <a class="nav-link" href="{{ route('visitors.findConsultantList') }}">FIND CONSULTANT</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link"
-                                href="{{ route('visitors.corporateInquery') }}">{{ _('CORPORATE INQUIRY') }}</a>
+                            <a class="nav-link" href="{{ route('visitors.membershipPlan') }}">MEMBERSHIP PLAN</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('visitors.contactus') }}">{{ _('CONTACT US') }}</a>
+                            <a class="nav-link" href="{{ route('visitors.corporateInquery') }}">CORPORATE INQUIRY</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('visitors.contactus') }}">CONTACT US</a>
                         </li>
                     </ul>
 
@@ -137,13 +145,14 @@
                             </li>
                             <li>
                                 <i class="fa fa-caret-right"></i>
-                                <a href="{{route('visitors.corporateInquery')}}" class="footerlink">Corporate Inquiry</a>
+                                <a href="{{route('visitors.corporateInquery')}}" class="footerlink">Corporate
+                                    Inquiry</a>
                             </li>
                         </ul>
                     </div>
                     <div class="policelink  mt-lg-0 mt-2">
                         <ul class="footerul mb-5" style="list-style-type: none;">
-                            <h5>Police Link</h5>
+                            <h5>Policy Link</h5>
                             <li class="mt-lg-5 mt-3">
                                 <i class="fa fa-caret-right"></i>
                                 <a href="" class="footerlink">Cancelation And Refund Policy</a>
@@ -192,7 +201,7 @@
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
     </script>
 
-    
+
 
 </body>
 

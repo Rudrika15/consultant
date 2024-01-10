@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\State;
+use App\Models\Category;
+use App\Models\AdminPackage;
+use App\Models\Package;
 use App\Models\City;
 use App\Models\Profile;
 use Illuminate\Http\Request;
@@ -55,7 +58,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'lastName'=>['required'],
+            'lastName' => ['required'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
@@ -72,36 +75,49 @@ class RegisterController extends Controller
         // 
         $user =  User::create([
             'name' => $data['name'],
-            'lastName'=>$data['lastName'],
+            'lastName' => $data['lastName'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'stateId' => $data['stateId'],
             'cityId' => $data['cityId'],
             'contactNo' => $data['contactNo'],
             'gender' => $data['gender'],
-            'birthdate' => $data['birthdate'],   
+            'birthdate' => $data['birthdate'],
         ]);
-        
+
         $profile = new Profile();
         $profile->userId = $user->id;
-        $profile->state=$data['stateId'];
-        $profile->city=$data['cityId'];
-        $profile->contactNo2=$data['contactNo'];
-        if($data['type']=="Consultant"){
+        $profile->state = $data['stateId'];
+        $profile->city = $data['cityId'];
+        $profile->contactNo2 = $data['contactNo'];
+        if ($data['type'] == "Consultant") {
             $user->assignRole('Consultant');
-            $profile->type =$data['type']; 
-        }else{
+            $profile->type = $data['type'];
+        } else {
             $user->assignRole('User');
-            $profile->type =$data['type']; 
+            $profile->type = $data['type'];
         }
         $profile->company = $data['company'];
         $profile->categoryId = $data['categoryId'];
-        $profile->packageId = $data['packageId'];   
+        $profile->packageId = $data['packageId'];
         $profile->status = 'Active';
         $profile->save();
 
         return $user;
     }
+
+
+
+    public function showRegistrationForm()
+    {
+        $states = State::all();
+        $categories = Category::all();
+        $adminpackages = AdminPackage::all();
+        // Add other data fetching logic as needed
+
+        return view('auth.register', compact('states', 'categories', 'adminpackages'));
+    }
+
 
     /**
      * Write code on Method
@@ -111,8 +127,8 @@ class RegisterController extends Controller
     public function fetchCity(Request $request)
     {
         $data['cities'] = City::where("stateId", $request->stateId)
-                                    ->get(["cityName", "id"]);
-                                      
+            ->get(["cityName", "id"]);
+
         return response()->json($data);
     }
 }
