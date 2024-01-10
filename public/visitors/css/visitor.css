@@ -29,50 +29,50 @@
 
 /* for All  pages */
 
-.main_page{
-    background-color: #F7F8FA !important;
-    padding-bottom: 50px !important; 
+.main_page {
+    background-color: #f7f8fa !important;
+    padding-bottom: 50px !important;
 }
-.register-page{
+.register-page {
     padding: 20px;
     margin-bottom: 30px;
-    background-color:var(--white);
+    background-color: var(--white);
 }
-.register-form{
+.register-form {
     border-radius: 0px !important;
 }
-.btn.btnsignup{
+.btn.btnsignup {
     background-color: var(--orangered) !important;
     color: var(--white) !important;
-    padding-left: 20px  !important;
+    padding-left: 20px !important;
     padding-right: 20px !important;
 }
-.btn.btncancel{
+.btn.btncancel {
     background-color: var(--purple) !important;
     color: var(--white) !important;
-    padding-left: 20px  !important;
+    padding-left: 20px !important;
     padding-right: 20px !important;
 }
 /* ------------------------------------------------------------- */
 
 /* Profile  */
 
-.user-avatar{
+.user-avatar {
     background-color: var(--white) !important;
     border-radius: 0 !important;
 }
-.profile-user{
+.profile-user {
     color: var(--black);
     font-size: 30px !important;
 }
-.cardtext{
-    border-bottom:1px solid #D2D2D2;   
+.cardtext {
+    border-bottom: 1px solid #d2d2d2;
 }
-.image-border{
+.image-border {
     position: relative;
     padding: 15px;
     border-style: dashed;
-    border-color:#D2D2D2;
+    border-color: #d2d2d2;
 }
 /* .btn.select-image-button{
     position: absolute;
@@ -83,35 +83,33 @@
     background-color: var(--orangered) !important;
     color: var(--white);
 } */
-span .updatetext{
-    color:var(--darklightgray) !important;
+span .updatetext {
+    color: var(--darklightgray) !important;
 }
-#profile-update-submit{
+#profile-update-submit {
     background-color: var(--orangered) !important;
     color: var(--white);
-    padding:15px 30px;
+    padding: 15px 30px;
 }
-#profile-update-reset{
+#profile-update-reset {
     color: var(--white) !important;
-    padding:15px 30px;
+    padding: 15px 30px;
 }
-#password-submit{
+#password-submit {
     background-color: var(--orangered) !important;
     color: var(--white);
-    padding:15px 30px;
+    padding: 15px 30px;
 }
-#password-reset{
+#password-reset {
     color: var(--white);
-    padding:15px 30px;
+    padding: 15px 30px;
 }
-
-
 
 /* ------------------------------------------------------------- */
 .user-avatar
 /* Home */
 
-.home-image{
+.home-image {
     background-color: var(--purple) !important;
     opacity: 0.5 !important;
 }
@@ -155,10 +153,10 @@ span .updatetext{
     width: 90px;
     border-radius: 50%;
 }
-.fa-circle{
+.fa-circle {
     position: absolute;
-    top:-5px;
-    left:70px;
+    top: -5px;
+    left: 70px;
     font-size: 28px;
 }
 .featured_card {
@@ -250,12 +248,12 @@ span .updatetext{
     font-size: 20px;
     text-decoration: none;
 }
-.previous_next_btn{
+.previous_next_btn {
     margin-top: 40px !important;
     font-size: 12px !important;
     border: 0 !important;
 }
-.carousel_previous{
+.carousel_previous {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -267,7 +265,7 @@ span .updatetext{
     font-size: 25px;
     border-radius: 50%;
 }
-.carousel_next{
+.carousel_next {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -345,7 +343,6 @@ span .updatetext{
     font-size: 14px !important;
 }
 
-
 /* ---------------------------------------------- */
 
 /* Membership */
@@ -358,12 +355,9 @@ span .updatetext{
 
 /* Contact Us */
 
-
 /* --------------------------------------------------- */
 
 /* Find Consultant List  */
-
-
 
 /* -------------------------------------------------------------------------- */
 .topcolor {
@@ -419,39 +413,56 @@ span .updatetext{
     background-color: var(--purple);
     min-height: 300px !important;
 }
+
 .searchCategory {
     position: absolute !important;
-    top: 42.05% !important;
+    top: 59%;
     left: 5%;
     right: 10%;
-    width: 35% !important;
-
+    width: 20% !important;
 }
-#searchInput{
+
+.searchLocation {
+    position: absolute !important;
+    top: 59%;
+    left: 30%;
+    right: 15%;
+    width: 20% !important;
+}
+
+#searchInput {
     border-radius: 5px;
-    width: 100%;
-    padding: 15px;
+    width: 50%;
+    padding: 6px 50px;
+    /* right: 50%; */
+    left: 30%;
     border: 2px solid var(--orangered);
 }
-#searchbuttonofcategory{
+
+#searchbuttonofcategory {
     background-color: var(--purple);
     color: var(--white);
     position: absolute;
-    top: 42.05% !important;
-    left:41%;
-    padding: 15px 60px;
+    top: 59% !important;
+    left: 85%;
+    padding: 6px 50px;
     border-radius: 5px;
 }
-#searchInput:focus{
+
+#optionsearch {
+    position: absolute;
+}
+
+#searchInput:focus {
     border: 3px solid var(--purple) !important;
 }
-.categorySuggestions{
+.categorySuggestions {
     position: absolute !important;
     top: 48% !important;
     left: 5%;
     width: 35%;
     height: 18%;
-    background-color:var(--white);
+    background-color: var(--white);
     overflow: scroll;
     border-radius: 5px;
     padding-top: 10px;
@@ -473,7 +484,7 @@ span .updatetext{
 }
 /* Cansltant category */
 .catcard {
-    background-color: #F7F8FA !important;
+    background-color: #f7f8fa !important;
     border: none !important;
     width: 220px !important;
 }
@@ -504,7 +515,7 @@ span .updatetext{
         padding-top: 0 !important;
         gap: 0 !important;
     }
-    .person-text{
+    .person-text {
         padding-left: 25px !important;
         padding-right: 25px !important;
     }
@@ -648,29 +659,29 @@ span .updatetext{
         left: 10%;
         width: 80% !important;
     }
-    #searchInputCategory{
+    #searchInputCategory {
         border-radius: 35px;
         width: 100%;
         padding: 20px;
         border: 1px solid green;
         border: none;
     }
-    #searchbuttonofcategory{
+    #searchbuttonofcategory {
         background-color: var(--orangered) !important;
         color: var(--white);
-        position:  absolute;
-        top:270px !important;
-        left:33%;
+        position: absolute;
+        top: 270px !important;
+        left: 33%;
         padding: 15px 40px;
-        border-radius:5px;
+        border-radius: 5px;
     }
-    .categorySuggestions{
+    .categorySuggestions {
         position: absolute !important;
         top: 33% !important;
         left: 12%;
         width: 78%;
         height: 20%;
-        background-color:var(--white);
+        background-color: var(--white);
         overflow: scroll;
     }
     .searchnowbtn {
@@ -694,14 +705,14 @@ span .updatetext{
         padding-left: 50px;
         padding-right: 50px;
     }
-   
+
     .cube_orange {
         height: 880px;
     }
     .cube_purple {
         height: 860px;
     }
-    .allplancard{
+    .allplancard {
         padding-top: -10px !important;
     }
 }
@@ -819,23 +830,23 @@ span .updatetext{
 
 /* Featured Consultant Slider */
 
-@media only screen and (min-width:500px){
+@media only screen and (min-width: 500px) {
     /* For Increase Screen */
     /* .main_page{
         background-color: pink !important;
     }  */
 }
-@media only screen and (min-width:1000px){
+@media only screen and (min-width: 1000px) {
     /* For Increase Screen */
-    .main_page{
+    .main_page {
         /* background-color: green !important; */
-    } 
+    }
 }
-@media only screen and (min-width:1300px){
+@media only screen and (min-width: 1300px) {
     /* For Dicrease Screen */
-    .main_page{
+    .main_page {
         /* background-color: red !important; */
-    } 
+    }
     .consultantcategory {
         background-color: var(--purple);
         min-height: 300px !important;
@@ -846,40 +857,39 @@ span .updatetext{
         left: 5%;
         right: 10%;
         width: 35% !important;
-    
     }
-    #searchInput{
+    #searchInput {
         border-radius: 5px;
         width: 100%;
         padding: 22px;
         border: 2px solid var(--orangered);
     }
-    #searchbuttonofcategory{
+    #searchbuttonofcategory {
         background-color: var(--purple);
         color: var(--white);
         position: absolute;
         top: 45.05% !important;
-        left:41%;
+        left: 41%;
         font-size: 20px;
         padding: 18px 60px;
         border-radius: 5px;
     }
-    #searchInput:focus{
+    #searchInput:focus {
         border: 3px solid var(--purple) !important;
     }
-    .categorySuggestions{
+    .categorySuggestions {
         position: absolute !important;
         top: 52% !important;
         left: 5%;
         width: 35%;
         height: 18%;
-        background-color:var(--white);
+        background-color: var(--white);
         overflow: scroll;
         border-radius: 5px;
         padding-top: 10px;
         padding-left: 20px !important;
     }
-    
+
     .slidertop {
         position: absolute !important;
         top: 70% !important;
@@ -893,6 +903,4 @@ span .updatetext{
         justify-content: center !important;
         align-items: center !important;
     }
-    
 }
-

@@ -6,10 +6,11 @@
         <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" data-interval="500">
             <div class="carousel-inner">
                 @foreach ($sliderinner as $sliderinner)
-                    <div class="carousel-item">
-                        <img src="{{url('/slider/'.$sliderinner->photo)}}" class="d-block w-100 img" height="300px" alt="...">
-                    </div>
-                @endforeach  
+                <div class="carousel-item">
+                    <img src="{{url('/slider/'.$sliderinner->photo)}}" class="d-block w-100 img" height="300px"
+                        alt="...">
+                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -22,53 +23,53 @@
     </div>
     <div class="container mt-5 mb-5">
         <div class="row mb-5">
-        @foreach ($adminpackage as $adminpackage)
-        <div class="col-lg-4 mt-2">
-            <div class="card membercard shadow p-3 mb-5 bg-body rounded">
-                <div class="card-body text-center">
-                    <h3 class="card-title text-center" id="adminpackage-title">{{$adminpackage->title}}<hr></h3>
-                    <h4 class="card-title text-center" id="adminpackage-price">
-                        @if ($adminpackage->price>0)
+            @foreach ($adminpackage as $adminpackage)
+            <div class="col-lg-4 mt-2">
+                <div class="card membercard shadow p-3 mb-5 bg-body rounded">
+                    <div class="card-body text-center">
+                        <h3 class="card-title text-center" id="adminpackage-title">{{$adminpackage->title}}
+                            <hr>
+                        </h3>
+                        <h4 class="card-title text-center" id="adminpackage-price">
+                            @if ($adminpackage->price>0)
                             <i class='fa fa-rupee'></i>{{$adminpackage->price}}
-                        @else
+                            @else
                             <p>-</p>
-                        @endif
-                    </h4>
-                    {{-- <i class="fa fa-check"></i> --}}
-                    <p class="card-text mt-5">{!!$adminpackage->details!!}</p>
-                    
-                    @if ($adminpackage->title==="Free")
+                            @endif
+                        </h4>
+                        {{-- <i class="fa fa-check"></i> --}}
+                        <p class="card-text mt-5">{!!$adminpackage->details!!}</p>
+
+                        @if ($adminpackage->title==="Free")
                         <a class="btn btn-primary mb-5 mt-5">Apply Now</a>
-                       
-                    @elseif(isset(Auth::user()->id))
-                        {{-- <a href="{{route('paymentgetway')}}/{{$adminpackage->id}}" class="btn btn-primary mb-5 mt-5">Apply Now</a> --}}
-                        
-                                <div class="card-body text-center">
-                                    <form action="{{ route('razorpay.payment.store') }}" method="POST" >
-                                        @csrf
-                                        <input type="hidden" name="package" value="{{$adminpackage->title}}">
-                                        <script src="https://checkout.razorpay.com/v1/checkout.js"
-                                                data-key="{{ env('RAZORPAY_KEY') }}"
-                                                data-amount="{{$adminpackage->price * 100}}"
-                                                data-buttontext="Apply Now"
-                                                data-name="ConsultantCube.com"
-                                                data-description="Rozerpay"
-                                                data-image="{{url('/visitors/images/ConsultantLogo.jpg')}}"
-                                                data-prefill.name="name"
-                                                
-                                                data-theme.color="#333692">
-                                        </script>
-                                    </form>
-                                </div>
-                    @else
-                        <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-primary mb-5 mt-5">Apply Now</a> 
-                    @endif
-                        
+
+                        @elseif(isset(Auth::user()->id))
+                        {{-- <a href="{{route('paymentgetway')}}/{{$adminpackage->id}}"
+                            class="btn btn-primary mb-5 mt-5">Apply Now</a> --}}
+
+                        <div class="card-body text-center">
+                            <form action="{{ route('razorpay.payment.store') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="package" value="{{$adminpackage->title}}">
+                                <script src="https://checkout.razorpay.com/v1/checkout.js"
+                                    data-key="{{ env('RAZORPAY_KEY') }}" data-amount="{{$adminpackage->price * 100}}"
+                                    data-buttontext="Apply Now" data-name="ConsultantCube.com"
+                                    data-description="Rozerpay"
+                                    data-image="{{url('/visitors/images/ConsultantLogo.jpg')}}" data-prefill.name="name"
+                                    data-theme.color="#333692">
+                                </script>
+                            </form>
+                        </div>
+                        @else
+                        <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                            class="btn btn-primary mb-5 mt-5">Apply Now</a>
+                        @endif
+
+                    </div>
                 </div>
             </div>
-        </div>
-        @endforeach
-        
+            @endforeach
+
         </div>
     </div>
     {{-- All Panls Include --}}
@@ -81,8 +82,9 @@
             <div class="card allplancard shadow p-3 mb-5 bg-gray rounded mt-5">
                 <div class="card-body">
                     <a href="{{route('visitor.profile')}}" style="text-decoration: none;color:black;">
-                    <img  class="text-center profile-access-user-img" src="{{asset('visitors/images/profile_access_user.png')}}">
-                    <h5 class="card-text text-center">Profile Access</h5>
+                        <img class="text-center profile-access-user-img"
+                            src="{{asset('visitors/images/profile_access_user.png')}}">
+                        <h5 class="card-text text-center">Profile Access</h5>
                     </a>
                 </div>
             </div>
@@ -125,8 +127,9 @@
             <div class="col-md-2 card allplancard  shadow p-lg-3 mb-5 bg-gray rounded mt-5" id="allpanlcard-with">
                 <div class="card-body text-center">
                     <a href="{{route('visitor.profile')}}" style="text-decoration: none;color:black;">
-                    <img  class="text-center profile-access-user-img" src="{{asset('visitors/images/profile_access_user.png')}}">
-                    <h5 class="card-text text-center">Profile Access</h5>
+                        <img class="text-center profile-access-user-img"
+                            src="{{asset('visitors/images/profile_access_user.png')}}">
+                        <h5 class="card-text text-center">Profile Access</h5>
                     </a>
                 </div>
             </div>
@@ -162,7 +165,8 @@
     </div>
     <div class="getstarted mt-5">
         <h1 class="text-center text-white pt-5">Get Started For Free</h1>
-        <p class="text-center text-white pt-2">Our forever Free Plan is a great place to start, and you can upgrade to our
+        <p class="text-center text-white pt-2">Our forever Free Plan is a great place to start, and you can upgrade to
+            our
             Premium Plans
             whenever you’re ready
         </p>
@@ -176,5 +180,5 @@
     $(document).ready(function () {
         $('#myCarousel').find('.carousel-item').first().addClass('active');
     });
-</script> 
+</script>
 @endsection

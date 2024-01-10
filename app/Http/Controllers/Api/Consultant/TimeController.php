@@ -1,42 +1,31 @@
 <?php
 
-namespace App\Http\Controllers\Api\Consultant;
+    namespace App\Http\Controllers\Api\Consultant;
 
-use App\Http\Controllers\Controller;
-use App\Models\Time;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+    use App\Http\Controllers\Controller;
+    use App\Models\Time;
+    use App\Helpers\Utils;
+    use App\Models\User;
+    use Illuminate\Http\Request;
+    use Illuminate\Support\Facades\Validator;
+    use Illuminate\Validation\UnauthorizedException;
 
-class TimeController extends Controller
-{
-    function index($id)
+    class TimeController extends Controller
     {
-        try{
-            $time = Time::where('userId', '=', $id)->get();
-            if (count($time) > 0) {
-                return response([
-                    'success' => true,
-                    'message' => 'View All Time !',
-                    'status' => 200,
-                    'data' => $time
-                ]);
-            } else {
-                return response([
-                    'message' => 'No Data Found !',
-                    'data' => $time
-                ]);
-            }
-        }catch(\Exception $e){
-            return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
-            ]);
+        public function __construct() {
+            $this->middleware('auth:api');
         }
-        
-    }
-    function store(Request $request)
+        function index(Time $time)
+        {
+            $userId = 53;
+                $user = Utils::isUserAuthorized($userId);
+                $time->where('userId',$userId)->get();
+                
+                return Utils::successResponse($time);
+                
+               
+        }
+        function store(Request $request)
     {
         try{
             $rules = array(

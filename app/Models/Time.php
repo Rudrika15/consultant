@@ -11,6 +11,7 @@ class Time extends Model
     protected $fillable = [
         'time',
         'day',
+        'userId'
     ];
     public function user()
     {

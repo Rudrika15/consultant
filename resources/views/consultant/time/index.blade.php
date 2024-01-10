@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('header','Time')
+@section('header', 'Time')
 @section('content')
 
 {{-- Message --}}
@@ -22,11 +22,9 @@
 </div>
 @endif
 
-
-
 <div class="card">
-    <!-- /.box-title -->
-    <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
         <div class="">
             <h4 class="">Time</h4>
         </div>
@@ -34,11 +32,9 @@
             <a href="{{ route('time.create') }}" id="add" class="btn btnback btn-sm">ADD</a>
 
             <a href="" id="back" class="btn btnback  btn-sm" style="display:none;">BACK</a>
-
-            <!-- /.sub-menu -->
         </div>
     </div>
-    <!-- /.dropdown js__dropdown -->
+
     <div class="card-body">
         <div class="table-responsive" id="dataTableDiv">
 
@@ -47,7 +43,8 @@
                     <tr>
                         <th>Sr No</th>
                         <th>Day</th>
-                        <th>Time</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
                         <th>Status</th>
                         <th width="280px">Action</th>
                     </tr>
@@ -62,6 +59,7 @@
     </div>
 
 </div>
+
 <script>
     function ConfirmDelete() {
         return confirm("Are you sure you want to delete?");
@@ -71,33 +69,37 @@
 <script type="text/javascript">
     $(function() {
         var table = $('.data-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('time.index') }}",
-            columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
-                },
-                {
-                    data: 'day',
-                    name: 'day'
-                },
-                {
-                    data: 'time',
-                    name: 'time'
-                },
-                {
-                    data: 'status',
-                    name: 'status'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false,
-
-                },
-            ]
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('time.index') }}",
+        columns: [
+        {
+        data: 'DT_RowIndex',
+        name: 'DT_RowIndex'
+        },
+        {
+        data: 'day',
+        name: 'day'
+        },
+        {
+        data: 'start_time', // Update to start_time
+        name: 'start_time' // Update to start_time
+        },
+        {
+            data: 'end_time',
+            name: 'end_time'
+        },
+        {
+        data: 'status',
+        name: 'status'
+        },
+        {
+        data: 'action',
+        name: 'action',
+        orderable: false,
+        searchable: false,
+        },
+        ]
         });
 
         $(document).on('click', '.edit', function() {
@@ -129,56 +131,56 @@
             var row = $(this).closest('tr');
             var data = table.row(row).data();
             var id = data.id;
-            
-                    Swal.fire({
-                        title: 'Delete Confirmation',
-                        text: 'Do you really want to delete this record?',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#d33',
-                        cancelButtonColor: '#345BCB',
-                        confirmButtonText: 'Yes, delete it!',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // AJAX request to delete the record
-                            $.ajax({
-                                url: "{{ url('time-delete') }}" +'/'+id,
-                                method: 'GET',
-                                data: {
-                                    _token: "{{ csrf_token() }}",
-                                    id:id
-                                },
-                                success: function(response) {
-                                    if (response.success) {
-                                        Swal.fire({
-                                            icon: 'success',
-                                            title: 'Success',
-                                            text: response.message,
-                                       }).then(() => {
-                                            // Refresh the page
-                                            location.reload();
-                                        });
-                                    } else {
-                                        // Error message using SweetAlert
-                                        Swal.fire({
-                                            icon: 'error',
-                                            title: 'Error',
-                                            text: 'An error occurred!',
-                                        });
-                                    }
-                                },
-                                error: function(xhr, status, error) {
-                                    // Error message using SweetAlert
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'Error',
-                                        text: 'An error occurred!',
-                                    });
-                                }
+
+            Swal.fire({
+                title: 'Delete Confirmation',
+                text: 'Do you really want to delete this record?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#345BCB',
+                confirmButtonText: 'Yes, delete it!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // AJAX request to delete the record
+                    $.ajax({
+                        url: "{{ url('time-delete') }}" + '/' + id,
+                        method: 'GET',
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            id: id
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text: response.message,
+                                }).then(() => {
+                                    // Refresh the page
+                                    location.reload();
+                                });
+                            } else {
+                                // Error message using SweetAlert
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: 'An error occurred!',
+                                });
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            // Error message using SweetAlert
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'An error occurred!',
                             });
                         }
                     });
-        
+                }
+            });
+
         });
 
     });

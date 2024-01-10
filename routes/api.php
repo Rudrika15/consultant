@@ -48,9 +48,13 @@ use Spatie\Permission\Contracts\Role;
 Route::get('search-category/{category?}',[SearchCategoryController::class,'search_category']);
 Route::get('visitor-user_search_category/{category?}',[SearchCategoryController::class,'visitor_user_search_category']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+//     Route::get('auth/time/index/', [TimeController::class, 'index']);
+
+// });
+Route::middleware('auth:sanctum')->get('/auth/time/index/{id?}', [TimeController::class, 'index']);
+
 
 Route::post('/send-otp', [OTPController::class, 'sendOTP']);
 
@@ -198,7 +202,7 @@ Route::get('socialLink/show/{id?}', [SocialLinkController::class, 'show']);
 Route::get('socialLink/getSocialLinkList', [SocialLinkController::class, 'getSocialLinkList']);
 
 /*  Time  */
-Route::get('time/index/{id?}', [TimeController::class, 'index']);
+// Route::get('time/index/{id?}', [TimeController::class, 'index']);
 Route::post('time/store', [TimeController::class, 'store']);
 Route::post('time/update/{id?}', [TimeController::class, 'update']);
 Route::get('time/delete/{id?}', [TimeController::class, 'delete']);

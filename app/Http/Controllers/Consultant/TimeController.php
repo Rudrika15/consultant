@@ -18,6 +18,7 @@ class TimeController extends Controller
             if ($request->ajax()) {
                 $data = Time::where('times.status', '!=', 'Deleted')
                     ->where('userId', '=', $userId)
+                    ->select(['id', 'day', 'start_time', 'end_time', 'status']) // Add start_time and end_time to the select
                     ->get();
                 return DataTables::of($data)
                     ->addIndexColumn()
@@ -32,86 +33,90 @@ class TimeController extends Controller
             }
             return view('consultant.time.index');
         } catch (\Throwable $th) {
-            //throw $th;
             return view('servererror');
         }
     }
-    //for show single data
+
     public function view(Request $request, $id)
     {
         try {
             $time = Time::findOrFail($id);
             return response()->json($time);
         } catch (\Throwable $th) {
-            //throw $th;
             return view('servererror');
         }
     }
+
     public function create()
     {
         try {
-            $time = Time::all();
-            return view('consultant.time.create', compact('time'));
+            return view('consultant.time.create');
         } catch (\Throwable $th) {
-            //throw $th;
             return view('servererror');
         }
     }
+
     public function store(Request $request)
     {
-        // Validate the incoming request data (time and day).
         $validatedData = $request->validate([
-            'time' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
             'day' => 'required',
         ]);
+
         try {
             $userId = Auth::user()->id;
             $time = new Time();
             $time->userId = $userId;
-            $time->time = $request->input('time');
+            $time->start_time = $request->input('start_time');
+            $time->end_time = $request->input('end_time');
             $time->day = $request->input('day');
             $time->status = 'Active';
             $time->save();
+
             return response()->json([
                 'success' => true,
                 'message' => 'Time Created Successfully!',
             ]);
         } catch (\Throwable $th) {
-            //throw $th;
             return view('servererror');
         }
     }
+
     public function edit(Request $request, $id)
     {
         try {
             $time = Time::find($id);
             return view('consultant.time.edit', compact('time'));
         } catch (\Throwable $th) {
-            //throw $th;
             return view('servererror');
         }
     }
+
     public function update(Request $request)
     {
         $this->validate($request, [
-            'time' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
             'day' => 'required',
         ]);
+
         try {
             $userId = Auth::user()->id;
             $id = $request->id;
             $time = Time::find($id);
             $time->userId = $userId;
-            $time->time = $request->time;
+            $time->start_time = $request->start_time;
+            $time->end_time = $request->end_time;
             $time->day = $request->day;
             $time->status = 'Active';
             $time->save();
+
             return response()->json([
                 'success' => true,
                 'message' => 'Time Updated Successfully!',
             ]);
         } catch (\Throwable $th) {
-            //throw $th;
             return view('servererror');
         }
     }
@@ -128,7 +133,6 @@ class TimeController extends Controller
                 'message' => 'Time Deleted Successfully!',
             ]);
         } catch (\Throwable $th) {
-            //throw $th;
             return view('servererror');
         }
     }
