@@ -26,13 +26,14 @@
 
 <div class="box-content card">
     <!-- /.box-title -->
-    <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
 
         <div class="">
             <h4 class="">Edit State</h4>
         </div>
         <div class="">
-            <a href="{{ route('state.index') }}" class="btn btnback btn-sm">BACK</a>
+            <a href="{{ route('state.index') }}" class="btn btn-info btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -47,7 +48,8 @@
 
             <div class="form-label-group mt-3">
                 <label for="stateName" class="fw-bold">State Name <sup class="text-danger">*</sup></label>
-                <input id="stateName" type="text" name="stateName" class="form-control" placeholder="State Name" value="{{$state->stateName}}">
+                <input id="stateName" type="text" name="stateName" class="form-control" placeholder="State Name"
+                    value="{{$state->stateName}}">
                 @if ($errors->has('stateName'))
                 <span class="error">{{ $errors->first('stateName') }}</span>
                 @endif

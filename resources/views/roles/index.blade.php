@@ -24,12 +24,13 @@
 
 <div class="card">
 
-    <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
         <div class="">
             <h4 class="">Role Management</h4>
         </div>
         <div class="">
-            <a href="{{ route('roles.create') }}" class="btn btnback btn-sm">ADD</a>
+            <a href="{{ route('roles.create') }}" class="btn btn-info btn-sm">ADD</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -52,7 +53,8 @@
                     <td>
                         <a class="btn btn-info" href="{{ route('roles.show',$role->id) }}">Show</a>
                         <a class="btn btn-primary" href="{{ route('roles.edit',$role->id) }}">Edit</a>
-                        {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
+                        {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy',
+                        $role->id],'style'=>'display:inline']) !!}
                         {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                         {!! Form::close() !!}
                     </td>

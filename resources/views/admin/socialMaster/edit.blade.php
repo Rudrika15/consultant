@@ -26,13 +26,14 @@
 
 <div class="card">
     <!-- /.box-title -->
-    <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
 
         <div class="">
             <h4 class="">Edit Social Master</h4>
         </div>
         <div class="">
-            <a href="{{ route('socialMaster.index') }}" class="btn btnback btn-sm">BACK</a>
+            <a href="{{ route('socialMaster.index') }}" class="btn btn-info btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -48,7 +49,8 @@
 
             <div class="form-label-group mt-3">
                 <label for="title" class="fw-bold">Title <sup class="text-danger">*</sup></label>
-                <input id="title" type="text" name="title" class="form-control" placeholder="Title" value="{{$socialMaster->title}}">
+                <input id="title" type="text" name="title" class="form-control" placeholder="Title"
+                    value="{{$socialMaster->title}}">
                 @if ($errors->has('title'))
                 <span class="error">{{ $errors->first('title') }}</span>
                 @endif
@@ -57,7 +59,8 @@
             <div class="form-label-group mt-3">
                 <label for="logo" class="fw-bold">Logo <sup class="text-danger">*</sup></label>
                 <input id="logo" type="file" name="logo" class="form-control" placeholder="logo">
-                <img src="{{ url('/logo/' . $socialMaster->logo) }}" class="mt-3" alt="" style="height:100px; width: 100px;">
+                <img src="{{ url('/logo/' . $socialMaster->logo) }}" class="mt-3" alt=""
+                    style="height:100px; width: 100px;">
 
                 @if ($errors->has('logo'))
                 <span class="error">{{ $errors->first('logo') }}</span>

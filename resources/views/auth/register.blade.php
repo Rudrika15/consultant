@@ -146,6 +146,8 @@
                             </span>
                             @enderror
                         </div>
+
+
                         <div class="col-md-6 pt-4">
                             <input id="birthdate" type="date"
                                 class="form-control register-form  @error('birthdate') is-invalid @enderror"
@@ -158,6 +160,39 @@
                             </span>
                             @enderror
                         </div>
+
+                        <div class="col-md-6 pt-4">
+                            <label for="type">Select User Type</label>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="type" id="user" value="User"
+                                            checked>
+                                        <label class="form-check-label" for="user">
+                                            User
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="type" id="consultant"
+                                            value="consultant">
+                                        <label class="form-check-label" for="consultant">
+                                            Become Consultant
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            @error('type')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+
+
+                        {{--
                         <div class="col-md-6 pt-4">
                             <label for="type">Select User Type</label>
                             <div class="row">
@@ -181,7 +216,8 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-                        </div>
+                        </div> --}}
+
                         <div id="become_consultant" class="row" style="display: none">
                             <div class="col-md-12 pt-4">
                                 <input id="company" type="text" class="form-control register-form  " name="company"

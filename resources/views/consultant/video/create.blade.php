@@ -26,13 +26,14 @@
 
 <div class="card">
     <!-- /.box-title -->
-    <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
 
         <div class="">
             <h4 class="">Create Video</h4>
         </div>
         <div class="">
-            <a href="{{ route('video.index') }}" class="btn btnback btn-sm">BACK</a>
+            <a href="{{ route('video.index') }}" class="btn btn-info btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -40,7 +41,8 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" id="videoForm" name="videoForm" action="{{route('video.store')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="videoForm" name="videoForm" action="{{route('video.store')}}"
+            enctype="multipart/form-data" method="post">
             @csrf
 
 

@@ -32,9 +32,9 @@
             <h4 class="">Slider</h4>
         </div>
         <div class="">
-            <a href="{{ route('slider.create') }}" id="add" class="btn btnback btn-primary ">ADD</a>
+            <a href="{{ route('slider.create') }}" id="add" class="btn btn-info btn-sm">ADD</a>
 
-            <a href="" id="back" class="btn btnback  btn-sm" style="display:none;">BACK</a>
+            <a href="" id="back" class="btn btn-primary  btn-sm" style="display:none;">BACK</a>
 
             <!-- /.sub-menu -->
         </div>

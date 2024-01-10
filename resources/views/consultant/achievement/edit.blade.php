@@ -26,13 +26,14 @@
 
 <div class="card">
     <!-- /.box-title -->
-    <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
 
         <div class="">
             <h4 class="">Edit Achievement</h4>
         </div>
         <div class="">
-            <a href="{{ route('achievement.index') }}" class="btn btnback btn-sm">BACK</a>
+            <a href="{{ route('achievement.index') }}" class="btn btn-info btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -46,7 +47,8 @@
             <input type="hidden" name="id" id="id" value="{{$achievement->id}}">
             <div class="form-label-group mt-3">
                 <label for="title" class="fw-bold">Title <sup class="text-danger">*</sup></label>
-                <input id="title" type="text" name="title" value="{{$achievement->title}}" class="form-control" placeholder="Title">
+                <input id="title" type="text" name="title" value="{{$achievement->title}}" class="form-control"
+                    placeholder="Title">
                 @if ($errors->has('title'))
                 <span class="error">{{ $errors->first('title') }}</span>
                 @endif
@@ -55,7 +57,8 @@
             <div class="form-label-group mt-3">
                 <label for="photo" class="fw-bold">Photo <sup class="text-danger">*</sup></label>
                 <input id="photo" type="file" name="photo" class="form-control" placeholder="photo">
-                <img id="preview-photo" src="{{ url('/achievement/' . $achievement->photo) }}" alt="" class="mt-3" style="height:100px; width: 100px;">
+                <img id="preview-photo" src="{{ url('/achievement/' . $achievement->photo) }}" alt="" class="mt-3"
+                    style="height:100px; width: 100px;">
 
                 @if ($errors->has('photo'))
                 <span class="error">{{ $errors->first('photo') }}</span>
@@ -74,7 +77,6 @@
 
 </div>
 <script type="text/javascript">
-   
     $('#photo').change(function() {
         let reader = new FileReader();
         reader.onload = (e) => {

@@ -100,7 +100,7 @@
 
                     <select class="form-select" aria-label="Default select example" id="stateId" name="stateId"
                         value="{{ old('stateId') }}" autocomplete="stateId" autofocus>
-                        <option value="">-- select State --</option>
+                        <option value="">-- Select State --</option>
                         @foreach($states as $data)
                         <option value="{{$data->id}}">{{$data->stateName}}</option>
                         @endforeach

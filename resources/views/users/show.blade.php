@@ -6,12 +6,13 @@
 
 <div class="card">
 
-<div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
         <div class="">
             <h4 class="">Show User</h4>
         </div>
         <div class="">
-            <a href="{{ route('users.index') }}" class="btn btnback btn-sm">Back</a>
+            <a href="{{ route('users.index') }}" class="btn btn-info btn-sm">Back</a>
 
             <!-- /.sub-menu -->
         </div>

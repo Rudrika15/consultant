@@ -26,13 +26,14 @@
 
 <div class="card">
     <!-- /.box-title -->
-    <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
 
         <div class="">
             <h4 class="">Create Achievement</h4>
         </div>
         <div class="">
-            <a href="{{ route('achievement.index') }}" class="btn btnback btn-sm">BACK</a>
+            <a href="{{ route('achievement.index') }}" class="btn btn-info btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -40,7 +41,8 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" id="achievementForm" name="achievementForm" action="{{route('achievement.store')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="achievementForm" name="achievementForm" action="{{route('achievement.store')}}"
+            enctype="multipart/form-data" method="post">
             @csrf
 
 
@@ -55,7 +57,8 @@
             <div class="form-label-group mt-3">
                 <label for="photo" class="fw-bold">Photo <sup class="text-danger">*</sup></label>
                 <input id="photo" type="file" name="photo" class="form-control" placeholder="photo">
-                <img id="preview-photo" src="achievement/default.jpg" name="preview-photo" class="mt-3" width="100px" height="100px">
+                <img id="preview-photo" src="achievement/default.jpg" name="preview-photo" class="mt-3" width="100px"
+                    height="100px">
 
                 @if ($errors->has('photo'))
                 <span class="error">{{ $errors->first('photo') }}</span>

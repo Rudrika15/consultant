@@ -26,13 +26,14 @@
 
 <div class="card">
     <!-- /.box-title -->
-    <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
 
         <div class="">
             <h4 class="">Create Social Master</h4>
         </div>
         <div class="">
-            <a href="{{ route('socialMaster.index') }}" class="btn btnback btn-sm">BACK</a>
+            <a href="{{ route('socialMaster.index') }}" class="btn btn-info btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -55,7 +56,7 @@
             <div class="form-label-group mt-3">
                 <label for="logo" class="fw-bold">Logo <sup class="text-danger">*</sup></label>
                 <input id="logo" type="file" name="logo" class="form-control" placeholder="logo">
-                <img id="preview-logo" width="100px" height="100px"  class="mt-3">
+                <img id="preview-logo" width="100px" height="100px" class="mt-3">
 
                 @if ($errors->has('logo'))
                 <span class="error" id="image-input-error">{{ $errors->first('logo') }}</span>

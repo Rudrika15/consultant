@@ -26,13 +26,14 @@
 
 <div class="card">
     <!-- /.box-title -->
-    <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
 
         <div class="">
             <h4 class="">Create Social Link</h4>
         </div>
         <div class="">
-            <a href="{{ route('socialLink.index') }}" class="btn btnback btn-sm">BACK</a>
+            <a href="{{ route('socialLink.index') }}" class="btn btn-info btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -40,14 +41,16 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" id="socialLinkForm" name="socialLinkForm" action="{{route('socialLink.store')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="socialLinkForm" name="socialLinkForm" action="{{route('socialLink.store')}}"
+            enctype="multipart/form-data" method="post">
             @csrf
 
 
             <div class="form-label-group mt-3">
                 <div class="form-group">
                     <strong>Social Media Master:</strong>
-                    <select class="form-control" data-error='Social Media Master Field is required' required name="socialMediaMasterId" id="socialMediaMasterId">
+                    <select class="form-control" data-error='Social Media Master Field is required' required
+                        name="socialMediaMasterId" id="socialMediaMasterId">
                         <option value="" selected disabled> Select Social Media Master </option>
                         @foreach ($socialMaster as $socialMaster)
                         <option value="{{ $socialMaster->id }}">{{ $socialMaster->title }}</option>

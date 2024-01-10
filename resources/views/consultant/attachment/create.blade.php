@@ -26,13 +26,14 @@
 
 <div class="card">
     <!-- /.box-title -->
-    <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
 
         <div class="">
             <h4 class="">Create Attachment</h4>
         </div>
         <div class="">
-            <a href="{{ route('attachment.index') }}" class="btn btnback btn-sm">BACK</a>
+            <a href="{{ route('attachment.index') }}" class="btn btn-info btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -40,7 +41,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" id="attachmentForm" name="attachmentForm"  enctype="multipart/form-data">
+        <form class="form-group" id="attachmentForm" name="attachmentForm" enctype="multipart/form-data">
             @csrf
 
 
@@ -55,7 +56,8 @@
             <div class="form-label-group mt-3">
                 <label for="file" class="fw-bold">File <sup class="text-danger">*</sup></label>
                 <input id="file" type="file" name="file" class="form-control" placeholder="file">
-                <img id="preview-file" src="attachment/default.jpg" name="preview-photo" class="mt-3" width="100px" height="100px">
+                <img id="preview-file" src="attachment/default.jpg" name="preview-photo" class="mt-3" width="100px"
+                    height="100px">
 
                 @if ($errors->has('file'))
                 <span class="error">{{ $errors->first('file') }}</span>
@@ -74,7 +76,6 @@
 </div>
 
 <script type="text/javascript">
-   
     $('#file').change(function() {
         let reader = new FileReader();
         reader.onload = (e) => {

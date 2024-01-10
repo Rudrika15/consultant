@@ -30,7 +30,7 @@
             <h4 class="">Edit Time</h4>
         </div>
         <div class="">
-            <a href="{{ route('time.index') }}" class="btn btnback btn-sm">BACK</a>
+            <a href="{{ route('time.index') }}" class="btn btn-info btn-sm">BACK</a>
         </div>
     </div>
 

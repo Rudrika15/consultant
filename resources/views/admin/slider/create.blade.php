@@ -33,7 +33,7 @@
             <h4 class="">Create Slider</h4>
         </div>
         <div class="">
-            <a href="{{ route('slider.index') }}" class="btn btnback btn-sm">BACK</a>
+            <a href="{{ route('slider.index') }}" class="btn btn-info btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>

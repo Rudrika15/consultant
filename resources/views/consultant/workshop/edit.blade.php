@@ -26,13 +26,14 @@
 
 <div class="card">
     <!-- /.box-title -->
-    <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
 
         <div class="">
             <h4 class="">Update Workshop</h4>
         </div>
         <div class="">
-            <a href="{{ route('workshop.index') }}" class="btn btnback btn-sm">BACK</a>
+            <a href="{{ route('workshop.index') }}" class="btn btn-info btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -45,7 +46,8 @@
             <input type="hidden" name="workshopId" id="workshopId" value={{$workshop->id}}>
             <div class="form-label-group mt-3">
                 <label for="title" class="fw-bold">Title <sup class="text-danger">*</sup></label>
-                <input id="title" type="text" name="title" value="{{$workshop->title}}" class="form-control" placeholder="Title">
+                <input id="title" type="text" name="title" value="{{$workshop->title}}" class="form-control"
+                    placeholder="Title">
                 @if ($errors->has('title'))
                 <span class="error">{{ $errors->first('title') }}</span>
                 @endif
@@ -53,7 +55,8 @@
 
             <div class="form-label-group mt-3">
                 <label for="price" class="fw-bold">Price <sup class="text-danger">*</sup></label>
-                <input id="price" type="text" name="price" value="{{$workshop->price}}" class="form-control" placeholder="Price">
+                <input id="price" type="text" name="price" value="{{$workshop->price}}" class="form-control"
+                    placeholder="Price">
                 @if ($errors->has('price'))
                 <span class="error">{{ $errors->first('price') }}</span>
                 @endif
@@ -67,13 +70,14 @@
                 @endif
             </div>
 
-            <div class="form-label-group mt-3">                
+            <div class="form-label-group mt-3">
                 <label for="price" class="fw-bold">Workshop Type <sup class="text-danger">*</sup></label>
 
                 <div class="row">
                     <div class="col-md-2">
                         <div class="form-check ">
-                            <input class="form-check-input" type="radio" name="workshopType" id="Online" value="Online" {{ $workshop->workshopType === 'Online' ? 'checked' : '' }}> 
+                            <input class="form-check-input" type="radio" name="workshopType" id="Online" value="Online"
+                                {{ $workshop->workshopType === 'Online' ? 'checked' : '' }}>
                             <label class="form-check-label" for="flexRadioDefault1">
                                 {{ __('Online') }}
                             </label>
@@ -81,7 +85,8 @@
                     </div>
                     <div class="col-md-2">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="workshopType" id="Offline" value="Offline" {{ $workshop->workshopType === 'Offline' ? 'checked' : '' }}>
+                            <input class="form-check-input" type="radio" name="workshopType" id="Offline"
+                                value="Offline" {{ $workshop->workshopType === 'Offline' ? 'checked' : '' }}>
                             <label class="form-check-label" for="flexRadioDefault2">
                                 {{ __('Offline') }}
                             </label>
@@ -90,23 +95,26 @@
                     @if ($errors->has('workshopType'))
                     <span class="error">{{ $errors->first('workshopType') }}</span>
                     @endif
-                    
+
                 </div>
             </div>
-            
+
             <div class="form-label-group mt-3" id="link" style="display:none;">
                 <label for="link" class="fw-bold">Link</label>
-                <input id="link" type="text" name="link" value="{{$workshop->link}}" class="form-control" placeholder="link">
-               
+                <input id="link" type="text" name="link" value="{{$workshop->link}}" class="form-control"
+                    placeholder="link">
+
             </div>
-            <div class="form-label-group mt-3" id="address"  style="display:none;">
+            <div class="form-label-group mt-3" id="address" style="display:none;">
                 <label for="address" class="fw-bold">Address </label>
-                <input id="address" type="text" name="address" value="{{$workshop->address}}" class="form-control" placeholder="address">
-                
+                <input id="address" type="text" name="address" value="{{$workshop->address}}" class="form-control"
+                    placeholder="address">
+
             </div>
             <div class="form-label-group mt-3">
                 <label for="workshopDate" class="fw-bold">Workshop Date <sup class="text-danger">*</sup></label>
-                <input id="workshopDate" type="date" name="workshopDate" value="{{$workshop->workshopDate}}" class="form-control" placeholder="workshopDate">
+                <input id="workshopDate" type="date" name="workshopDate" value="{{$workshop->workshopDate}}"
+                    class="form-control" placeholder="workshopDate">
                 @if ($errors->has('workshopDate'))
                 <span class="error">{{ $errors->first('workshopDate') }}</span>
                 @endif
@@ -125,8 +133,8 @@
 
 </div>
 <script src="https://cdn.ckeditor.com/ckeditor5/38.1.1/classic/ckeditor.js"></script>
-    <script>
-        ClassicEditor
+<script>
+    ClassicEditor
             .create(document.querySelector('#detail'))
             .then(editor => {
                 // console.log(inquiry );
@@ -134,7 +142,7 @@
             .catch(error => {
                 console.error(error);
             });
-    </script>
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script>
     $(document).ready(function(){

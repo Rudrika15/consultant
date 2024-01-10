@@ -26,13 +26,14 @@
 
 <div class="card">
     <!-- /.box-title -->
-    <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
 
         <div class="">
             <h4 class="">Edit Language Master</h4>
         </div>
         <div class="">
-            <a href="{{ route('languageMaster.index') }}" class="btn btnback btn-sm">BACK</a>
+            <a href="{{ route('languageMaster.index') }}" class="btn btn-info btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -48,7 +49,8 @@
 
             <div class="form-label-group mt-3">
                 <label for="language" class="fw-bold">Language Master <sup class="text-danger">*</sup></label>
-                <input id="language" type="text" name="language" class="form-control" placeholder="language" value="{{$languageMaster->language}}">
+                <input id="language" type="text" name="language" class="form-control" placeholder="language"
+                    value="{{$languageMaster->language}}">
                 @if ($errors->has('language'))
                 <span class="error">{{ $errors->first('language') }}</span>
                 @endif

@@ -26,13 +26,14 @@
 
 <div class="card">
     <!-- /.box-title -->
-    <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
 
         <div class="">
             <h4 class="">Edit Video</h4>
         </div>
         <div class="">
-            <a href="{{ route('video.index') }}" class="btn btnback btn-sm">BACK</a>
+            <a href="{{ route('video.index') }}" class="btn btn-info btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -40,7 +41,7 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" id="videoForm" name="videoForm"  enctype="multipart/form-data">
+        <form class="form-group" id="videoForm" name="videoForm" enctype="multipart/form-data">
             @csrf
 
             <input type="hidden" id="id" name="id" value="{{$video->id}}">
@@ -51,7 +52,7 @@
                 <span class="error">{{ $errors->first('url') }}</span>
                 @endif
             </div>
-           
+
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
                 <button type="submit" id="saveBtn" class="btn btn-primary">Submit</button>
             </div>
@@ -63,7 +64,7 @@
 
 </div>
 <script type="text/javascript">
-  $(function () {
+    $(function () {
      
     $.ajaxSetup({
           headers: {

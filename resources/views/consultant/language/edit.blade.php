@@ -26,13 +26,14 @@
 
 <div class="card">
     <!-- /.box-title -->
-    <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
 
         <div class="">
             <h4 class="">Create Language</h4>
         </div>
         <div class="">
-            <a href="{{ route('language.index') }}" class="btn btnback btn-sm">BACK</a>
+            <a href="{{ route('language.index') }}" class="btn btn-info btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -40,16 +41,19 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" id="languageForm" name="languageForm"  enctype="multipart/form-data" >
+        <form class="form-group" id="languageForm" name="languageForm" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="id" id="id" value="{{$language->id}}">
             <div class="form-label-group mt-3">
                 <div class="form-group">
                     <strong>Language Master Name:</strong>
-                    <select class="form-control" data-error='State Name Field is required' required name="languageId" id="languageId">
+                    <select class="form-control" data-error='State Name Field is required' required name="languageId"
+                        id="languageId">
                         <option value="" selected disabled> Select Language Master </option>
                         @foreach ($languageMaster as $languageMasterData)
-                        <option value="{{ $languageMasterData->id }}" {{$languageMasterData->id == old('languageId',$language->languageId)? 'selected':''}}>{{ $languageMasterData->language }}</option>
+                        <option value="{{ $languageMasterData->id }}" {{$languageMasterData->id ==
+                            old('languageId',$language->languageId)? 'selected':''}}>{{ $languageMasterData->language }}
+                        </option>
                         @endforeach
                     </select>
                     <div class="help-block with-errors"></div>

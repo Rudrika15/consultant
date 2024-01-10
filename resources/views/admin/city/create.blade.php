@@ -26,13 +26,14 @@
 
 <div class="card">
     <!-- /.box-title -->
-    <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
 
         <div class="">
             <h4 class="">Create City</h4>
         </div>
         <div class="">
-            <a href="{{ route('city.index') }}" class="btn btnback btn-sm">BACK</a>
+            <a href="{{ route('city.index') }}" class="btn btn-info btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -46,7 +47,8 @@
             <div class="form-label-group mt-3">
                 <div class="form-group">
                     <strong>State Name:</strong>
-                    <select class="form-control" data-error='State Name Field is required' required name="stateId" id="stateId">
+                    <select class="form-control" data-error='State Name Field is required' required name="stateId"
+                        id="stateId">
                         <option value="" selected disabled> Select User Name </option>
                         @foreach ($state as $state)
                         <option value="{{ $state->id }}">{{ $state->stateName }}</option>

@@ -26,13 +26,14 @@
 
 <div class="card">
     <!-- /.box-title -->
-    <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
 
         <div class="">
             <h4 class="">Create Pincode</h4>
         </div>
         <div class="">
-            <a href="{{ route('pincode.index') }}" class="btn btnback btn-sm">BACK</a>
+            <a href="{{ route('pincode.index') }}" class="btn btn-info btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -46,7 +47,8 @@
             <div class="form-label-group mt-3">
                 <div class="form-group">
                     <strong>City Name:</strong>
-                    <select class="form-control" data-error='State Name Field is required' required name="cityId" id="cityId">
+                    <select class="form-control" data-error='State Name Field is required' required name="cityId"
+                        id="cityId">
                         <option value="" selected disabled> Select User Name </option>
                         @foreach ($city as $city)
                         <option value="{{ $city->id }}">{{ $city->cityName }}</option>
@@ -75,7 +77,7 @@
                 <span class="error">{{ $errors->first('pincode') }}</span>
                 @endif
             </div>
-            
+
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
                 <button type="submit" class="btn btn-primary" id="saveBtn">Submit</button>
             </div>
