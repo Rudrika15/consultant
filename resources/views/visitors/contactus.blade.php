@@ -5,9 +5,9 @@
         <h3 class="contacttext ms-lg-5">Contact Us</h3>
         <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" data-interval="500">
             <div class="carousel-inner">
-                @foreach ($sliderinner as $sliderinner)
+                @foreach ($slidercontactus as $slidercontactus)
                 <div class="carousel-item">
-                    <img src="{{url('/slider/'.$sliderinner->photo)}}" class="d-block w-100 img" height="300px"
+                    <img src="{{url('/slider/'.$slidercontactus->photo)}}" class="d-block w-100 img" height="300px"
                         alt="...">
                 </div>
                 @endforeach

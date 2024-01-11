@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\PincodeController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SocialMasterController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ConsultantRegisterController;
 use App\Http\Controllers\Consultant\AttachmentController;
 // use App\Http\Controllers\Consultant\ConsultantController;
 use App\Http\Controllers\Consultant\GalleryController;
@@ -91,10 +92,6 @@ Route::get('/nearByConsultantList', [VisitorController::class, 'nearByConsultant
 
 
 
-
-
-
-
 Route::post('/serachwithdata', [VisitorController::class, 'serachwithdata'])->name('visitors.serachwithdata');
 
 // City for Home page
@@ -104,7 +101,9 @@ Route::post('fetchCity', [RegisterController::class, 'fetchCity'])->name('fetchC
 
 Route::post('city', [UserController::class, 'city'])->name('city');
 Auth::routes();
-
+// consultant register
+Route::get('/consultant/register', [RegisterController::class, 'registerConsultant'])->name('registerConsultant');
+Route::post('/consultant/register/code', [RegisterController::class, 'registerConsultantCode'])->name('registerConsultantCode');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/homepage', [App\Http\Controllers\HomeController::class, 'homePage'])->name('app');
@@ -118,7 +117,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('razorpay-payment', [RazorpayPaymentController::class, 'store'])->name('razorpay.payment.store');
 
 
-    // Route::get('consultantRegister', [ConsultantController::class, 'consultantRegister'])->name('consultantRegister');
+    // Route::get('consultantRegister', [ConsultantRegisterController::class, 'consultantRegister'])->name('consultantRegister');
 
     // profile update
     Route::get('profile-update/{id?}', [UserController::class, 'profile'])->name('profile');

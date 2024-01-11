@@ -50,8 +50,11 @@
                     <select class="form-control" required name="type" id="type">
                         <option value="" selected disabled> Select Type </option>
                         <option value="Home">Home</option>
-                        <option value="Inner">Inner</option>
-
+                        <option value="About Us">About Us</option>
+                        <option value="Find Consultant">Find Consultant</option>
+                        <option value="Membership Plan">Membership Plan</option>
+                        <option value="Corporate Inquiry">Corporate Inquiry</option>
+                        <option value="Contact Us">Contact Us</option>
 
                     </select>
                     <div class="help-block with-errors"></div>

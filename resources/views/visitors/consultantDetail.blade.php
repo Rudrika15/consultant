@@ -539,7 +539,7 @@
                         </div>
                 </div>
 
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                         <div class="col-md-12">
                                 <h3 class="fw-bold">Contact Details</h3>
                                 <p class="textSize"><span class="fw-bold">Contact No: </span>{!!
@@ -549,7 +549,7 @@
                                 <p class="textSize"><span class="fw-bold">Website: </span>{!!
                                         isset($consultant->webSite) ? $consultant->webSite : ' -' !!}</p>
                         </div>
-                </div>
+                </div> --}}
         </div>
 </div>
 

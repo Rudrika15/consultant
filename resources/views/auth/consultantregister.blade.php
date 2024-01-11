@@ -5,7 +5,7 @@
         <div class="container">
             <a href="{{ route('visitors.index') }}" class="home_link">HOME</a>
             <span class="span_arrow">/</span>
-            <a href="{{ route('register') }}" class="about_us_link">USER SIGN UP</a>
+            <a href="{{ route('register') }}" class="about_us_link">CONSULTANT SIGN UP</a>
         </div>
     </div>
     <div class="container mt-5">
@@ -21,7 +21,7 @@
             <div class="tab-pane fade show active" id="register" role="tabpanel" aria-labelledby="register">
                 <!-- Outer Row -->
 
-                <form action="{{route('register')}}" method="post">
+                <form action="{{route('registerConsultantCode')}}" method="post">
                     @csrf
                     <div class="row">
                         <div class="col-md-6 pt-4">
@@ -106,6 +106,7 @@
                             </span>
                             @enderror
                         </div>
+
                         <div class="col-md-6 pt-4">
                             <input id="contactNo" type="text"
                                 class="form-control register-form @error('contactNo') is-invalid @enderror"
@@ -161,64 +162,12 @@
                             @enderror
                         </div>
 
-                        {{-- <div class="col-md-6 pt-4">
-                            <label for="type">Select User Type</label>
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="type" id="user" value="User"
-                                            checked>
-                                        <label class="form-check-label" for="user">
-                                            User
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="type" id="consultant"
-                                            value="consultant">
-                                        <label class="form-check-label" for="consultant">
-                                            Become Consultant
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            @error('type')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div> --}}
 
 
 
-                        {{--
-                        <div class="col-md-6 pt-4">
-                            <label for="type">Select User Type</label>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="type" id="user" value="User"
-                                            checked>
-                                        <label class="form-check-label" for="user">User</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="type" id="consultant"
-                                            value="Consultant">
-                                        <label class="form-check-label" for="consultant">Become Consultant</label>
-                                    </div>
-                                </div>
-                            </div>
-                            @error('type')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div> --}}
 
-                        <div id="become_consultant" class="row" style="display: none">
+
+                        {{-- <div id="become_consultant" class="row" style="display: none"> --}}
                             <div class="col-md-12 pt-4">
                                 <input id="company" type="text" class="form-control register-form  " name="company"
                                     placeholder="Company Name">

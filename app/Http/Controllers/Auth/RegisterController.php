@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
+use App\Models\City;
 use App\Models\User;
 use App\Models\State;
+use App\Models\Package;
+use App\Models\Profile;
 use App\Models\Category;
 use App\Models\AdminPackage;
-use App\Models\Package;
-use App\Models\City;
-use App\Models\Profile;
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -90,15 +91,16 @@ class RegisterController extends Controller
         $profile->state = $data['stateId'];
         $profile->city = $data['cityId'];
         $profile->contactNo2 = $data['contactNo'];
-        if ($data['type'] == "Consultant") {
-            $user->assignRole('Consultant');
-            $profile->type = $data['type'];
-        } else {
-            $user->assignRole('User');
-            $profile->type = $data['type'];
-        }
-        $profile->company = $data['company'];
-        $profile->categoryId = $data['categoryId'];
+        $user->assignRole('User');
+        // if ($data['type'] == "User") {
+        //     $user->assignRole('User');
+        //     $profile->type = $data['type'];
+        // } else {
+        //     $user->assignRole('User');
+        //     $profile->type = $data['type'];
+        // }
+        // $profile->company = $data['company'];
+        // $profile->categoryId = $data['categoryId'];
         $profile->packageId = $data['packageId'];
         $profile->status = 'Active';
         $profile->save();
@@ -131,4 +133,67 @@ class RegisterController extends Controller
 
         return response()->json($data);
     }
+
+    //consultant registration
+
+    public function registerConsultant()
+    {
+        $states = State::all();
+        $categories = Category::all();
+        $adminpackages = AdminPackage::all();
+        // Add other data fetching logic as needed
+
+        return view('auth.consultantregister', compact('states', 'categories', 'adminpackages'));
+    }
+
+
+    public function registerConsultantCode(Request $request)
+    {
+        $user = User::create([
+            'name' => $request->name,
+            'lastName' => $request->lastName,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'stateId' => $request->stateId,
+            'cityId' => $request->cityId,
+            'contactNo' => $request->contactNo,
+            'gender' => $request->gender,
+            'birthdate' => $request->birthdate,
+        ]);
+
+        $profile = new Profile();
+
+        $profile->userId = $user->id;
+        $profile->state = $request->stateId;
+        $profile->city = $request->cityId;
+        $profile->contactNo2 = $request->contactNo;
+        $profile->company = $request->company;
+        $profile->categoryId = $request->categoryId;
+        $profile->packageId = $request->packageId;
+        $profile->status = 'Active';
+
+        // Assign the 'Consultant' role to the user
+        $user->assignRole('Consultant');
+
+        $profile->save();
+
+        Auth::login($user);
+
+        return redirect()->route('home');
+    }
+
+
+    // $profile->userId = $user->id;
+    // $profile->state = $data['stateId'];
+    // $profile->city = $data['cityId'];
+    // $profile->contactNo2 = $data['contactNo'];
+    // $user->assignRole('Consultant');
+    // $profile->company = $data['company'];
+    // $profile->categoryId = $data['categoryId'];
+    // $profile->packageId = $data['packageId'];
+    // $profile->status = 'Active';
+    // $profile->save();
+
+    // return $user;
+    // }
 }

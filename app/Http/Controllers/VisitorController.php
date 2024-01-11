@@ -79,9 +79,9 @@ class VisitorController extends Controller
     public function aboutus()
     {
         try {
-            $sliderinner = Slider::where('type', '=', "Inner")->get();
+            $sliderabout = Slider::where('type', '=', "About Us")->get();
             $about = About::all();
-            return view('visitors.aboutus', compact('sliderinner', 'about'));
+            return view('visitors.aboutus', compact('sliderabout', 'about'));
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -90,9 +90,9 @@ class VisitorController extends Controller
     public function membershipPlan()
     {
         try {
-            $sliderinner = Slider::where('type', '=', "Inner")->get();
+            $slidermember = Slider::where('type', '=', "Membership Plan")->get();
             $adminpackage = AdminPackage::all();
-            return view('visitors.membershipPlan', compact('adminpackage', 'sliderinner'));
+            return view('visitors.membershipPlan', compact('adminpackage', 'slidermember'));
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -102,8 +102,8 @@ class VisitorController extends Controller
     public function corporateInquery()
     {
         try {
-            $sliderinner = Slider::where('type', '=', "Inner")->get();
-            return view('visitors.corporateInquery', compact('sliderinner'));
+            $slidercorporate = Slider::where('type', '=', "Corporate Inquiry")->get();
+            return view('visitors.corporateInquery', compact('slidercorporate'));
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -147,8 +147,8 @@ class VisitorController extends Controller
     public function contactus()
     {
         try {
-            $sliderinner = Slider::where('type', '=', "Inner")->get();
-            return view('visitors.contactus', compact('sliderinner'));
+            $slidercontactus = Slider::where('type', '=', "Contact Us")->get();
+            return view('visitors.contactus', compact('slidercontactus'));
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
@@ -209,6 +209,8 @@ class VisitorController extends Controller
 
     public function findConsultantList(Request $request)
     {
+        $sliderfindconsultant = Slider::where('type', '=', "Find Consultant")->get();
+
         $category = Category::all();
         $cities = City::all();
         $categoryId = $request->categoryId;
@@ -238,7 +240,7 @@ class VisitorController extends Controller
             $leads->save();
         }
 
-        return view('visitors.findConsultantList', compact('consultant', 'cities', 'countconsultant', 'categoryphoto', 'category'));
+        return view('visitors.findConsultantList', compact('consultant', 'cities', 'countconsultant', 'categoryphoto', 'category', 'sliderfindconsultant'));
     }
 
 

@@ -50,7 +50,11 @@
                     <select class="form-control" required name="type" id="type">
                         <option value="{{ $slider->type }}">{{ $slider->type }}</option>
                         <option value="Home">Home</option>
-                        <option value="Inner">Inner</option>
+                        <option value="Inner">About Us</option>
+                        <option value="Inner">Find Consultant</option>
+                        <option value="Inner">Membership Plan</option>
+                        <option value="Inner">Corporate Inquiry</option>
+                        <option value="Inner">Contact Us</option>
                     </select>
                     <div class="help-block with-errors"></div>
                     @error('type')

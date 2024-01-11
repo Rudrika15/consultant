@@ -5,9 +5,9 @@
         <h3 class="membertext ms-lg-5">Membership Plan</h3>
         <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" data-interval="500">
             <div class="carousel-inner">
-                @foreach ($sliderinner as $sliderinner)
+                @foreach ($slidermember as $slidermember)
                 <div class="carousel-item">
-                    <img src="{{url('/slider/'.$sliderinner->photo)}}" class="d-block w-100 img" height="300px"
+                    <img src="{{url('/slider/'.$slidermember->photo)}}" class="d-block w-100 img" height="300px"
                         alt="...">
                 </div>
                 @endforeach

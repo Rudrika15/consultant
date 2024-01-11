@@ -6,15 +6,16 @@
         {{-- sliderinner --}}
         {{-- <img class="img" src="{{ asset('visitors/images/Backgroung-Web-banner-.png') }}" alt="" width="100%"
             height="300px"> --}}
-            <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" data-interval="500">
-                <div class="carousel-inner">
-                    @foreach ($sliderinner as $sliderinner)
-                        <div class="carousel-item">
-                            <img src="{{url('/slider/'.$sliderinner->photo)}}" class="d-block w-100 img" height="300px" alt="...">
-                        </div>
-                    @endforeach  
+        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" data-interval="500">
+            <div class="carousel-inner">
+                @foreach ($sliderabout as $sliderabout)
+                <div class="carousel-item">
+                    <img src="{{url('/slider/'.$sliderabout->photo)}}" class="d-block w-100 img" height="300px"
+                        alt="...">
                 </div>
+                @endforeach
             </div>
+        </div>
     </div>
     <div class="grid pt-4">
         <div class="container">
@@ -33,9 +34,9 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            <script>
-                $(document).ready(function () {
+<script>
+    $(document).ready(function () {
                     $('#myCarousel').find('.carousel-item').first().addClass('active');
                 });
-            </script>
+</script>
 @endsection
