@@ -1,5 +1,10 @@
 @extends('layouts.visitorApp')
 @section('content')
+{{--
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"> --}}
+
+
 <style>
     .category-suggestion {
         padding-left: 10px;
@@ -22,6 +27,14 @@
             /* Add your desired text color for hover state */
 
     }
+
+    .select2-container {
+        width: 300px !important;
+    }
+
+    .cat {}
+
+    .city {}
 </style>
 <div class="main_page">
 
@@ -71,35 +84,47 @@
         </form> --}}
 
 
+
+
         <div class="container">
-            <div class="row-  py-3">
-                <form class="form-inline" action="{{ route('visitors.findConsultantList') }}" method="POST">
+            <div class="row- py-3">
+                <form class="form-inline" id="searchForm" action="{{ route('visitors.findConsultantList') }}"
+                    method="POST">
                     @csrf
                     <div class="row">
-                        <div class="col">
-                            <select class="form-control" name="categoryId" id="categoryId" class="">
+                        <div class="cat col-md-12">
+                            <select class="form-control" name="categoryId" id="categoryId"
+                                placeholder="Select Category">
                                 <option value="" selected> Select Category</option>
                                 @foreach ($category as $categoryData )
                                 <option value="{{ $categoryData->id}}">{{$categoryData->catName}}</option>
                                 @endforeach
                             </select>
-                        </div>
-                        <div class="col">
-                            <select class="form-control" name="cityId" id="cityId">
+
+                            <select class="form-control city" name="cityId" id="cityId" placeholder="Select City">
                                 <option value="" selected> Select City</option>
                                 @foreach ($cities as $city )
                                 <option value="{{ $city->id}}">{{$city->cityName}}</option>
-
                                 @endforeach
                             </select>
+
+                            <button type="button" class="btn btn-primary" id="searchButton"
+                                style="width: 200px">Search</button>
+
                         </div>
-                        <div class="col">
-                            <button type="submit" value="" class="btn btn-primary">Search</button>
-                        </div>
+
                     </div>
                 </form>
             </div>
         </div>
+
+        <style>
+            .custom-width {
+                width: 200px;
+                /* Adjust the width as needed */
+            }
+        </style>
+
         <div class="consultantcategory p-5 mb-5">
 
             {{-- <form action="{{ route('visitors.findConsultantList') }}" method="POST" id="categoryForm">
@@ -718,6 +743,28 @@
         });
     });
 </script> --}}
+
+
+{{--
+<!-- Select2 JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script> --}}
+
+<script>
+    $(document).ready(function() {
+        // Initialize Select2 for categoryId
+        $('#categoryId').select2();
+
+        // Initialize Select2 for cityId
+        $('#cityId').select2();
+
+        // Submit form on button click
+        $('#searchButton').click(function() {
+            $('#searchForm').submit();
+        });
+    });
+</script>
+
+
 
 <script>
     $(document).ready(function() {

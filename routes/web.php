@@ -1,43 +1,44 @@
 <?php
 
-use App\Http\Controllers\Admin\AboutController;
-use App\Http\Controllers\Admin\AdminLeadController;
-use App\Http\Controllers\Admin\AdminPackageController;
-use App\Http\Controllers\Admin\AdminWorkshopController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\CityController;
-use App\Http\Controllers\Admin\ConsultantController;
-use App\Http\Controllers\Admin\ContactusController;
-use App\Http\Controllers\Admin\InquiryController;
-use App\Http\Controllers\Admin\LanguageMasterController;
-use App\Http\Controllers\Admin\PincodeController;
-use App\Http\Controllers\Admin\SliderController;
-use App\Http\Controllers\Admin\SocialMasterController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\ConsultantRegisterController;
-use App\Http\Controllers\Consultant\AttachmentController;
-// use App\Http\Controllers\Consultant\ConsultantController;
-use App\Http\Controllers\Consultant\GalleryController;
-use App\Http\Controllers\Consultant\LanguageController;
-use App\Http\Controllers\Consultant\PackageController;
-use App\Http\Controllers\Consultant\CertificateController;
-use App\Http\Controllers\Consultant\AchievementController;
-use App\Http\Controllers\Consultant\SocialLinkController;
-use App\Http\Controllers\Consultant\TimeController;
-use App\Http\Controllers\Consultant\VideoController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\VisitorController;
-use App\Http\Controllers\Admin\StateController;
-use App\Http\Controllers\Consultant\LeadController;
-use App\Http\Controllers\Consultant\UpgradePlanController;
-use App\Http\Controllers\Consultant\WorkshopController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\RazorpayController;
-use App\Http\Controllers\RazorpayPaymentController;
 use App\Models\Attachment;
-use Illuminate\Support\Facades\Route;
 use League\Flysystem\Visibility;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\VisitorController;
+use App\Http\Controllers\RazorpayController;
+use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\StateController;
+use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\InquiryController;
+use App\Http\Controllers\Admin\PincodeController;
+use App\Http\Controllers\Auth\RegisterController;
+// use App\Http\Controllers\Consultant\ConsultantController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\AdminLeadController;
+use App\Http\Controllers\Admin\ContactusController;
+use App\Http\Controllers\Consultant\LeadController;
+use App\Http\Controllers\Consultant\TimeController;
+use App\Http\Controllers\RazorpayPaymentController;
+use App\Http\Controllers\Admin\ConsultantController;
+use App\Http\Controllers\Consultant\VideoController;
+use App\Http\Controllers\Admin\AdminPackageController;
+use App\Http\Controllers\Admin\SocialMasterController;
+use App\Http\Controllers\Consultant\GalleryController;
+use App\Http\Controllers\Consultant\PackageController;
+use App\Http\Controllers\Admin\AdminWorkshopController;
+use App\Http\Controllers\Consultant\LanguageController;
+use App\Http\Controllers\Consultant\WorkshopController;
+use App\Http\Controllers\Admin\LanguageMasterController;
+use App\Http\Controllers\Consultant\AttachmentController;
+use App\Http\Controllers\Consultant\SocialLinkController;
+use App\Http\Controllers\Consultant\AchievementController;
+use App\Http\Controllers\Consultant\CertificateController;
+use App\Http\Controllers\Consultant\UpgradePlanController;
+use App\Http\Controllers\Auth\ConsultantRegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,7 +101,9 @@ Route::post('fetchcityhome', [VisitorController::class, 'fetchcityhome'])->name(
 Route::post('fetchCity', [RegisterController::class, 'fetchCity'])->name('fetchCity');
 
 Route::post('city', [UserController::class, 'city'])->name('city');
+
 Auth::routes();
+
 // consultant register
 Route::get('/consultant/register', [RegisterController::class, 'registerConsultant'])->name('registerConsultant');
 Route::post('/consultant/register/code', [RegisterController::class, 'registerConsultantCode'])->name('registerConsultantCode');
