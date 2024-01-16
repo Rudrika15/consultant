@@ -95,6 +95,8 @@
                             </span>
                             @enderror
                         </div>
+
+
                         <div class="col-md-6 pt-4">
                             <select class="form-select register-form" aria-label="Default select example" id="cityId"
                                 name="cityId" value="{{ old('cityId') }}" required autocomplete="cityId">

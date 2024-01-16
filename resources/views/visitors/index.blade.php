@@ -135,7 +135,7 @@
                         </select>
                     </div>
                     <div class="col-md-2 mb-3" style="padding-left: 100px;">
-                        <button type="button" class="btn btn-primary" id="searchButton"
+                        <button type="submit" class="btn btn-primary" id="searchButton"
                             style="width: 300px">Search</button>
                     </div>
                 </div>

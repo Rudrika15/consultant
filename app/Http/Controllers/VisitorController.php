@@ -31,8 +31,8 @@ class VisitorController extends Controller
     public function index()
     {
         try {
-            $category = Category::all();
-            $cities = City::all();
+            $category = Category::where('status', 'active')->get();
+            $cities = City::where('status', 'active')->get();
             $data['states'] = State::get(["stateName", "id"]);
             $sliderhome = Slider::where('type', '=', "Home")->get();
 
@@ -80,7 +80,7 @@ class VisitorController extends Controller
     {
         try {
             $sliderabout = Slider::where('type', '=', "About Us")->get();
-            $about = About::all();
+            $about = About::where('status', 'active')->get();
             return view('visitors.aboutus', compact('sliderabout', 'about'));
         } catch (\Throwable $th) {
             //throw $th;
@@ -91,7 +91,7 @@ class VisitorController extends Controller
     {
         try {
             $slidermember = Slider::where('type', '=', "Membership Plan")->get();
-            $adminpackage = AdminPackage::all();
+            $adminpackage = AdminPackage::where('status', 'active')->get();
             return view('visitors.membershipPlan', compact('adminpackage', 'slidermember'));
         } catch (\Throwable $th) {
             //throw $th;
@@ -183,6 +183,7 @@ class VisitorController extends Controller
             return view('servererror');
         }
     }
+
     public function profile()
     {
         try {
@@ -211,8 +212,8 @@ class VisitorController extends Controller
     {
         $sliderfindconsultant = Slider::where('type', '=', "Find Consultant")->get();
 
-        $category = Category::all();
-        $cities = City::all();
+        $category = Category::where('status', 'active')->get();
+        $cities = City::where('status', 'active')->get();
         $categoryId = $request->categoryId;
         $cityId = $request->cityId;
         $categoryphoto = Category::find($categoryId);
@@ -228,7 +229,11 @@ class VisitorController extends Controller
             });
         }
 
-        $consultant = $consultant->get();
+        // $consultant = $consultant->get();
+
+        $consultant = $consultant->where('type', '=', 'consultant')->get();
+
+
         $countconsultant = count($consultant);
 
         if (isset(Auth::user()->id) && $categoryphoto) {

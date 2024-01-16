@@ -112,13 +112,15 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        $states = State::all();
-        $categories = Category::all();
-        $adminpackages = AdminPackage::all();
+        $states = State::where('status', 'active')->get();
+        $categories = Category::where('status', 'active')->get();
+        $adminpackages = AdminPackage::where('status', 'active')->get();
+
         // Add other data fetching logic as needed
 
         return view('auth.register', compact('states', 'categories', 'adminpackages'));
     }
+
 
 
     /**
@@ -138,9 +140,9 @@ class RegisterController extends Controller
 
     public function registerConsultant()
     {
-        $states = State::all();
-        $categories = Category::all();
-        $adminpackages = AdminPackage::all();
+        $states = State::where('status', 'active')->get();
+        $categories = Category::where('status', 'active')->get();
+        $adminpackages = AdminPackage::where('status', 'active')->get();
         // Add other data fetching logic as needed
 
         return view('auth.consultantregister', compact('states', 'categories', 'adminpackages'));
