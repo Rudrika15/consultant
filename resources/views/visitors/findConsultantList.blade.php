@@ -16,15 +16,61 @@
         }
 
         .card {
-            max-width: 400px;
-            max-height: 600px;
+            max-width: 300px;
+            /* Adjusted card width for better alignment */
+            max-height: 450px;
+            /* Adjusted card height for better alignment */
+            margin-bottom: 20px;
+            /* Added margin-bottom to create space between cards */
+        }
+
+        .select2-container {
+            width: 300px !important;
+        }
+
+        /* Increase the height of select2 dropdown */
+        .select2-container--default .select2-selection--single {
+            height: 30px;
+            /* Adjust the height as needed */
+        }
+
+        .select2-container--default .select2-selection--single,
+        .btn-primary {
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Adjust the height as needed */
+        }
+
+        /* .btn-primary {} */
+
+        /* Improved responsiveness for smaller screens */
+        @media (max-width: 576px) {
+            .card {
+                max-width: 100%;
+                max-height: none;
+            }
+
+            .select2-container {
+                width: 100% !important;
+                /* Full width for smaller screens */
+            }
+        }
+
+        /* Center align the search button on all screen sizes */
+        #searchButton {
+            width: 100%;
+        }
+
+        /* Add some margin to the top of the form */
+        .search-form {
+            margin-top: 20px;
         }
     </style>
 
-    <div class="container py-3">
-
+    <div class="" style="position: relative">
         <div class="findconsultant">
-            {{-- <h3 class="findtext ms-lg-5">Find Consultant</h3> --}}
             <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="500">
                 <div class="carousel-inner">
                     @foreach ($sliderfindconsultant as $key => $slider)
@@ -37,31 +83,35 @@
             </div>
         </div>
 
-        <form class="form-inline" action="{{ route('visitors.findConsultantList') }}" method="get">
-            @csrf
-            <input type="hidden" value="{{ request('categoryId') }}">
-            <div class="row">
-                <div class="col-md-4">
-                    <select class="form-control" name="categoryId" id="categoryId">
-                        <option value="" selected> Select Category</option>
-                        @foreach ($category as $categoryData)
-                        <option value="{{ $categoryData->id }}">{{ $categoryData->catName }}</option>
-                        @endforeach
-                    </select>
+        <div class="container mt-3">
+            <form class="form-inline" action="{{ route('visitors.findConsultantList') }}" method="get">
+                @csrf
+                <input type="hidden" value="{{ request('categoryId') }}">
+                <input type="hidden" value="{{ request('cityId') }}">
+                <div class="row">
+                    <div class="col-md-4" style="padding-left: 50px">
+                        <select class="form-control select2" name="categoryId" id="categoryId">
+                            <option value="" selected> Select Category</option>
+                            @foreach ($category as $categoryData)
+                            <option value="{{ $categoryData->id }}">{{ $categoryData->catName }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-4" style="padding-left: 70px">
+                        <select class="form-control select2" name="cityId" id="cityId">
+                            <option value="" selected> Select City</option>
+                            @foreach ($cities as $city)
+                            <option value="{{ $city->id }}">{{ $city->cityName }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-2" style="padding-left: 100px">
+                        <button type="button" class="btn btn-primary" id="searchButton"
+                            style="width: 150px">Search</button>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <select class="form-control" name="cityId" id="cityId">
-                        <option value="" selected> Select City</option>
-                        @foreach ($cities as $city)
-                        <option value="{{ $city->id }}">{{ $city->cityName }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
 
         <br>
 
@@ -81,7 +131,7 @@
                         @if (isset($consultantData->categoriesData->catName))
                         <p class="card-text">{{ $consultantData->categoriesData->catName }}</p>
                         @else
-                        <p class="card-text">Category Name Not Available</p>
+                        <p class="card-text">Not Available</p>
                         @endif
                         <a href="{{ route('visitors.consultantDetail', $consultantData->userId) }}"
                             class="btn btn-primary">Show Profile</a>
@@ -97,5 +147,13 @@
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.select2').select2();
+    });
+</script>
 
 @endsection

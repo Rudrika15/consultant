@@ -32,9 +32,35 @@
         width: 300px !important;
     }
 
-    .cat {}
+    /* Increase the height of select2 dropdown */
+    .select2-container--default .select2-selection--single {
+        height: 30px;
+        /* Adjust the height as needed */
+    }
 
-    .city {}
+    .select2-container--default .select2-selection--single,
+    .btn-primary {
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* Adjust the height as needed */
+    }
+
+    .select2-container {
+        width: 100% !important;
+        /* Full width for smaller screens */
+    }
+
+    /* Center align the search button on all screen sizes */
+    #searchButton {
+        width: 100%;
+    }
+
+    /* Add some margin to the top of the form */
+    .search-form {
+        margin-top: 20px;
+    }
 </style>
 <div class="main_page">
 
@@ -86,44 +112,35 @@
 
 
 
-        <div class="container">
-            <div class="row- py-3">
-                <form class="form-inline" id="searchForm" action="{{ route('visitors.findConsultantList') }}"
-                    method="POST">
-                    @csrf
-                    <div class="row">
-                        <div class="cat col-md-12">
-                            <select class="form-control" name="categoryId" id="categoryId"
-                                placeholder="Select Category">
-                                <option value="" selected> Select Category</option>
-                                @foreach ($category as $categoryData )
-                                <option value="{{ $categoryData->id}}">{{$categoryData->catName}}</option>
-                                @endforeach
-                            </select>
-
-                            <select class="form-control city" name="cityId" id="cityId" placeholder="Select City">
-                                <option value="" selected> Select City</option>
-                                @foreach ($cities as $city )
-                                <option value="{{ $city->id}}">{{$city->cityName}}</option>
-                                @endforeach
-                            </select>
-
-                            <button type="button" class="btn btn-primary" id="searchButton"
-                                style="width: 200px">Search</button>
-
-                        </div>
-
+        <div class="container mt-3">
+            <form class="form-inline" action="{{ route('visitors.findConsultantList') }}" method="get">
+                @csrf
+                <input type="hidden" value="{{ request('categoryId') }}">
+                <input type="hidden" value="{{ request('cityId') }}">
+                <div class="row">
+                    <div class="col-md-4 mb-3" style="padding-left: 30px; width: 40%;">
+                        <select class="form-control select2" name="categoryId" id="categoryId" style="">
+                            <option value="" selected> Select Category</option>
+                            @foreach ($category as $categoryData)
+                            <option value="{{ $categoryData->id }}">{{ $categoryData->catName }}</option>
+                            @endforeach
+                        </select>
                     </div>
-                </form>
-            </div>
+                    <div class="col-md-4 mb-3" style="padding-left: 50px; width: 40%;">
+                        <select class="form-control select2" name="cityId" id="cityId">
+                            <option value="" selected> Select City</option>
+                            @foreach ($cities as $city)
+                            <option value="{{ $city->id }}">{{ $city->cityName }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-2 mb-3" style="padding-left: 100px;">
+                        <button type="button" class="btn btn-primary" id="searchButton"
+                            style="width: 300px">Search</button>
+                    </div>
+                </div>
+            </form>
         </div>
-
-        <style>
-            .custom-width {
-                width: 200px;
-                /* Adjust the width as needed */
-            }
-        </style>
 
         <div class="consultantcategory p-5 mb-5">
 
