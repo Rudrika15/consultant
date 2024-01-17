@@ -102,7 +102,10 @@
                         value="{{ old('stateId') }}" autocomplete="stateId" autofocus>
                         <option value="">-- Select State --</option>
                         @foreach($states as $data)
-                        <option value="{{$data->id}}">{{$data->stateName}}</option>
+                        <option value="{{ $data->id }}" {{ old('stateId', $data->id ) == $data->id ? 'selected' :
+                            '' }}>
+                            {{ $data->stateName }} </option>
+                        {{-- <option value="{{$data->id}}">{{$data->stateName}}</option> --}}
                         @endforeach
                     </select>
                     @error('stateId')
@@ -111,13 +114,19 @@
                     </span>
                     @enderror
                 </div>
+
+
                 <div class="col-auto">
                     <label for="name" class="col-form-label text-md-end fw-bold">{{ __('City') }}</label>
-
+                    <input type="hidden">
                     <select class="form-select" aria-label="Default select example" id="cityId" name="cityId"
                         value="{{ old('cityId') }}" autocomplete="cityId" autofocus>
                         <option value="">-- Select City --</option>
-
+                        @foreach($cities as $data)
+                        <option value="{{ $data->id }}" {{ old('cityId', $data->id ) == $data->id ? 'selected' :
+                            '' }}>
+                            {{ $data->cityName }} </option>
+                        @endforeach
                     </select>
                     @error('cityId')
                     <span class="invalid-feedback" role="alert">
