@@ -49,7 +49,7 @@
                     <strong>State Name:</strong>
                     <select class="form-control" data-error='State Name Field is required' required name="stateId"
                         id="stateId">
-                        <option value="" selected disabled> Select User Name </option>
+                        <option value="" selected disabled> Select State Name </option>
                         @foreach ($state as $state)
                         <option value="{{ $state->id }}">{{ $state->stateName }}</option>
                         @endforeach

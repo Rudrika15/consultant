@@ -184,9 +184,14 @@
                                     id="categoryId" name="categoryId">
                                     <option value="">-- Select Category --</option>
                                     @foreach ($categories as $data)
-                                    <option value={{$data->id}}>{{$data->catName}}</option>
+                                    <option value="{{$data->id}}">{{$data->catName}}</option>
                                     @endforeach
+                                    <option value="other">Other</option>
                                 </select>
+                                <div id="otherCategoryDiv" style="display: none;">
+                                    <input type="text" class="form-control register-form" id="otherCategory"
+                                        name="otherCategory" placeholder="Enter Other Category">
+                                </div>
                                 @error('categoryId')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -249,6 +254,21 @@
 <script
     src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js">
 </script>
+
+<script>
+    $(document).ready(function() {
+        $("#cityId").on('change', function() {
+            var selectedCity = $(this).val();
+            if (selectedCity === 'other') {
+                $("#otherCityDiv").show();
+            } else {
+                $("#otherCityDiv").hide();
+            }
+        });
+    });
+</script>
+
+
 <script>
     $(document).ready(function(){
         $("#becomecomsultanttype").click(function(){

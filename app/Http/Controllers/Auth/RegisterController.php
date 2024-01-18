@@ -71,42 +71,45 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    protected function create(Request $request)
     {
         // 
         $user =  User::create([
-            'name' => $data['name'],
-            'lastName' => $data['lastName'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'stateId' => $data['stateId'],
-            'cityId' => $data['cityId'],
-            'contactNo' => $data['contactNo'],
-            'gender' => $data['gender'],
-            'birthdate' => $data['birthdate'],
+            'name' => $request->input('name'),
+            'lastName' => $request->input('lastName'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'stateId' => $request->input('stateId'),
+            'cityId' => $request->input('cityId'),
+            'contactNo' => $request->input('contactNo'),
+            'gender' => $request->input('gender'),
+            'birthdate' => $request->input('birthdate'),
         ]);
 
         $profile = new Profile();
         $profile->userId = $user->id;
-        $profile->state = $data['stateId'];
-        $profile->city = $data['cityId'];
-        $profile->contactNo2 = $data['contactNo'];
+        $profile->state = $request->input('stateId');
+        $profile->city = $request->input('cityId');
+        $profile->contactNo2 = $request->input('contactNo');
         $user->assignRole('User');
-        // if ($data['type'] == "User") {
-        //     $user->assignRole('User');
-        //     $profile->type = $data['type'];
-        // } else {
-        //     $user->assignRole('User');
-        //     $profile->type = $data['type'];
-        // }
-        // $profile->company = $data['company'];
-        // $profile->categoryId = $data['categoryId'];
-        $profile->packageId = $data['packageId'];
+
+        if ($request->input('cityId') == 'other') {
+            $newCity = new City();
+            $newCity->cityName = $request->input('otherCity');
+            $newCity->save();
+
+            $profile->cityId = $newCity->id;
+        } else {
+            $profile->cityId = $request->input('cityId');
+        }
+
+        $profile->packageId = $request->input('packageId');
         $profile->status = 'Active';
         $profile->save();
 
         return $user;
     }
+
 
 
 
@@ -118,7 +121,9 @@ class RegisterController extends Controller
 
         // Add other data fetching logic as needed
 
-        return view('auth.register', compact('states', 'categories', 'adminpackages'));
+        $cities = City::where('status', 'active')->get();
+
+        return view('auth.register', compact('states', 'categories', 'adminpackages', 'cities'));
     }
 
 
@@ -151,6 +156,21 @@ class RegisterController extends Controller
 
     public function registerConsultantCode(Request $request)
     {
+
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'lastName' => 'required|string|max:255',
+            'email' => 'required|email|unique:users|max:255',
+            'password' => 'required|string|min:8|confirmed',
+            'state' => 'state',
+            'city' => 'city',
+            'contactNo' => 'required|string|max:15',
+            'gender' => 'required|string|in:Male,Female',
+            'birthdate' => 'required|date',
+            'otherCategory' => 'sometimes|required_if:categoryId,other|string|max:255',
+
+        ]);
+
         $user = User::create([
             'name' => $request->name,
             'lastName' => $request->lastName,
@@ -161,6 +181,7 @@ class RegisterController extends Controller
             'contactNo' => $request->contactNo,
             'gender' => $request->gender,
             'birthdate' => $request->birthdate,
+            'otherCategory' => 'sometimes|required_if:categoryId,other|string|max:255',
         ]);
 
         $profile = new Profile();
@@ -170,9 +191,19 @@ class RegisterController extends Controller
         $profile->city = $request->cityId;
         $profile->contactNo2 = $request->contactNo;
         $profile->company = $request->company;
-        $profile->categoryId = $request->categoryId;
-        $profile->packageId = $request->packageId;
         $profile->status = 'Active';
+
+        if ($request->input('categoryId') == 'other') {
+
+            $newCategoryName = $request->input('otherCategory');
+            $newCategory = Category::create(['catName' => $newCategoryName]);
+            $profile->categoryId = $newCategory->id;
+        } else {
+
+            $profile->categoryId = $request->categoryId;
+        }
+
+        $profile->packageId = $request->packageId;
 
         // Assign the 'Consultant' role to the user
         $user->assignRole('Consultant');
@@ -183,19 +214,4 @@ class RegisterController extends Controller
 
         return redirect()->route('home');
     }
-
-
-    // $profile->userId = $user->id;
-    // $profile->state = $data['stateId'];
-    // $profile->city = $data['cityId'];
-    // $profile->contactNo2 = $data['contactNo'];
-    // $user->assignRole('Consultant');
-    // $profile->company = $data['company'];
-    // $profile->categoryId = $data['categoryId'];
-    // $profile->packageId = $data['packageId'];
-    // $profile->status = 'Active';
-    // $profile->save();
-
-    // return $user;
-    // }
 }

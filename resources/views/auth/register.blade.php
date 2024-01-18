@@ -99,15 +99,28 @@
 
                         <div class="col-md-6 pt-4">
                             <select class="form-select register-form" aria-label="Default select example" id="cityId"
-                                name="cityId" value="{{ old('cityId') }}" required autocomplete="cityId">
+                                name="cityId" required>
                                 <option value="">-- Select City --</option>
+                                @foreach($cities as $data)
+                                <option value="{{$data->id}}">{{$data->cityName}}</option>
+                                @endforeach
+                                <option value="other">Other</option>
                             </select>
+
+                            <!-- Hidden text box for other city -->
+                            <div id="otherCityDiv" style="display: none;">
+                                <input id="otherCity" type="text" class="form-control register-form" name="otherCity"
+                                    placeholder="Enter City">
+                            </div>
+
                             @error('cityId')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
+
+
                         <div class="col-md-6 pt-4">
                             <input id="contactNo" type="text"
                                 class="form-control register-form @error('contactNo') is-invalid @enderror"
@@ -302,6 +315,23 @@
 <script
     src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js">
 </script>
+
+
+<script>
+    $(document).ready(function() {
+        $("#cityId").on('change', function() {
+            var selectedCity = $(this).val();
+            if (selectedCity === 'other') {
+                $("#otherCategoryDiv").show();
+            } else {
+                $("#otherCategoryDiv").hide();
+            }
+        });
+    });
+</script>
+
+
+
 <script>
     $(document).ready(function(){
         $("#becomecomsultanttype").click(function(){
@@ -309,6 +339,8 @@
         });
     });
 </script>
+
+
 <script>
     $(function () {
         $("#consultant").click(function () {
@@ -333,13 +365,13 @@
     });
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 <script>
-    $(document).ready(function() {
-
-        $('#stateId').on('change', function() {
+    $(document).ready(function () {
+        $('#stateId').on('change', function () {
             var idState = this.value;
-            $("#cityId").html('');
+            $("#cityId").html('<option value="">-- Select City --</option>');
+            $('#otherCityDiv').hide(); // Hide the other city textbox when state changes
+
             $.ajax({
                 url: "{{url('fetchCity')}}",
                 type: "POST",
@@ -348,19 +380,26 @@
                     _token: '{{csrf_token()}}'
                 },
                 dataType: 'json',
-                success: function(res) {
-                    $('#cityId').html('<option value="">-- Select City --</option>');
-                    $.each(res.cities, function(key, value) {
-                        $("#cityId").append('<option value="' + value
-                            .id + '">' + value.cityName + '</option>');
+                success: function (res) {
+                    $.each(res.cities, function (key, value) {
+                        $("#cityId").append('<option value="' + value.id + '">' + value.cityName + '</option>');
                     });
                 }
             });
+        });
 
+        $('#cityId').on('change', function () {
+            var selectedCity = $(this).val();
+
+            // Show or hide the text box based on the selected city
+            if (selectedCity === 'other') {
+                $('#otherCityDiv').show();
+            } else {
+                $('#otherCityDiv').hide();
+            }
         });
     });
-</script>
-{{-- <script>
+</script>{{-- <script>
     $(document).ready(function () {
 
         /*------------------------------------------
