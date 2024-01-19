@@ -79,7 +79,7 @@ class VisitorController extends Controller
     public function aboutus()
     {
         try {
-            $sliderabout = Slider::where('type', '=', "About Us")->get();
+            $sliderabout = Slider::where('type', '=', "About Us")->where('status', '=', 'Active')->get();
             $about = About::where('status', 'active')->get();
             return view('visitors.aboutus', compact('sliderabout', 'about'));
         } catch (\Throwable $th) {
@@ -90,7 +90,7 @@ class VisitorController extends Controller
     public function membershipPlan()
     {
         try {
-            $slidermember = Slider::where('type', '=', "Membership Plan")->get();
+            $slidermember = Slider::where('type', '=', "Membership Plan")->where('status', '=', 'Active')->get();
             $adminpackage = AdminPackage::where('status', 'active')->get();
             return view('visitors.membershipPlan', compact('adminpackage', 'slidermember'));
         } catch (\Throwable $th) {
@@ -102,7 +102,7 @@ class VisitorController extends Controller
     public function corporateInquery()
     {
         try {
-            $slidercorporate = Slider::where('type', '=', "Corporate Inquiry")->get();
+            $slidercorporate = Slider::where('type', '=', "Corporate Inquiry")->where('status', '=', 'Active')->get();
             return view('visitors.corporateInquery', compact('slidercorporate'));
         } catch (\Throwable $th) {
             //throw $th;
@@ -144,16 +144,18 @@ class VisitorController extends Controller
             return view('servererror');
         }
     }
+
     public function contactus()
     {
         try {
-            $slidercontactus = Slider::where('type', '=', "Contact Us")->get();
+            $slidercontactus = Slider::where('type', '=', "Contact Us")->where('status', '=', 'Active')->get();
             return view('visitors.contactus', compact('slidercontactus'));
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }
     }
+
     public function contantus_store(Request $request)
     {
 
@@ -210,7 +212,7 @@ class VisitorController extends Controller
 
     public function findConsultantList(Request $request)
     {
-        $sliderfindconsultant = Slider::where('type', '=', "Find Consultant")->get();
+        $sliderfindconsultant = Slider::where('type', '=', "Find Consultant")->where('status', '=', 'Active')->get();
 
         $category = Category::where('status', 'active')->get();
         $cities = City::where('status', 'active')->get();

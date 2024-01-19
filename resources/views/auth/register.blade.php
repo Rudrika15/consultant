@@ -121,6 +121,10 @@
                         </div>
 
 
+
+
+
+
                         <div class="col-md-6 pt-4">
                             <input id="contactNo" type="text"
                                 class="form-control register-form @error('contactNo') is-invalid @enderror"
@@ -317,18 +321,18 @@
 </script>
 
 
-<script>
+{{-- <script>
     $(document).ready(function() {
         $("#cityId").on('change', function() {
             var selectedCity = $(this).val();
             if (selectedCity === 'other') {
-                $("#otherCategoryDiv").show();
+                $("#otherCityDiv").show();
             } else {
-                $("#otherCategoryDiv").hide();
+                $("#otherCityDiv").hide();
             }
         });
     });
-</script>
+</script> --}}
 
 
 
@@ -384,6 +388,9 @@
                     $.each(res.cities, function (key, value) {
                         $("#cityId").append('<option value="' + value.id + '">' + value.cityName + '</option>');
                     });
+
+                    // Append the "Other" option after fetching the cities
+                    $("#cityId").append('<option value="other">Other</option>');
                 }
             });
         });
@@ -399,7 +406,10 @@
             }
         });
     });
-</script>{{-- <script>
+</script>
+
+
+{{-- <script>
     $(document).ready(function () {
 
         /*------------------------------------------

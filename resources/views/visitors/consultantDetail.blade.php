@@ -873,8 +873,8 @@
                         <div class="tab-pane text-center" id="qa">
 
                                 <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                                        elit.
+                                        Do you have any Question ? Please Go to the <b>Contact Us</b> page.
+
                                 </p>
 
                         </div>

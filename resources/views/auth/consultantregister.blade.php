@@ -81,7 +81,7 @@
                             @enderror
                         </div>
 
-                        <div class="col-md-6 pt-4">
+                        {{-- <div class="col-md-6 pt-4">
                             <select class="form-select register-form" aria-label="Default select example" id="stateId"
                                 name="stateId" value="{{ old('stateId') }}" required autocomplete="stateId">
                                 <option value="">-- Select State --</option>
@@ -105,7 +105,50 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
+                        </div> --}}
+
+
+                        <div class="col-md-6 pt-4">
+                            <select class="form-select register-form" aria-label="Default select example" id="stateId"
+                                name="stateId" value="{{ old('stateId') }}" required autocomplete="stateId">
+                                <option value="">-- Select State --</option>
+                                @foreach($states as $data)
+                                <option value="{{$data->id}}">{{$data->stateName}}</option>
+                                @endforeach
+                            </select>
+                            @error('stateId')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
+
+
+                        <div class="col-md-6 pt-4">
+                            <select class="form-select register-form" aria-label="Default select example" id="cityId"
+                                name="cityId" required>
+                                <option value="">-- Select City --</option>
+                                @foreach($cities as $data)
+                                <option value="{{$data->id}}">{{$data->cityName}}</option>
+                                @endforeach
+                                <option value="other">Other</option>
+                            </select>
+
+                            <!-- Hidden text box for other city -->
+                            <div id="otherCityDiv" style="display: none;">
+                                <input id="otherCity" type="text" class="form-control register-form" name="otherCity"
+                                    placeholder="Enter City">
+                            </div>
+
+                            @error('cityId')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+
+
 
                         <div class="col-md-6 pt-4">
                             <input id="contactNo" type="text"
@@ -245,7 +288,7 @@
 <script src="{{ asset('asset/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="js/sb-admin-2.min.js"></script>
+<script src="{{ asset('asset/js/sb-admin-2.min.js') }}"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -257,12 +300,12 @@
 
 <script>
     $(document).ready(function() {
-        $("#cityId").on('change', function() {
-            var selectedCity = $(this).val();
-            if (selectedCity === 'other') {
-                $("#otherCityDiv").show();
+        $("#categoryId").on('change', function() {
+            var selectedCategory = $(this).val();
+            if (selectedCategory === 'other') {
+                $("#otherCategoryDiv").show();
             } else {
-                $("#otherCityDiv").hide();
+                $("#otherCategoryDiv").hide();
             }
         });
     });
@@ -276,6 +319,7 @@
         });
     });
 </script>
+
 <script>
     $(function () {
         $("#consultant").click(function () {
@@ -321,12 +365,26 @@
                         $("#cityId").append('<option value="' + value
                             .id + '">' + value.cityName + '</option>');
                     });
+
+                    // Append the "Other" option after fetching the cities
+                        $("#cityId").append('<option value="other">Other</option>');
                 }
             });
-
         });
-    });
+
+        $('#cityId').on('change', function () {
+        var selectedCity = $(this).val();
+        
+        // Show or hide the text box based on the selected city
+        if (selectedCity === 'other') {
+        $('#otherCityDiv').show();
+        } else {
+        $('#otherCityDiv').hide();
+        }
+        });
+        });
 </script>
+
 {{-- <script>
     $(document).ready(function () {
 
