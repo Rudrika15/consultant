@@ -18,10 +18,12 @@ use App\Models\Profile;
 use App\Models\Category;
 use App\Models\Language;
 use App\Models\Contactus;
-use App\Models\AdminPackage;
 use App\Models\Attachment;
+use App\Models\AdminPackage;
 use Illuminate\Http\Request;
+use App\Models\PrivacyPolicy;
 use Laravel\Ui\Presets\React;
+use App\Models\TermsCondition;
 use PhpParser\Node\Expr\FuncCall;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -480,5 +482,33 @@ class VisitorController extends Controller
 
 
         return view('visitors.consultantDetail', compact('consultant', 'profile', 'packages', 'languages', 'times', 'videos', 'galleries', 'attachments'));
+    }
+
+    //privacy policy
+
+    public function policy()
+    {
+        try {
+            // $sliderpolicy = Slider::where('type', '=', "Privacy Policy")->where('status', '=', 'Active')->get();
+            $policy = PrivacyPolicy::where('status', 'active')->get();
+            return view('visitors.policy', compact('sliderpolicy', 'policy'));
+        } catch (\Throwable $th) {
+            throw $th;
+            return view('servererror');
+        }
+    }
+
+    //terms condition
+
+    public function terms()
+    {
+        try {
+            // $sliderterms = Slider::where('type', '=', "Terms & Condition")->where('status', '=', 'Active')->get();
+            $terms = TermsCondition::where('status', 'active')->get();
+            return view('visitors.terms', compact('sliderterms', 'terms'));
+        } catch (\Throwable $th) {
+            throw $th;
+            return view('servererror');
+        }
     }
 }

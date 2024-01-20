@@ -163,11 +163,11 @@
                             </li>
                             <li>
                                 <i class="fa fa-caret-right"></i>
-                                <a href="" class="footerlink">Terms & Conditions</a>
+                                <a href="{{ route('visitors.terms') }}" class="footerlink">Terms & Conditions</a>
                             </li>
                             <li>
                                 <i class="fa fa-caret-right"></i>
-                                <a href="" class="footerlink">Privacy Policy</a>
+                                <a href="{{ route('visitors.policy') }}" class="footerlink">Privacy Policy</a>
                             </li>
                             <li>
                                 <i class="fa fa-caret-right"></i>

@@ -33,6 +33,8 @@ use App\Http\Controllers\Admin\AdminWorkshopController;
 use App\Http\Controllers\Consultant\LanguageController;
 use App\Http\Controllers\Consultant\WorkshopController;
 use App\Http\Controllers\Admin\LanguageMasterController;
+use App\Http\Controllers\Admin\PrivacyPolicyController;
+use App\Http\Controllers\Admin\TermsConditionController;
 use App\Http\Controllers\Consultant\AttachmentController;
 use App\Http\Controllers\Consultant\SocialLinkController;
 use App\Http\Controllers\Consultant\AchievementController;
@@ -62,6 +64,8 @@ Route::get('/', function () {
 Route::get('/', [VisitorController::class, 'index'])->name('visitors.index');
 Route::get('/search', [VisitorController::class, 'search'])->name('visitors.search');
 Route::get('/aboutus', [VisitorController::class, 'aboutus'])->name('visitors.aboutus');
+Route::get('/policy', [VisitorController::class, 'policy'])->name('visitors.policy');
+Route::get('/terms', [VisitorController::class, 'terms'])->name('visitors.terms');
 Route::get('/membershipplan', [VisitorController::class, 'membershipPlan'])->name('visitors.membershipPlan');
 Route::get('/corporateInquery', [VisitorController::class, 'corporateInquery'])->name('visitors.corporateInquery');
 Route::post('corporateInquery-inqueryStore', [VisitorController::class, 'inqueryStore'])->name('corporateInquery.inqueryStore');
@@ -215,6 +219,24 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('slider-update', [SliderController::class, 'update'])->name('slider.update');
     Route::get('slider-delete/{id?}', [SliderController::class, 'delete'])->name('slider.delete');
     Route::get('slider/{id}/view', [SliderController::class, 'view'])->name('slider.view');
+
+    // /* Terms & Condition */
+    Route::get('terms-index', [TermsConditionController::class, 'index'])->name('terms.index');
+    Route::get('terms-create', [TermsConditionController::class, 'create'])->name('terms.create');
+    Route::post('terms-store', [TermsConditionController::class, 'store'])->name('terms.store');
+    Route::get('terms-edit/{id?}', [TermsConditionController::class, 'edit'])->name('terms.edit');
+    Route::post('terms-update', [TermsConditionController::class, 'update'])->name('terms.update');
+    Route::get('terms-delete/{id?}', [TermsConditionController::class, 'delete'])->name('terms.delete');
+    Route::get('terms/{id}/view', [TermsConditionController::class, 'view'])->name('terms.view');
+
+    // /* Privacy Policy */
+    Route::get('policy-index', [PrivacyPolicyController::class, 'index'])->name('policy.index');
+    Route::get('policy-create', [PrivacyPolicyController::class, 'create'])->name('policy.create');
+    Route::post('policy-store', [PrivacyPolicyController::class, 'store'])->name('policy.store');
+    Route::get('policy-edit/{id?}', [PrivacyPolicyController::class, 'edit'])->name('policy.edit');
+    Route::post('policy-update', [PrivacyPolicyController::class, 'update'])->name('policy.update');
+    Route::get('policy-delete/{id?}', [PrivacyPolicyController::class, 'delete'])->name('policy.delete');
+    Route::get('policy/{id}/view', [PrivacyPolicyController::class, 'view'])->name('policy.view');
 
 
     // /* Corporate Inquiry */

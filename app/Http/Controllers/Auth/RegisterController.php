@@ -122,9 +122,6 @@ class RegisterController extends Controller
     }
 
 
-
-
-
     public function showRegistrationForm()
     {
         $states = State::where('status', 'active')->get();
