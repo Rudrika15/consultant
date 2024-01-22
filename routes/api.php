@@ -26,6 +26,7 @@ use App\Http\Controllers\Api\Consultant\SocialLinkController;
 use App\Http\Controllers\Api\Consultant\TimeController;
 use App\Http\Controllers\Api\Consultant\VideoController;
 use App\Http\Controllers\Api\Consultant\WorkshopController;
+use App\Http\Controllers\Api\LoginRegisterController;
 use App\Http\Controllers\Api\OTPController;
 use App\Http\Controllers\Api\User\SearchCategoryController;
 use Illuminate\Http\Request;
@@ -45,8 +46,8 @@ use Spatie\Permission\Contracts\Role;
 
 // Route::get('visitor-search-category/{category?}',[SearchCategoryController::class,'visitor_search_category']);
 
-Route::get('search-category/{category?}',[SearchCategoryController::class,'search_category']);
-Route::get('visitor-user_search_category/{category?}',[SearchCategoryController::class,'visitor_user_search_category']);
+Route::get('search-category/{category?}', [SearchCategoryController::class, 'search_category']);
+Route::get('visitor-user_search_category/{category?}', [SearchCategoryController::class, 'visitor_user_search_category']);
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
@@ -58,11 +59,15 @@ Route::middleware('auth:sanctum')->get('/auth/time/index/{id?}', [TimeController
 
 Route::post('/send-otp', [OTPController::class, 'sendOTP']);
 
-Route::get('user_search_category/{id?}/{category?}',[SearchCategoryController::class,'user_search_category']);
+Route::get('user_search_category/{id?}/{category?}', [SearchCategoryController::class, 'user_search_category']);
 /* ---------------------------------- Admin Side ----------------------------------  */
 // login/register
 Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/login', [RegisterController::class, 'login']);
+
+Route::post('/changePassword', [LoginRegisterController::class, 'changePassword']);
+Route::post('/forgotPassword', [LoginRegisterController::class, 'forgotPassword']);
+
 
 // State 
 Route::get('state-index', [StateController::class, 'index']);
@@ -77,6 +82,9 @@ Route::post('city-store', [CityController::class, 'store']);
 Route::post('city-update/{id?}', [CityController::class, 'update']);
 Route::get('city-delete/{id?}', [CityController::class, 'delete']);
 Route::get('city-show/{id?}', [CityController::class, 'show']);
+
+Route::get('stateWiseCity/{stateId?}', [CityController::class, 'stateWiseCity']);
+
 
 // Category 
 Route::get('category-index', [CategoryController::class, 'index']);
@@ -100,45 +108,45 @@ Route::get('socialMaster-delete/{id?}', [SocialMasterController::class, 'delete'
 Route::get('socialMaster-show/{id?}', [SocialMasterController::class, 'show']);
 
 /*  Admin Package */
-Route::get('adminpackage-index',[AdminPackageController::class,'index']);
-Route::post('adminpackage-store',[AdminPackageController::class,'store']);
-Route::post('adminpackage-update/{id?}',[AdminPackageController::class,'update']);
-Route::get('adminpackage-delete/{id?}',[AdminPackageController::class,'delete']);
-Route::get('adminpackage-show/{id?}',[AdminPackageController::class,'show']);
+Route::get('adminpackage-index', [AdminPackageController::class, 'index']);
+Route::post('adminpackage-store', [AdminPackageController::class, 'store']);
+Route::post('adminpackage-update/{id?}', [AdminPackageController::class, 'update']);
+Route::get('adminpackage-delete/{id?}', [AdminPackageController::class, 'delete']);
+Route::get('adminpackage-show/{id?}', [AdminPackageController::class, 'show']);
 
 /*  Slider */
-Route::get('slider-index/{id}',[SliderController::class,'index']);
-Route::post('slider-store',[SliderController::class,'store']);
-Route::post('slider-update/{id?}',[SliderController::class,'update']);
-Route::get('slider-delete/{id?}',[SliderController::class,'delete']);
-Route::get('slider-show/{id?}',[SliderController::class,'show']);
+Route::get('slider-index/{id}', [SliderController::class, 'index']);
+Route::post('slider-store', [SliderController::class, 'store']);
+Route::post('slider-update/{id?}', [SliderController::class, 'update']);
+Route::get('slider-delete/{id?}', [SliderController::class, 'delete']);
+Route::get('slider-show/{id?}', [SliderController::class, 'show']);
 
 /* Inquiry */
-Route::get('corporate-inquiry-index',[InquiryController::class,'index']);
+Route::get('corporate-inquiry-index', [InquiryController::class, 'index']);
 
 /* Workshop */
-Route::get('workshoplist-index',[AdminWorkshopController::class,'index']);
+Route::get('workshoplist-index', [AdminWorkshopController::class, 'index']);
 
 /* profile */
 Route::get('consultant-profile/{id?}', [RegisterController::class, 'consultantProfile']);
 Route::post('consultant-update/{id?}', [RegisterController::class, 'update']);
 
 /* Consultant categorywise */
-Route::get('consultant_wise_category/{id?}',[CategoryConsultantController::class,'consultant_wise_category']);
-Route::get('category-wise-consultant/{id?}',[CategoryConsultantController::class,'category_wise_consultant']);
-Route::get('user_details/{id?}',[CategoryConsultantController::class,'user_details']);
-Route::get('isFeatured/{isFeatured}',[CategoryConsultantController::class,'isFeatured']);
+Route::get('consultant_wise_category/{id?}', [CategoryConsultantController::class, 'consultant_wise_category']);
+Route::get('category-wise-consultant/{id?}', [CategoryConsultantController::class, 'category_wise_consultant']);
+Route::get('user_details/{id?}', [CategoryConsultantController::class, 'user_details']);
+Route::get('isFeatured/{isFeatured}', [CategoryConsultantController::class, 'isFeatured']);
 
 /* Leads List */
-Route::get('leads-list',[AdminLeadController::class,'index']);
+Route::get('leads-list', [AdminLeadController::class, 'index']);
 
 
 /*  Pincode */
-Route::get('pincode-index',[PincodeController::class,'index']);
-Route::post('pincode-store',[PincodeController::class,'store']);
-Route::post('pincode-update/{id?}',[PincodeController::class,'update']);
-Route::get('pincode-delete/{id?}',[PincodeController::class,'delete']);
-Route::get('pincode-show/{id?}',[PincodeController::class,'show']);
+Route::get('pincode-index', [PincodeController::class, 'index']);
+Route::post('pincode-store', [PincodeController::class, 'store']);
+Route::post('pincode-update/{id?}', [PincodeController::class, 'update']);
+Route::get('pincode-delete/{id?}', [PincodeController::class, 'delete']);
+Route::get('pincode-show/{id?}', [PincodeController::class, 'show']);
 
 
 
@@ -216,15 +224,15 @@ Route::get('video/delete/{id?}', [VideoController::class, 'delete']);
 Route::get('video/show/{id?}', [VideoController::class, 'show']);
 
 /* Workshop */
-Route::get('workshop/index/{id?}',[WorkshopController::class,'index']);
-Route::post('workshop/store',[WorkshopController::class,'store']);
-Route::post('workshop/update/{id?}',[WorkshopController::class,'update']);
-Route::get('workshop/delete/{id?}',[WorkshopController::class,'delete']);
-Route::get('workshop/show/{id?}',[WorkshopController::class,'show']);
+Route::get('workshop/index/{id?}', [WorkshopController::class, 'index']);
+Route::post('workshop/store', [WorkshopController::class, 'store']);
+Route::post('workshop/update/{id?}', [WorkshopController::class, 'update']);
+Route::get('workshop/delete/{id?}', [WorkshopController::class, 'delete']);
+Route::get('workshop/show/{id?}', [WorkshopController::class, 'show']);
 
 /* Leads List */
-Route::get('consultant-leads-list/{id?}',[ConsultantLeadController::class,'index']);
+Route::get('consultant-leads-list/{id?}', [ConsultantLeadController::class, 'index']);
 
 /* Admin Package List */
-Route::get('admin_package_detail',[ConsultantAdminPackageController::class,'admin_package_detail']);
-Route::post('upgrade_plan',[ConsultantAdminPackageController::class,'upgrade_plan']);
+Route::get('admin_package_detail', [ConsultantAdminPackageController::class, 'admin_package_detail']);
+Route::post('upgrade_plan', [ConsultantAdminPackageController::class, 'upgrade_plan']);

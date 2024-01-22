@@ -171,7 +171,7 @@
             whenever you’re ready
         </p>
         <div class="d-flex justify-content-center">
-            <button class="btn bg-white text-center mt-4 mb-5">Start With Free</button>
+            <a href="#" class="btn bg-white text-center mt-4 mb-5">Start With Free</button>
         </div>
     </div>
 </div>

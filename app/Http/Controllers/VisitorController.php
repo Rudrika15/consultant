@@ -491,9 +491,9 @@ class VisitorController extends Controller
         try {
             // $sliderpolicy = Slider::where('type', '=', "Privacy Policy")->where('status', '=', 'Active')->get();
             $policy = PrivacyPolicy::where('status', 'active')->get();
-            return view('visitors.policy', compact('sliderpolicy', 'policy'));
+            return view('visitors.policy', compact('policy'));
         } catch (\Throwable $th) {
-            throw $th;
+            // throw $th;
             return view('servererror');
         }
     }
@@ -505,9 +505,9 @@ class VisitorController extends Controller
         try {
             // $sliderterms = Slider::where('type', '=', "Terms & Condition")->where('status', '=', 'Active')->get();
             $terms = TermsCondition::where('status', 'active')->get();
-            return view('visitors.terms', compact('sliderterms', 'terms'));
+            return view('visitors.terms', compact('terms'));
         } catch (\Throwable $th) {
-            throw $th;
+            // throw $th;
             return view('servererror');
         }
     }

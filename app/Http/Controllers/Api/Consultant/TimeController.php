@@ -1,33 +1,32 @@
 <?php
 
-    namespace App\Http\Controllers\Api\Consultant;
+namespace App\Http\Controllers\Api\Consultant;
 
-    use App\Http\Controllers\Controller;
-    use App\Models\Time;
-    use App\Helpers\Utils;
-    use App\Models\User;
-    use Illuminate\Http\Request;
-    use Illuminate\Support\Facades\Validator;
-    use Illuminate\Validation\UnauthorizedException;
+use App\Http\Controllers\Controller;
+use App\Models\Time;
+use App\Helpers\Utils;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\UnauthorizedException;
 
-    class TimeController extends Controller
+class TimeController extends Controller
+{
+    public function __construct()
     {
-        public function __construct() {
-            $this->middleware('auth:api');
-        }
-        function index(Time $time)
-        {
-            $userId = 53;
-                $user = Utils::isUserAuthorized($userId);
-                $time->where('userId',$userId)->get();
-                
-                return Utils::successResponse($time);
-                
-               
-        }
-        function store(Request $request)
+        $this->middleware('auth:api');
+    }
+    function index(Time $time)
     {
-        try{
+        $userId = 53;
+        $user = Utils::isUserAuthorized($userId);
+        $time->where('userId', $userId)->get();
+
+        return Utils::successResponse($time);
+    }
+    function store(Request $request)
+    {
+        try {
             $rules = array(
                 'userId' => 'required',
                 'time' => 'required',
@@ -55,19 +54,18 @@
                     'data' => $time
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function update(Request $request, $id)
     {
-        try{
+        try {
             $rules = array(
                 'time' => 'required',
                 'day' => 'required',
@@ -93,19 +91,18 @@
                     'data' => $time
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function delete($id)
     {
-        try{
+        try {
             $time = Time::find($id);
             $time->status = "Deleted";
             if ($time->save()) {
@@ -121,19 +118,18 @@
                     'data' => $time
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function show($id)
     {
-        try{
+        try {
             $time = Time::find($id);
             if ($time) {
                 return response([
@@ -148,14 +144,13 @@
                     'data' => $time
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
 }
