@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Otp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -100,7 +101,7 @@ class LoginRegisterController extends Controller
                 return $user;
                 // $findUser->password = Hash::make()
             } else {
-                return "password does not match";
+                return "Password does not match";
             }
         } else {
             return "user not found";
@@ -108,38 +109,43 @@ class LoginRegisterController extends Controller
         return $findUser;
     }
 
+
+
+
     public function forgotPassword(Request $request)
     {
         $rules = array(
             'email'  => "required",
         );
+
         $validator = Validator::make($request->all(), $rules);
+
         if ($validator->fails()) {
             return $validator->errors();
         }
+
         $email = $request->email;
         if ($email) {
 
-            $otp = random_int(0000, 9999);
+            $otp = random_int(1234, 9999);
+
             $data = array(
                 'otp' => $otp,
             );
 
-            // Mail::send('emails.forgetpass', $data, function ($message) use ($data) {
-            //     $message->from($data['email']);
-            //     $message->to($email);
-            //     $message->with($data['otp']);
-            //     $message->subject($data['subject']);
-            // });
-            $user = User::where('email', $email)->first();
-            $user->otp = $otp;
-            $user->save();
+            Mail::send('emails.forgetpass', ['otp' => $data['otp']], function ($message) use ($email) {
+                $message->from('connect@consultantcube.com');
+                $message->to($email);
+                $message->subject('Password Reset OTP');
+            });
+
+
+            Otp::create([
+                'email' => $email,
+                'otp' => $otp,
+            ]);
+
+            return "Email sent successfully with OTP";
         }
-
-
-
-        // Mail::send($email);
-
-        return "email send";
     }
 }

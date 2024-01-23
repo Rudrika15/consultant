@@ -5,6 +5,7 @@ use League\Flysystem\Visibility;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisitorController;
@@ -15,8 +16,8 @@ use App\Http\Controllers\Admin\StateController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\InquiryController;
 use App\Http\Controllers\Admin\PincodeController;
-use App\Http\Controllers\Auth\RegisterController;
 // use App\Http\Controllers\Consultant\ConsultantController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AdminLeadController;
 use App\Http\Controllers\Admin\ContactusController;
@@ -30,10 +31,10 @@ use App\Http\Controllers\Admin\SocialMasterController;
 use App\Http\Controllers\Consultant\GalleryController;
 use App\Http\Controllers\Consultant\PackageController;
 use App\Http\Controllers\Admin\AdminWorkshopController;
+use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Consultant\LanguageController;
 use App\Http\Controllers\Consultant\WorkshopController;
 use App\Http\Controllers\Admin\LanguageMasterController;
-use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Admin\TermsConditionController;
 use App\Http\Controllers\Consultant\AttachmentController;
 use App\Http\Controllers\Consultant\SocialLinkController;
@@ -69,6 +70,12 @@ Route::get('/terms', [VisitorController::class, 'terms'])->name('visitors.terms'
 Route::get('/membershipplan', [VisitorController::class, 'membershipPlan'])->name('visitors.membershipPlan');
 Route::get('/corporateInquery', [VisitorController::class, 'corporateInquery'])->name('visitors.corporateInquery');
 Route::post('corporateInquery-inqueryStore', [VisitorController::class, 'inqueryStore'])->name('corporateInquery.inqueryStore');
+
+Route::post('/free-trial', [VisitorController::class, 'freeTrial'])->name('free.trial');
+Route::get('/membershipplan', [VisitorController::class, 'membershipPlan'])->name('visitors.membershipPlan');
+
+//otp send in mail
+// Route::get('send-mail', [MailController::class, 'index']);
 
 Route::get('/contactus', [VisitorController::class, 'contactus'])->name('visitors.contactus');
 Route::post('contactus-store', [VisitorController::class, 'contantus_store'])->name('contactus.store');

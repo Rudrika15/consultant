@@ -13,10 +13,10 @@ class StateController extends Controller
 {
     public function index(Request $request)
     {
-        try{
-            $state = state::where('status', '!=', "Deleted")
-            ->orderBy('id', 'DESC')
-            ->get();
+        try {
+            $state = State::where('status', '!=', "Deleted")
+                ->orderBy('id', 'DESC')
+                ->get();
 
             if (count($state) > 0) {
                 return response([
@@ -32,20 +32,19 @@ class StateController extends Controller
                     'data' => $state,
                 ], 404);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
-        } 
-        
+        }
     }
 
     public function store(Request $request)
     {
-        try{
+        try {
             $rules = array(
                 'stateName' => 'required',
             );
@@ -53,14 +52,14 @@ class StateController extends Controller
             if ($validator->fails()) {
                 return $validator->errors();
             }
-    
+
             $state = new state();
-    
+
             if ($state) {
                 $state->stateName = $request->stateName;
                 $state->status = 'Active';
                 $state->save();
-    
+
                 if ($state) {
                     $response = [
                         'success' => true,
@@ -76,21 +75,20 @@ class StateController extends Controller
                     ], 404);
                 }
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
-        } 
-        
+        }
     }
 
 
     public function update(Request $request, $id)
     {
-        try{
+        try {
             $rules = array(
                 'stateName' => 'required',
             );
@@ -99,7 +97,7 @@ class StateController extends Controller
                 return $validator->errors();
             }
             $state = State::find($id);
-    
+
             if ($state) {
                 $state->stateName = $request->stateName;
                 $state->status = 'Active';
@@ -119,20 +117,19 @@ class StateController extends Controller
                     ], 404);
                 }
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
-        } 
-        
+        }
     }
 
     function delete($id, Request $request)
     {
-        try{
+        try {
             $state = State::find($id);
             $state->status = "Deleted";
             if ($state) {
@@ -151,20 +148,19 @@ class StateController extends Controller
                     'data' => $state,
                 ], 404);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
-        } 
-        
+        }
     }
 
     public function show($id)
     {
-        try{
+        try {
             $state = State::find($id);
             if ($state) {
                 $state->save();
@@ -182,14 +178,13 @@ class StateController extends Controller
                     'data' => $state,
                 ], 404);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
 }

@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
-    
+
     function register(Request $request)
     {
-        try{
+        try {
             $rules = array(
                 'name' => 'required',
-                'email' => 'required|email', 'unique:users',
+                'email' => 'required|unique:users,email',
                 'password' => 'required',
                 'lastName' => 'required',
                 'stateId' => 'required',
@@ -26,7 +26,7 @@ class RegisterController extends Controller
                 'gender' => 'required',
                 'birthdate' => 'required',
             );
-    
+
             $validator = validator::make($request->all(), $rules);
             if ($validator->fails()) {
                 return $validator->errors();
@@ -37,14 +37,14 @@ class RegisterController extends Controller
             $user->assignRole('Consultant');
             $success['token'] =  $user->createToken('MyApp')->plainTextToken;
             $success['user'] =  $user;
-    
+
             $userData =  $user->id;
-    
+
             $profile = new Profile();
             $profile->userId = $userData;
             $profile->status = "Active";
             $profile->save();
-    
+
             if ($input) {
                 $response = [
                     'success' => true,
@@ -56,18 +56,18 @@ class RegisterController extends Controller
                     'message' => ['Register Data not found']
                 ], 404);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
-        }   
+        }
     }
     public function login(Request $request)
     {
-        try{
+        try {
             $user = User::where('email', $request->email)->first();
             if ($user && Hash::check($request->password, $user->password)) {
                 $token = $user->createToken('my-app-token')->plainTextToken;
@@ -83,29 +83,28 @@ class RegisterController extends Controller
                     'message' => ['Login Data not found']
                 ], 404);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
 
 
     public function consultantProfile(Request $request, $id)
     {
 
-        try{
+        try {
             $userId = $request->userId;
             $consultantProfile = Profile::with('users')->where('userId', '=', $id)->first();
             if ($consultantProfile) {
-                $consultantProfile->about=strip_tags($consultantProfile->about);
-                $consultantProfile->address=strip_tags($consultantProfile->address);
+                $consultantProfile->about = strip_tags($consultantProfile->about);
+                $consultantProfile->address = strip_tags($consultantProfile->address);
                 $consultantProfile->save();
-                
+
                 $response = [
                     'success' => true,
                     'ConsultantProfile' => $consultantProfile,
@@ -120,20 +119,19 @@ class RegisterController extends Controller
 
                 ], 404);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
 
     public function update(Request $request, $id = 0)
-    {   
-        try{
+    {
+        try {
             $profile =  Profile::where('userId', '=', $id)->first();
 
             if ($profile) {
@@ -166,12 +164,12 @@ class RegisterController extends Controller
                     'data' => $profile,
                 ], 404);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
 
@@ -186,6 +184,6 @@ class RegisterController extends Controller
         //     return $validator->errors();
         // }
 
-        
+
     }
 }

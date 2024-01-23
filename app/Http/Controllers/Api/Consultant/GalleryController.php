@@ -11,8 +11,8 @@ class GalleryController extends Controller
 {
     function index($id)
     {
-        try{
-            $gallery = Gallery::where('userId', '=', $id)->get();;
+        try {
+            $gallery = Gallery::where('userId', '=', $id)->where('status', 'Active')->get();;
             if (count($gallery) > 0) {
                 return response([
                     'success' => true,
@@ -26,19 +26,18 @@ class GalleryController extends Controller
                     'data' => $gallery
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function store(Request $request)
     {
-        try{
+        try {
             $rules = array(
                 'userId' => 'required',
                 'title' => 'required',
@@ -69,19 +68,18 @@ class GalleryController extends Controller
                     'data' => $gallery
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function update(Request $request, $id)
     {
-        try{
+        try {
             $rules = array(
                 'title' => 'required',
             );
@@ -109,19 +107,18 @@ class GalleryController extends Controller
                     'data' => $gallery
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function delete($id)
     {
-        try{
+        try {
             $gallery = Gallery::find($id);
             $gallery->status = "Deleted";
             if ($gallery->save()) {
@@ -137,19 +134,18 @@ class GalleryController extends Controller
                     'data' => $gallery
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function show($id)
     {
-        try{
+        try {
             $gallery = Gallery::find($id);
             if ($gallery) {
                 return response([
@@ -164,14 +160,13 @@ class GalleryController extends Controller
                     'data' => $gallery
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
 }

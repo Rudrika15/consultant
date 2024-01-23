@@ -11,8 +11,8 @@ class AttachmentController extends Controller
 {
     function index($id)
     {
-        try{
-            $attachment = Attachment::where('userId', '=', $id)->get();
+        try {
+            $attachment = Attachment::where('userId', '=', $id)->where('status', 'Active')->get();
             if (count($attachment) > 0) {
                 return response([
                     'success' => true,
@@ -26,18 +26,18 @@ class AttachmentController extends Controller
                     'data' => $attachment
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
     }
     function store(Request $request)
     {
-        try{
+        try {
             $rules = array(
                 'userId' => 'required',
                 'title' => 'required',
@@ -68,19 +68,18 @@ class AttachmentController extends Controller
                     'data' => $attachment
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function update(Request $request, $id)
     {
-        try{
+        try {
             $rules = array(
                 'title' => 'required',
             );
@@ -107,20 +106,19 @@ class AttachmentController extends Controller
                     'message' => ['Attachment Not Updated !'],
                     'data' => $attachment
                 ]);
-            } 
-        }catch(\Exception $e){
+            }
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function delete($id)
     {
-        try{
+        try {
             $attachment = Attachment::find($id);
             $attachment->status = "Deleted";
             if ($attachment->save()) {
@@ -136,19 +134,18 @@ class AttachmentController extends Controller
                     'data' => $attachment
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function show($id)
     {
-        try{
+        try {
             $attachment = Attachment::find($id);
             if ($attachment) {
                 return response([
@@ -163,12 +160,12 @@ class AttachmentController extends Controller
                     'data' => $attachment
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
     }

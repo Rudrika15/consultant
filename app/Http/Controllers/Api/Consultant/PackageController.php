@@ -9,11 +9,13 @@ use Illuminate\Support\Facades\Validator;
 
 class PackageController extends Controller
 {
-   
+
     function index($id)
     {
-        try{
-            $package = Package::where('userId', '=', $id)->get();;
+        try {
+            $package = Package::where('userId', '=', $id)
+                ->where('status', 'Active')
+                ->get();
             if (count($package) > 0) {
                 return response([
                     'success' => true,
@@ -27,19 +29,18 @@ class PackageController extends Controller
                     'data' => $package
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function store(Request $request)
     {
-        try{
+        try {
             $rules = array(
                 'userId' => 'required',
                 'title' => 'required',
@@ -58,7 +59,7 @@ class PackageController extends Controller
             $package->detail = $request->detail;
             $package->validUpTo = $request->validUpTo;
             $package->status = 'Active';
-    
+
             if ($package->save()) {
                 return response([
                     'success' => true,
@@ -72,19 +73,18 @@ class PackageController extends Controller
                     'data' => $package
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function update(Request $request, $id)
     {
-        try{
+        try {
             $rules = array(
                 'title' => 'required',
                 'price' => 'required',
@@ -101,7 +101,7 @@ class PackageController extends Controller
             $package->detail = $request->detail;
             $package->validUpTo = $request->validUpTo;
             $package->status = 'Active';
-    
+
             if ($package->save()) {
                 return response([
                     'success' => true,
@@ -115,19 +115,18 @@ class PackageController extends Controller
                     'data' => $package
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function delete($id)
     {
-        try{
+        try {
             $package = Package::find($id);
             $package->status = "Deleted";
             if ($package->save()) {
@@ -143,19 +142,18 @@ class PackageController extends Controller
                     'data' => $package
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function show($id)
     {
-        try{
+        try {
             $package = Package::find($id);
             if ($package) {
                 return response([
@@ -170,14 +168,13 @@ class PackageController extends Controller
                     'data' => $package
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
 }

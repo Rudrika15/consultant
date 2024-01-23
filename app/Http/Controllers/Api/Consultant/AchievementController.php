@@ -11,8 +11,8 @@ class AchievementController extends Controller
 {
     function index($id)
     {
-        try{
-            $achievement = Achievement::where('userId', '=', $id)->get();
+        try {
+            $achievement = Achievement::where('userId', '=', $id)->where('status', 'Active')->get();
             if (count($achievement) > 0) {
                 return response([
                     'success' => true,
@@ -26,18 +26,18 @@ class AchievementController extends Controller
                     'data' => $achievement
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
     }
     function store(Request $request)
     {
-        try{
+        try {
             $rules = array(
                 'userId' => 'required',
                 'title' => 'required',
@@ -68,19 +68,18 @@ class AchievementController extends Controller
                     'data' => $achievement
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function update(Request $request, $id)
     {
-        try{
+        try {
             $rules = array(
                 'title' => 'required',
             );
@@ -108,19 +107,19 @@ class AchievementController extends Controller
                     'data' => $achievement
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
     }
-    
+
     function delete($id)
     {
-        try{
+        try {
             $achievement = Achievement::find($id);
             $achievement->status = "Deleted";
             if ($achievement->save()) {
@@ -136,18 +135,18 @@ class AchievementController extends Controller
                     'data' => $achievement
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
     }
     function show($id)
     {
-        try{
+        try {
             $achievement = Achievement::find($id);
             if ($achievement) {
                 return response([
@@ -162,14 +161,13 @@ class AchievementController extends Controller
                     'data' => $achievement
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
 }

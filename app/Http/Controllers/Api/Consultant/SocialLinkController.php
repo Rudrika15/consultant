@@ -41,72 +41,70 @@ class SocialLinkController extends Controller
     //         ]);
     //     }    
     // }
-    public function index($id){
-        try{
+    public function index($id)
+    {
+        try {
             $socialLink = SocialLink::with('social_masters')
                 ->where('userId', '=', $id)
+                ->where('status', 'Active')
                 ->get();
 
-                $socialLinkList = [];
-                foreach($socialLink as $socialLinkData){
-                    $socialLinkItem=[
-                        'id'=>$socialLinkData->id,
-                        'userId'=>$socialLinkData->userId,
-                        'socialMediaMasterId'=>$socialLinkData->socialMediaMasterId,
-                        'title'=>$socialLinkData->social_masters->title,
-                        'url'=>$socialLinkData->url,
-                        'status' => $socialLinkData->status,
-                        'created_at' => $socialLinkData->created_at,
-                        'updated_at' => $socialLinkData->updated_at,
-                    ];
-                    array_push($socialLinkList,$socialLinkItem);
-                }
-                if(count($socialLinkList)>0){
-                    return response([
-                            'success' => true,
-                            'message' => 'View All Socail Links !',
-                            'status' => 200,
-                            'data' => $socialLinkList
-                    ]);
-                }
-                else {
-                    return response([
-                        'message' => 'No Data Found !',
-                        'data' => $socialLink
-                    ]);
+            $socialLinkList = [];
+            foreach ($socialLink as $socialLinkData) {
+                $socialLinkItem = [
+                    'id' => $socialLinkData->id,
+                    'userId' => $socialLinkData->userId,
+                    'socialMediaMasterId' => $socialLinkData->socialMediaMasterId,
+                    'title' => $socialLinkData->social_masters->title,
+                    'url' => $socialLinkData->url,
+                    'status' => $socialLinkData->status,
+                    'created_at' => $socialLinkData->created_at,
+                    'updated_at' => $socialLinkData->updated_at,
+                ];
+                array_push($socialLinkList, $socialLinkItem);
             }
-        }
-        catch(\Exception $e){
+            if (count($socialLinkList) > 0) {
+                return response([
+                    'success' => true,
+                    'message' => 'View All Socail Links !',
+                    'status' => 200,
+                    'data' => $socialLinkList
+                ]);
+            } else {
+                return response([
+                    'message' => 'No Data Found !',
+                    'data' => $socialLink
+                ]);
+            }
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
     }
-    public function getSocialLinkList(){
-        $socialLink=SocialMaster::all();
-        if($socialLink){
+    public function getSocialLinkList()
+    {
+        $socialLink = SocialMaster::all();
+        if ($socialLink) {
             return response([
-                'success'=>true,
-                'message'=>'Social Link Dropdwon List',
-                'data'=>$socialLink
+                'success' => true,
+                'message' => 'Social Link Dropdwon List',
+                'data' => $socialLink
+            ]);
+        } else {
+            return response([
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'data' => $socialLink
             ]);
         }
-        else{
-            return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'data'=>$socialLink
-            ]);
-        }
-        
-
     }
     function store(Request $request)
     {
-        try{
+        try {
             $rules = array(
                 'userId' => 'required',
                 'socialMediaMasterId' => 'required',
@@ -120,7 +118,7 @@ class SocialLinkController extends Controller
             $socialLink->userId = $request->userId;
             $socialLink->socialMediaMasterId = $request->socialMediaMasterId;
             $socialLink->url = $request->url;
-    
+
             $socialLink->status = 'Active';
             if ($socialLink->save()) {
                 return response([
@@ -135,19 +133,18 @@ class SocialLinkController extends Controller
                     'data' => $socialLink
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function update(Request $request, $id)
     {
-        try{
+        try {
             $rules = array(
                 'socialMediaMasterId' => 'required',
                 'url' => 'required',
@@ -159,7 +156,7 @@ class SocialLinkController extends Controller
             $socialLink = SocialLink::find($id);
             $socialLink->socialMediaMasterId = $request->socialMediaMasterId;
             $socialLink->url = $request->url;
-    
+
             $socialLink->status = 'Active';
             if ($socialLink->save()) {
                 return response([
@@ -174,19 +171,18 @@ class SocialLinkController extends Controller
                     'data' => $socialLink
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function delete($id)
     {
-        try{
+        try {
             $socialLink = SocialLink::find($id);
             $socialLink->status = "Deleted";
             if ($socialLink->save()) {
@@ -202,19 +198,18 @@ class SocialLinkController extends Controller
                     'data' => $socialLink
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function show($id)
     {
-        try{
+        try {
             $socialLink = SocialLink::find($id);
             if ($socialLink) {
                 return response([
@@ -229,14 +224,13 @@ class SocialLinkController extends Controller
                     'data' => $socialLink
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
 }

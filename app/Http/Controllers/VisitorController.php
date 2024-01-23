@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\City;
 use App\Models\Lead;
 use App\Models\Time;
@@ -378,7 +379,9 @@ class VisitorController extends Controller
         try {
             $userId = Auth::user()->id;
             $user = User::find($userId);
-            $user->plantype = $request->planType;
+            // $user->plantype = $request->planType;
+            $user->planType = $request->input('package');
+
             $user->save();
             return response()->json([
                 'success' => true,
@@ -389,6 +392,30 @@ class VisitorController extends Controller
             return view('servererror');
         }
     }
+
+    public function freeTrial(Request $request)
+    {
+        try {
+            $userId = Auth::user()->id;
+            $user = User::find($userId);
+
+            // Set plan type to the selected package
+            $user->plantype = $request->input('package');
+
+            // Set the validupto field to 25 days from now
+            $user->validupto = Carbon::now()->addDays(25);
+
+            $user->save();
+
+            return redirect()->route('visitors.membershipPlan')->with('successMessage', 'Free Trial activated successfully!');
+        } catch (\Throwable $th) {
+            throw $th;
+            return view('servererror');
+        }
+    }
+
+
+
     public function detail(Request $request)
     {
         try {

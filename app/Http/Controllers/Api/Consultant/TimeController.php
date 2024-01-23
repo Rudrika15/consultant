@@ -12,24 +12,29 @@ use Illuminate\Validation\UnauthorizedException;
 
 class TimeController extends Controller
 {
-    public function __construct()
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:api');
+    // }
+    function index($id)
     {
-        $this->middleware('auth:api');
-    }
-    function index(Time $time)
-    {
-        $userId = 53;
-        $user = Utils::isUserAuthorized($userId);
-        $time->where('userId', $userId)->get();
-
-        return Utils::successResponse($time);
+        $time = Time::find($id)
+            ->where('status', 'Active')
+            ->get();
+        return response([
+            'success' => true,
+            'message' => 'Time',
+            'status' => 200,
+            'data' => $time
+        ]);
     }
     function store(Request $request)
     {
         try {
             $rules = array(
                 'userId' => 'required',
-                'time' => 'required',
+                'start_time' => 'required',
+                'end_time' => 'required',
                 'day' => 'required',
             );
             $validator = Validator::make($request->all(), $rules);
@@ -38,7 +43,8 @@ class TimeController extends Controller
             }
             $time = new Time();
             $time->userId = $request->userId;
-            $time->time = $request->time;
+            $time->start_time = $request->start_time;
+            $time->end_time = $request->end_time;
             $time->day = $request->day;
             $time->status = 'Active';
             if ($time->save()) {
@@ -67,7 +73,8 @@ class TimeController extends Controller
     {
         try {
             $rules = array(
-                'time' => 'required',
+                'start_time' => 'required',
+                'end_time' => 'required',
                 'day' => 'required',
             );
             $validator = Validator::make($request->all(), $rules);
@@ -75,7 +82,8 @@ class TimeController extends Controller
                 return $validator->errors();
             }
             $time = Time::find($id);
-            $time->time = $request->time;
+            $time->start_time = $request->start_time;
+            $time->end_time = $request->end_time;
             $time->day = $request->day;
             $time->status = 'Active';
             if ($time->save()) {
@@ -127,8 +135,9 @@ class TimeController extends Controller
             ]);
         }
     }
-    function show($id)
+    public function show($id)
     {
+        // return "here";
         try {
             $time = Time::find($id);
             if ($time) {
