@@ -171,7 +171,7 @@
                             </li>
                             <li>
                                 <i class="fa fa-caret-right"></i>
-                                <a href="" class="footerlink">Workshop</a>
+                                <a href="{{ route('visitor.workshop')}}" class="footerlink">Workshop</a>
                             </li>
                         </ul>
                     </div>
@@ -182,7 +182,7 @@
         <div class="copyright">
             <div class="container d-flex justify-content-between flex-wrap pt-5">
                 <div>
-                    <p>Copyright © Consultant Cube 2022 Rights Reserve </br>
+                    <p>Copyright © Consultant Cube 2024 Rights Reserved </br>
                         Developed by Aspireotech </p>
                 </div>
                 <div class="d-flex me-5 gap-3">

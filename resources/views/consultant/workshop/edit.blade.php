@@ -63,6 +63,17 @@
             </div>
 
             <div class="form-label-group mt-3">
+                <label for="photo" class="fw-bold">Photo <sup class="text-danger">*</sup></label>
+                <input id="photo" type="file" name="photo" class="form-control" placeholder="photo">
+                <img id="preview-photo" src="{{ url('/gallery/' . $gallery->photo) }}" alt="" class="mt-3"
+                    style="height:100px; width: 100px;">
+
+                @if ($errors->has('photo'))
+                <span class="error">{{ $errors->first('photo') }}</span>
+                @endif
+            </div>
+
+            <div class="form-label-group mt-3">
                 <label for="detail" class="fw-bold">Detail <sup class="text-danger">*</sup></label>
                 <textarea id="detail" rows="10" name="detail" class="form-control">{{$workshop->detail}}</textarea>
                 @if ($errors->has('detail'))

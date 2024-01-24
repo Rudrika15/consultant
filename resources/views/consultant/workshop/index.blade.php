@@ -49,6 +49,7 @@
                         <th>Sr No</th>
                         <th>Title</th>
                         <th>Price</th>
+                        <th>Photo</th>
                         <th>Detail</th>
                         <th>Workshop Type</th>
                         <th>Link</th>
@@ -92,6 +93,10 @@
                 {
                     data: 'price',
                     name: 'price'
+                },
+                {
+                    data: 'photo',
+                    name: 'photo'
                 },
                 {
                     data: 'detail',

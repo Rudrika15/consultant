@@ -62,7 +62,7 @@
                         <p class="card-text mt-5">{!! $adminpackage->details !!}</p>
 
                         @if ($adminpackage->title === 'Free')
-                        <a class="btn btn-primary mb-5 mt-5">Apply Now</a>
+                        {{-- <a class="btn btn-primary mb-5 mt-5">Apply Now</a> --}}
                         @elseif (isset(Auth::user()->id))
                         <div class="card-body text-center">
                             <form action="{{ route('razorpay.payment.store') }}" method="POST">

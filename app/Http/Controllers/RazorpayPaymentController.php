@@ -53,7 +53,7 @@ class RazorpayPaymentController extends Controller
                 return redirect()->back();
             }
         }
-        Session::put('success', ('Payment Successful'));
+        Session::put('success', ('Payment Successfull!'));
         return redirect()->back();
     }
 }

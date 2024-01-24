@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('header','Consultant')
+@section('header', 'Consultant')
 @section('content')
 
 {{-- Message --}}
@@ -22,27 +22,20 @@
 </div>
 @endif
 
-
-
 <div class="card">
-    <!-- /.box-title -->
     <div class="card-header"
         style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
         <div class="">
             <h4 class="">Consultant List</h4>
         </div>
         <div class="">
-
-            <a href="" id="back" class="btn btnback  btn-sm" style="display:none;">BACK</a>
-
-            <!-- /.sub-menu -->
+            <a href="{{ route('consultant.index') }}" id="back" class="btn btnback btn-sm"
+                style="display:none;">BACK</a>
         </div>
     </div>
-    <!-- /.dropdown js__dropdown -->
     <div class="card-body">
         <div class="table-responsive" id="dataTableDiv">
-
-            <table class="table table-bordered data-table">
+            <table class="table table-bordered" id="dataTable">
                 <thead>
                     <tr>
                         <th>Sr No</th>
@@ -61,187 +54,98 @@
                         <th>Action</th>
                     </tr>
                 </thead>
-
                 <tbody>
+
+                    @foreach ($consultants as $consultant)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $consultant->name }}</td>
+                        <td>{{ $consultant->email }}</td>
+                        <td>{{ $consultant->contactNo }}</td>
+                        <td>{{ $consultant->planType }}</td>
+                        <td>
+
+                            @if(isset($consultant->profile->about))
+                            {{ $consultant->profile->about }}
+                            @endif
+
+                        </td>
+
+                        <td>
+                            @if(isset($consultant->profile->photo))
+                            <img src="{{ url('/profile') . '/' . $consultant->profile->photo }}" width="50px"
+                                height="50px">
+                            @else
+
+                            <img src="{{ url('/placeholder-image.jpg') }}" width="50px" height="50px" alt="Image">
+                            @endif
+                        </td>
+
+                        <td>
+                            @if(isset($consultant->profile->type))
+                            {{ $consultant->profile->type }}
+                            @endif
+                        </td>
+
+
+                        <td>
+                            @if(isset($consultant->profile->company))
+                            {{ $consultant->profile->company }}
+                            @endif
+                        </td>
+
+
+                        <td>
+                            @if(isset($consultant->profile->category->catName))
+                            {{ $consultant->profile->category->catName }}
+                            @endif
+                        </td>
+
+                        <td>
+                            @if(isset($consultant->profile->packages->title))
+                            {{ $consultant->profile->packages->title }}
+                            @endif
+                        </td>
+
+                        <td>
+                            @if(isset($consultant->profile->isFeatured))
+                            {{ $consultant->profile->isFeatured }}
+                            @endif
+                        </td>
+
+                        <td>
+                            @if(isset($consultant->status))
+                            {{ $consultant->status }}
+                            @endif
+                        </td>
+
+                        <td>
+                            <a href="{{ route('consultant.view', $consultant->id) }}"
+                                class="btn btn-success btn-sm view">View</a>
+                        </td>
+                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
         <!-- Show single data -->
         <div id="viewDataDiv"></div>
     </div>
-
 </div>
+
 <script>
     function ConfirmDelete() {
         return confirm("Are you sure you want to delete?");
     }
 </script>
 
-<script type="text/javascript">
-    $(function() {
-        var table = $('.data-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('consultant.index') }}",
-            columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
-                },
-                {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
-                    data: 'email',
-                    name: 'email'
-                },
-                {
-                    data: 'contactNo',
-                    name: 'contactNo'
-                },
-                {
-                    data: 'planType',
-                    name: 'planType'
-                },
-                {
-                    data: 'profile.about',
-                    name: 'profile.about'
-                },
-                {
-                    data: 'profile.photo',
-                    name: 'profile.photo'
-                },
-                {
-                    data: 'profile.type',
-                    name: 'profile.type'
-                },
-                {
-                    data: 'profile.company',
-                    name: 'profile.company'
-                },
-
-                {
-                    data: 'profile.categoryId.catName',
-                    name: 'profile.categoryId.catName'
-                },
-
-                {
-                    data: 'profile.packages.title',
-                    name: 'profile.packages.title'
-                },
-                {
-                    data: 'profile.isFeatured',
-                    name: 'profile.isFeatured'
-                },
-                {
-                    data: 'status',
-                    name: 'status'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false,
-                    // render: function (data, type, full, meta) {
-
-                    //     return $edit=`<a href="{{ route('city.edit', ':id') }}" class="btn btn-sm btn-primary">Edit</a>`
-
-                    // }
-                },
-            ]
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var table = $('#dataTable').DataTable();
+        $('#dataTable tbody').on('click', 'tr', function () {
+            var data = table.row(this).data();
+            window.location.href = "{{ url('consultant') }}" + '/' + data.id + '/view';
         });
-
-        $(document).on('click', '.edit', function() {
-            var row = $(this).closest('tr');
-            var data = table.row(row).data();
-            var consultantId = data.id;
-
-            $.ajax({
-                url: "{{ url('consultant') }}" + '/' + consultantId + '/view',
-                type: 'GET',
-                success: function(response) {
-                    // Handle the Ajax response here
-                    console.log(response); // Check the response in the browser console
-                    $('#dataTableDiv').hide();
-                    $('#add').hide();
-                    $('#back').show();
-                    $('#viewDataDiv').html('<strong>Name:</strong>' + response.name + 
-                        '<br>' + '<strong>Emai:</strong> ' + response.email +
-                        '<br>' + '<strong>Contact No:</strong> ' + response.contactNo +
-                        '<br>' + '<strong>Plan Type:</strong> ' + response.planType +
-                        '<br>' + '<strong>About:</strong> ' + response.profile.about +
-                        '<br>' + '<br><strong>Photo:</strong><img src="{{url('/profile')}}/' + response.profile.photo + '" width="100px" height="100px" class="ms-3">' +
-                        '<br>' + '<strong>Type:</strong> ' + response.profile.type +
-                        '<br>' + '<strong>Company:</strong> ' + response.profile.company   +
-                        '<br>' + '<strong>Category:</strong> ' + response.profile.categories.catName +
-                        '<br>' + '<strong>Package:</strong> ' + response.profile.packages.title +
-                        '<br>' + '<strong>Is Featured:</strong> ' + response.profile.ifFeatured +
-                        '<br>' + '<strong>Status:</strong> ' + response.status);
-
-                },
-                error: function(error) {
-                    // Handle the error response here
-                    console.log(error); // Check the error in the browser console
-                }
-            });
-        });
-
-        // $('body').on('click', '.delete', function(event) {
-        //     event.preventDefault();
-        //     var row = $(this).closest('tr');
-        //     var data = table.row(row).data();
-        //     var id = data.id;
-        //     Swal.fire({
-        //         title: 'Delete Confirmation',
-        //         text: 'Do you really want to delete this record?',
-        //         icon: 'warning',
-        //         showCancelButton: true,
-        //         confirmButtonColor: '#d33',
-        //         cancelButtonColor: '#4e73df',
-        //         confirmButtonText: 'Yes, delete it!',
-        //     }).then((result) => {
-        //         if (result.isConfirmed) {
-        //             // AJAX request to delete the record
-        //             $.ajax({
-        //                 url: '/city-delete' + '/' + id,
-        //                 method: 'GET',
-        //                 data: {
-        //                     _token: "{{ csrf_token() }}",
-        //                     id: id
-        //                 },
-        //                 success: function(response) {
-        //                     if (response.success) {
-        //                         Swal.fire({
-        //                             icon: 'success',
-        //                             title: 'Deleted',
-        //                             text: response.message,
-        //                         }).then(() => {
-        //                             // Refresh the page
-        //                             location.reload();
-        //                         });
-        //                     } else {
-        //                         // Error message using SweetAlert
-        //                         Swal.fire({
-        //                             icon: 'error',
-        //                             title: 'Error',
-        //                             text: 'An error occurred!',
-        //                         });
-        //                     }
-        //                 },
-        //                 error: function(xhr, status, error) {
-        //                     // Error message using SweetAlert
-        //                     Swal.fire({
-        //                         icon: 'error',
-        //                         title: 'Error',
-        //                         text: 'An error occurred!',
-        //                     });
-        //                 }
-        //             });
-        //         }
-        //     });
-
-        // });
-
     });
 </script>
 

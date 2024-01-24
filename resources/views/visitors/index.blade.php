@@ -226,27 +226,28 @@
                             <i class="fa fa-circle text-white"></i>
                             <img src="{{ asset('visitors/images/1-1.png') }}" alt="" width="60" height="50">
                         </div>
-                        <h5 class="person-text text-white mt-4">Find your consulta</h5>
-                        <p class=" person-text text-white mt-2">We will enlist just the right
-                            ones based on your choices.</p>
+                        <h5 class="person-text text-white mt-4">Find Your Consultant</h5>
+                        <p class=" person-text text-white mt-2">
+                            "We will enlist just the right
+                            ones based on your choices."</p>
                     </div>
                     <div class="col-lg-4  person_section">
                         <div class="person_img_circle position-relative">
                             <i class="fa fa-circle text-white"></i>
                             <img src="{{ asset('visitors/images/2.png') }}" alt="" width="60" height="50">
                         </div>
-                        <h5 class="person-text text-white mt-4">Find your consulta</h5>
-                        <p class="person-text text-white mt-2">We will enlist just the right
-                            ones based on your choices.</p>
+                        <h5 class="person-text text-white mt-4">Connect with Your Consultant</h5>
+                        <p class="person-text text-white mt-2">"Locate guidance, then forge a powerful connection with
+                            your consultant for growth."</p>
                     </div>
                     <div class="col-lg-4  person_section">
                         <div class="person_img_circle position-relative">
                             <i class="fa fa-circle text-white"></i>
                             <img src="{{ asset('visitors/images/3.png') }}" alt="" width="60" height="50">
                         </div>
-                        <h5 class="person-text text-white mt-4">Find your consulta</h5>
-                        <p class="person-text text-white mt-2">We will enlist just the right
-                            ones based on your choices.</p>
+                        <h5 class="person-text text-white mt-4">Connect for Success</h5>
+                        <p class="person-text text-white mt-2">"Identify your mentor, then establish a transformative
+                            connection for mutual development."</p>
                     </div>
                 </div>
             </div>

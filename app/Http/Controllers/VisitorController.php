@@ -18,6 +18,7 @@ use App\Models\Pincode;
 use App\Models\Profile;
 use App\Models\Category;
 use App\Models\Language;
+use App\Models\Workshop;
 use App\Models\Contactus;
 use App\Models\Attachment;
 use App\Models\AdminPackage;
@@ -90,6 +91,22 @@ class VisitorController extends Controller
             return view('servererror');
         }
     }
+
+    public function workshop()
+    {
+        try {
+            $sliderworkshop = Slider::where('type', '=', "Workshop")->where('status', '=', 'Active')->get();
+            $workshop = Workshop::where('status', 'active')->get();
+            return view('visitors.workshop', compact('sliderworkshop', 'workshop'));
+        } catch (\Throwable $th) {
+            // throw $th;
+            return view('servererror');
+        }
+    }
+
+
+
+
     public function membershipPlan()
     {
         try {
