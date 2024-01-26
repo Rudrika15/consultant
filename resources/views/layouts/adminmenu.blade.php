@@ -24,7 +24,7 @@
         <span>Inquiry</span></a>
 </li>
 <li class="nav-item active">
-    <a class="nav-link" href="{{route('consultantInquiry.index')}}">
+    <a class="nav-link" href="{{route('consultantInquiry.inquiry')}}">
         <i class="bi bi-gear-fill"></i>
         <span>Consultant Inquiry</span></a>
 </li>

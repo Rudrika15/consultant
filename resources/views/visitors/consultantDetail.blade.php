@@ -568,8 +568,14 @@
 <div class="getintouch mt-5">
         <h1 class="text-center text-white pt-5">Get In Touch With Consultant</h1>
         <p class="text-center text-white">Send us your inquiry we will respond earliest</p>
-        <form id="inquieryform" name="inquieryform" action="" class="mb-5">
+        <form id="inquiryForm" name="inquiryForm" method="post"
+                action="{{ route('consultantInquiry.consultantInquiryStore') }}" class="mb-5">
                 @csrf
+
+                {{-- <input type="hidden" name="userId" id="userId" value="userId"> --}}
+
+                <input type="hidden" name="userId" id="userId" value="{{request('id')}}">
+
                 <div class="row getinform">
                         <div class="col-12 mt-3">
                                 <label for="name" class="formlabel text-white">Name<span

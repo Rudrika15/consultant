@@ -41,7 +41,9 @@ use App\Http\Controllers\Consultant\SocialLinkController;
 use App\Http\Controllers\Consultant\AchievementController;
 use App\Http\Controllers\Consultant\CertificateController;
 use App\Http\Controllers\Consultant\UpgradePlanController;
+use App\Http\Controllers\Admin\ConsultantInquiryController;
 use App\Http\Controllers\Auth\ConsultantRegisterController;
+use App\Http\Controllers\Consultant\ConsultantEnquiryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,8 +70,12 @@ Route::get('/aboutus', [VisitorController::class, 'aboutus'])->name('visitors.ab
 Route::get('/policy', [VisitorController::class, 'policy'])->name('visitors.policy');
 Route::get('/terms', [VisitorController::class, 'terms'])->name('visitors.terms');
 Route::get('/membershipplan', [VisitorController::class, 'membershipPlan'])->name('visitors.membershipPlan');
+//corporate inquiry
 Route::get('/corporateInquery', [VisitorController::class, 'corporateInquery'])->name('visitors.corporateInquery');
 Route::post('corporateInquery-inqueryStore', [VisitorController::class, 'inqueryStore'])->name('corporateInquery.inqueryStore');
+//consultant inquiry
+Route::get('/consultantInquiry', [VisitorController::class, 'consultantInquiry'])->name('visitors.consultantInquiry');
+Route::post('consultantInquiry-consultantInquiryStore', [VisitorController::class, 'consultantInquiryStore'])->name('consultantInquiry.consultantInquiryStore');
 
 Route::post('/free-trial', [VisitorController::class, 'freeTrial'])->name('free.trial');
 Route::get('/membershipplan', [VisitorController::class, 'membershipPlan'])->name('visitors.membershipPlan');
@@ -253,10 +259,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('corporateInquiry/{id}/view', [InquiryController::class, 'view'])->name('corparateInquiry.view');
 
     // /* Consultant Inquiry */
-
-    Route::get('consultantInquiry-index', [InquiryController::class, 'index'])->name('consultantInquiry.index');
-    Route::get('consultantInquiry/{id}/view', [InquiryController::class, 'view'])->name('consultantInquiry.view');
-
+    Route::get('consultantInquiry-index', [ConsultantInquiryController::class, 'index'])->name('consultantInquiry.inquiry');
+    Route::get('consultantInquiry/{id}/view', [ConsultantInquiryController::class, 'view'])->name('consultantInquiry.view');
 
     /* Workshop */
     Route::get('adminworkshop-index', [AdminWorkshopController::class, 'index'])->name('adminworkshop.index');
@@ -388,4 +392,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     /* Lead  */
     Route::get('consultant-lead-index', [LeadController::class, 'index'])->name('consultant.lead.index');
+
+    // Consultant Inquiry
+    Route::get('consultant-inquiry-index', [ConsultantEnquiryController::class, 'index'])->name('consultant.consultantinquiry.index');
 });

@@ -4,6 +4,11 @@
         <span>Time</span></a>
 </li>
 <li class="nav-item active">
+    <a class="nav-link" href="{{ route('consultant.consultantinquiry.index') }}">
+        <i class="bi bi-alarm-fill"></i>
+        <span>Inquiry</span></a>
+</li>
+<li class="nav-item active">
     <a class="nav-link" href="{{ route('language.index') }}">
         <i class="fa fa-language"></i>
         <span>Language</span></a>

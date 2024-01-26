@@ -26,6 +26,7 @@ use Illuminate\Http\Request;
 use App\Models\PrivacyPolicy;
 use Laravel\Ui\Presets\React;
 use App\Models\TermsCondition;
+use App\Models\ConsultantInquiry;
 use PhpParser\Node\Expr\FuncCall;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -119,6 +120,9 @@ class VisitorController extends Controller
         }
     }
 
+
+    // General Inquiry for
+
     public function corporateInquery()
     {
         try {
@@ -166,13 +170,58 @@ class VisitorController extends Controller
         }
     }
 
+    // Consultant Side Inquiry
+
     public function consultantInquiry()
 
     {
         try {
-            return view('visitors.corporateInquery');
+            return view('visitors.consultantDetail');
         } catch (\Throwable $th) {
             //throw $th;
+            return view('servererror');
+        }
+    }
+
+
+    public function consultantInquiryStore(Request $request)
+    {
+        try {
+
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',
+                'email' => 'required',
+                'inquiry' => 'required',
+                // Add other validation rules for other fields
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()], 200);
+            }
+
+            $userId = $request->userId;
+
+            // $userId = Auth::user()->id;
+
+            // $consultantId = $request->userId;
+
+            $cinquiry = new ConsultantInquiry();
+
+            $cinquiry->name = $request->name;
+            $cinquiry->email = $request->email;
+            $cinquiry->inquiry = $request->inquiry;
+            $cinquiry->userId = $userId;
+            // $cinquiry->userId = $consultantId;
+
+            $cinquiry->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Inquiry sent Successfully!',
+                'data' => $cinquiry
+            ]);
+        } catch (\Throwable $th) {
+            //throw $th;    
             return view('servererror');
         }
     }
