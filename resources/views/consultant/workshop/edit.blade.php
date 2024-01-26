@@ -65,7 +65,7 @@
             <div class="form-label-group mt-3">
                 <label for="photo" class="fw-bold">Photo <sup class="text-danger">*</sup></label>
                 <input id="photo" type="file" name="photo" class="form-control" placeholder="photo">
-                <img id="preview-photo" src="{{ url('/gallery/' . $gallery->photo) }}" alt="" class="mt-3"
+                <img id="preview-photo" src="{{ url('/workshop/' . $workshop->photo) }}" alt="" class="mt-3"
                     style="height:100px; width: 100px;">
 
                 @if ($errors->has('photo'))

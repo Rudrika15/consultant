@@ -73,7 +73,12 @@ class WorkshopController extends Controller
             $workshop->userId = $request->userId;
             $workshop->title = $request->title;
             $workshop->price = $request->price;
-            $workshop->photo = $request->photo;
+
+            if ($request->photo) {
+                $workshop->photo = time() . '.' . $request->photo->extension();
+                $request->photo->move(public_path('workshop'),  $workshop->photo);
+            }
+
             $workshop->detail = $request->detail;
             $workshop->workshopType = $request->workshopType;
             $workshop->link = $request->link;
@@ -118,7 +123,10 @@ class WorkshopController extends Controller
             $workshop->userId = $userId;
             $workshop->title = $request->title;
             $workshop->price = $request->price;
-            $workshop->photo = $request->photo;
+            if ($request->photo) {
+                $workshop->photo = time() . '.' . $request->photo->extension();
+                $request->photo->move(public_path('workshop'),  $workshop->photo);
+            }
 
             $workshop->detail = $request->detail;
             $workshop->workshopType = $request->workshopType;

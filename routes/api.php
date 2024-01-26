@@ -1,37 +1,38 @@
 <?php
 
-use App\Http\Controllers\Api\Admin\AdminLeadController;
-use App\Http\Controllers\Api\Admin\AdminPackageController;
-use App\Http\Controllers\Api\Admin\AdminWorkshopController;
-use App\Http\Controllers\Api\Admin\CategoryController;
-use App\Http\Controllers\Api\Admin\CityController;
-use App\Http\Controllers\Api\Admin\InquiryController;
-use App\Http\Controllers\Api\Admin\LanguageMasterController;
-use App\Http\Controllers\Api\Admin\PincodeController;
-use App\Http\Controllers\Api\Admin\RegisterController;
-use App\Http\Controllers\Api\Admin\SliderController;
-use App\Http\Controllers\Api\Admin\SocialMasterController;
-use App\Http\Controllers\Api\Admin\StateController;
-use App\Http\Controllers\Api\Consultant\AchievementController;
-use App\Http\Controllers\Api\Consultant\AdminPackageController as ConsultantAdminPackageController;
-use App\Http\Controllers\Api\Consultant\AttachmentController;
-use App\Http\Controllers\Api\Consultant\CategoryConsultantController;
-use App\Http\Controllers\Api\Consultant\CertificateController;
-use App\Http\Controllers\Api\Consultant\ConsultantLeadController;
-use App\Http\Controllers\Api\Consultant\GalleryController;
-use App\Http\Controllers\Api\Consultant\LanguageController;
-use App\Http\Controllers\Api\Consultant\PackageController;
-use App\Http\Controllers\Api\Consultant\PayamnetGetWayController;
-use App\Http\Controllers\Api\Consultant\SocialLinkController;
-use App\Http\Controllers\Api\Consultant\TimeController;
-use App\Http\Controllers\Api\Consultant\VideoController;
-use App\Http\Controllers\Api\Consultant\WorkshopController;
-use App\Http\Controllers\Api\LoginRegisterController;
-use App\Http\Controllers\Api\OTPController;
-use App\Http\Controllers\Api\User\SearchCategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Contracts\Role;
+use App\Http\Controllers\Api\OTPController;
+use App\Http\Controllers\Api\Admin\CityController;
+use App\Http\Controllers\Api\Consultant\ConsultantListController;
+use App\Http\Controllers\Api\Admin\StateController;
+use App\Http\Controllers\Api\Admin\SliderController;
+use App\Http\Controllers\Api\Admin\InquiryController;
+use App\Http\Controllers\Api\Admin\PincodeController;
+use App\Http\Controllers\Api\LoginRegisterController;
+use App\Http\Controllers\Api\Admin\CategoryController;
+use App\Http\Controllers\Api\Admin\RegisterController;
+use App\Http\Controllers\Api\Admin\AdminLeadController;
+use App\Http\Controllers\Api\Consultant\TimeController;
+use App\Http\Controllers\Api\Consultant\VideoController;
+use App\Http\Controllers\Api\Admin\AdminPackageController;
+use App\Http\Controllers\Api\Admin\SocialMasterController;
+use App\Http\Controllers\Api\Consultant\GalleryController;
+use App\Http\Controllers\Api\Consultant\PackageController;
+use App\Http\Controllers\Api\Admin\AdminWorkshopController;
+use App\Http\Controllers\Api\Consultant\LanguageController;
+use App\Http\Controllers\Api\Consultant\WorkshopController;
+use App\Http\Controllers\Api\User\SearchCategoryController;
+use App\Http\Controllers\Api\Admin\LanguageMasterController;
+use App\Http\Controllers\Api\Consultant\AttachmentController;
+use App\Http\Controllers\Api\Consultant\SocialLinkController;
+use App\Http\Controllers\Api\Consultant\AchievementController;
+use App\Http\Controllers\Api\Consultant\CertificateController;
+use App\Http\Controllers\Api\Consultant\ConsultantLeadController;
+use App\Http\Controllers\Api\Consultant\PayamnetGetWayController;
+use App\Http\Controllers\Api\Consultant\CategoryConsultantController;
+use App\Http\Controllers\Api\Consultant\AdminPackageController as ConsultantAdminPackageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -131,6 +132,12 @@ Route::get('consultant_wise_category/{id?}', [CategoryConsultantController::clas
 Route::get('category-wise-consultant/{id?}', [CategoryConsultantController::class, 'category_wise_consultant']);
 Route::get('user_details/{id?}', [CategoryConsultantController::class, 'user_details']);
 Route::get('isFeatured/{isFeatured}', [CategoryConsultantController::class, 'isFeatured']);
+
+/* Consultant List */
+Route::get('consultant_list', [ConsultantListController::class, 'consultant_list']);
+
+/* Consultant List with Filter */
+Route::get('search_with_filter', [ConsultantListController::class, 'search_with_filter']);
 
 /* Leads List */
 Route::get('leads-list', [AdminLeadController::class, 'index']);

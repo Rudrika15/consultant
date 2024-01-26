@@ -27,7 +27,7 @@ class CityController extends Controller
                     'City' => $city,
 
                 ];
-                // return response($response, 200);
+                return response($response, 200);
             } else {
                 return response([
                     'message' => ['City Data No Found'],

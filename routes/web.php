@@ -251,6 +251,13 @@ Route::group(['middleware' => ['auth']], function () {
     // /* Corporate Inquiry */
     Route::get('corparateInquiry-index', [InquiryController::class, 'index'])->name('corparateInquiry.index');
     Route::get('corporateInquiry/{id}/view', [InquiryController::class, 'view'])->name('corparateInquiry.view');
+
+    // /* Consultant Inquiry */
+
+    Route::get('consultantInquiry-index', [InquiryController::class, 'index'])->name('consultantInquiry.index');
+    Route::get('consultantInquiry/{id}/view', [InquiryController::class, 'view'])->name('consultantInquiry.view');
+
+
     /* Workshop */
     Route::get('adminworkshop-index', [AdminWorkshopController::class, 'index'])->name('adminworkshop.index');
     Route::get('adminworkshop/{id}/view', [AdminWorkshopController::class, 'view'])->name('adminworkshop.view');

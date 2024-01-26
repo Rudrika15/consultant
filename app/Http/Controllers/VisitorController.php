@@ -129,6 +129,7 @@ class VisitorController extends Controller
             return view('servererror');
         }
     }
+
     public function inqueryStore(Request $request)
     {
         try {
@@ -164,6 +165,19 @@ class VisitorController extends Controller
             return view('servererror');
         }
     }
+
+    public function consultantInquiry()
+
+    {
+        try {
+            return view('visitors.corporateInquery');
+        } catch (\Throwable $th) {
+            //throw $th;
+            return view('servererror');
+        }
+    }
+
+
 
     public function contactus()
     {

@@ -265,11 +265,11 @@
                                                                 <th><span class="fw-bold">More Details</span></th>
                                                                 {{-- <th><span class="fw-bold">Value</span></th> --}}
                                                         </tr>
-                                                        <tr>
+                                                        {{-- <tr>
                                                                 <td><span class="fw-bold">Map:</span></td>
                                                                 <td>{!! isset($consultant->map) ? $consultant->map : '
                                                                         -' !!}</td>
-                                                        </tr>
+                                                        </tr> --}}
                                                         <tr>
                                                                 <td><span class="fw-bold">Address:</span></td>
                                                                 <td>{!! isset($consultant->address) ?
@@ -301,11 +301,11 @@
                                                                 <td>{!! isset($consultant->packages->title) ?
                                                                         $consultant->packages->title : ' -' !!}</td>
                                                         </tr>
-                                                        <tr>
+                                                        {{-- <tr>
                                                                 <td><span class="fw-bold">isFeatured:</span></td>
                                                                 <td>{!! isset($consultant->isFeatured) ?
                                                                         $consultant->isFeatured : ' -' !!}</td>
-                                                        </tr>
+                                                        </tr> --}}
                                                         <tr>
                                                                 <td><span class="fw-bold">Status:</span></td>
                                                                 <td>{!! isset($consultant->status) ? $consultant->status
@@ -325,10 +325,18 @@
                                                         alt="Default Profile Image">
                                                 @endif
                                                 <div class="icon d-flex justify-content-between">
-                                                        <i class="fa fa-gear" style="color: #FEC2B4;"></i>
-                                                        <i class="fa fa-list-alt" style="color: #819AF4;"></i>
-                                                        <i class="fa fa-file-o" style="color: #70BB4F;"></i>
-                                                        <i class="fa fa-heart-o" style="color: #3BC6FB;"></i>
+                                                        <a href="#gear-link">
+                                                                <i class="fa fa-gear" style="color: #FEC2B4;"></i>
+                                                        </a>
+                                                        <a href="#list-alt-link">
+                                                                <i class="fa fa-list-alt" style="color: #819AF4;"></i>
+                                                        </a>
+                                                        <a href="#file-o-link">
+                                                                <i class="fa fa-file-o" style="color: #70BB4F;"></i>
+                                                        </a>
+                                                        <a href="#heart-o-link">
+                                                                <i class="fa fa-heart-o" style="color: #3BC6FB;"></i>
+                                                        </a>
                                                 </div>
                                         </div>
 
@@ -552,10 +560,50 @@
                 </div> --}}
         </div>
 </div>
-
-
 {{-- end Contact --}}
 
+
+{{-- Inquiry Start --}}
+
+<div class="getintouch mt-5">
+        <h1 class="text-center text-white pt-5">Get In Touch With Consultant</h1>
+        <p class="text-center text-white">Send us your inquiry we will respond earliest</p>
+        <form id="inquieryform" name="inquieryform" action="" class="mb-5">
+                @csrf
+                <div class="row getinform">
+                        <div class="col-12 mt-3">
+                                <label for="name" class="formlabel text-white">Name<span
+                                                style="color: red">*</span></label>
+                                <input type="text" id="name" name="name" class="form-control">
+                                @if ($errors->has('title'))
+                                <span class="error">{{ $errors->first('title') }}</span>
+                                @endif
+
+                        </div>
+                        <div class="col-12 mt-3">
+                                <label for="email" class="formlabel text-white">Email<span
+                                                style="color: red">*</span></label>
+                                <input type="email" id="email" name="email" class="form-control">
+                                @if ($errors->has('email'))
+                                <span class="error">{{$errors->first('email')}}</span>
+                                @endif
+                        </div>
+                        <div class="col-12 mt-3">
+                                <label for="inquery" class="formlabel text-white">Inquiry<span
+                                                style="color: red">*</span></label>
+                                <textarea id="inquiry" rows="2" name="inquiry" class="form-control"></textarea>
+                                @if ($errors->has('inquiry'))
+                                <span class="error">{{ $errors->first('inquiry') }}</span>
+                                @endif
+                        </div>
+                </div>
+                <div class="d-flex justify-content-center mt-5 mb-5">
+                        <button type="submit" id="saveBtn" class="getinbutton text-center">Submit</button>
+                </div>
+        </form>
+</div>
+
+{{-- Inquiry End --}}
 
 
 

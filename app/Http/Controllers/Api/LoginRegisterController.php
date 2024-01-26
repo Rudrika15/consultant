@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Models\Otp;
+use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -16,6 +17,7 @@ class LoginRegisterController extends Controller
     public function register(Request $request)
     {
         $request->validate([
+            'type' => 'required|string',
             'name' => 'required|string',
             'email' => 'required|string|unique:users',
             'password' => 'required|string',
@@ -23,10 +25,35 @@ class LoginRegisterController extends Controller
         ]);
 
         $user = new User([
+            'type' => $request->type,
             'name'  => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
+
+        if ($request->type === 'user') {
+            $user->assignRole('user');
+            $userType = 'User';
+        } else {
+            return response()->json(['error' => 'User is Invalid']);
+        }
+
+
+        // $profile = $request->$user;
+
+        if ($request->type === 'consultant') {
+            $user->assignRole('consultant');
+            $userType = 'Consultant';
+        } else {
+            return response()->json(['error' => 'User is Invalid']);
+        }
+
+        $userType = new Profile([
+            'type' => $userType
+        ]);
+
+        $user->profile()->save($userType);
+
 
         if ($user->save()) {
             $tokenResult = $user->createToken('Personal Access Token');
@@ -126,26 +153,29 @@ class LoginRegisterController extends Controller
 
         $email = $request->email;
         if ($email) {
-
-            $otp = random_int(1234, 9999);
+            $otp = random_int(1000, 9999);
 
             $data = array(
                 'otp' => $otp,
             );
 
-            Mail::send('emails.forgetpass', ['otp' => $data['otp']], function ($message) use ($email) {
-                $message->from('connect@consultantcube.com');
-                $message->to($email);
-                $message->subject('Password Reset OTP');
-            });
+            try {
+                Mail::send('emails.forgetpass', ['otp' => $data['otp']], function ($message) use ($email) {
+                    $message->from('text1008mail@gmail.com');
+                    $message->to($email);
+                    $message->subject('Password Reset OTP');
+                });
 
+                Otp::create([
+                    'email' => $email,
+                    'otp' => $otp,
+                ]);
 
-            Otp::create([
-                'email' => $email,
-                'otp' => $otp,
-            ]);
-
-            return "Email sent successfully with OTP";
+                return "Email sent successfully with OTP";
+            } catch (\Exception $e) {
+                // Log or handle the exception
+                return "Email sending failed: " . $e->getMessage();
+            }
         }
     }
 }
