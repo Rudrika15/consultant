@@ -108,6 +108,7 @@ Route::post('/regitrationStore', [VisitorController::class, 'regitrationStore'])
 Route::get('/nearByConsultantList', [VisitorController::class, 'nearByConsultantList'])->name('visitors.nearByConsultantList');
 
 
+Route::get('visitor/workshop', [VisitorController::class, 'workshop'])->name('visitor.workshop');
 
 
 Route::post('/serachwithdata', [VisitorController::class, 'serachwithdata'])->name('visitors.serachwithdata');
@@ -147,7 +148,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     //For Visitors Profile
 
-    Route::get('visitor/workshop', [VisitorController::class, 'workshop'])->name('visitor.workshop');
     Route::get('visitor/profile', [VisitorController::class, 'profile'])->name('visitor.profile');
     Route::post('visitor/profile/city', [VisitorController::class, 'cityforprofile'])->name('visitors.cityforprofile');
 

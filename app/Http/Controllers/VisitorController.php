@@ -217,7 +217,7 @@ class VisitorController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Inquiry sent Successfully!',
+                'message' => 'Inquiry Sent Successfully!',
                 'data' => $cinquiry
             ]);
         } catch (\Throwable $th) {

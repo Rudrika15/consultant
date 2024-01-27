@@ -16,6 +16,7 @@
 
         .custom-read-more {
             color: white !important;
+            text-decoration: none !important;
         }
     </style>
 
@@ -27,10 +28,8 @@
         </div>
     </div>
 
-
-
     <div class="card text-center"
-        style="background-color: #0d47a1; border-radius: 10px; border: 0px solid #2980b9; width: auto;">
+        style="background-color: #333692; border-radius: 10px; border: 0px solid #2980b9; width: auto;">
         <div class="card-body text-white">Our Workshops</div>
     </div>
     <div class="container">
