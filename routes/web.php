@@ -159,6 +159,10 @@ Route::group(['middleware' => ['auth']], function () {
     /* Leade List */
     Route::get('lead-index', [AdminLeadController::class, 'index'])->name('admin.lead.index');
 
+    /* approve inquiry */
+    Route::post('/consultantInquiry/{id}/approve', [ConsultantInquiryController::class, 'approve'])->name('consultantInquiry.approve');
+
+
 
     /* State */
     Route::get('state-index', [StateController::class, 'index'])->name('state.index');

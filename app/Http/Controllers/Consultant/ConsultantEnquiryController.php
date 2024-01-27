@@ -3,28 +3,22 @@
 namespace App\Http\Controllers\Consultant;
 
 use App\Http\Controllers\Controller;
-use App\Models\Consultant;
 use App\Models\ConsultantInquiry;
 use Illuminate\Http\Request;
 use DataTables;
-use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Auth;
 
 class ConsultantEnquiryController extends Controller
 {
-    //
     public function index(Request $request)
     {
         try {
             if ($request->ajax()) {
-                $data = ConsultantInquiry::with('users')->where('status', 'Active')
+                // Retrieve consultant inquiries only for the authenticated consultant
+                $data = ConsultantInquiry::where('userId', Auth::id())
+                    ->where('status', 'Approved')
                     ->orderBy('id', 'DESC')
                     ->get();
-
-                // Controller or wherever you retrieve consultant inquiries
-                // $data = ConsultantInquiry::where('userId', Auth::user()->id)
-                //     ->where('status', 'Active')
-                //     ->get();
-
 
                 return DataTables::of($data)
                     ->addIndexColumn()
@@ -33,10 +27,10 @@ class ConsultantEnquiryController extends Controller
 
                         return $buttons;
                     })
-
                     ->rawColumns(['action'])
                     ->make(true);
             }
+
             return view('consultant.consultantInquiry.index');
         } catch (\Throwable $th) {
             return view('servererror');
@@ -47,9 +41,14 @@ class ConsultantEnquiryController extends Controller
     {
         try {
             $cinquiry = ConsultantInquiry::findOrFail($id);
-            return response()->json($cinquiry);
+            // Ensure the authenticated consultant can only view their own inquiries
+            if ($cinquiry->userId == Auth::id()) {
+                return response()->json($cinquiry);
+            } else {
+                // Unauthorized access
+                abort(403);
+            }
         } catch (\Throwable $th) {
-            //throw $th;    
             return view('servererror');
         }
     }

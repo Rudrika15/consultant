@@ -609,6 +609,44 @@
         </form>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script type="text/javascript">
+        $(function() {
+        $('#inquiryForm').submit(function(e) {
+        e.preventDefault();
+
+        $.ajax({
+                url: $(this).attr('action'),
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                console.log(response);
+
+                    // Display SweetAlert for success
+                        Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: 'Inquiry sent Successfully!',
+                });
+
+                    // Optionally, you can redirect or perform other actions after the SweetAlert is closed
+                
+                },
+                        error: function(error) {
+                        console.log(error);
+
+                    // Display SweetAlert for errors
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'An error occurred while submitting the form.',
+        });
+                }
+        });
+        });
+});
+</script>
+
 {{-- Inquiry End --}}
 
 
