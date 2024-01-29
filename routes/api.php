@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Contracts\Role;
 use App\Http\Controllers\Api\OTPController;
 use App\Http\Controllers\Api\Admin\CityController;
-use App\Http\Controllers\Api\Consultant\ConsultantListController;
 use App\Http\Controllers\Api\Admin\StateController;
 use App\Http\Controllers\Api\Admin\SliderController;
 use App\Http\Controllers\Api\Admin\InquiryController;
@@ -30,7 +29,9 @@ use App\Http\Controllers\Api\Consultant\SocialLinkController;
 use App\Http\Controllers\Api\Consultant\AchievementController;
 use App\Http\Controllers\Api\Consultant\CertificateController;
 use App\Http\Controllers\Api\Consultant\ConsultantLeadController;
+use App\Http\Controllers\Api\Consultant\ConsultantListController;
 use App\Http\Controllers\Api\Consultant\PayamnetGetWayController;
+use App\Http\Controllers\Api\Consultant\ConsultantEnquiryController;
 use App\Http\Controllers\Api\Consultant\CategoryConsultantController;
 use App\Http\Controllers\Api\Consultant\AdminPackageController as ConsultantAdminPackageController;
 
@@ -238,3 +239,7 @@ Route::get('consultant-leads-list/{id?}', [ConsultantLeadController::class, 'ind
 /* Admin Package List */
 Route::get('admin_package_detail', [ConsultantAdminPackageController::class, 'admin_package_detail']);
 Route::post('upgrade_plan', [ConsultantAdminPackageController::class, 'upgrade_plan']);
+
+/* Inquiry List */
+
+Route::get('inquiry_list/{id?}', [ConsultantEnquiryController::class, 'inquiry_list']);
