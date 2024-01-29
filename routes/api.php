@@ -243,3 +243,4 @@ Route::post('upgrade_plan', [ConsultantAdminPackageController::class, 'upgrade_p
 /* Inquiry List */
 
 Route::get('inquiry_list/{id?}', [ConsultantEnquiryController::class, 'inquiry_list']);
+Route::post('consultantInquiryStore', [ConsultantEnquiryController::class, 'consultantInquiryStore']);
