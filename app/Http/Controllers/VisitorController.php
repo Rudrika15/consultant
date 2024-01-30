@@ -187,7 +187,6 @@ class VisitorController extends Controller
     public function consultantInquiryStore(Request $request)
     {
         try {
-
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
                 'email' => 'required',
@@ -199,19 +198,16 @@ class VisitorController extends Controller
                 return response()->json(['errors' => $validator->errors()], 200);
             }
 
-            $userId = $request->userId;
-
-            // $userId = Auth::user()->id;
-
-            // $consultantId = $request->userId;
+            $userId = auth()->id();
+            $consultantId = $request->input('consultantId');
 
             $cinquiry = new ConsultantInquiry();
 
-            $cinquiry->name = $request->name;
-            $cinquiry->email = $request->email;
-            $cinquiry->inquiry = $request->inquiry;
+            $cinquiry->name = $request->input('name');
+            $cinquiry->email = $request->input('email');
+            $cinquiry->inquiry = $request->input('inquiry');
             $cinquiry->userId = $userId;
-            // $cinquiry->userId = $consultantId;
+            $cinquiry->consultantId = $consultantId;
 
             $cinquiry->save();
 
@@ -221,10 +217,12 @@ class VisitorController extends Controller
                 'data' => $cinquiry
             ]);
         } catch (\Throwable $th) {
-            //throw $th;    
+            // Handle exceptions appropriately, e.g., log the error
             return view('servererror');
         }
     }
+
+
 
 
 
@@ -302,6 +300,7 @@ class VisitorController extends Controller
         $categoryId = $request->categoryId;
         $cityId = $request->cityId;
         $categoryphoto = Category::find($categoryId);
+        $city = City::find($cityId);
         $consultant = Profile::with('userData');
 
         if ($categoryId) {
@@ -321,6 +320,9 @@ class VisitorController extends Controller
 
         $countconsultant = count($consultant);
 
+        $selectedCategory = $categoryphoto;
+        $selectedCity = $city;
+
         if (isset(Auth::user()->id) && $categoryphoto) {
             $leads = new Lead();
             $leads->userId = Auth::user()->id;
@@ -330,7 +332,7 @@ class VisitorController extends Controller
             $leads->save();
         }
 
-        return view('visitors.findConsultantList', compact('consultant', 'cities', 'countconsultant', 'categoryphoto', 'category', 'sliderfindconsultant'));
+        return view('visitors.findConsultantList', compact('consultant', 'selectedCity', 'cities', 'countconsultant', 'categoryphoto', 'category', 'sliderfindconsultant', 'selectedCategory'));
     }
 
 

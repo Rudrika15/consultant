@@ -36,6 +36,8 @@ class CategoryConsultantController extends Controller
             ]);
         }
     }
+
+
     public function category_wise_consultant($id)
     {
         try {

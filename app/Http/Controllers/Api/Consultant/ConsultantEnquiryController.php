@@ -2,47 +2,59 @@
 
 namespace App\Http\Controllers\Api\Consultant;
 
-use App\Http\Controllers\Controller;
-use App\Models\ConsultantInquiry;
 use Illuminate\Http\Request;
+use App\Models\ConsultantInquiry;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class ConsultantEnquiryController extends Controller
 {
 
     public function consultantInquiryStore(Request $request)
+
     {
         try {
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
                 'email' => 'required',
                 'inquiry' => 'required',
-                // Add other validation rules for other fields
+                'consultantId' => 'required', // Assuming consultantId is required
             ]);
 
             if ($validator->fails()) {
-                return response()->json(['errors' => $validator->errors()], 200);
+                return response([
+                    'success' => false,
+                    'status' => 422,
+                    'message' => 'Validation Error',
+                    'errors' => $validator->errors(),
+                ]);
             }
 
-            $userId = $request->userId;
+
+            $consultantId = $request->input('consultantId');
 
             $cinquiry = new ConsultantInquiry();
-            $cinquiry->name = $request->name;
-            $cinquiry->email = $request->email;
-            $cinquiry->inquiry = $request->inquiry;
-            $cinquiry->userId = $userId;
+
+            $cinquiry->name = $request->input('name');
+            $cinquiry->email = $request->input('email');
+            $cinquiry->inquiry = $request->input('inquiry');
+            $cinquiry->userId = $request->userId;
+            $cinquiry->consultantId = $consultantId;
+
             $cinquiry->save();
 
-            return response()->json([
+            return response([
                 'success' => true,
+                'status' => 200,
                 'message' => 'Inquiry Sent Successfully!',
                 'data' => $cinquiry
             ]);
         } catch (\Throwable $th) {
-            return response()->json([
-                'status' => 500,
+            return response([
                 'success' => false,
-                'message' => 'Error storing inquiry',
+                'status' => 500,
+                'message' => 'An error occurred while processing your request.',
                 'error' => $th->getMessage()
             ]);
         }

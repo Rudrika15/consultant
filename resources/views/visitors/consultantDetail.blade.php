@@ -572,9 +572,9 @@
                 action="{{ route('consultantInquiry.consultantInquiryStore') }}" class="mb-5">
                 @csrf
 
-                {{-- <input type="hidden" name="userId" id="userId" value="userId"> --}}
-
-                <input type="hidden" name="userId" id="userId" value="{{request('id')}}">
+                <input type="hidden" name="userId" id="userId" value="{{ auth()->id() }}">
+                {{-- <input type="hiddenn" name="userId" id="userId" value="{{request('id')}}"> --}}
+                <input type="hidden" name="consultantId" id="consultantId" value="{{request('id')}}">
 
                 <div class="row getinform">
                         <div class="col-12 mt-3">

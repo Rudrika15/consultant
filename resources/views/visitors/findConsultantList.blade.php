@@ -115,6 +115,12 @@
 
         <br>
 
+        @if ($selectedCategory)
+        <h4>List of Consultants > {{ $selectedCategory->catName }} > {{$selectedCity->cityName}} </h4>
+        @else
+        <h2>List of All Consultants</h2>
+        @endif
+
         <div class="row">
             @if ($countconsultant > 0)
             @foreach ($consultant as $consultantData)

@@ -21,6 +21,6 @@ class Category extends Model
 
     public function profiles()
     {
-        return $this->hasOne(Profile::class, 'categoryId', 'id');
+        return $this->hasMany(Profile::class, 'categoryId', 'id');
     }
 }
