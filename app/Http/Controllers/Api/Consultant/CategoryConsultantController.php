@@ -82,7 +82,9 @@ class CategoryConsultantController extends Controller
                 ->with('certificate')
                 ->with('achievement')
                 ->with('workshop')
-                ->where('id', '=', $id)->get();
+                ->where('id', '=', $id)
+                ->where('status', 'Active')
+                ->get();
             if ($user) {
                 foreach ($user as $data) {
                     $data->profile->about = strip_tags($data->profile->about);
