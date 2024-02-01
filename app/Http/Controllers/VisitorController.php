@@ -40,11 +40,12 @@ class VisitorController extends Controller
             $cities = City::where('status', 'active')->get();
             $data['states'] = State::get(["stateName", "id"]);
             $sliderhome = Slider::where('type', '=', "Home")->get();
+            $sliderworkshop = Slider::where('type', '=', "Home")->get();
 
             $FeaturedConsultants = Profile::where('isFeatured', '=', 'Yes')->with('user')->get();
 
 
-            return view('visitors.index', $data, compact('category', 'sliderhome', 'cities', 'FeaturedConsultants'));
+            return view('visitors.index', $data, compact('category', 'sliderhome', 'sliderworkshop' , 'cities', 'FeaturedConsultants'));
         } catch (\Throwable $th) {
             throw $th;
             return view('servererror');
@@ -93,14 +94,39 @@ class VisitorController extends Controller
         }
     }
 
-    public function workshop()
+    // public function workshopDetails()
+    // {
+    //     try {
+    //         $sliderworkshop = Slider::where('type', '=', "Workshop")->where('status', '=', 'Active')->get();
+    //         $workshop = Workshop::where('status', 'active')->get();
+    //         return view('visitors.workshopDetails', compact('sliderworkshop', 'workshop'));
+    //     } catch (\Throwable $th) {
+    //         // throw $th;
+    //         return view('servererror');
+    //     }
+    // }
+
+    public function workshopDetails(Request $request, $id)
+    {
+        $sliderworkshop = Slider::where('type', '=', "Workshop")->where('status', '=', 'Active')->get();
+        $workshop = Workshop::find($id);
+
+        return view('visitors.workshopDetails', compact('workshop', 'sliderworkshop'));
+    }
+
+
+
+
+
+
+    public function workshopList()
     {
         try {
             $sliderworkshop = Slider::where('type', '=', "Workshop")->where('status', '=', 'Active')->get();
             $workshop = Workshop::where('status', 'active')->get();
-            return view('visitors.workshop', compact('sliderworkshop', 'workshop'));
+            return view('visitors.workshopList', compact('workshop', 'sliderworkshop'));
         } catch (\Throwable $th) {
-            // throw $th;
+            throw $th;
             return view('servererror');
         }
     }
@@ -291,6 +317,52 @@ class VisitorController extends Controller
     }
 
 
+    // public function findConsultantList(Request $request)
+    // {
+    //     $sliderfindconsultant = Slider::where('type', '=', "Find Consultant")->where('status', '=', 'Active')->get();
+
+    //     $category = Category::where('status', 'active')->get();
+    //     $cities = City::where('status', 'active')->get();
+    //     $categoryId = $request->categoryId;
+    //     $cityId = $request->cityId;
+    //     $categoryphoto = Category::find($categoryId);
+    //     // $city = City::find($cityId);
+    //     $consultant = Profile::with('userData');
+
+    //     if ($categoryId) {
+    //         $consultant = $consultant->where('categoryId', '=', $categoryId)->with('categoriesData');
+    //     }
+
+    //     if ($cityId) {
+    //         $consultant = $consultant->whereHas('cityData', function ($query) use ($cityId) {
+    //             $query->where('id', '=', $cityId);
+    //         });
+    //     }
+
+    //     // $consultant = $consultant->get();
+
+    //     $consultant = $consultant->where('type', '=', 'consultant')->get();
+
+
+    //     $countconsultant = count($consultant);
+
+    //     $selectedCategory = $categoryphoto;
+    //     // $selectedCity = $city;
+
+    //     if (isset(Auth::user()->id) && $categoryphoto) {
+    //         $leads = new Lead();
+    //         $leads->userId = Auth::user()->id;
+
+    //         $leads->categoryId = $categoryphoto->id;
+    //         $leads->cityId = $cityId;
+    //         $leads->save();
+    //     }
+
+    //     return view('visitors.findConsultantList', compact('consultant', 'cities', 'countconsultant', 'categoryphoto', 'category', 'sliderfindconsultant', 'selectedCategory'));
+    // }
+
+
+
     public function findConsultantList(Request $request)
     {
         $sliderfindconsultant = Slider::where('type', '=', "Find Consultant")->where('status', '=', 'Active')->get();
@@ -301,22 +373,26 @@ class VisitorController extends Controller
         $cityId = $request->cityId;
         $categoryphoto = Category::find($categoryId);
         $city = City::find($cityId);
-        $consultant = Profile::with('userData');
 
+        // Create a base query for consultants
+        $consultantQuery = Profile::with('userData');
+
+        // Add conditions based on the selected category
         if ($categoryId) {
-            $consultant = $consultant->where('categoryId', '=', $categoryId)->with('categoriesData');
+            $consultantQuery->where('categoryId', '=', $categoryId)->with('categoriesData');
         }
 
+        // If city is selected, filter by city
         if ($cityId) {
-            $consultant = $consultant->whereHas('cityData', function ($query) use ($cityId) {
+            $consultantQuery->whereHas('cityData', function ($query) use ($cityId) {
                 $query->where('id', '=', $cityId);
             });
         }
 
-        // $consultant = $consultant->get();
+       
 
-        $consultant = $consultant->where('type', '=', 'consultant')->get();
-
+        // Get the consultants based on the conditions
+        $consultant = $consultantQuery->where('type', '=', 'consultant')->get();
 
         $countconsultant = count($consultant);
 
@@ -326,14 +402,15 @@ class VisitorController extends Controller
         if (isset(Auth::user()->id) && $categoryphoto) {
             $leads = new Lead();
             $leads->userId = Auth::user()->id;
-
             $leads->categoryId = $categoryphoto->id;
-            $leads->cityId = $cityId;
+            $leads->cityId = $cityId; // Note: This line may not be necessary if cityId is not present
             $leads->save();
         }
 
         return view('visitors.findConsultantList', compact('consultant', 'selectedCity', 'cities', 'countconsultant', 'categoryphoto', 'category', 'sliderfindconsultant', 'selectedCategory'));
     }
+
+
 
 
 

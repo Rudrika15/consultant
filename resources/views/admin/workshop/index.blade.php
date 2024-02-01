@@ -32,7 +32,7 @@
             <h4 class="">Workshop</h4>
         </div>
         <div class="">
-            <a href="" id="back" class="btn btnback  btn-sm" style="display:none;">BACK</a>
+            <a href="{{ route('adminworkshop.create') }}" id="add" class="btn btn-info btn-sm">ADD</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -45,7 +45,7 @@
                 <thead>
                     <tr>
                         <th>Sr No</th>
-                        <th>User Id</th>
+                        {{-- <th>User Id</th> --}}
                         <th>Title</th>
                         <th>Price</th>
                         <th>Photo</th>
@@ -53,7 +53,7 @@
                         <th>Workshop Type</th>
                         <th>Link</th>
                         <th>Address</th>
-                        <th>workshop Date</th>
+                        <th>Workshop Date</th>
                         <th>Status</th>
                         <th width="280px">Action</th>
                     </tr>
@@ -85,10 +85,10 @@
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex'
                 },
-                {
-                    data: 'users.name',
-                    name: 'users.name'
-                },
+                // {
+                //     data: 'users.name',
+                //     name: 'users.name'
+                // },
                 {
                     data: 'title',
                     name: 'title'

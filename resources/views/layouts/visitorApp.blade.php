@@ -171,7 +171,7 @@
                             </li>
                             <li>
                                 <i class="fa fa-caret-right"></i>
-                                <a href="{{ route('visitor.workshop')}}" class="footerlink">Workshop</a>
+                                <a href="{{ route('visitor.workshopList')}}" class="footerlink">Workshop</a>
                             </li>
                         </ul>
                     </div>

@@ -55,6 +55,7 @@
                         <option value="Membership Plan">Membership Plan</option>
                         <option value="Corporate Inquiry">Corporate Inquiry</option>
                         <option value="Contact Us">Contact Us</option>
+                        <option value="Workshop">Workshop</option>
 
                     </select>
                     <div class="help-block with-errors"></div>

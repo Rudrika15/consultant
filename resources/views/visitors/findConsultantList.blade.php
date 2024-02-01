@@ -116,7 +116,11 @@
         <br>
 
         @if ($selectedCategory)
-        <h4>List of Consultants > {{ $selectedCategory->catName }} > {{$selectedCity->cityName}} </h4>
+        @if ($selectedCity)
+        <h4>List of Consultants > {{ $selectedCategory->catName }} > {{ $selectedCity->cityName }} </h4>
+        @else
+        <h4>List of Consultants > {{ $selectedCategory->catName }} > All City </h4>
+        @endif
         @else
         <h2>List of All Consultants</h2>
         @endif

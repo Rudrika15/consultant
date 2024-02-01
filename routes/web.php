@@ -63,6 +63,10 @@ Route::get('/', function () {
 
 /* ---------------------- Visitors Side ----------------------------------- */
 
+//workshop list
+
+// Route::get('/workshopList' , [VisitorController::class, ''])
+
 
 Route::get('/', [VisitorController::class, 'index'])->name('visitors.index');
 Route::get('/search', [VisitorController::class, 'search'])->name('visitors.search');
@@ -107,8 +111,9 @@ Route::get('/visitorsRegister', [VisitorController::class, 'visitorsRegister'])-
 Route::post('/regitrationStore', [VisitorController::class, 'regitrationStore'])->name('visitors.regitrationStore');
 Route::get('/nearByConsultantList', [VisitorController::class, 'nearByConsultantList'])->name('visitors.nearByConsultantList');
 
-
-Route::get('visitor/workshop', [VisitorController::class, 'workshop'])->name('visitor.workshop');
+//Workshop View
+Route::get('visitor/workshopDetails/{id?}', [VisitorController::class, 'workshopDetails'])->name('visitor.workshopDetails');
+Route::get('visitor/workshopList', [VisitorController::class, 'workshopList'])->name('visitor.workshopList');
 
 
 Route::post('/serachwithdata', [VisitorController::class, 'serachwithdata'])->name('visitors.serachwithdata');
@@ -268,6 +273,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     /* Workshop */
     Route::get('adminworkshop-index', [AdminWorkshopController::class, 'index'])->name('adminworkshop.index');
+    Route::get('adminworkshop-create', [AdminWorkshopController::class, 'create'])->name('adminworkshop.create');
+    Route::post('adminworkshop-store', [AdminWorkshopController::class, 'store'])->name('adminworkshop.store');
+    Route::get('adminworkshop-edit/{id?}', [AdminWorkshopController::class, 'edit'])->name('adminworkshop.edit');
+    Route::post('adminworkshop-update', [AdminWorkshopController::class, 'update'])->name('adminworkshop.update');
+    Route::get('adminworkshop-delete{id?}', [AdminWorkshopController::class, 'delete'])->name('adminworkshop.delete');
     Route::get('adminworkshop/{id}/view', [AdminWorkshopController::class, 'view'])->name('adminworkshop.view');
 
     /* Contactus List */
