@@ -1,10 +1,26 @@
 @extends('layouts.VisitorApp')
 @section('content')
 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
 
 <div class="container mt-5">
 
+    @if(session('successMessage'))
+    <div class="alert alert-success">
+        {{ session('successMessage') }}
+    </div>
+    @endif
+
+    @if(session('errorMessage'))
+    <div class="alert alert-danger">
+        {{ session('errorMessage') }}
+    </div>
+
+    @endif
     <div class="card shadow mt-5 p-2">
         <div class="row">
             <div class="col-sm-1 col-md-1 col-6">
@@ -18,20 +34,24 @@
                     class="img-fluid rounded p-2" style="max-width: 90px; height: 90px;">
                 @endif
 
-                {{-- <img src="https://cdn2.allevents.in/thumbs/thumb65b7a8998dad3.jpg" alt="event img"
-                    class="img-fluid rounded p-2" style="max-width: 90px; height: 90px;"> --}}
             </div>
 
-            <input type="hidden" value="{{ request('id') }}">
-            {{-- <input type="hidden" value="{{ request('userId') }}"> --}}
-
+            <input type="hidden" name="userId" value="{{ Auth::check() ? Auth::user()->id : 'user id not found' }}">
+            <input type="hidden" name="workshopId" value="{{ $workshop->id }}">
 
             <div class="col-sm-8 col-md-8 col-6 mx-auto">
                 <p class="font-weight-bold mt-3">{{$workshop->title}}</p>
             </div>
 
             <div class="col-sm-3 col-md-3 col-6">
-                <div class="btn btn-primary mt-4">Register Now</div>
+                @auth
+                <form action="{{ route('register.workshop', ['workshopId' => $workshop->id]) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-primary mt-4" id="joinNowButton">Join Now</button>
+                </form>
+                @else
+                <button class="btn btn-primary mt-4" id="joinNowButton">Join Now</button>
+                @endauth
             </div>
         </div>
     </div>
@@ -52,9 +72,6 @@
                                 alt="Default Profile Image">
                             @endif
 
-                            {{-- <img itemprop="image" class="event-banner-image img-fluid p-2 mx-auto d-block"
-                                src="https://cdn2.allevents.in/thumbs/thumb65b7a8998dad3.jpg" alt="event img"
-                                title="Event Name"> --}}
                         </div>
                         <div class="mt-3 p-4">
                             <h5 class="font-weight-bold">Event Details</h5>
@@ -67,20 +84,37 @@
                 </div>
             </div>
 
+
+
+
             <div class="col-md-4 ">
-               <div class="card mb-3 shadow" style="max-height: 120px; overflow: hidden;">
-                <div class="card-body">
-                    <h5 class="card-title font-weight-bold">Date</h5>
-                    <div class="text-center">
-                        <i class="icon-time"></i>
-                        <p>
-                            {{ \Carbon\Carbon::parse($workshop->workshopDate)->format('d-m-y') }}
-                        </p>
-                        <br>
-                        <small></small>
+                <div class="card mb-3 shadow" style="max-height: 120px; overflow: hidden;">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">Date</h5>
+                        <div class="text-center">
+                            <i class="icon-time"></i>
+                            <p>
+                                {{ \Carbon\Carbon::parse($workshop->workshopDate)->format('d-m-y') }}
+                            </p>
+                            <br>
+                            <small></small>
+                        </div>
                     </div>
                 </div>
-            </div>
+
+                <div class="card mb-3 shadow" style="max-height: 120px; overflow: hidden;">
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">Price</h5>
+                        <div class="text-center">
+                            <i class="icon-time"></i>
+                            <p>
+                              ₹  {{ $workshop->price }}
+                            </p>
+                            <br>
+                            <small></small>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="card shadow ">
                     <div class="card-body">
@@ -117,9 +151,66 @@
 
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content w-lg-75">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Login</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="user mt-5" method="POST" action="{{ route('login') }}">
+                    @csrf
+                    <div class="mb-3 ">
+                        <input type="email" placeholder="Email address"
+                            class="form-control p-3 form-control-user @error('email') is-invalid @enderror" name="email"
+                            value="{{ old('email') }}" id="email" aria-describedby="emailHelp" required
+                            autocomplete="email" autofocus>
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="mb-3 mt-5">
+                        <input type="password" name="password" placeholder="Password"
+                            class="form-control p-3 form-control-user @error('password') is-invalid @enderror"
+                            id="password">
+                        @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="text-center mt-5">
+                        <button type="button" class="btn " id="btn-secondary-close"
+                            data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn" id="btn-primary-login" data-bs-dismiss="modal">Login</button>
+                    </div>
+
+                </form>
+                <div class="mb-3 text-center mt-5">
+                    @if (Route::has('password.request'))
+                    <a class="small bluetext" id="forgot-link" href="{{ route('password.request') }}">Forgot
+                        Password?</a>
+                    @endif
+                    <a class="small bluetext" id="create-new-account-link" href="{{ route('register') }}">Create New
+                        Account</a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         var clipboard = new ClipboardJS('.copy-button');
+
+        // Other script code ...
     });
 </script>
 

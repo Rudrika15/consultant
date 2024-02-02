@@ -28,11 +28,21 @@
         <i class="bi bi-gear-fill"></i>
         <span>Consultant Inquiry</span></a>
 </li>
+
+
 <li class="nav-item active">
     <a class="nav-link" href="{{route('adminworkshop.index')}}">
         <i class="fas fa-laptop-house"></i>
         <span>Workshop</span></a>
 </li>
+
+<li class="nav-item active">
+    <a class="nav-link" href="{{route('workshopregistration.index')}}">
+        <i class="fas fa-laptop-house"></i>
+        <span>Workshop Registrations</span></a>
+</li>
+
+
 <li class="nav-item active">
     <a class="nav-link" href="{{ route('state.index') }}">
         <i class="bi bi-device-ssd-fill"></i>

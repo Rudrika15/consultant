@@ -264,12 +264,16 @@
                                                         <tr>
                                                                 <th><span class="fw-bold">More Details</span></th>
                                                                 {{-- <th><span class="fw-bold">Value</span></th> --}}
+                                                                <td></td>
                                                         </tr>
                                                         {{-- <tr>
                                                                 <td><span class="fw-bold">Map:</span></td>
                                                                 <td>{!! isset($consultant->map) ? $consultant->map : '
                                                                         -' !!}</td>
                                                         </tr> --}}
+
+
+
                                                         <tr>
                                                                 <td><span class="fw-bold">Address:</span></td>
                                                                 <td>{!! isset($consultant->address) ?
@@ -306,11 +310,11 @@
                                                                 <td>{!! isset($consultant->isFeatured) ?
                                                                         $consultant->isFeatured : ' -' !!}</td>
                                                         </tr> --}}
-                                                        <tr>
+                                                        {{-- <tr>
                                                                 <td><span class="fw-bold">Status:</span></td>
                                                                 <td>{!! isset($consultant->status) ? $consultant->status
                                                                         : ' -' !!}</td>
-                                                        </tr>
+                                                        </tr> --}}
                                                 </table>
                                                 <!-- ... other code ... -->
 

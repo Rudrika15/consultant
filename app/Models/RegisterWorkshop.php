@@ -5,9 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Workshop extends Model
+class RegisterWorkshop extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'userId',
+        'workshopId',
+    ];
+
+    // Define relationships if needed
     public function users()
     {
         return $this->belongsTo(User::class, 'userId');
@@ -15,6 +22,6 @@ class Workshop extends Model
 
     public function workshops()
     {
-        return $this->belongsTo(Workshop::class, 'workshopId');
+        return $this->hasOne(Workshop::class, 'id', 'workshopId');
     }
 }

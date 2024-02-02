@@ -26,6 +26,7 @@ use Illuminate\Http\Request;
 use App\Models\PrivacyPolicy;
 use Laravel\Ui\Presets\React;
 use App\Models\TermsCondition;
+use App\Models\RegisterWorkshop;
 use App\Models\ConsultantInquiry;
 use PhpParser\Node\Expr\FuncCall;
 use Illuminate\Support\Facades\Auth;
@@ -39,13 +40,13 @@ class VisitorController extends Controller
             $category = Category::where('status', 'active')->get();
             $cities = City::where('status', 'active')->get();
             $data['states'] = State::get(["stateName", "id"]);
-            $sliderhome = Slider::where('type', '=', "Home")->get();
-            $sliderworkshop = Slider::where('type', '=', "Home")->get();
-
+            $sliderhome = Slider::where('type', '=', "Home")->where('status', 'Active')->get();
+            // $sliderworkshop = Slider::where('type', '=', "Workshop")->where('status', 'Active')->get();
+            $workshop = Workshop::where('status', 'Active')->get();
             $FeaturedConsultants = Profile::where('isFeatured', '=', 'Yes')->with('user')->get();
 
 
-            return view('visitors.index', $data, compact('category', 'sliderhome', 'sliderworkshop' , 'cities', 'FeaturedConsultants'));
+            return view('visitors.index', $data, compact('category', 'sliderhome', 'workshop', 'cities', 'FeaturedConsultants'));
         } catch (\Throwable $th) {
             throw $th;
             return view('servererror');
@@ -109,10 +110,35 @@ class VisitorController extends Controller
     public function workshopDetails(Request $request, $id)
     {
         $sliderworkshop = Slider::where('type', '=', "Workshop")->where('status', '=', 'Active')->get();
-        $workshop = Workshop::find($id);
+        $workshop = Workshop::where('id', $id)->where('status', 'Active')->first();
 
         return view('visitors.workshopDetails', compact('workshop', 'sliderworkshop'));
     }
+
+
+
+    public function registerWorkshop(Request $request)
+    {
+        if (auth()->check()) {
+            $userId = auth()->user()->id;
+            // return $workshopId = $request->input('workshopId');
+            $workshopId = $request->workshopId;
+
+            if (!RegisterWorkshop::where(['userId' => $userId, 'workshopId' => $workshopId])->exists()) {
+                RegisterWorkshop::create([
+                    'userId' => $userId,
+                    'workshopId' => $workshopId,
+                ]);
+
+                return back()->with('successMessage', 'Successfully registered for the workshop.');
+            } else {
+                return back()->with('errorMessage', 'You are already registered for this workshop.');
+            }
+        } else {
+            return redirect()->route('login')->with('errorMessage', 'Please login to register for the workshop.');
+        }
+    }
+
 
 
 
@@ -123,7 +149,7 @@ class VisitorController extends Controller
     {
         try {
             $sliderworkshop = Slider::where('type', '=', "Workshop")->where('status', '=', 'Active')->get();
-            $workshop = Workshop::where('status', 'active')->get();
+            $workshop = Workshop::where('status', '=', 'active')->get();
             return view('visitors.workshopList', compact('workshop', 'sliderworkshop'));
         } catch (\Throwable $th) {
             throw $th;
@@ -389,7 +415,7 @@ class VisitorController extends Controller
             });
         }
 
-       
+
 
         // Get the consultants based on the conditions
         $consultant = $consultantQuery->where('type', '=', 'consultant')->get();

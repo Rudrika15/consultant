@@ -43,6 +43,7 @@ use App\Http\Controllers\Consultant\CertificateController;
 use App\Http\Controllers\Consultant\UpgradePlanController;
 use App\Http\Controllers\Admin\ConsultantInquiryController;
 use App\Http\Controllers\Auth\ConsultantRegisterController;
+use App\Http\Controllers\Admin\WorkshopRegistrationController;
 use App\Http\Controllers\Consultant\ConsultantEnquiryController;
 
 /*
@@ -99,9 +100,14 @@ Route::get('/detail', [VisitorController::class, 'detail'])->name('visitors.deta
 Route::get('/review/{id?}', [VisitorController::class, 'review'])->name('visitors.review');
 
 
-// pericular category detail
+// perticular category detail
 Route::get('category-detail/{id?}', [VisitorController::class, 'categoryDetail'])->name('visitors.categoryDetail');
 Route::get('consultant-detail/{id?}', [VisitorController::class, 'consultantDetail'])->name('visitors.consultantDetail');
+
+//workshop register
+Route::post('/register-workshop/{workshopId}', [VisitorController::class, 'registerWorkshop'])
+    ->name('register.workshop');
+
 
 
 
@@ -279,6 +285,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('adminworkshop-update', [AdminWorkshopController::class, 'update'])->name('adminworkshop.update');
     Route::get('adminworkshop-delete{id?}', [AdminWorkshopController::class, 'delete'])->name('adminworkshop.delete');
     Route::get('adminworkshop/{id}/view', [AdminWorkshopController::class, 'view'])->name('adminworkshop.view');
+
+    /* Workshop Registration View */
+    Route::get('workshopregistration', [WorkshopRegistrationController::class, 'index'])->name('workshopregistration.index');
+
 
     /* Contactus List */
     Route::get('contactus-index', [ContactusController::class, 'index'])->name('contactus.index');
