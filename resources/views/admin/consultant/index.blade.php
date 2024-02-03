@@ -55,7 +55,6 @@
                     </tr>
                 </thead>
                 <tbody>
-
                     @foreach ($consultants as $consultant)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
@@ -64,65 +63,56 @@
                         <td>{{ $consultant->contactNo }}</td>
                         <td>{{ $consultant->planType }}</td>
                         <td>
-
                             @if(isset($consultant->profile->about))
                             {{ $consultant->profile->about }}
                             @endif
-
                         </td>
-
                         <td>
                             @if(isset($consultant->profile->photo))
                             <img src="{{ url('/profile') . '/' . $consultant->profile->photo }}" width="50px"
                                 height="50px">
                             @else
-
                             <img src="{{ url('/placeholder-image.jpg') }}" width="50px" height="50px" alt="Image">
                             @endif
                         </td>
-
                         <td>
                             @if(isset($consultant->profile->type))
                             {{ $consultant->profile->type }}
                             @endif
                         </td>
-
-
                         <td>
                             @if(isset($consultant->profile->company))
                             {{ $consultant->profile->company }}
                             @endif
                         </td>
-
-
                         <td>
                             @if(isset($consultant->profile->category->catName))
                             {{ $consultant->profile->category->catName }}
                             @endif
                         </td>
-
                         <td>
                             @if(isset($consultant->profile->packages->title))
                             {{ $consultant->profile->packages->title }}
                             @endif
                         </td>
-
                         <td>
                             @if(isset($consultant->profile->isFeatured))
                             {{ $consultant->profile->isFeatured }}
                             @endif
                         </td>
-
                         <td>
                             @if(isset($consultant->status))
                             {{ $consultant->status }}
                             @endif
                         </td>
-
                         <td>
                             <a href="{{ route('consultant.view', $consultant->id) }}"
                                 class="btn btn-success btn-sm view">View</a>
+
+                            <a href="{{ route('consultant.edit', $consultant->id) }}"
+                                class="btn btn-primary btn-sm mt-3 edit">Edit</a>
                         </td>
+
                     </tr>
                     @endforeach
                 </tbody>

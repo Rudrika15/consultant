@@ -1,9 +1,5 @@
-@extends('layouts.VisitorApp')
+@extends('layouts.visitorApp')
 @section('content')
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
 
@@ -21,6 +17,8 @@
     </div>
 
     @endif
+
+
     <div class="card shadow mt-5 p-2">
         <div class="row">
             <div class="col-sm-1 col-md-1 col-6">
@@ -29,7 +27,7 @@
                 <img src="{{ url('workshop') }}/{{ $workshop->photo }}" class="img-fluid" alt="workshop img"
                     class="img-fluid rounded p-2" style="max-width: 100px; height: 90px;">
                 @else
-                <!-- Provide a fallback image or handle the case when $profile->photo is not set -->
+
                 <img src="{{ url('default-profile-image.jpg') }}" class="img-fluid" alt="Default Profile Image"
                     class="img-fluid rounded p-2" style="max-width: 90px; height: 90px;">
                 @endif
@@ -45,113 +43,133 @@
 
             <div class="col-sm-3 col-md-3 col-6">
                 @auth
-                <form action="{{ route('register.workshop', ['workshopId' => $workshop->id]) }}" method="POST">
+                @if($workshop->price == 0)
+                <!-- Check if the event is free -->
+                <form id="registrationForm" action="{{ route('workshop.register') }}" method="POST">
                     @csrf
+                    <input type="hidden" name="workshopId" value="{{ $workshop->id }}">
                     <button type="submit" class="btn btn-primary mt-4" id="joinNowButton">Join Now</button>
                 </form>
                 @else
-                <button class="btn btn-primary mt-4" id="joinNowButton">Join Now</button>
+                <form id="registrationForm" action="{{ route('workshop.register') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="workshopId" value="{{ $workshop->id }}">
+                    <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="{{ env('RAZORPAY_KEY') }}"
+                        data-amount="{{ $workshop->price * 100 }}" data-buttontext="Join Now"
+                        data-name="{{ $workshop->title }}" data-description="Workshop Payment"
+                        data-image="{{ url('/your-workshop-logo.jpg') }}" data-prefill.name="{{ Auth::user()->name }}"
+                        data-prefill.email="{{ Auth::user()->email }}" data-theme.color="#333692"
+                        data-prefill.workshopId="{{ $workshop->id }}">
+                    </script>
+                </form>
+                @endif
+                @else
+                <button class="btn btn-primary mt-4" id="joinNowButton" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop">Join
+                    Now</button>
                 @endauth
             </div>
         </div>
     </div>
+</div>
 
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="card shadow ">
-                    <div class="row">
-                        <div class="col-md-12 mt-3 text-center">
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card shadow ">
+                <div class="row">
+                    <div class="col-md-12 mt-3 text-center">
 
-                            @if(isset($workshop->photo))
-                            <img src="{{ url('workshop') }}/{{ $workshop->photo }}" class="img-fluid"
-                                alt="workshop img">
-                            @else
-                            <!-- Provide a fallback image or handle the case when $profile->photo is not set -->
-                            <img src="{{ url('default-profile-image.jpg') }}" class="img-fluid"
-                                alt="Default Profile Image">
-                            @endif
+                        @if(isset($workshop->photo))
+                        <img src="{{ url('workshop') }}/{{ $workshop->photo }}" class="img-fluid" alt="workshop img">
+                        @else
+                        <img src="{{ url('default-profile-image.jpg') }}" class="img-fluid" alt="Default Profile Image">
+                        @endif
 
-                        </div>
-                        <div class="mt-3 p-4">
-                            <h5 class="font-weight-bold">Event Details</h5>
-                            <p>
-                            <p>{{ \Carbon\Carbon::parse($workshop->workshopDate)->format('d-m-y') }}</p>
-                            </p>
-                            <p>{!!$workshop->detail!!}</p>
-                        </div>
+                    </div>
+                    <div class="mt-3 p-4">
+                        <h5 class="font-weight-bold">Event Details</h5>
+                        <p>
+                        <p>{{ \Carbon\Carbon::parse($workshop->workshopDate)->format('d-m-y') }}</p>
+                        </p>
+                        <p>{!!$workshop->detail!!}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-4 ">
+            <div class="card mb-3 shadow" style="max-height: 120px; overflow: hidden;">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold">Date</h5>
+                    <div class="text-center">
+                        <i class="icon-time"></i>
+                        <p>
+                            {{ \Carbon\Carbon::parse($workshop->workshopDate)->format('d-m-y') }}
+                        </p>
+                        <br>
+                        <small></small>
                     </div>
                 </div>
             </div>
 
-
-
-
-            <div class="col-md-4 ">
-                <div class="card mb-3 shadow" style="max-height: 120px; overflow: hidden;">
-                    <div class="card-body">
-                        <h5 class="card-title font-weight-bold">Date</h5>
-                        <div class="text-center">
-                            <i class="icon-time"></i>
-                            <p>
-                                {{ \Carbon\Carbon::parse($workshop->workshopDate)->format('d-m-y') }}
-                            </p>
-                            <br>
-                            <small></small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mb-3 shadow" style="max-height: 120px; overflow: hidden;">
-                    <div class="card-body">
-                        <h5 class="card-title font-weight-bold">Price</h5>
-                        <div class="text-center">
-                            <i class="icon-time"></i>
-                            <p>
-                              ₹  {{ $workshop->price }}
-                            </p>
-                            <br>
-                            <small></small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card shadow ">
-                    <div class="card-body">
-                        <h5 class="card-title font-weight-bold">Location</h5>
-                        <div class="text-center">
-                            <i class="icon-map-marker"></i>
-                            @if(isset($workshop->address) && !empty($workshop->address))
-                            <p><span class="full-venue">{{ $workshop->address }}</span></p>
+            <div class="card shadow mb-3">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold">Price</h5>
+                    <div class="text-center">
+                        <i class="icon-map-marker"></i>
+                        <p>
+                            @isset($workshop->price)
+                            @if($workshop->price == 0)
+                            Free
                             @else
-                            <p>Event is Online</p>
+                            <span class="full-venue"> ₹ {{ $workshop->price }}</span>
                             @endif
-                        </div>
+                            @else
+                            Price is not available at the moment.
+                            @endisset
+                        </p>
                     </div>
                 </div>
+            </div>
 
-                <div class="card mt-3 shadow ">
-                    <div class="card-body">
-                        <h5 class="card-title font-weight-bold">Event Link</h5>
-                        <div class="text-center">
-                            <i class="icon-map-marker"></i>
-                            <p><button class="btn btn-primary copy-button" data-clipboard-target="#linkToCopy">Copy
-                                    Link</button></p>
-                            @if(isset($workshop->link) && !empty($workshop->link))
-                            <p><span id="linkToCopy" class="mt-2">{{ $workshop->link }}</span></p>
-                            @else
-                            <p>Event is Offline</p>
-                            @endif
-                        </div>
+            <div class="card shadow ">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold">Location</h5>
+                    <div class="text-center">
+                        <i class="icon-map-marker"></i>
+                        @isset($workshop->address)
+                        <p><span class="full-venue">{{ $workshop->address }}</span></p>
+                        @else
+                        <p>Event is Online</p>
+                        @endisset
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-3 shadow ">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bold">Event Link</h5>
+                    <div class="text-center">
+                        <i class="icon-map-marker"></i>
+                        <p><button class="btn btn-primary copy-button" data-clipboard-target="#linkToCopy">Copy
+                                Link</button></p>
+                        @isset($workshop->link)
+                        <p><span id="linkToCopy" class="mt-2">{{ $workshop->link }}</span></p>
+                        @else
+                        <p>Event is Offline</p>
+                        @endisset
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 </div>
 
-<!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog ">
@@ -206,11 +224,10 @@
     </div>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var clipboard = new ClipboardJS('.copy-button');
 
-        // Other script code ...
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var clipboard = new ClipboardJS('.copy-button');
     });
 </script>
 

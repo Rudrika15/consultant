@@ -13,7 +13,8 @@ class ConsultantInquiryController extends Controller
     {
         try {
             if ($request->ajax()) {
-                $data = ConsultantInquiry::orderBy('id', 'DESC')
+                $data = ConsultantInquiry::with('users') // Using the 'users' relationship
+                    ->orderBy('id', 'DESC')
                     ->get();
 
                 return DataTables::of($data)

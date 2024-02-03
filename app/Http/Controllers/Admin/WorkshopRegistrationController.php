@@ -12,11 +12,10 @@ class WorkshopRegistrationController extends Controller
     public function index(Request $request)
     {
         try {
-            $workshopRegistrations = RegisterWorkshop::paginate(10); // You can adjust the number of items per page as needed
-            //  $workshopRegistrations = RegisterWorkshop::with('workshops')->get(); // You can adjust the number of items per page as needed
-            return view('admin.registerworkshop.index', compact('workshopRegistrations'));
+            $workshopRegistrations = RegisterWorkshop::with(['workshop', 'user'])->paginate(10);
+
+            return view('admin.workshop.show', compact('workshopRegistrations'));
         } catch (\Throwable $th) {
-            throw $th;
             return view('servererror');
         }
     }

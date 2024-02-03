@@ -36,11 +36,11 @@
         <span>Workshop</span></a>
 </li>
 
-<li class="nav-item active">
+{{-- <li class="nav-item active">
     <a class="nav-link" href="{{route('workshopregistration.index')}}">
         <i class="fas fa-laptop-house"></i>
         <span>Workshop Registrations</span></a>
-</li>
+</li> --}}
 
 
 <li class="nav-item active">

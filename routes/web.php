@@ -105,9 +105,14 @@ Route::get('category-detail/{id?}', [VisitorController::class, 'categoryDetail']
 Route::get('consultant-detail/{id?}', [VisitorController::class, 'consultantDetail'])->name('visitors.consultantDetail');
 
 //workshop register
-Route::post('/register-workshop/{workshopId}', [VisitorController::class, 'registerWorkshop'])
-    ->name('register.workshop');
+Route::post('/workshop/register', [VisitorController::class, 'registerAndPay'])
+    ->name('workshop.register');
 
+// Route::post('/workshop/register/{workshopId}', [VisitorController::class, 'registerAndPay'])
+//     ->name('workshop.register');
+
+// Add a new route for the registerAndPay method
+// Route::post('/workshop/register', 'YourController@registerAndPay')->name('workshop.register');
 
 
 
@@ -284,10 +289,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('adminworkshop-edit/{id?}', [AdminWorkshopController::class, 'edit'])->name('adminworkshop.edit');
     Route::post('adminworkshop-update', [AdminWorkshopController::class, 'update'])->name('adminworkshop.update');
     Route::get('adminworkshop-delete{id?}', [AdminWorkshopController::class, 'delete'])->name('adminworkshop.delete');
-    Route::get('adminworkshop/{id}/view', [AdminWorkshopController::class, 'view'])->name('adminworkshop.view');
+    Route::get('adminworkshop/{id}/show', [AdminWorkshopController::class, 'show'])->name('adminworkshop.show');
 
     /* Workshop Registration View */
-    Route::get('workshopregistration', [WorkshopRegistrationController::class, 'index'])->name('workshopregistration.index');
+    // Route::get('workshopregistration', [WorkshopRegistrationController::class, 'index'])->name('workshopregistration.index');
 
 
     /* Contactus List */

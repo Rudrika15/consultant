@@ -117,27 +117,96 @@ class VisitorController extends Controller
 
 
 
-    public function registerWorkshop(Request $request)
+    // public function registerWorkshop(Request $request)
+    // {
+    //     if (auth()->check()) {
+    //         $userId = auth()->user()->id;
+    //         // return $workshopId = $request->input('workshopId');
+    //         $workshopId = $request->workshopId;
+
+    //         if (!RegisterWorkshop::where(['userId' => $userId, 'workshopId' => $workshopId])->exists()) {
+    //             RegisterWorkshop::create([
+    //                 'userId' => $userId,
+    //                 'workshopId' => $workshopId,
+    //             ]);
+
+    //             return back()->with('successMessage', 'Successfully registered for the workshop.');
+    //         } else {
+    //             return back()->with('errorMessage', 'You are already registered for this workshop.');
+    //         }
+    //     } else {
+    //         return redirect()->route('login')->with('errorMessage', 'Please login to register for the workshop.');
+    //     }
+    // }
+
+
+    // public function registerWorkshop(Request $request)
+    // {
+    //     if (auth()->check()) {
+    //         $userId = auth()->user()->id;
+    //         $workshopId = $request->input('workshopId');
+
+    //         // Check for successful payment (you may need to adjust this condition based on Razorpay's response)
+    //         if ($request->input('payment_success') == true) {
+    //             // Check if the user is already registered for the workshop
+    //             if (!RegisterWorkshop::where(['userId' => $userId, 'workshopId' => $workshopId])->exists()) {
+    //                 // Store registration data in the database
+    //                 RegisterWorkshop::create([
+    //                     'userId' => $userId,
+    //                     'workshopId' => $workshopId,
+    //                 ]);
+
+    //                 return back()->with('successMessage', 'Successfully registered for the workshop.');
+    //             } else {
+    //                 return back()->with('errorMessage', 'You are already registered for this workshop.');
+    //             }
+    //         } else {
+    //             return back()->with('errorMessage', 'Payment was not successful. Please try again.');
+    //         }
+    //     } else {
+    //         return redirect()->route('login')->with('errorMessage', 'Please login to register for the workshop.');
+    //     }
+    // }
+
+
+
+
+    public function registerAndPay(Request $request)
     {
-        if (auth()->check()) {
-            $userId = auth()->user()->id;
-            // return $workshopId = $request->input('workshopId');
-            $workshopId = $request->workshopId;
+        // Assuming you have validation logic for your registration form fields
+        $request->validate([
+            'workshopId' => 'required|exists:workshops,id',
+            // Add other validation rules as needed
+        ]);
 
-            if (!RegisterWorkshop::where(['userId' => $userId, 'workshopId' => $workshopId])->exists()) {
-                RegisterWorkshop::create([
-                    'userId' => $userId,
-                    'workshopId' => $workshopId,
-                ]);
+        $userId = auth()->user()->id;
+        $workshopId = $request->input('workshopId');
 
-                return back()->with('successMessage', 'Successfully registered for the workshop.');
-            } else {
-                return back()->with('errorMessage', 'You are already registered for this workshop.');
-            }
+        // Check if the user is already registered for the workshop
+        if (!RegisterWorkshop::where(['userId' => $userId, 'workshopId' => $workshopId])->exists()) {
+            // Store registration data in the database
+            RegisterWorkshop::create([
+                'userId' => $userId,
+                'workshopId' => $workshopId,
+                // Add other registration fields as needed
+            ]);
+
+            // Handle payment success logic here (update payment status, store payment details, etc.)
+            // You can access Razorpay payment details from $request->all()
+
+            return redirect()->back()->with('successMessage', 'Successfully Registered for the workshop.');
         } else {
-            return redirect()->route('login')->with('errorMessage', 'Please login to register for the workshop.');
+            return back()->with('errorMessage', 'You are already registered for this workshop.');
         }
     }
+
+
+
+
+
+
+
+
 
 
 

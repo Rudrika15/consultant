@@ -2,48 +2,36 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use Auth;
+use DataTables;
 use App\Models\Workshop;
 use Illuminate\Http\Request;
-use DataTables;
-use Auth;
+use App\Models\RegisterWorkshop;
 use Illuminate\Support\Facades\URL;
+use App\Http\Controllers\Controller;
 
 class AdminWorkshopController extends Controller
 {
+
     public function index(Request $request)
     {
         try {
+            $workshop = Workshop::where('status', 'Active')->get();
 
-            if ($request->ajax()) {
-                $data = Workshop::where('status', '!=', "Deleted")
-
-                    ->get();
-                return DataTables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function ($row) {
-                        $view = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm me-1 ">View</a>';
-                        $btn = '<a href="' . URL::route('adminworkshop.edit', $row->id) . '" class="update btn btn-primary btn-sm me-1">Edit</a>';
-                        $btn = $btn . '<a href="' . URL::route('adminworkshop.delete', $row->id) . '" class="delete btn btn-danger btn-sm me-1" id="delete">Delete</a>';
-                        // 
-                        return $view . '' . $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-            }
-            return view('admin.workshop.index');
+            return view('admin.workshop.index', compact('workshop'));
         } catch (\Throwable $th) {
-            //throw $th;
             return view('servererror');
         }
     }
-    public function view(Request $request, $id)
+    public function show(Request $request, $id)
     {
         try {
-            $package = Workshop::findOrFail($id);
-            return response()->json($package);
+            $workshopData = Workshop::findOrFail($id);
+            $registeredUsers = RegisterWorkshop::where('workshopId', $id)->with('users')->get();
+
+            return view('admin.workshop.show', compact('workshopData', 'registeredUsers'));
         } catch (\Throwable $th) {
-            //throw $th;
+            // Handle the exception, you may log it or return an error view
             return view('servererror');
         }
     }
@@ -104,7 +92,7 @@ class AdminWorkshopController extends Controller
             return view('servererror');
         }
     }
-    
+
     public function update(Request $request)
     {
         try {

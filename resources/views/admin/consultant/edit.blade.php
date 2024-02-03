@@ -26,7 +26,8 @@
 
 <div class="card">
     <!-- /.box-title -->
-    <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
 
         <div class="">
             <h4 class="">Edit Consultant</h4>
@@ -50,20 +51,20 @@
                 <div class="form-check mt-2">
                     <input class="form-check-input" type="radio" name="isFeatured" id="Yes">
                     <label class="form-check-label" for="Yes">
-                      Yes
+                        Yes
                     </label>
-                  </div>
-                  <div class="form-check mt-2">
-                    <input class="form-check-input" type="radio" name="isFeatured" id="No" >
+                </div>
+                <div class="form-check mt-2">
+                    <input class="form-check-input" type="radio" name="isFeatured" id="No">
                     <label class="form-check-label" for="No">
-                      No
+                        No
                     </label>
-                  </div>
-                  @if ($errors->has('language'))
-                  <span class="error">{{ $errors->first('language') }}</span>
-                  @endif
+                </div>
+                @if ($errors->has('language'))
+                <span class="error">{{ $errors->first('language') }}</span>
+                @endif
             </div>
-           
+
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
                 <button type="submit" class="btn btn-primary" id="">Submit</button>
             </div>

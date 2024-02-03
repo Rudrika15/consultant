@@ -64,12 +64,35 @@
             serverSide: true,
             ajax: "{{ route('consultantInquiry.inquiry') }}",
             columns: [
-                { data: 'DT_RowIndex', name: 'DT_RowIndex' },
-                { data: 'users.name', name: 'users.name' },
-                { data: 'name', name: 'name' },
-                { data: 'email', name: 'email' },
-                { data: 'inquiry', name: 'inquiry' },
-                { data: 'status', name: 'status' },
+                {
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                { 
+
+                    data: 'users.name', 
+                    name: 'users.name'
+                },
+                
+                {
+                    data: 'name',
+                    name: 'name' 
+                },
+
+                {
+                    data: 'email', 
+                    name: 'email' 
+                },
+
+                { 
+                    data: 'inquiry',
+                    name: 'inquiry' 
+                },
+
+                {
+                    data: 'status',
+                    name: 'status' 
+                },
                 {
                     data: 'action',
                     name: 'action',

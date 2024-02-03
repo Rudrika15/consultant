@@ -215,111 +215,15 @@
     </div>
 
     {{-- Display Workshop Start--}}
-    <div class="workshops mt-5 ml-5 mr-5">
-        <h3 class="text-center">Our Workshops</h3>
-        <div class="row">
-            @forelse ($workshop as $workshopData)
-            @php
-            $workshopDate = \Carbon\Carbon::parse($workshopData->workshopDate);
-            $today = \Carbon\Carbon::today();
-            @endphp
-
-            {{-- Check if the event date is greater than today's date --}}
-            @if ($workshopDate->greaterThanOrEqualTo($today))
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="rounded-image mx-auto mt-3">
-                        <img src="{{ url('workshop') . '/' . $workshopData->photo }}" class="card-img-top"
-                            style="height: 200px; object-fit: cover;">
-                    </div>
-                    <div class="card-body text-center">
-                        <p class="card-text">{{ $workshopData->title ?? '-' }} </p>
-                        <p class="card-text">{{ $workshopDate->format('d-m-y') }}</p>
-                        {{-- <p class="card-text">{{ $workshopData-> ?? '-' }}</p> --}}
-                        <a href="{{ route('visitor.workshopDetails', $workshopData->id) }}"
-                            class="btn btn-primary">Register
-                            Now</a>
-                    </div>
-                </div>
-            </div>
-            @endif
-            @empty
-            <div class="col-md-12 text-center">
-                <p>No Workshops Right Now.</p>
-            </div>
-            @endforelse
-        </div>
-    </div>
 
 
-    {{-- <div class="slider-for-workshops">
-        <div class="" style="position: relative;">
-            <h3 class="text-center">Our Workshops</h3>
-            <div id="myCarousell" class="carousel slide" data-bs-ride="carousel" data-interval="5000">
-                <div class="carousel-inner">
-                    @foreach ($sliderworkshop as $sliderworkshop)
-                    <div class="carousel-item">
-                        <a href="{{ url('visitor/workshopList') }}">
-                            <img src="{{ url('/slider/' . $sliderworkshop->photo) }}" class="d-block w-100"
-                                height="500px" alt="Workshop">
-                        </a>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <script>
-        $(document).ready(function() {
-        $('#myCarousell').find('.carousel-item').first().addClass('active');
-    });
-    </script> --}}
 
 
 
     {{-- How Consultant Cube Works Start --}}
-    <div class="cube_orange">
-        <div class="cube_purple text-center">
-            <h3 class="text-center text-white mt-5">How Consultant Cube Works</h3>
-            <p class="text-center text-white mt-3">A platform to find right consultant</p>
-            <div class="container mt-5">
-                <div class="row">
-                    <div class="col-lg-4 person_section">
-                        <div class="person_img_circle position-relative">
-                            <i class="fa fa-circle text-white"></i>
-                            <img src="{{ asset('visitors/images/1-1.png') }}" alt="" width="60" height="50">
-                        </div>
-                        <h5 class="person-text text-white mt-4">Find Your Consultant</h5>
-                        <p class=" person-text text-white mt-2">
-                            "We will enlist just the right
-                            ones based on your choices."</p>
-                    </div>
-                    <div class="col-lg-4  person_section">
-                        <div class="person_img_circle position-relative">
-                            <i class="fa fa-circle text-white"></i>
-                            <img src="{{ asset('visitors/images/2.png') }}" alt="" width="60" height="50">
-                        </div>
-                        <h5 class="person-text text-white mt-4">Connect with Your Consultant</h5>
-                        <p class="person-text text-white mt-2">"Locate guidance, then forge a powerful connection with
-                            your consultant for growth."</p>
-                    </div>
-                    <div class="col-lg-4  person_section">
-                        <div class="person_img_circle position-relative">
-                            <i class="fa fa-circle text-white"></i>
-                            <img src="{{ asset('visitors/images/3.png') }}" alt="" width="60" height="50">
-                        </div>
-                        <h5 class="person-text text-white mt-4">Connect for Success</h5>
-                        <p class="person-text text-white mt-2">"Identify your mentor, then establish a transformative
-                            connection for mutual development."</p>
-                    </div>
-                </div>
-            </div>
 
-        </div>
-    </div>
     {{-- How Consultant Cube Works End --}}
 
     {{-- Featured Consultants Start --}}
@@ -354,209 +258,169 @@
             @endforelse
         </div>
     </div>
-    {{--
-    <div class="carousel-item @if ($key === 0) active @endif">
-        <div class="d-flex justify-content-center">
-            <div class="card featured_card">
-                <div class="row">
-                    <div class="col-lg-3 col-md-4 ">
-                        <img src="{{ url('profile')}}/{{$FeaturedConsultantsData->photo }}" class="featured_profile"
-                            alt="" width="90px" height="70px">
-                    </div>
-                    <div class="col-lg-7 mt-4">
-                        <div class="image_constant">
 
 
-                            <h5>{{$FeaturedConsultantsData->user[0]->name}}</h5>
-                            <p class="card-text">{{$FeaturedConsultantsData->user[0]->name}}</p>
-                            <h5 class="card-title">{!!$FeaturedConsultantsData->about!!}</h5>
-                            <p class="card-text">{{$FeaturedConsultantsData->map}}</p>
-                            <p class="card-text">{{$FeaturedConsultantsData->categories[0]->catName}}
-                            </p>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    </a>
-    @endforeach
-</div>
---}}
-
-<br>
-
-
-
-
-
-
-{{-- Featured Consultants End --}}
-
-{{-- Be a consultant --}}
-
-
-<div class="get_started-purple">
-    <div class="get_text">
-        <h2 class="text-center text-white pt-5">Be a Consultant</h2>
-        <br>
-        <h2 class="text-center text-white">Get Started For Free</h2>
-    </div>
     <br>
 
 
-    <div class="d-flex justify-content-center">
-        <a href="{{ route('register') }}" class="btn text-center fw-bold start_with_me bg-white">Register Now</a>
-        {{-- <button class="btn text-center fw-bold start_with_me bg-white">
-            Start With Free
-        </button> --}}
+    {{-- Featured Consultants End --}}
+
+
+    <div class="trusted_porple mt-5">
+        <div class="trusted_orange">
+            <div class="trusted_white">
+
+                <div class="workshops mt-5 ml-5 mr-5">
+                    <h3 class="text-center">Our Workshops</h3>
+                    <div class="row">
+                        @forelse ($workshop as $workshopData)
+                        @php
+                        $workshopDate = \Carbon\Carbon::parse($workshopData->workshopDate);
+                        $today = \Carbon\Carbon::today();
+                        @endphp
+
+                        {{-- Check if the event date is greater than today's date --}}
+                        @if ($workshopDate->greaterThanOrEqualTo($today))
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="rounded-image mx-auto mt-3">
+                                    <img src="{{ url('workshop') . '/' . $workshopData->photo }}" class="card-img-top"
+                                        style="height: 200px; object-fit: cover;">
+                                </div>
+                                <div class="card-body text-center">
+                                    <p class="card-text">{{ $workshopData->title ?? '-' }} </p>
+                                    <p class="card-text">{{ $workshopDate->format('d-m-y') }}</p>
+                                    {{-- <p class="card-text">{{ $workshopData-> ?? '-' }}</p> --}}
+                                    <a href="{{ route('visitor.workshopDetails', $workshopData->id) }}"
+                                        class="btn btn-primary">Register
+                                        Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                        @empty
+                        <div class="col-md-12 text-center">
+                            <p>No Workshops Right Now.</p>
+                        </div>
+                        @endforelse
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 
-</div>
-
-{{-- Be a consultant end --}}
 
 
-{{-- Trust ed by thousands of people all over the world Start --}}
 
-<div class="trusted_porple mt-5">
-    <div class="trusted_orange">
-        <div class="trusted_white">
-            <h3 class="text-center mt-5">
-                Trusted by thousands of people all over the world
-            </h3>
-            <p class="text-center pt-2">
-                Best Service Deals
+
+
+
+
+    {{-- Be a consultant --}}
+
+
+    <div class="get_started-purple">
+        <div class="get_text">
+            <h2 class="text-center text-white pt-5">Be a Consultant</h2>
+            <br>
+            <h2 class="text-center text-white">Get Started For Free</h2>
+        </div>
+        <br>
+
+
+        <div class="d-flex justify-content-center">
+            <a href="{{ route('register') }}" class="btn text-center fw-bold start_with_me bg-white">Register
+                Now</a>
+            {{-- <button class="btn text-center fw-bold start_with_me bg-white">
+                Start With Free
+            </button> --}}
+        </div>
+
+    </div>
+
+    {{-- Be a consultant end --}}
+
+
+    {{-- Trust ed by thousands of people all over the world Start --}}
+
+    <br>
+    {{-- <div class="trusted_porple">
+
+    </div> --}}
+    {{-- <div class="trusted_porple mt-5">
+        <div class="trusted_orange">
+            <div class="trusted_white">
+                <h3 class="text-center mt-5">
+                    Trusted by thousands of people all over the world
+                </h3>
+                <p class="text-center pt-2">
+                    Best Service Deals
+                </p>
+                <div class="service_details d-flex justify-content-center flex-wrap mt-5 gap-4">
+                    <div class="card providers">
+                        <div class="card-body">
+                            <div class="card-text text-white text-center">
+                                <h1>75</h1>
+                                <h3>Providers</h3>
+                            </div>
+                            <div class="mt-4 provider w-100"></div>
+                        </div>
+
+                    </div>
+                    <div class="card providers">
+                        <div class="card-body">
+                            <div class="card-text text-white text-center">
+                                <h1>8</h1>
+                                <h3>Customer</h3>
+                            </div>
+                            <div class="mt-4 customer w-100"></div>
+                        </div>
+                    </div>
+                    <div class="card providers">
+                        <div class="card-body">
+                            <div class="card-text text-white text-center">
+                                <h1>0</h1>
+                                <h3>Jobs</h3>
+                            </div>
+                            <div class="mt-4 job w-100"></div>
+                        </div>
+                    </div>
+                    <div class="card providers">
+                        <div class="card-body">
+                            <div class="card-text text-white text-center">
+                                <h1>35</h1>
+                                <h3>Categories</h3>
+                            </div>
+                            <div class="mt-4 category w-100"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div> --}}
+    {{-- Trusted by thousands of people all over the world End --}}
+
+    {{-- Get Started Start --}}
+    <div class="get_started-purple">
+        <div class="get_text">
+            <h2 class="text-center text-white pt-5">Are You Consultant ?</h2>
+            <h2 class="text-center text-white">Get Started For Free</h2>
+            <p class="text-center text-white pt-3">
+                Our forever Free Plan is a great place to start, and you can upgrade
+                to our Premium Plans whenever you’re ready
             </p>
-            <div class="service_details d-flex justify-content-center flex-wrap mt-5 gap-4">
-                <div class="card providers">
-                    <div class="card-body">
-                        <div class="card-text text-white text-center">
-                            <h1>75</h1>
-                            <h3>Providers</h3>
-                        </div>
-                        <div class="mt-4 provider w-100"></div>
-                    </div>
-
-                </div>
-                <div class="card providers">
-                    <div class="card-body">
-                        <div class="card-text text-white text-center">
-                            <h1>8</h1>
-                            <h3>Customer</h3>
-                        </div>
-                        <div class="mt-4 customer w-100"></div>
-                    </div>
-                </div>
-                <div class="card providers">
-                    <div class="card-body">
-                        <div class="card-text text-white text-center">
-                            <h1>0</h1>
-                            <h3>Jobs</h3>
-                        </div>
-                        <div class="mt-4 job w-100"></div>
-                    </div>
-                </div>
-                <div class="card providers">
-                    <div class="card-body">
-                        <div class="card-text text-white text-center">
-                            <h1>35</h1>
-                            <h3>Categories</h3>
-                        </div>
-                        <div class="mt-4 category w-100"></div>
-                    </div>
-                </div>
-
-            </div>
         </div>
-    </div>
-</div>
-{{-- Trusted by thousands of people all over the world End --}}
 
-{{-- Why Choose Us Start --}}
-<div class="chooseus_orange">
-    <h3 class="text-center pt-5 text-white">
-        Why Choose us
-    </h3>
-    <p class="text-center text-white pt-3">
-        Best Service Deals
-    </p>
-    {{-- commu.png
-    help (1).png
-    1-3.png --}}
-    <div class="container p-5">
-        <div class="row choose_us">
-            <div class="col-md-4 col-sm-4 be_part">
-                <div class="text-center">
-                    <img src="{{ asset('visitors/images/commu.png') }}" alt="" width="90px" height="90px">
-                </div>
-                <div class="text-center text-white mt-4">
-                    <p class="fw-bold">
-                        Be part of a generous community
-                    </p>
-                    <p class="">
-                        Consultant Cube provides a win-win platform,
-                        where individuals prosper in their respective domains.
-                        Be a part of a generous community as a mentor or mentee and lead towards better EVERYTHING.
-                    </p>
-                </div>
-            </div>
-            <div class=" col-md-4 col-sm-4 be_part">
-                <div class="text-center">
-                    <img src="{{ asset('visitors/images/helping.png') }}" alt="" width="90px" height="90px">
-                </div>
-                <div class="text-center text-white mt-4">
-                    <p class="fw-bold">
-                        Serve the help, Get the help
-                    </p>
-                    <p class="">
-                        Each of us was born raw, shaped gradually with the help of
-                        our parents and teachers. Consultant Cube offers a platform
-                        for everyone who wishes to serve help,
-                        out of his or her experiences or receive help in any arena.</p>
-                </div>
-            </div>
-            <div class=" col-md-4  col-sm-4 be_part">
-                <div class="text-center">
-                    <img src="{{ asset('visitors/images/persona.png ') }}" alt="" width="90px" height="90px">
-                </div>
-                <div class="text-center text-white mt-4">
-                    <p class="fw-bold">
-                        Amplify your persona
-                    </p>
-                    <p class="">
-                        Knowledge, Wisdom and Information when received from the right individual,
-                        results in amplification of your persona. Consultant Cube bridges one
-                        with consistent learning in one or another way, as either a mentor or a mentee.
-                </div>
-            </div>
+        <div class="d-flex justify-content-center">
+            <button class="btn text-center fw-bold start_with_me bg-white">
+                Start With Free
+            </button>
         </div>
 
     </div>
-</div>
-{{-- Why Choose Us End --}}
-
-{{-- Get Started Start --}}
-<div class="get_started-purple">
-    <div class="get_text">
-        <h2 class="text-center text-white pt-5">Are You Consultant ?</h2>
-        <h2 class="text-center text-white">Get Started For Free</h2>
-        <p class="text-center text-white pt-3">
-            Our forever Free Plan is a great place to start, and you can upgrade
-            to our Premium Plans whenever you’re ready
-        </p>
-    </div>
-
-    <div class="d-flex justify-content-center">
-        <button class="btn text-center fw-bold start_with_me bg-white">
-            Start With Free
-        </button>
-    </div>
-
-</div>
-{{-- Get Started Start --}}
+    {{-- Get Started Start --}}
 
 
 
