@@ -31,6 +31,7 @@
         <div class="">
             <a href="{{ route('consultant.index') }}" id="back" class="btn btnback btn-sm"
                 style="display:none;">BACK</a>
+            <a href="{{ route('consultant.create') }}" id="add" class="btn btnback btn-sm btn-info">ADD</a>
         </div>
     </div>
     <div class="card-body">

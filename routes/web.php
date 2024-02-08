@@ -83,7 +83,7 @@ Route::get('/consultantInquiry', [VisitorController::class, 'consultantInquiry']
 Route::post('consultantInquiry-consultantInquiryStore', [VisitorController::class, 'consultantInquiryStore'])->name('consultantInquiry.consultantInquiryStore');
 
 Route::post('/free-trial', [VisitorController::class, 'freeTrial'])->name('free.trial');
-Route::get('/membershipplan', [VisitorController::class, 'membershipPlan'])->name('visitors.membershipPlan');
+// Route::get('/membershipplan', [VisitorController::class, 'membershipPlan'])->name('visitors.membershipPlan');
 
 //otp send in mail
 // Route::get('send-mail', [MailController::class, 'index']);
@@ -302,6 +302,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     /* Consultant List  */
     Route::get('consultant-index', [ConsultantController::class, 'index'])->name('consultant.index');
+    Route::get('consultant-create', [ConsultantController::class, 'create'])->name('consultant.create');
+    Route::get('consultant-store', [ConsultantController::class, 'store'])->name('consultant.store');
     Route::get('consultant/{id}/view', [ConsultantController::class, 'view'])->name('consultant.view');
     Route::get('consultant-edit/{id?}', [ConsultantController::class, 'edit'])->name('consultant.edit');
     Route::post('consultant-update', [ConsultantController::class, 'update'])->name('consultant.update');

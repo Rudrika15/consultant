@@ -13,15 +13,9 @@
 </div>
 @endif
 
-
-
 <div class="main_page">
     <div class="membership">
         <h3 class="membertext ms-lg-5">Membership Plan</h3>
-
-
-
-
 
         <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" data-interval="500">
             <div class="carousel-inner">
@@ -61,12 +55,12 @@
                         </h4>
                         <p class="card-text mt-5">{!! $adminpackage->details !!}</p>
 
-                        @if ($adminpackage->title === 'Free')
-                        {{-- <a class="btn btn-primary mb-5 mt-5">Apply Now</a> --}}
-                        @elseif (isset(Auth::user()->id))
+                        @if (isset(Auth::user()->id))
+                        @if ($adminpackage->title != 'Free')
                         <div class="card-body text-center">
                             <form action="{{ route('razorpay.payment.store') }}" method="POST">
                                 @csrf
+                                {{-- <button type="submit" class="btn btn-success mb-5 mt-5">Apply Now</button> --}}
                                 <input type="hidden" name="package" value="{{ $adminpackage->title }}">
                                 <script src="https://checkout.razorpay.com/v1/checkout.js"
                                     data-key="{{ env('RAZORPAY_KEY') }}" data-amount="{{ $adminpackage->price * 100 }}"
@@ -76,15 +70,17 @@
                                     data-prefill.name="name" data-theme.color="#333692">
                                 </script>
                             </form>
+                            <form action="{{ route('free.trial') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="package" value="{{ $adminpackage->title }} Free Trial">
+                                <button type="submit" class="btn btn-success mb-5 mt-5">Free Trial</button>
+                            </form>
                         </div>
-                        <form action="{{ route('free.trial') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="package" value="{{ $adminpackage->title }}">
-                            <button type="submit" class="btn btn-success mb-5 mt-5">Free Trial</button>
-                        </form>
+                        @endif
                         @else
                         <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                            class="btn btn-primary mb-5 mt-5">Apply Now</a>
+                            class="btn btn-primary mb-5 mt-5">Apply
+                            Now</a>
                         @endif
                     </div>
                 </div>

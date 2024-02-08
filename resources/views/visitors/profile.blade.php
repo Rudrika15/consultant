@@ -170,7 +170,7 @@
                                             <div class="input-container">
                                                 <i class="fa fa-map-marker icon text-center"></i>
                                                 <input type="text" name="pincode" id="pincode"
-                                                    class="form-control input-field" placeholder="{{_('pincode')}}">
+                                                    class="form-control input-field" placeholder="Pincode">
                                             </div>
                                         </div>
 
@@ -244,7 +244,7 @@
 
                                                     <input id="password" type="password"
                                                         class="form-control register-form  @error('password') is-invalid @enderror"
-                                                        name="password" placeholder="{{_('Password')}}" required
+                                                        name="password" placeholder="Password" required
                                                         autocomplete="new-password">
 
                                                     @error('password')
@@ -261,7 +261,7 @@
                                                     <i class="fa fa-lock icon text-center"></i>
                                                     <input id="password-confirm" type="password"
                                                         class="form-control register-form" name="password_confirmation"
-                                                        placeholder="{{_('Confirm Password')}}" required
+                                                        placeholder="Confirm Password" required
                                                         autocomplete="new-password">
 
                                                     @error('password_confirmation')

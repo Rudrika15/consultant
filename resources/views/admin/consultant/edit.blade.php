@@ -22,8 +22,6 @@
 </div>
 @endif
 
-
-
 <div class="card">
     <!-- /.box-title -->
     <div class="card-header"
@@ -41,27 +39,28 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" id="consultantForm" enctype="multipart/form-data">
+        <form class="form-group" id="consultantForm" action="{{ route('consultant.update') }}" method="POST"
+            enctype="multipart/form-data">
             @csrf
-            <input type="hidden" name="userId" id="id" value="{{$profile->id}}">
+            <input type="hidden" name="userId" id="userId" value="{{$profile->id}}">
 
 
             <div class="form-label-group mt-3">
                 <label for="">Is Featured Selected ?</label>
                 <div class="form-check mt-2">
-                    <input class="form-check-input" type="radio" name="isFeatured" id="Yes">
+                    <input class="form-check-input" type="radio" name="isFeatured" id="Yes" value="Yes">
                     <label class="form-check-label" for="Yes">
                         Yes
                     </label>
                 </div>
                 <div class="form-check mt-2">
-                    <input class="form-check-input" type="radio" name="isFeatured" id="No">
+                    <input class="form-check-input" type="radio" name="isFeatured" id="No" value="No">
                     <label class="form-check-label" for="No">
                         No
                     </label>
                 </div>
-                @if ($errors->has('language'))
-                <span class="error">{{ $errors->first('language') }}</span>
+                @if ($errors->has('isFeatured'))
+                <span class="error">{{ $errors->first('isFeatured') }}</span>
                 @endif
             </div>
 
@@ -75,54 +74,5 @@
     <!-- Collapsable Card Example -->
 
 </div>
-
-<script type="text/javascript">
-    $(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        
-        $('#consultantForm').submit(function(e) {
-        e.preventDefault();
-        let formData = new FormData(this);
-
-        $.ajax({
-            type: 'POST',
-            url: "{{ route('consultant.update') }}",
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                if (response.success) {
-                    // Success message using SweetAlert
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text: response.message,
-                    }, 200);
-                    $('#consultantForm').trigger("reset");
-                } else {
-                    // Error message using SweetAlert
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'An error occurred!',
-                    });
-                }
-            },
-            error: function(xhr, status, error) {
-                // Error message using SweetAlert
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'An error occurred!',
-                });
-            }
-        });
-    });
-    });
-</script>
 
 @endsection

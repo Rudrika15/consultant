@@ -136,7 +136,7 @@
                     </div>
                     <div class="col-md-2 mb-3" style="padding-left: 100px;">
                         <button type="submit" class="btn btn-primary" id="searchButton"
-                            style="width: 300px">Search</button>
+                            style="width: 200px">Search</button>
                     </div>
                 </div>
             </form>
@@ -245,9 +245,8 @@
                         {{-- <p class="card-text">{!! $FeaturedConsultantsData->about ?? '-' !!}</p> --}}
                         <p class="card-text">{{ $FeaturedConsultantsData->map ?? '-' }}</p>
                         <p class="card-text">{{ $FeaturedConsultantsData->categories[0]->catName ?? '-' }}</p>
-
                         <a href="{{ route('visitors.consultantDetail', $FeaturedConsultantsData->userId) }}"
-                            class="btn btn-primary">Show Profile</a>
+                            class="btn btn-primary btn-show" style="width: 150px;">Show Profile</a>
                     </div>
                 </div>
             </div>
@@ -265,6 +264,19 @@
 
     {{-- Featured Consultants End --}}
 
+
+    <style>
+        .btn-register {
+
+            margin-left: 100px;
+        }
+
+        .btn-show {
+
+            margin-left: 50px;
+
+        }
+    </style>
 
     <div class="trusted_porple mt-5">
         <div class="trusted_orange">
@@ -292,8 +304,7 @@
                                     <p class="card-text">{{ $workshopDate->format('d-m-y') }}</p>
                                     {{-- <p class="card-text">{{ $workshopData-> ?? '-' }}</p> --}}
                                     <a href="{{ route('visitor.workshopDetails', $workshopData->id) }}"
-                                        class="btn btn-primary">Register
-                                        Now</a>
+                                        class="btn btn-primary btn-register" style="width: 130px">Register Now</a>
                                 </div>
                             </div>
                         </div>

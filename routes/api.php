@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\Admin\AdminLeadController;
 use App\Http\Controllers\Api\Consultant\TimeController;
 use App\Http\Controllers\Api\Consultant\VideoController;
 use App\Http\Controllers\Api\Admin\AdminPackageController;
+use App\Http\Controllers\Api\Admin\MembershipController;
 use App\Http\Controllers\Api\Admin\SocialMasterController;
 use App\Http\Controllers\Api\Consultant\GalleryController;
 use App\Http\Controllers\Api\Consultant\PackageController;
@@ -82,6 +83,12 @@ Route::get('city-show/{id?}', [CityController::class, 'show']);
 
 Route::get('stateWiseCity/{stateId?}', [CityController::class, 'stateWiseCity']);
 
+
+/* Payment View */
+
+// Route::get('payments', 'App\Http\Controllers\Api\Admin\MembershipController@index');
+Route::get('payments-index', [MembershipController::class, 'index']);
+Route::post('payments-store', [MembershipController::class, 'store']);
 
 // Category 
 Route::get('category-index', [CategoryController::class, 'index']);
@@ -194,6 +201,7 @@ Route::post('language/update/{id?}', [LanguageController::class, 'update']);
 Route::get('language/delete/{id?}', [LanguageController::class, 'delete']);
 Route::get('language/show/{id?}', [LanguageController::class, 'show']);
 Route::get('getLanguageList', [LanguageController::class, 'getLanguageList']);
+
 
 
 

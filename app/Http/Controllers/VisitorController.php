@@ -618,6 +618,8 @@ class VisitorController extends Controller
         $cityId = $request->cityId;
         return   $categoryId . '' . $pincodeId . '' . $cityId;
     }
+
+
     public function paymentgetway($id)
     {
         try {
@@ -628,6 +630,11 @@ class VisitorController extends Controller
             return view('servererror');
         }
     }
+
+    
+
+
+
     public function userplantype(Request $request)
     {
         try {
@@ -635,6 +642,7 @@ class VisitorController extends Controller
             $user = User::find($userId);
             // $user->plantype = $request->planType;
             $user->planType = $request->input('package');
+            $user->validupto = Carbon::now()->addDays(365);
 
             $user->save();
             return response()->json([
@@ -642,7 +650,7 @@ class VisitorController extends Controller
                 'message' => 'Payment Successfully!',
             ], 200);
         } catch (\Throwable $th) {
-            //throw $th;
+            throw $th;
             return view('servererror');
         }
     }
