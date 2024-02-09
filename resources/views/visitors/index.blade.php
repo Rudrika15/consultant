@@ -135,7 +135,7 @@
                         </select>
                     </div>
                     <div class="col-md-2 mb-3" style="padding-left: 100px;">
-                        <button type="submit" class="btn btn-primary" id="searchButton"
+                        <button type="submit" class="btn text-white" id="searchButton"
                             style="width: 200px">Search</button>
                     </div>
                 </div>
@@ -246,7 +246,7 @@
                         <p class="card-text">{{ $FeaturedConsultantsData->map ?? '-' }}</p>
                         <p class="card-text">{{ $FeaturedConsultantsData->categories[0]->catName ?? '-' }}</p>
                         <a href="{{ route('visitors.consultantDetail', $FeaturedConsultantsData->userId) }}"
-                            class="btn btn-primary btn-show" style="width: 150px;">Show Profile</a>
+                            class="btn text-white btn-show" style="width: 150px;">Show Profile</a>
                     </div>
                 </div>
             </div>
@@ -268,12 +268,12 @@
     <style>
         .btn-register {
 
-            margin-left: 100px;
+            margin-left: 10px;
         }
 
         .btn-show {
 
-            margin-left: 50px;
+            margin-left: 10px;
 
         }
     </style>
@@ -304,7 +304,7 @@
                                     <p class="card-text">{{ $workshopDate->format('d-m-y') }}</p>
                                     {{-- <p class="card-text">{{ $workshopData-> ?? '-' }}</p> --}}
                                     <a href="{{ route('visitor.workshopDetails', $workshopData->id) }}"
-                                        class="btn btn-primary btn-register" style="width: 130px">Register Now</a>
+                                        class="btn text-white btn-register" style="width: 130px">Register Now</a>
                                 </div>
                             </div>
                         </div>

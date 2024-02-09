@@ -134,6 +134,8 @@ Route::post('fetchcityhome', [VisitorController::class, 'fetchcityhome'])->name(
 
 Route::post('fetchCity', [RegisterController::class, 'fetchCity'])->name('fetchCity');
 
+Route::post('fetchCityAdmin', [ConsultantController::class, 'fetchCityAdmin'])->name('fetchCityAdmin');
+
 Route::post('city', [UserController::class, 'city'])->name('city');
 
 Auth::routes();
@@ -303,7 +305,7 @@ Route::group(['middleware' => ['auth']], function () {
     /* Consultant List  */
     Route::get('consultant-index', [ConsultantController::class, 'index'])->name('consultant.index');
     Route::get('consultant-create', [ConsultantController::class, 'create'])->name('consultant.create');
-    Route::get('consultant-store', [ConsultantController::class, 'store'])->name('consultant.store');
+    Route::post('consultant-store', [ConsultantController::class, 'store'])->name('consultant.store');
     Route::get('consultant/{id}/view', [ConsultantController::class, 'view'])->name('consultant.view');
     Route::get('consultant-edit/{id?}', [ConsultantController::class, 'edit'])->name('consultant.edit');
     Route::post('consultant-update', [ConsultantController::class, 'update'])->name('consultant.update');
