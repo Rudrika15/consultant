@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-    public function user()
-    {
-        return $this->hasMany(User::class, 'id', 'userId');
-    }
 
     public function profiles()
     {
-        return $this->hasOne(Profile::class, 'categoryId', 'id');
+        return $this->hasMany(Profile::class, 'categoryId', 'id');
+    }
+    public function consultants()
+    {
+        return $this->hasMany(Profile::class, 'categoryId', 'id');
     }
 }
