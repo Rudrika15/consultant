@@ -29,9 +29,9 @@
             <h4 class="">Time</h4>
         </div>
         <div class="">
-            <a href="{{ route('time.create') }}" id="add" class="btn btnback btn-sm">ADD</a>
+            <a href="{{ route('time.create') }}" id="add" class="btn btn-info btn-sm">ADD</a>
 
-            <a href="" id="back" class="btn btnback  btn-sm" style="display:none;">BACK</a>
+            <a href="" id="back" class="btn btn-info  btn-sm" style="display:none;">BACK</a>
         </div>
     </div>
 

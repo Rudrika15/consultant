@@ -26,13 +26,14 @@
 
 <div class="card">
     <!-- /.box-title -->
-    <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
 
         <div class="">
             <h4 class="">Update Pincode</h4>
         </div>
         <div class="">
-            <a href="{{ route('pincode.index') }}" class="btn btnback btn-sm">BACK</a>
+            <a href="{{ route('pincode.index') }}" class="btn btn-info btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -46,11 +47,13 @@
             <div class="form-label-group mt-3">
                 <div class="form-group">
                     <strong>City Name:</strong>
-                    <select class="form-control" data-error='State Name Field is required' required name="cityId" id="cityId">
+                    <select class="form-control" data-error='State Name Field is required' required name="cityId"
+                        id="cityId">
                         <option value="" selected disabled> Select User Name </option>
                         @foreach ($city as $cityData)
 
-                        <option value="{{ $cityData->id }}" {{$cityData->id==old('cityId',$pincode->cityId) ? 'selected':''}}>{{ $cityData->cityName }}</option>
+                        <option value="{{ $cityData->id }}" {{$cityData->id==old('cityId',$pincode->cityId) ?
+                            'selected':''}}>{{ $cityData->cityName }}</option>
                         @endforeach
                     </select>
                     <div class="help-block with-errors"></div>
@@ -63,7 +66,8 @@
 
             <div class="form-label-group mt-3">
                 <label for="areaName" class="fw-bold">Area Name <sup class="text-danger">*</sup></label>
-                <input id="areaName" type="text" name="areaName" value="{{$pincode->areaName}}" class="form-control" placeholder="Area Name">
+                <input id="areaName" type="text" name="areaName" value="{{$pincode->areaName}}" class="form-control"
+                    placeholder="Area Name">
                 @if ($errors->has('areaName'))
                 <span class="error">{{ $errors->first('areaName') }}</span>
                 @endif
@@ -71,12 +75,13 @@
 
             <div class="form-label-group mt-3">
                 <label for="pincode" class="fw-bold">Pincode <sup class="text-danger">*</sup></label>
-                <input id="pincode" type="text" name="pincode" value="{{$pincode->pincode}}" class="form-control" placeholder="Pincode">
+                <input id="pincode" type="text" name="pincode" value="{{$pincode->pincode}}" class="form-control"
+                    placeholder="Pincode">
                 @if ($errors->has('pincode'))
                 <span class="error">{{ $errors->first('pincode') }}</span>
                 @endif
             </div>
-            
+
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
                 <button type="submit" class="btn btn-primary" id="saveBtn">Submit</button>
             </div>
@@ -89,7 +94,6 @@
 </div>
 
 <script type="text/javascript">
-    
     $('#pincodeForm').submit(function(e) {
         e.preventDefault();
         let formData = new FormData(this);

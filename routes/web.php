@@ -1,42 +1,50 @@
 <?php
 
-use App\Http\Controllers\Admin\AboutController;
-use App\Http\Controllers\Admin\AdminLeadController;
-use App\Http\Controllers\Admin\AdminPackageController;
-use App\Http\Controllers\Admin\AdminWorkshopController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\CityController;
-use App\Http\Controllers\Admin\ConsultantController;
-use App\Http\Controllers\Admin\ContactusController;
-use App\Http\Controllers\Admin\InquiryController;
-use App\Http\Controllers\Admin\LanguageMasterController;
-use App\Http\Controllers\Admin\PincodeController;
-use App\Http\Controllers\Admin\SliderController;
-use App\Http\Controllers\Admin\SocialMasterController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Consultant\AttachmentController;
-// use App\Http\Controllers\Consultant\ConsultantController;
-use App\Http\Controllers\Consultant\GalleryController;
-use App\Http\Controllers\Consultant\LanguageController;
-use App\Http\Controllers\Consultant\PackageController;
-use App\Http\Controllers\Consultant\CertificateController;
-use App\Http\Controllers\Consultant\AchievementController;
-use App\Http\Controllers\Consultant\SocialLinkController;
-use App\Http\Controllers\Consultant\TimeController;
-use App\Http\Controllers\Consultant\VideoController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\VisitorController;
-use App\Http\Controllers\Admin\StateController;
-use App\Http\Controllers\Consultant\LeadController;
-use App\Http\Controllers\Consultant\UpgradePlanController;
-use App\Http\Controllers\Consultant\WorkshopController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\RazorpayController;
-use App\Http\Controllers\RazorpayPaymentController;
 use App\Models\Attachment;
-use Illuminate\Support\Facades\Route;
 use League\Flysystem\Visibility;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MailController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\VisitorController;
+use App\Http\Controllers\RazorpayController;
+use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\StateController;
+use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\InquiryController;
+use App\Http\Controllers\Admin\PincodeController;
+// use App\Http\Controllers\Consultant\ConsultantController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\AdminLeadController;
+use App\Http\Controllers\Admin\ContactusController;
+use App\Http\Controllers\Consultant\LeadController;
+use App\Http\Controllers\Consultant\TimeController;
+use App\Http\Controllers\RazorpayPaymentController;
+use App\Http\Controllers\Admin\ConsultantController;
+use App\Http\Controllers\Consultant\VideoController;
+use App\Http\Controllers\Admin\AdminPackageController;
+use App\Http\Controllers\Admin\SocialMasterController;
+use App\Http\Controllers\Consultant\GalleryController;
+use App\Http\Controllers\Consultant\PackageController;
+use App\Http\Controllers\Admin\AdminWorkshopController;
+use App\Http\Controllers\Admin\PrivacyPolicyController;
+use App\Http\Controllers\Consultant\LanguageController;
+use App\Http\Controllers\Consultant\WorkshopController;
+use App\Http\Controllers\Admin\LanguageMasterController;
+use App\Http\Controllers\Admin\TermsConditionController;
+use App\Http\Controllers\Consultant\AttachmentController;
+use App\Http\Controllers\Consultant\SocialLinkController;
+use App\Http\Controllers\Consultant\AchievementController;
+use App\Http\Controllers\Consultant\CertificateController;
+use App\Http\Controllers\Consultant\UpgradePlanController;
+use App\Http\Controllers\Admin\ConsultantInquiryController;
+use App\Http\Controllers\Auth\ConsultantRegisterController;
+use App\Http\Controllers\Admin\WorkshopRegistrationController;
+use App\Http\Controllers\Consultant\ConsultantEnquiryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,13 +64,29 @@ Route::get('/', function () {
 
 /* ---------------------- Visitors Side ----------------------------------- */
 
+//workshop list
+
+// Route::get('/workshopList' , [VisitorController::class, ''])
+
 
 Route::get('/', [VisitorController::class, 'index'])->name('visitors.index');
 Route::get('/search', [VisitorController::class, 'search'])->name('visitors.search');
 Route::get('/aboutus', [VisitorController::class, 'aboutus'])->name('visitors.aboutus');
+Route::get('/policy', [VisitorController::class, 'policy'])->name('visitors.policy');
+Route::get('/terms', [VisitorController::class, 'terms'])->name('visitors.terms');
 Route::get('/membershipplan', [VisitorController::class, 'membershipPlan'])->name('visitors.membershipPlan');
+//corporate inquiry
 Route::get('/corporateInquery', [VisitorController::class, 'corporateInquery'])->name('visitors.corporateInquery');
 Route::post('corporateInquery-inqueryStore', [VisitorController::class, 'inqueryStore'])->name('corporateInquery.inqueryStore');
+//consultant inquiry
+Route::get('/consultantInquiry', [VisitorController::class, 'consultantInquiry'])->name('visitors.consultantInquiry');
+Route::post('consultantInquiry-consultantInquiryStore', [VisitorController::class, 'consultantInquiryStore'])->name('consultantInquiry.consultantInquiryStore');
+
+Route::post('/free-trial', [VisitorController::class, 'freeTrial'])->name('free.trial');
+// Route::get('/membershipplan', [VisitorController::class, 'membershipPlan'])->name('visitors.membershipPlan');
+
+//otp send in mail
+// Route::get('send-mail', [MailController::class, 'index']);
 
 Route::get('/contactus', [VisitorController::class, 'contactus'])->name('visitors.contactus');
 Route::post('contactus-store', [VisitorController::class, 'contantus_store'])->name('contactus.store');
@@ -76,9 +100,19 @@ Route::get('/detail', [VisitorController::class, 'detail'])->name('visitors.deta
 Route::get('/review/{id?}', [VisitorController::class, 'review'])->name('visitors.review');
 
 
-// pericular category detail
+// perticular category detail
 Route::get('category-detail/{id?}', [VisitorController::class, 'categoryDetail'])->name('visitors.categoryDetail');
 Route::get('consultant-detail/{id?}', [VisitorController::class, 'consultantDetail'])->name('visitors.consultantDetail');
+
+//workshop register
+Route::post('/workshop/register', [VisitorController::class, 'registerAndPay'])
+    ->name('workshop.register');
+
+// Route::post('/workshop/register/{workshopId}', [VisitorController::class, 'registerAndPay'])
+//     ->name('workshop.register');
+
+// Add a new route for the registerAndPay method
+// Route::post('/workshop/register', 'YourController@registerAndPay')->name('workshop.register');
 
 
 
@@ -88,11 +122,9 @@ Route::get('/visitorsRegister', [VisitorController::class, 'visitorsRegister'])-
 Route::post('/regitrationStore', [VisitorController::class, 'regitrationStore'])->name('visitors.regitrationStore');
 Route::get('/nearByConsultantList', [VisitorController::class, 'nearByConsultantList'])->name('visitors.nearByConsultantList');
 
-
-
-
-
-
+//Workshop View
+Route::get('visitor/workshopDetails/{id?}', [VisitorController::class, 'workshopDetails'])->name('visitor.workshopDetails');
+Route::get('visitor/workshopList', [VisitorController::class, 'workshopList'])->name('visitor.workshopList');
 
 
 Route::post('/serachwithdata', [VisitorController::class, 'serachwithdata'])->name('visitors.serachwithdata');
@@ -102,9 +134,15 @@ Route::post('fetchcityhome', [VisitorController::class, 'fetchcityhome'])->name(
 
 Route::post('fetchCity', [RegisterController::class, 'fetchCity'])->name('fetchCity');
 
+Route::post('fetchCityAdmin', [ConsultantController::class, 'fetchCityAdmin'])->name('fetchCityAdmin');
+
 Route::post('city', [UserController::class, 'city'])->name('city');
+
 Auth::routes();
 
+// consultant register
+Route::get('/consultant/register', [RegisterController::class, 'registerConsultant'])->name('registerConsultant');
+Route::post('/consultant/register/code', [RegisterController::class, 'registerConsultantCode'])->name('registerConsultantCode');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/homepage', [App\Http\Controllers\HomeController::class, 'homePage'])->name('app');
@@ -118,7 +156,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('razorpay-payment', [RazorpayPaymentController::class, 'store'])->name('razorpay.payment.store');
 
 
-    // Route::get('consultantRegister', [ConsultantController::class, 'consultantRegister'])->name('consultantRegister');
+    // Route::get('consultantRegister', [ConsultantRegisterController::class, 'consultantRegister'])->name('consultantRegister');
 
     // profile update
     Route::get('profile-update/{id?}', [UserController::class, 'profile'])->name('profile');
@@ -127,6 +165,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     //For Visitors Profile
+
     Route::get('visitor/profile', [VisitorController::class, 'profile'])->name('visitor.profile');
     Route::post('visitor/profile/city', [VisitorController::class, 'cityforprofile'])->name('visitors.cityforprofile');
 
@@ -137,6 +176,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     /* Leade List */
     Route::get('lead-index', [AdminLeadController::class, 'index'])->name('admin.lead.index');
+
+    /* approve inquiry */
+    Route::post('/consultantInquiry/{id}/approve', [ConsultantInquiryController::class, 'approve'])->name('consultantInquiry.approve');
+
 
 
     /* State */
@@ -214,13 +257,45 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('slider-delete/{id?}', [SliderController::class, 'delete'])->name('slider.delete');
     Route::get('slider/{id}/view', [SliderController::class, 'view'])->name('slider.view');
 
+    // /* Terms & Condition */
+    Route::get('terms-index', [TermsConditionController::class, 'index'])->name('terms.index');
+    Route::get('terms-create', [TermsConditionController::class, 'create'])->name('terms.create');
+    Route::post('terms-store', [TermsConditionController::class, 'store'])->name('terms.store');
+    Route::get('terms-edit/{id?}', [TermsConditionController::class, 'edit'])->name('terms.edit');
+    Route::post('terms-update', [TermsConditionController::class, 'update'])->name('terms.update');
+    Route::get('terms-delete/{id?}', [TermsConditionController::class, 'delete'])->name('terms.delete');
+    Route::get('terms/{id}/view', [TermsConditionController::class, 'view'])->name('terms.view');
+
+    // /* Privacy Policy */
+    Route::get('policy-index', [PrivacyPolicyController::class, 'index'])->name('policy.index');
+    Route::get('policy-create', [PrivacyPolicyController::class, 'create'])->name('policy.create');
+    Route::post('policy-store', [PrivacyPolicyController::class, 'store'])->name('policy.store');
+    Route::get('policy-edit/{id?}', [PrivacyPolicyController::class, 'edit'])->name('policy.edit');
+    Route::post('policy-update', [PrivacyPolicyController::class, 'update'])->name('policy.update');
+    Route::get('policy-delete/{id?}', [PrivacyPolicyController::class, 'delete'])->name('policy.delete');
+    Route::get('policy/{id}/view', [PrivacyPolicyController::class, 'view'])->name('policy.view');
+
 
     // /* Corporate Inquiry */
     Route::get('corparateInquiry-index', [InquiryController::class, 'index'])->name('corparateInquiry.index');
     Route::get('corporateInquiry/{id}/view', [InquiryController::class, 'view'])->name('corparateInquiry.view');
+
+    // /* Consultant Inquiry */
+    Route::get('consultantInquiry-index', [ConsultantInquiryController::class, 'index'])->name('consultantInquiry.inquiry');
+    Route::get('consultantInquiry/{id}/view', [ConsultantInquiryController::class, 'view'])->name('consultantInquiry.view');
+
     /* Workshop */
     Route::get('adminworkshop-index', [AdminWorkshopController::class, 'index'])->name('adminworkshop.index');
-    Route::get('adminworkshop/{id}/view', [AdminWorkshopController::class, 'view'])->name('adminworkshop.view');
+    Route::get('adminworkshop-create', [AdminWorkshopController::class, 'create'])->name('adminworkshop.create');
+    Route::post('adminworkshop-store', [AdminWorkshopController::class, 'store'])->name('adminworkshop.store');
+    Route::get('adminworkshop-edit/{id?}', [AdminWorkshopController::class, 'edit'])->name('adminworkshop.edit');
+    Route::post('adminworkshop-update', [AdminWorkshopController::class, 'update'])->name('adminworkshop.update');
+    Route::get('adminworkshop-delete{id?}', [AdminWorkshopController::class, 'delete'])->name('adminworkshop.delete');
+    Route::get('adminworkshop/{id}/show', [AdminWorkshopController::class, 'show'])->name('adminworkshop.show');
+
+    /* Workshop Registration View */
+    // Route::get('workshopregistration', [WorkshopRegistrationController::class, 'index'])->name('workshopregistration.index');
+
 
     /* Contactus List */
     Route::get('contactus-index', [ContactusController::class, 'index'])->name('contactus.index');
@@ -229,6 +304,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     /* Consultant List  */
     Route::get('consultant-index', [ConsultantController::class, 'index'])->name('consultant.index');
+    Route::get('consultant-create', [ConsultantController::class, 'create'])->name('consultant.create');
+    Route::post('consultant-store', [ConsultantController::class, 'store'])->name('consultant.store');
     Route::get('consultant/{id}/view', [ConsultantController::class, 'view'])->name('consultant.view');
     Route::get('consultant-edit/{id?}', [ConsultantController::class, 'edit'])->name('consultant.edit');
     Route::post('consultant-update', [ConsultantController::class, 'update'])->name('consultant.update');
@@ -348,4 +425,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     /* Lead  */
     Route::get('consultant-lead-index', [LeadController::class, 'index'])->name('consultant.lead.index');
+
+    // Consultant Inquiry
+    Route::get('consultant-inquiry-index', [ConsultantEnquiryController::class, 'index'])->name('consultant.consultantinquiry.index');
 });

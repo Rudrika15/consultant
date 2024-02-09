@@ -17,12 +17,13 @@
 
 <div class="card">
 
-<div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
         <div class="">
             <h4 class="">Create New User</h4>
         </div>
         <div class="">
-            <a href="{{ route('users.index') }}" class="btn btnback btn-sm">Back</a>
+            <a href="{{ route('users.index') }}" class="btn btn-info btn-sm">Back</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -54,7 +55,8 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Confirm Password:</strong>
-                    {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control')) !!}
+                    {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' =>
+                    'form-control')) !!}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
@@ -66,7 +68,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
-        </div>  
+        </div>
         {!! Form::close() !!}
 
 

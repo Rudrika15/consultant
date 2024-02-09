@@ -27,6 +27,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+
     <!-- For Sweet Alert  for css-->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -160,15 +163,15 @@
                             </li>
                             <li>
                                 <i class="fa fa-caret-right"></i>
-                                <a href="" class="footerlink">Terms & Conditions</a>
+                                <a href="{{ route('visitors.terms') }}" class="footerlink">Terms & Conditions</a>
                             </li>
                             <li>
                                 <i class="fa fa-caret-right"></i>
-                                <a href="" class="footerlink">Privacy Policy</a>
+                                <a href="{{ route('visitors.policy') }}" class="footerlink">Privacy Policy</a>
                             </li>
                             <li>
                                 <i class="fa fa-caret-right"></i>
-                                <a href="" class="footerlink">Workshop</a>
+                                <a href="{{ route('visitor.workshopList')}}" class="footerlink">Workshop</a>
                             </li>
                         </ul>
                     </div>
@@ -179,7 +182,7 @@
         <div class="copyright">
             <div class="container d-flex justify-content-between flex-wrap pt-5">
                 <div>
-                    <p>Copyright © Consultant Cube 2022 Rights Reserve </br>
+                    <p>Copyright © Consultant Cube 2024 Rights Reserved </br>
                         Developed by Aspireotech </p>
                 </div>
                 <div class="d-flex me-5 gap-3">
@@ -201,7 +204,7 @@
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
     </script>
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
 </body>
 

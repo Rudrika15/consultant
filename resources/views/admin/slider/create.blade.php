@@ -33,7 +33,7 @@
             <h4 class="">Create Slider</h4>
         </div>
         <div class="">
-            <a href="{{ route('slider.index') }}" class="btn btnback btn-sm">BACK</a>
+            <a href="{{ route('slider.index') }}" class="btn btn-info btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -50,8 +50,12 @@
                     <select class="form-control" required name="type" id="type">
                         <option value="" selected disabled> Select Type </option>
                         <option value="Home">Home</option>
-                        <option value="Inner">Inner</option>
-
+                        <option value="About Us">About Us</option>
+                        <option value="Find Consultant">Find Consultant</option>
+                        <option value="Membership Plan">Membership Plan</option>
+                        <option value="Corporate Inquiry">Corporate Inquiry</option>
+                        <option value="Contact Us">Contact Us</option>
+                        <option value="Workshop">Workshop</option>
 
                     </select>
                     <div class="help-block with-errors"></div>

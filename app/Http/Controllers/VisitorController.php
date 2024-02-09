@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\City;
 use App\Models\Lead;
 use App\Models\Time;
@@ -17,11 +18,16 @@ use App\Models\Pincode;
 use App\Models\Profile;
 use App\Models\Category;
 use App\Models\Language;
+use App\Models\Workshop;
 use App\Models\Contactus;
-use App\Models\AdminPackage;
 use App\Models\Attachment;
+use App\Models\AdminPackage;
 use Illuminate\Http\Request;
+use App\Models\PrivacyPolicy;
 use Laravel\Ui\Presets\React;
+use App\Models\TermsCondition;
+use App\Models\RegisterWorkshop;
+use App\Models\ConsultantInquiry;
 use PhpParser\Node\Expr\FuncCall;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -31,15 +37,16 @@ class VisitorController extends Controller
     public function index()
     {
         try {
-            $category = Category::all();
-            $cities = City::all();
+            $category = Category::where('status', 'active')->get();
+            $cities = City::where('status', 'active')->get();
             $data['states'] = State::get(["stateName", "id"]);
-            $sliderhome = Slider::where('type', '=', "Home")->get();
-
+            $sliderhome = Slider::where('type', '=', "Home")->where('status', 'Active')->get();
+            // $sliderworkshop = Slider::where('type', '=', "Workshop")->where('status', 'Active')->get();
+            $workshop = Workshop::where('status', 'Active')->get();
             $FeaturedConsultants = Profile::where('isFeatured', '=', 'Yes')->with('user')->get();
 
 
-            return view('visitors.index', $data, compact('category', 'sliderhome', 'cities', 'FeaturedConsultants'));
+            return view('visitors.index', $data, compact('category', 'sliderhome', 'workshop', 'cities', 'FeaturedConsultants'));
         } catch (\Throwable $th) {
             throw $th;
             return view('servererror');
@@ -79,36 +86,175 @@ class VisitorController extends Controller
     public function aboutus()
     {
         try {
-            $sliderinner = Slider::where('type', '=', "Inner")->get();
-            $about = About::all();
-            return view('visitors.aboutus', compact('sliderinner', 'about'));
-        } catch (\Throwable $th) {
-            //throw $th;
-            return view('servererror');
-        }
-    }
-    public function membershipPlan()
-    {
-        try {
-            $sliderinner = Slider::where('type', '=', "Inner")->get();
-            $adminpackage = AdminPackage::all();
-            return view('visitors.membershipPlan', compact('adminpackage', 'sliderinner'));
+            $sliderabout = Slider::where('type', '=', "About Us")->where('status', '=', 'Active')->get();
+            $about = About::where('status', 'active')->get();
+            return view('visitors.aboutus', compact('sliderabout', 'about'));
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }
     }
 
-    public function corporateInquery()
+    // public function workshopDetails()
+    // {
+    //     try {
+    //         $sliderworkshop = Slider::where('type', '=', "Workshop")->where('status', '=', 'Active')->get();
+    //         $workshop = Workshop::where('status', 'active')->get();
+    //         return view('visitors.workshopDetails', compact('sliderworkshop', 'workshop'));
+    //     } catch (\Throwable $th) {
+    //         // throw $th;
+    //         return view('servererror');
+    //     }
+    // }
+
+    public function workshopDetails(Request $request, $id)
+    {
+        $sliderworkshop = Slider::where('type', '=', "Workshop")->where('status', '=', 'Active')->get();
+        $workshop = Workshop::where('id', $id)->where('status', 'Active')->first();
+
+        return view('visitors.workshopDetails', compact('workshop', 'sliderworkshop'));
+    }
+
+
+
+    // public function registerWorkshop(Request $request)
+    // {
+    //     if (auth()->check()) {
+    //         $userId = auth()->user()->id;
+    //         // return $workshopId = $request->input('workshopId');
+    //         $workshopId = $request->workshopId;
+
+    //         if (!RegisterWorkshop::where(['userId' => $userId, 'workshopId' => $workshopId])->exists()) {
+    //             RegisterWorkshop::create([
+    //                 'userId' => $userId,
+    //                 'workshopId' => $workshopId,
+    //             ]);
+
+    //             return back()->with('successMessage', 'Successfully registered for the workshop.');
+    //         } else {
+    //             return back()->with('errorMessage', 'You are already registered for this workshop.');
+    //         }
+    //     } else {
+    //         return redirect()->route('login')->with('errorMessage', 'Please login to register for the workshop.');
+    //     }
+    // }
+
+
+    // public function registerWorkshop(Request $request)
+    // {
+    //     if (auth()->check()) {
+    //         $userId = auth()->user()->id;
+    //         $workshopId = $request->input('workshopId');
+
+    //         // Check for successful payment (you may need to adjust this condition based on Razorpay's response)
+    //         if ($request->input('payment_success') == true) {
+    //             // Check if the user is already registered for the workshop
+    //             if (!RegisterWorkshop::where(['userId' => $userId, 'workshopId' => $workshopId])->exists()) {
+    //                 // Store registration data in the database
+    //                 RegisterWorkshop::create([
+    //                     'userId' => $userId,
+    //                     'workshopId' => $workshopId,
+    //                 ]);
+
+    //                 return back()->with('successMessage', 'Successfully registered for the workshop.');
+    //             } else {
+    //                 return back()->with('errorMessage', 'You are already registered for this workshop.');
+    //             }
+    //         } else {
+    //             return back()->with('errorMessage', 'Payment was not successful. Please try again.');
+    //         }
+    //     } else {
+    //         return redirect()->route('login')->with('errorMessage', 'Please login to register for the workshop.');
+    //     }
+    // }
+
+
+
+
+    public function registerAndPay(Request $request)
+    {
+        // Assuming you have validation logic for your registration form fields
+        $request->validate([
+            'workshopId' => 'required|exists:workshops,id',
+            // Add other validation rules as needed
+        ]);
+
+        $userId = auth()->user()->id;
+        $workshopId = $request->input('workshopId');
+
+        // Check if the user is already registered for the workshop
+        if (!RegisterWorkshop::where(['userId' => $userId, 'workshopId' => $workshopId])->exists()) {
+            // Store registration data in the database
+            RegisterWorkshop::create([
+                'userId' => $userId,
+                'workshopId' => $workshopId,
+                // Add other registration fields as needed
+            ]);
+
+            // Handle payment success logic here (update payment status, store payment details, etc.)
+            // You can access Razorpay payment details from $request->all()
+
+            return redirect()->back()->with('successMessage', 'Successfully Registered for the workshop.');
+        } else {
+            return back()->with('errorMessage', 'You are already registered for this workshop.');
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function workshopList()
     {
         try {
-            $sliderinner = Slider::where('type', '=', "Inner")->get();
-            return view('visitors.corporateInquery', compact('sliderinner'));
+            $sliderworkshop = Slider::where('type', '=', "Workshop")->where('status', '=', 'Active')->get();
+            $workshop = Workshop::where('status', '=', 'active')->get();
+            return view('visitors.workshopList', compact('workshop', 'sliderworkshop'));
+        } catch (\Throwable $th) {
+            throw $th;
+            return view('servererror');
+        }
+    }
+
+
+
+
+    public function membershipPlan()
+    {
+        try {
+            $slidermember = Slider::where('type', '=', "Membership Plan")->where('status', '=', 'Active')->get();
+            $adminpackage = AdminPackage::where('status', 'active')->get();
+            return view('visitors.membershipPlan', compact('adminpackage', 'slidermember'));
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }
     }
+
+
+    // General Inquiry for
+
+    public function corporateInquery()
+    {
+        try {
+            $slidercorporate = Slider::where('type', '=', "Corporate Inquiry")->where('status', '=', 'Active')->get();
+            return view('visitors.corporateInquery', compact('slidercorporate'));
+        } catch (\Throwable $th) {
+            //throw $th;
+            return view('servererror');
+        }
+    }
+
     public function inqueryStore(Request $request)
     {
         try {
@@ -144,16 +290,74 @@ class VisitorController extends Controller
             return view('servererror');
         }
     }
-    public function contactus()
+
+    // Consultant Side Inquiry
+
+    public function consultantInquiry()
+
     {
         try {
-            $sliderinner = Slider::where('type', '=', "Inner")->get();
-            return view('visitors.contactus', compact('sliderinner'));
+            return view('visitors.consultantDetail');
         } catch (\Throwable $th) {
             //throw $th;
             return view('servererror');
         }
     }
+
+
+    public function consultantInquiryStore(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',
+                'email' => 'required',
+                'inquiry' => 'required',
+                // Add other validation rules for other fields
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()], 200);
+            }
+
+            $userId = auth()->id();
+            $consultantId = $request->input('consultantId');
+
+            $cinquiry = new ConsultantInquiry();
+
+            $cinquiry->name = $request->input('name');
+            $cinquiry->email = $request->input('email');
+            $cinquiry->inquiry = $request->input('inquiry');
+            $cinquiry->userId = $userId;
+            $cinquiry->consultantId = $consultantId;
+
+            $cinquiry->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Inquiry Sent Successfully!',
+                'data' => $cinquiry
+            ]);
+        } catch (\Throwable $th) {
+            // Handle exceptions appropriately, e.g., log the error
+            return view('servererror');
+        }
+    }
+
+
+
+
+
+    public function contactus()
+    {
+        try {
+            $slidercontactus = Slider::where('type', '=', "Contact Us")->where('status', '=', 'Active')->get();
+            return view('visitors.contactus', compact('slidercontactus'));
+        } catch (\Throwable $th) {
+            //throw $th;
+            return view('servererror');
+        }
+    }
+
     public function contantus_store(Request $request)
     {
 
@@ -183,6 +387,7 @@ class VisitorController extends Controller
             return view('servererror');
         }
     }
+
     public function profile()
     {
         try {
@@ -207,39 +412,100 @@ class VisitorController extends Controller
     }
 
 
+    // public function findConsultantList(Request $request)
+    // {
+    //     $sliderfindconsultant = Slider::where('type', '=', "Find Consultant")->where('status', '=', 'Active')->get();
+
+    //     $category = Category::where('status', 'active')->get();
+    //     $cities = City::where('status', 'active')->get();
+    //     $categoryId = $request->categoryId;
+    //     $cityId = $request->cityId;
+    //     $categoryphoto = Category::find($categoryId);
+    //     // $city = City::find($cityId);
+    //     $consultant = Profile::with('userData');
+
+    //     if ($categoryId) {
+    //         $consultant = $consultant->where('categoryId', '=', $categoryId)->with('categoriesData');
+    //     }
+
+    //     if ($cityId) {
+    //         $consultant = $consultant->whereHas('cityData', function ($query) use ($cityId) {
+    //             $query->where('id', '=', $cityId);
+    //         });
+    //     }
+
+    //     // $consultant = $consultant->get();
+
+    //     $consultant = $consultant->where('type', '=', 'consultant')->get();
+
+
+    //     $countconsultant = count($consultant);
+
+    //     $selectedCategory = $categoryphoto;
+    //     // $selectedCity = $city;
+
+    //     if (isset(Auth::user()->id) && $categoryphoto) {
+    //         $leads = new Lead();
+    //         $leads->userId = Auth::user()->id;
+
+    //         $leads->categoryId = $categoryphoto->id;
+    //         $leads->cityId = $cityId;
+    //         $leads->save();
+    //     }
+
+    //     return view('visitors.findConsultantList', compact('consultant', 'cities', 'countconsultant', 'categoryphoto', 'category', 'sliderfindconsultant', 'selectedCategory'));
+    // }
+
+
+
     public function findConsultantList(Request $request)
     {
-        $category = Category::all();
-        $cities = City::all();
+        $sliderfindconsultant = Slider::where('type', '=', "Find Consultant")->where('status', '=', 'Active')->get();
+
+        $category = Category::where('status', 'active')->get();
+        $cities = City::where('status', 'active')->get();
         $categoryId = $request->categoryId;
         $cityId = $request->cityId;
         $categoryphoto = Category::find($categoryId);
-        $consultant = Profile::with('userData');
+        $city = City::find($cityId);
 
+        // Create a base query for consultants
+        $consultantQuery = Profile::with('userData');
+
+        // Add conditions based on the selected category
         if ($categoryId) {
-            $consultant = $consultant->where('categoryId', '=', $categoryId)->with('categoriesData');
+            $consultantQuery->where('categoryId', '=', $categoryId)->with('categoriesData');
         }
 
+        // If city is selected, filter by city
         if ($cityId) {
-            $consultant = $consultant->whereHas('cityData', function ($query) use ($cityId) {
+            $consultantQuery->whereHas('cityData', function ($query) use ($cityId) {
                 $query->where('id', '=', $cityId);
             });
         }
 
-        $consultant = $consultant->get();
+
+
+        // Get the consultants based on the conditions
+        $consultant = $consultantQuery->where('type', '=', 'consultant')->get();
+
         $countconsultant = count($consultant);
+
+        $selectedCategory = $categoryphoto;
+        $selectedCity = $city;
 
         if (isset(Auth::user()->id) && $categoryphoto) {
             $leads = new Lead();
             $leads->userId = Auth::user()->id;
-
             $leads->categoryId = $categoryphoto->id;
-            $leads->cityId = $cityId;
+            $leads->cityId = $cityId; // Note: This line may not be necessary if cityId is not present
             $leads->save();
         }
 
-        return view('visitors.findConsultantList', compact('consultant', 'cities', 'countconsultant', 'categoryphoto', 'category'));
+        return view('visitors.findConsultantList', compact('consultant', 'selectedCity', 'cities', 'countconsultant', 'categoryphoto', 'category', 'sliderfindconsultant', 'selectedCategory'));
     }
+
+
 
 
 
@@ -352,6 +618,8 @@ class VisitorController extends Controller
         $cityId = $request->cityId;
         return   $categoryId . '' . $pincodeId . '' . $cityId;
     }
+
+
     public function paymentgetway($id)
     {
         try {
@@ -362,22 +630,54 @@ class VisitorController extends Controller
             return view('servererror');
         }
     }
+
+    
+
+
+
     public function userplantype(Request $request)
     {
         try {
             $userId = Auth::user()->id;
             $user = User::find($userId);
-            $user->plantype = $request->planType;
+            // $user->plantype = $request->planType;
+            $user->planType = $request->input('package');
+            $user->validupto = Carbon::now()->addDays(365);
+
             $user->save();
             return response()->json([
                 'success' => true,
                 'message' => 'Payment Successfully!',
             ], 200);
         } catch (\Throwable $th) {
-            //throw $th;
+            throw $th;
             return view('servererror');
         }
     }
+
+    public function freeTrial(Request $request)
+    {
+        try {
+            $userId = Auth::user()->id;
+            $user = User::find($userId);
+
+            // Set plan type to the selected package
+            $user->plantype = $request->input('package');
+
+            // Set the validupto field to 25 days from now
+            $user->validupto = Carbon::now()->addDays(25);
+
+            $user->save();
+
+            return redirect()->route('visitors.membershipPlan')->with('successMessage', 'Free Trial activated successfully!');
+        } catch (\Throwable $th) {
+            throw $th;
+            return view('servererror');
+        }
+    }
+
+
+
     public function detail(Request $request)
     {
         try {
@@ -471,5 +771,33 @@ class VisitorController extends Controller
 
 
         return view('visitors.consultantDetail', compact('consultant', 'profile', 'packages', 'languages', 'times', 'videos', 'galleries', 'attachments'));
+    }
+
+    //privacy policy
+
+    public function policy()
+    {
+        try {
+            // $sliderpolicy = Slider::where('type', '=', "Privacy Policy")->where('status', '=', 'Active')->get();
+            $policy = PrivacyPolicy::where('status', 'active')->get();
+            return view('visitors.policy', compact('policy'));
+        } catch (\Throwable $th) {
+            // throw $th;
+            return view('servererror');
+        }
+    }
+
+    //terms condition
+
+    public function terms()
+    {
+        try {
+            // $sliderterms = Slider::where('type', '=', "Terms & Condition")->where('status', '=', 'Active')->get();
+            $terms = TermsCondition::where('status', 'active')->get();
+            return view('visitors.terms', compact('terms'));
+        } catch (\Throwable $th) {
+            // throw $th;
+            return view('servererror');
+        }
     }
 }

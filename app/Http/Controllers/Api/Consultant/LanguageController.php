@@ -46,6 +46,7 @@ class LanguageController extends Controller
         try {
             $languages = Language::with('language_masters')
                 ->where('userId', '=', $id)
+                ->where('status', 'Active')
                 ->get();
 
             $languageList = [];
@@ -85,8 +86,9 @@ class LanguageController extends Controller
         }
     }
 
-    function getLanguageList(){
-        $languageList=LanguageMaster::all();
+    function getLanguageList()
+    {
+        $languageList = LanguageMaster::all();
         return response([
             'success' => true,
             'message' => 'Language List !',
@@ -104,14 +106,14 @@ class LanguageController extends Controller
         //         }
         //     }
         // }
-        
+
         //  return response()->json([
         //     'data'=>$responseData   
         // ]);
     }
     function store(Request $request)
     {
-       try{
+        try {
             $rules = array(
                 'userId' => 'required',
                 'languageId' => 'required',
@@ -137,19 +139,18 @@ class LanguageController extends Controller
                     'data' => $language
                 ]);
             }
-       }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
-       } 
-        
+        }
     }
     function update(Request $request, $id)
     {
-        try{
+        try {
             $rules = array(
                 'languageId' => 'required'
             );
@@ -173,19 +174,18 @@ class LanguageController extends Controller
                     'data' => $language
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function delete($id)
-    {   
-        try{
+    {
+        try {
             $language = Language::find($id);
             $language->status = "Deleted";
             if ($language->save()) {
@@ -201,19 +201,18 @@ class LanguageController extends Controller
                     'data' => $language
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function show($id)
     {
-        try{
+        try {
             $language = Language::find($id);
             if ($language) {
                 return response([
@@ -228,14 +227,13 @@ class LanguageController extends Controller
                     'data' => $language
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
 }

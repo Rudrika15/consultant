@@ -13,7 +13,7 @@ class CategoryConsultantController extends Controller
     public function consultant_wise_category($id)
     {
         try {
-            $consultant = Profile::with('categories')->where('userId', '=', $id)->get();
+            $consultant = Profile::with('categories')->where('userId', '=', $id)->where('status', 'Active')->get();
             if ($consultant) {
                 return response([
                     'success' => true,
@@ -36,10 +36,13 @@ class CategoryConsultantController extends Controller
             ]);
         }
     }
+
+
     public function category_wise_consultant($id)
     {
         try {
-            $category = Category::with('consultants')->where('id', '=', $id)->get();
+
+            $category = Category::with('profiles')->with('profiles.user')->where('id', '=', $id)->get();
             if ($category) {
                 return response([
                     'success' => true,
@@ -79,7 +82,9 @@ class CategoryConsultantController extends Controller
                 ->with('certificate')
                 ->with('achievement')
                 ->with('workshop')
-                ->where('id', '=', $id)->get();
+                ->where('id', '=', $id)
+                ->where('status', 'Active')
+                ->get();
             if ($user) {
                 foreach ($user as $data) {
                     $data->profile->about = strip_tags($data->profile->about);

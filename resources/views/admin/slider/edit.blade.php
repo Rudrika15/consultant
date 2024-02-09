@@ -26,13 +26,14 @@
 
 <div class="card">
     <!-- /.box-title -->
-    <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
 
         <div class="">
             <h4 class="">Update Slider</h4>
         </div>
         <div class="">
-            <a href="{{ route('slider.index') }}" class="btn btnback btn-sm">BACK</a>
+            <a href="{{ route('slider.index') }}" class="btn btn-info btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -49,7 +50,11 @@
                     <select class="form-control" required name="type" id="type">
                         <option value="{{ $slider->type }}">{{ $slider->type }}</option>
                         <option value="Home">Home</option>
-                        <option value="Inner">Inner</option>  
+                        <option value="Inner">About Us</option>
+                        <option value="Inner">Find Consultant</option>
+                        <option value="Inner">Membership Plan</option>
+                        <option value="Inner">Corporate Inquiry</option>
+                        <option value="Inner">Contact Us</option>
                     </select>
                     <div class="help-block with-errors"></div>
                     @error('type')
@@ -60,13 +65,14 @@
             <div class="form-label-group mt-3">
                 <label for="photo" class="fw-bold">Photo <sup class="text-danger">*</sup></label>
                 <input id="photo" type="file" name="photo" class="form-control" placeholder="photo">
-                <img id="preview-photo" src="{{url('/slider/'.$slider->photo)}}" name="preview-photo"  class="mt-3" width="100px" height="100px">
+                <img id="preview-photo" src="{{url('/slider/'.$slider->photo)}}" name="preview-photo" class="mt-3"
+                    width="100px" height="100px">
 
                 @if ($errors->has('photo'))
                 <span class="error">{{ $errors->first('photo') }}</span>
                 @endif
             </div>
-            
+
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
                 <button type="submit" id="saveBtn" class="btn btn-primary">Submit</button>
             </div>

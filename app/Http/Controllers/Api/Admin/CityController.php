@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\City;
+use App\Models\State;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -12,11 +13,11 @@ class CityController extends Controller
 {
     public function index()
     {
-        try{
+        try {
             $city = City::with('state')
-            ->where('status', '!=', 'Deleted')
-            ->orderBy('id', 'DESC')
-            ->get();
+                ->where('status', '!=', 'Deleted')
+                ->orderBy('id', 'DESC')
+                ->get();
 
             if (count($city) > 0) {
                 $response = [
@@ -26,27 +27,26 @@ class CityController extends Controller
                     'City' => $city,
 
                 ];
-                // return response($response, 200);
+                return response($response, 200);
             } else {
                 return response([
                     'message' => ['City Data No Found'],
                     'data' => $city,
                 ], 404);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
 
     public function store(Request $request)
     {
-        try{
+        try {
             $rules = array(
                 'cityName' => 'required',
             );
@@ -54,22 +54,22 @@ class CityController extends Controller
             if ($validator->fails()) {
                 return $validator->errors();
             }
-    
+
             $city = new City();
-    
+
             if ($city) {
                 $city->stateId = $request->stateId;
                 $city->cityName = $request->cityName;
                 $city->status = 'Active';
                 $city->save();
-    
+
                 if ($city) {
                     $response = [
                         'success' => true,
                         'status' => 200,
                         'message' => 'City Created Successfully !',
                         'City' => $city,
-    
+
                     ];
                     return response($response, 200);
                 } else {
@@ -79,20 +79,19 @@ class CityController extends Controller
                     ], 404);
                 }
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
 
     public function update(Request $request, $id)
     {
-        try{
+        try {
             $rules = array(
                 'cityName' => 'required',
             );
@@ -100,9 +99,9 @@ class CityController extends Controller
             if ($validator->fails()) {
                 return $validator->errors();
             }
-    
+
             $city = City::find($id);
-    
+
             if ($city) {
                 $city->stateId = $request->stateId;
                 $city->cityName = $request->cityName;
@@ -114,7 +113,7 @@ class CityController extends Controller
                         'status' => 200,
                         'message' => 'City Updated Successfully !',
                         'City' => $city,
-    
+
                     ];
                     return response($response, 200);
                 } else {
@@ -124,20 +123,19 @@ class CityController extends Controller
                     ], 404);
                 }
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
 
     function delete($id, Request $request)
     {
-        try{
+        try {
             $city = City::find($id);
             $city->status = "Deleted";
             if ($city) {
@@ -156,20 +154,19 @@ class CityController extends Controller
                     'data' => $city,
                 ], 404);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
 
     public function show($id)
     {
-        try{
+        try {
             $city = City::find($id);
             if ($city) {
                 $city->save();
@@ -187,14 +184,24 @@ class CityController extends Controller
                     'data' => $city,
                 ], 404);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
+    }
+
+    public function stateWiseCity($stateId)
+    {
+        // $city = City::where('stateId', $stateId)->with('state')->get();
+
+        $city = State::where('id', $stateId)
+            ->with('city', function ($q) use ($stateId) {
+                $q->where('stateId', $stateId);
+            })->get();
+        return $city;
     }
 }

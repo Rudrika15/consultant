@@ -26,13 +26,14 @@
 
 <div class="card">
     <!-- /.box-title -->
-    <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
         <div class="">
             <h4 class="">City</h4>
         </div>
         <div class="">
-            <a href="{{ route('city.create') }}" id="add" class="btn btnback btn-sm">ADD</a>
-            <a href="" id="back" class="btn btnback  btn-sm" style="display:none;">BACK</a>
+            <a href="{{ route('city.create') }}" id="add" class="btn btn-info btn-sm">ADD</a>
+            <a href="" id="back" class="btn btn-info  btn-sm" style="display:none;">BACK</a>
 
             <!-- /.sub-menu -->
         </div>

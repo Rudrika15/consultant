@@ -26,13 +26,14 @@
 
 <div class="card">
     <!-- /.box-title -->
-    <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
 
         <div class="">
             <h4 class="">Edit Social Link</h4>
         </div>
         <div class="">
-            <a href="{{ route('socialLink.index') }}" class="btn btnback btn-sm">BACK</a>
+            <a href="{{ route('socialLink.index') }}" class="btn btn-info btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -40,7 +41,8 @@
     <!-- /.dropdown js__dropdown -->
 
     <div class="card-body">
-        <form class="form-group" id="socialLinkForm" name="socialLinkForm" action="{{route('socialLink.update')}}" enctype="multipart/form-data" method="post">
+        <form class="form-group" id="socialLinkForm" name="socialLinkForm" action="{{route('socialLink.update')}}"
+            enctype="multipart/form-data" method="post">
             @csrf
             <input type="hidden" name="id" id="id" value="{{$socialLink->id}}">
 
@@ -48,10 +50,13 @@
                 <div class="form-group">
 
                     <strong>Social Media Master:</strong>
-                    <select class="form-control" data-error='Social Media Master Field is required' required name="socialMediaMasterId" id="socialMediaMasterId">
+                    <select class="form-control" data-error='Social Media Master Field is required' required
+                        name="socialMediaMasterId" id="socialMediaMasterId">
                         <option value="" selected disabled> Select Social Media Master </option>
                         @foreach ($socialMaster as $socialMasterdata)
-                        <option value="{{ $socialMasterdata->id }}" {{$socialMasterdata->id == old('socialMediaMasterId',$socialLink->socialMediaMasterId)? 'selected':''}}>{{ $socialMasterdata->title }}</option>
+                        <option value="{{ $socialMasterdata->id }}" {{$socialMasterdata->id ==
+                            old('socialMediaMasterId',$socialLink->socialMediaMasterId)? 'selected':''}}>{{
+                            $socialMasterdata->title }}</option>
                         @endforeach
                     </select>
                     <div class="help-block with-errors"></div>
@@ -62,7 +67,8 @@
             </div>
             <div class="form-label-group mt-3">
                 <label for="url" class="fw-bold">Url <sup class="text-danger">*</sup></label>
-                <input id="url" type="text" name="url" class="form-control" placeholder="url" value="{{$socialLink->url}}">
+                <input id="url" type="text" name="url" class="form-control" placeholder="url"
+                    value="{{$socialLink->url}}">
                 @if ($errors->has('url'))
                 <span class="error">{{ $errors->first('url') }}</span>
                 @endif
@@ -70,7 +76,7 @@
 
 
             <div class="col-xs-12 col-sm-12 col-md-12 mt-5 text-center">
-            <button type="submit" id="saveBtn" class="btn btn-primary">Submit</button>
+                <button type="submit" id="saveBtn" class="btn btn-primary">Submit</button>
             </div>
 
         </form>
@@ -81,7 +87,7 @@
 </div>
 
 <script type="text/javascript">
-  $(function () {
+    $(function () {
      
     $.ajaxSetup({
           headers: {

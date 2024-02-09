@@ -8,7 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Workshop extends Model
 {
     use HasFactory;
-    public function users(){
-        return $this->belongsTo(User::class,'userId');
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'userId');
+    }
+
+    public function workshops()
+    {
+        return $this->belongsTo(Workshop::class, 'workshopId');
     }
 }

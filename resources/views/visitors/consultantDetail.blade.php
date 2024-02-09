@@ -264,12 +264,16 @@
                                                         <tr>
                                                                 <th><span class="fw-bold">More Details</span></th>
                                                                 {{-- <th><span class="fw-bold">Value</span></th> --}}
+                                                                <td></td>
                                                         </tr>
-                                                        <tr>
+                                                        {{-- <tr>
                                                                 <td><span class="fw-bold">Map:</span></td>
                                                                 <td>{!! isset($consultant->map) ? $consultant->map : '
                                                                         -' !!}</td>
-                                                        </tr>
+                                                        </tr> --}}
+
+
+
                                                         <tr>
                                                                 <td><span class="fw-bold">Address:</span></td>
                                                                 <td>{!! isset($consultant->address) ?
@@ -301,16 +305,16 @@
                                                                 <td>{!! isset($consultant->packages->title) ?
                                                                         $consultant->packages->title : ' -' !!}</td>
                                                         </tr>
-                                                        <tr>
+                                                        {{-- <tr>
                                                                 <td><span class="fw-bold">isFeatured:</span></td>
                                                                 <td>{!! isset($consultant->isFeatured) ?
                                                                         $consultant->isFeatured : ' -' !!}</td>
-                                                        </tr>
-                                                        <tr>
+                                                        </tr> --}}
+                                                        {{-- <tr>
                                                                 <td><span class="fw-bold">Status:</span></td>
                                                                 <td>{!! isset($consultant->status) ? $consultant->status
                                                                         : ' -' !!}</td>
-                                                        </tr>
+                                                        </tr> --}}
                                                 </table>
                                                 <!-- ... other code ... -->
 
@@ -325,10 +329,18 @@
                                                         alt="Default Profile Image">
                                                 @endif
                                                 <div class="icon d-flex justify-content-between">
-                                                        <i class="fa fa-gear" style="color: #FEC2B4;"></i>
-                                                        <i class="fa fa-list-alt" style="color: #819AF4;"></i>
-                                                        <i class="fa fa-file-o" style="color: #70BB4F;"></i>
-                                                        <i class="fa fa-heart-o" style="color: #3BC6FB;"></i>
+                                                        <a href="#gear-link">
+                                                                <i class="fa fa-gear" style="color: #FEC2B4;"></i>
+                                                        </a>
+                                                        <a href="#list-alt-link">
+                                                                <i class="fa fa-list-alt" style="color: #819AF4;"></i>
+                                                        </a>
+                                                        <a href="#file-o-link">
+                                                                <i class="fa fa-file-o" style="color: #70BB4F;"></i>
+                                                        </a>
+                                                        <a href="#heart-o-link">
+                                                                <i class="fa fa-heart-o" style="color: #3BC6FB;"></i>
+                                                        </a>
                                                 </div>
                                         </div>
 
@@ -539,7 +551,7 @@
                         </div>
                 </div>
 
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                         <div class="col-md-12">
                                 <h3 class="fw-bold">Contact Details</h3>
                                 <p class="textSize"><span class="fw-bold">Contact No: </span>{!!
@@ -549,13 +561,97 @@
                                 <p class="textSize"><span class="fw-bold">Website: </span>{!!
                                         isset($consultant->webSite) ? $consultant->webSite : ' -' !!}</p>
                         </div>
-                </div>
+                </div> --}}
         </div>
 </div>
-
-
 {{-- end Contact --}}
 
+
+{{-- Inquiry Start --}}
+
+<div class="getintouch mt-5">
+        <h1 class="text-center text-white pt-5">Get In Touch With Consultant</h1>
+        <p class="text-center text-white">Send us your inquiry we will respond earliest</p>
+        <form id="inquiryForm" name="inquiryForm" method="post"
+                action="{{ route('consultantInquiry.consultantInquiryStore') }}" class="mb-5">
+                @csrf
+
+                <input type="hidden" name="userId" id="userId" value="{{ auth()->id() }}">
+                {{-- <input type="hiddenn" name="userId" id="userId" value="{{request('id')}}"> --}}
+                <input type="hidden" name="consultantId" id="consultantId" value="{{request('id')}}">
+
+                <div class="row getinform">
+                        <div class="col-12 mt-3">
+                                <label for="name" class="formlabel text-white">Name<span
+                                                style="color: red">*</span></label>
+                                <input type="text" id="name" name="name" class="form-control">
+                                @if ($errors->has('title'))
+                                <span class="error">{{ $errors->first('title') }}</span>
+                                @endif
+
+                        </div>
+                        <div class="col-12 mt-3">
+                                <label for="email" class="formlabel text-white">Email<span
+                                                style="color: red">*</span></label>
+                                <input type="email" id="email" name="email" class="form-control">
+                                @if ($errors->has('email'))
+                                <span class="error">{{$errors->first('email')}}</span>
+                                @endif
+                        </div>
+                        <div class="col-12 mt-3">
+                                <label for="inquery" class="formlabel text-white">Inquiry<span
+                                                style="color: red">*</span></label>
+                                <textarea id="inquiry" rows="2" name="inquiry" class="form-control"></textarea>
+                                @if ($errors->has('inquiry'))
+                                <span class="error">{{ $errors->first('inquiry') }}</span>
+                                @endif
+                        </div>
+                </div>
+                <div class="d-flex justify-content-center mt-5 mb-5">
+                        <button type="submit" id="saveBtn" class="getinbutton text-center">Submit</button>
+                </div>
+        </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script type="text/javascript">
+        $(function() {
+        $('#inquiryForm').submit(function(e) {
+        e.preventDefault();
+
+        $.ajax({
+                url: $(this).attr('action'),
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                console.log(response);
+
+                    // Display SweetAlert for success
+                        Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: 'Inquiry sent Successfully!',
+                });
+
+                    // Optionally, you can redirect or perform other actions after the SweetAlert is closed
+                
+                },
+                        error: function(error) {
+                        console.log(error);
+
+                    // Display SweetAlert for errors
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'An error occurred while submitting the form.',
+        });
+                }
+        });
+        });
+});
+</script>
+
+{{-- Inquiry End --}}
 
 
 
@@ -873,8 +969,8 @@
                         <div class="tab-pane text-center" id="qa">
 
                                 <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                                        elit.
+                                        Do you have any Question ? Please Go to the <b>Contact Us</b> page.
+
                                 </p>
 
                         </div>

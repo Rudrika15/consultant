@@ -5,9 +5,9 @@
         <h3 class="contacttext ms-lg-5">Contact Us</h3>
         <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" data-interval="500">
             <div class="carousel-inner">
-                @foreach ($sliderinner as $sliderinner)
+                @foreach ($slidercontactus as $slidercontactus)
                 <div class="carousel-item">
-                    <img src="{{url('/slider/'.$sliderinner->photo)}}" class="d-block w-100 img" height="300px"
+                    <img src="{{url('/slider/'.$slidercontactus->photo)}}" class="d-block w-100 img" height="300px"
                         alt="...">
                 </div>
                 @endforeach
@@ -34,7 +34,7 @@
                                 <p class="phone_font fw-bold">Phone</p>
                             </div>
                             <div class="card-text text-center">
-                                <p class="phoneno">9632587412</p>
+                                <p class="phoneno">9979411148</p>
                             </div>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                                 <p class="phone_font fw-bold">Email</p>
                             </div>
                             <div class="card-text text-center">
-                                <p class="emailid">consultantcube123@gmail.com</p>
+                                <p class="emailid">connect@consultantcube.com</p>
                             </div>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                                 <p class="phone_font fw-bold">Address</p>
                             </div>
                             <div class="card-text text-center">
-                                <p class="address">1017 , Shilp Epitome, behind Rajpath club, off Sindhu bhavan road,
+                                <p class="address">1017 , Shilp Epitome, Behind Rajpath Club, Off Sindhu Bhavan Road,
                                     Ahmedabad
                                 </p>
                             </div>
@@ -131,21 +131,13 @@
                         </div>
                     </form>
                 </div>
+
                 <div class="col-md-6">
                     <h4>Our Location</h4>
-                    <div id="googleMap" style="width:100%;height:400px;" class="mt-5"></div>
-
-                    <script>
-                        function myMap() {
-                            var mapProp= {
-                            center:new google.maps.LatLng(51.508742,-0.120850),
-                            zoom:5,
-                            };
-                            var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-                            }
-                    </script>
-
-                    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.6815810929547!2d72.49961088885502!3d23.03546080000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e834d76e8ae11%3A0x68bd852e92db8f97!2sAspireotech%20Solutions%20Private%20Limited%20-%20Web%20Development%20and%20SEO%20Company%20in%20Ahmedabad!5e0!3m2!1sen!2sin!4v1705906680306!5m2!1sen!2sin"
+                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>

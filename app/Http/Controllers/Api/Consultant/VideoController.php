@@ -11,8 +11,10 @@ class VideoController extends Controller
 {
     function index($id)
     {
-        try{
-            $video = Video::where('userId', '=', $id)->get();;
+        try {
+            $video = Video::where('userId', '=', $id)
+                ->where('status', 'Active')
+                ->get();
             if (count($video) > 0) {
                 return response([
                     'success' => true,
@@ -26,19 +28,18 @@ class VideoController extends Controller
                     'data' => $video
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function store(Request $request)
     {
-        try{
+        try {
             $rules = array(
                 'userId' => 'required',
                 'url' => 'required',
@@ -64,19 +65,18 @@ class VideoController extends Controller
                     'data' => $video
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function update(Request $request, $id)
     {
-        try{
+        try {
             $rules = array(
                 'url' => 'required',
             );
@@ -100,19 +100,18 @@ class VideoController extends Controller
                     'data' => $video
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function delete($id)
     {
-        try{
+        try {
             $video = Video::find($id);
             $video->status = "Deleted";
             if ($video->save()) {
@@ -128,19 +127,18 @@ class VideoController extends Controller
                     'data' => $video
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function show($id)
     {
-        try{
+        try {
             $video = Video::find($id);
             if ($video) {
                 return response([
@@ -155,12 +153,12 @@ class VideoController extends Controller
                     'data' => $video
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
     }

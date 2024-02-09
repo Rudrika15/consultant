@@ -7,13 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+
+    protected $fillable = [
+        'catName'
+    ];
+
+
     use HasFactory;
 
     public function profiles()
-    {
-        return $this->hasMany(Profile::class, 'categoryId', 'id');
-    }
-    public function consultants()
     {
         return $this->hasMany(Profile::class, 'categoryId', 'id');
     }

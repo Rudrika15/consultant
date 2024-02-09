@@ -8,12 +8,13 @@ use Illuminate\Http\Request;
 
 class AdminLeadController extends Controller
 {
-    public function index(){
-        try{
+    public function index()
+    {
+        try {
             $leads = Lead::with('user')
-                    ->with('categories')
-                    ->orderBy('id', 'DESC')
-                    ->get();
+                ->with('categories')
+                ->orderBy('id', 'DESC')
+                ->get();
 
             if (count($leads) > 0) {
                 return response([
@@ -29,14 +30,13 @@ class AdminLeadController extends Controller
                     'data' => $leads,
                 ], 404);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
 }

@@ -100,9 +100,10 @@
 
                     <select class="form-select" aria-label="Default select example" id="stateId" name="stateId"
                         value="{{ old('stateId') }}" autocomplete="stateId" autofocus>
-                        <option value="">-- select State --</option>
+                        <option value="">-- Select State --</option>
                         @foreach($states as $data)
-                        <option value="{{$data->id}}">{{$data->stateName}}</option>
+                        <option value="{{ $data->id }}"> </option>
+                        {{-- <option value="{{$data->id}}">{{$data->stateName}}</option> --}}
                         @endforeach
                     </select>
                     @error('stateId')
@@ -111,13 +112,17 @@
                     </span>
                     @enderror
                 </div>
+
+
                 <div class="col-auto">
                     <label for="name" class="col-form-label text-md-end fw-bold">{{ __('City') }}</label>
-
+                    <input type="hidden">
                     <select class="form-select" aria-label="Default select example" id="cityId" name="cityId"
                         value="{{ old('cityId') }}" autocomplete="cityId" autofocus>
                         <option value="">-- Select City --</option>
-
+                        @foreach($cities as $data)
+                        <option value="{{ $data->id }}"> </option>
+                        @endforeach
                     </select>
                     @error('cityId')
                     <span class="invalid-feedback" role="alert">
@@ -130,7 +135,7 @@
 
             <div class="form-label-group mt-3">
                 <label for="pincode" class="fw-bold">Pin Code</label>
-                <input id="pincode" type="text" name="pincode" class="form-control" placeholder="pincode"
+                <input id="pincode" type="text" name="pincode" class="form-control" placeholder="Pincode"
                     value="{{$profile->pincode}}">
                 @if ($errors->has('pincode'))
                 <span class="error">{{ $errors->first('pincode') }}</span>

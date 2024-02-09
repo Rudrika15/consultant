@@ -10,6 +10,11 @@ class Package extends Model
     use HasFactory;
     public function user()
     {
-        return $this->hasMany(User::class,'userId','id');
+        return $this->hasMany(User::class, 'userId', 'id');
+    }
+
+    public function profiles()
+    {
+        return $this->hasMany(Profile::class, 'packageId');
     }
 }

@@ -154,7 +154,9 @@ class UserController extends Controller
     {
         $id = Auth::user()->id;
         $profile = Profile::where('userId', '=', $id)->first();
-        $data['states'] = State::get(["stateName", "id"]);
+        // $data['states'] = State::get(["stateName", "id"]);
+        $data['states'] = State::where('status', 'active')->get();
+        $data['cities'] = City::where('status', 'active')->get();
         return view('profile', $data, compact('profile'));
     }
 
@@ -182,6 +184,7 @@ class UserController extends Controller
                 $profile->photo = time() . '.' . $request->photo->extension();
                 $request->photo->move(public_path('profile'),  $profile->photo);
             }
+
             $profile->status = 'Active';
             $profile->save();
             return redirect('visitor/profile');

@@ -24,9 +24,9 @@
         <h3 class="corporatetext ms-lg-5">Corporate Inquiry</h3>
         <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" data-interval="500">
             <div class="carousel-inner">
-                @foreach ($sliderinner as $sliderinner)
+                @foreach ($slidercorporate as $slidercorporate)
                 <div class="carousel-item">
-                    <img src="{{url('/slider/'.$sliderinner->photo)}}" class="d-block w-100 img" height="300px"
+                    <img src="{{url('/slider/'.$slidercorporate->photo)}}" class="d-block w-100 img" height="300px"
                         alt="...">
                 </div>
                 @endforeach

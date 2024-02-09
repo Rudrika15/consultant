@@ -26,13 +26,14 @@
 
 <div class="card">
     <!-- /.box-title -->
-    <div class="card-header" style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
+    <div class="card-header"
+        style="padding: 12px 10px 12px 10px; display: flex; justify-content: space-between; background-color: #345BCB; color:white;">
 
         <div class="">
             <h4 class="">Edit City</h4>
         </div>
         <div class="">
-            <a href="{{ route('city.index') }}" class="btn btnback btn-sm">BACK</a>
+            <a href="{{ route('city.index') }}" class="btn btn-info btn-sm">BACK</a>
 
             <!-- /.sub-menu -->
         </div>
@@ -50,7 +51,8 @@
                     <select class="form-control" data-error='State Name Field is required' name="stateId" id="stateId">
                         <option value="" selected disabled> Select User Name </option>
                         @foreach ($state as $statedata)
-                        <option value="{{ $statedata->id }}" {{$statedata->id == old('stateId',$city->stateId)? 'selected':''}}>{{ $statedata->stateName }}</option>
+                        <option value="{{ $statedata->id }}" {{$statedata->id == old('stateId',$city->stateId)?
+                            'selected':''}}>{{ $statedata->stateName }}</option>
                         @endforeach
                     </select>
                     <div class="help-block with-errors"></div>
@@ -63,7 +65,8 @@
 
             <div class="form-label-group mt-3">
                 <label for="cityName" class="fw-bold">City Name <sup class="text-danger">*</sup></label>
-                <input id="cityName" type="text" name="cityName" class="form-control" placeholder="City Name" value="{{$city->cityName}}">
+                <input id="cityName" type="text" name="cityName" class="form-control" placeholder="City Name"
+                    value="{{$city->cityName}}">
                 @if ($errors->has('cityName'))
                 <span class="error">{{ $errors->first('cityName') }}</span>
                 @endif

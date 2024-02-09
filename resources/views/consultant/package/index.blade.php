@@ -32,9 +32,9 @@
             <h4 class="">Package</h4>
         </div>
         <div class="">
-            <a href="{{ route('package.create') }}" id="add" class="btn btnback btn-sm">ADD</a>
+            <a href="{{ route('package.create') }}" id="add" class="btn btn-info btn-sm">ADD</a>
 
-            <a href="{{ route('package.index') }}" id="back" class="btn btnback  btn-sm" style="display:none;">BACK</a>
+            <a href="{{ route('package.index') }}" id="back" class="btn btn-info  btn-sm" style="display:none;">BACK</a>
 
             <!-- /.sub-menu -->
         </div>

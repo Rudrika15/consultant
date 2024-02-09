@@ -11,8 +11,8 @@ class CertificateController extends Controller
 {
     function index($id)
     {
-        try{
-            $certificate = Certificate::where('userId', '=', $id)->get();;
+        try {
+            $certificate = Certificate::where('userId', '=', $id)->where('status', 'Active')->get();;
             if (count($certificate) > 0) {
                 return response([
                     'success' => true,
@@ -26,19 +26,18 @@ class CertificateController extends Controller
                     'data' => $certificate
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function store(Request $request)
     {
-        try{
+        try {
             $rules = array(
                 'userId' => 'required',
                 'title' => 'required',
@@ -68,20 +67,19 @@ class CertificateController extends Controller
                     'message' => 'Certificate Not  Created !',
                     'data' => $certificate
                 ]);
-            } 
-        }catch(\Exception $e){
+            }
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function update(Request $request, $id)
     {
-        try{
+        try {
             $rules = array(
                 'title' => 'required',
             );
@@ -108,20 +106,19 @@ class CertificateController extends Controller
                     'message' => 'Certificate Not Updated !',
                     'data' => $certificate
                 ]);
-            } 
-        }catch(\Exception $e){
+            }
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
-        
     }
     function delete($id)
     {
-        try{
+        try {
             $certificate = Certificate::find($id);
             $certificate->status = "Deleted";
             if ($certificate->save()) {
@@ -137,18 +134,18 @@ class CertificateController extends Controller
                     'data' => $certificate
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
     }
     function show($id)
     {
-        try{
+        try {
             $certificate = Certificate::find($id);
             if ($certificate) {
                 return response([
@@ -163,12 +160,12 @@ class CertificateController extends Controller
                     'data' => $certificate
                 ]);
             }
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response([
-                'success'=>false,
-                'message'=>'An error occurred while processing your request.',
-                'status'=>500,
-                'error'=>$e->getMessage()
+                'success' => false,
+                'message' => 'An error occurred while processing your request.',
+                'status' => 500,
+                'error' => $e->getMessage()
             ]);
         }
     }
