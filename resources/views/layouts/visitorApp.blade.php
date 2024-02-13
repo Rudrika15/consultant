@@ -15,6 +15,7 @@
 
     <meta name="description" content="" />
     <meta name="keywords" content="bootstrap, bootstrap5" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="stylesheet" href="https://codepen.io/chriscoyier/pen/gHnGD.scss">
     <link rel="stylesheet" href="https://codepen.io/chriscoyier/pen/gHnGD.html">
@@ -49,13 +50,13 @@
         rel="stylesheet" /> --}}
 
     <link rel="stylesheet" href="{{ asset('visitors/css/visitor.css') }}" />
-    <link rel="stylesheet" href="{{asset('visitors/css/findconsultant.css')}}">
-    <link rel="stylesheet" href="{{asset('visitors/css/aboutus.css')}}">
-    <link rel="stylesheet" href="{{asset('visitors/css/membership.css')}}">
-    <link rel="stylesheet" href="{{asset('visitors/css/corporateinquiry.css')}}">
-    <link rel="stylesheet" href="{{asset('visitors/css/contactus.css')}}">
-    <link rel="stylesheet" href="{{asset('visitors/css/paymentgetway.css')}}">
-    <link rel="stylesheet" href="{{asset('visitors/css/login.css')}}">
+    <link rel="stylesheet" href="{{ asset('visitors/css/findconsultant.css') }}">
+    <link rel="stylesheet" href="{{ asset('visitors/css/aboutus.css') }}">
+    <link rel="stylesheet" href="{{ asset('visitors/css/membership.css') }}">
+    <link rel="stylesheet" href="{{ asset('visitors/css/corporateinquiry.css') }}">
+    <link rel="stylesheet" href="{{ asset('visitors/css/contactus.css') }}">
+    <link rel="stylesheet" href="{{ asset('visitors/css/paymentgetway.css') }}">
+    <link rel="stylesheet" href="{{ asset('visitors/css/login.css') }}">
 
 
     {{--
@@ -70,8 +71,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <!-- End of <body> -->
 
     <title>
@@ -85,10 +85,8 @@
 
         <nav class="navbar navbar-expand-sm navbar-white bg-white">
             <div class="container">
-                <a class="" href="{{ route('visitors.index') }}"><img class=""
-                        src="{{ asset('visitors/images/ConsultantLogo.jpg') }}" width="150px" height="50px"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent">
+                <a class="" href="{{ route('visitors.index') }}"><img class="" src="{{ asset('visitors/images/ConsultantLogo.jpg') }}" width="150px" height="50px"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -127,20 +125,19 @@
             <div class="container">
                 <div class="d-flex justify-content-between flex-wrap">
                     <div>
-                        <img src="{{ asset('visitors/images/ConsultantLogo.jpg') }}" alt="" width="300px"
-                            height="100px">
+                        <img src="{{ asset('visitors/images/ConsultantLogo.jpg') }}" alt="" width="300px" height="100px">
                     </div>
                     <div class="sitelink mt-lg-0 mt-2">
                         <ul class="footerul" style="list-style-type: none;">
                             <h5>Site Link</h5>
                             <li class="mt-lg-5 mt-3">
                                 <i class="fa fa-caret-right"></i>
-                                <a href="{{route('visitors.contactus')}}" class="footerlink">Contact Us</a>
+                                <a href="{{ route('visitors.contactus') }}" class="footerlink">Contact Us</a>
 
                             </li>
                             <li>
                                 <i class="fa fa-caret-right"></i>
-                                <a href="{{route('visitors.aboutus')}}" class="footerlink">About Us</a>
+                                <a href="{{ route('visitors.aboutus') }}" class="footerlink">About Us</a>
                             </li>
                             <li>
                                 <i class="fa fa-caret-right"></i>
@@ -148,7 +145,7 @@
                             </li>
                             <li>
                                 <i class="fa fa-caret-right"></i>
-                                <a href="{{route('visitors.corporateInquery')}}" class="footerlink">Corporate
+                                <a href="{{ route('visitors.corporateInquery') }}" class="footerlink">Corporate
                                     Inquiry</a>
                             </li>
                         </ul>
@@ -171,7 +168,7 @@
                             </li>
                             <li>
                                 <i class="fa fa-caret-right"></i>
-                                <a href="{{ route('visitor.workshopList')}}" class="footerlink">Workshop</a>
+                                <a href="{{ route('visitor.workshopList') }}" class="footerlink">Workshop</a>
                             </li>
                         </ul>
                     </div>
@@ -200,11 +197,10 @@
 
     {{-- <script src="{{ asset('visitors/js/bootstrap.bundle.min.js') }}"></script> --}}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-K+7exjvNH2xjcGQms8e5/fpAXO7A2ZCLm9n6L/TNWQE=" crossorigin="anonymous"></script>
 
 </body>
 

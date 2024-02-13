@@ -173,22 +173,17 @@ class VisitorController extends Controller
 
     public function registerAndPay(Request $request)
     {
-        // Assuming you have validation logic for your registration form fields
         $request->validate([
             'workshopId' => 'required|exists:workshops,id',
-            // Add other validation rules as needed
         ]);
 
         $userId = auth()->user()->id;
         $workshopId = $request->input('workshopId');
 
-        // Check if the user is already registered for the workshop
         if (!RegisterWorkshop::where(['userId' => $userId, 'workshopId' => $workshopId])->exists()) {
-            // Store registration data in the database
             RegisterWorkshop::create([
                 'userId' => $userId,
                 'workshopId' => $workshopId,
-                // Add other registration fields as needed
             ]);
 
             // Handle payment success logic here (update payment status, store payment details, etc.)

@@ -45,6 +45,7 @@ use App\Http\Controllers\Admin\ConsultantInquiryController;
 use App\Http\Controllers\Auth\ConsultantRegisterController;
 use App\Http\Controllers\Admin\WorkshopRegistrationController;
 use App\Http\Controllers\Consultant\ConsultantEnquiryController;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('/store-current-url', function (Request $request) {
+    $request->session()->put('current_url', $request->url);
+    return response()->json(['message' => 'Current URL stored successfully']);
+});
+
+Route::post('/set-login-user-session', function (Request $request) {
+    // Retrieve the value to set the loginUser session variable
+    $loginUser = $request->input('loginUser');
+
+    session(['loginUser' => $loginUser]);
+
+    return response()->json(['message' => 'loginUser session variable set successfully']);
+});
 
 /* ---------------------- Visitors Side ----------------------------------- */
 
