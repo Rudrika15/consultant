@@ -14,9 +14,9 @@ use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\RegisterController;
 use App\Http\Controllers\Api\Admin\AdminLeadController;
 use App\Http\Controllers\Api\Consultant\TimeController;
+use App\Http\Controllers\Api\Admin\MembershipController;
 use App\Http\Controllers\Api\Consultant\VideoController;
 use App\Http\Controllers\Api\Admin\AdminPackageController;
-use App\Http\Controllers\Api\Admin\MembershipController;
 use App\Http\Controllers\Api\Admin\SocialMasterController;
 use App\Http\Controllers\Api\Consultant\GalleryController;
 use App\Http\Controllers\Api\Consultant\PackageController;
@@ -27,6 +27,7 @@ use App\Http\Controllers\Api\User\SearchCategoryController;
 use App\Http\Controllers\Api\Admin\LanguageMasterController;
 use App\Http\Controllers\Api\Consultant\AttachmentController;
 use App\Http\Controllers\Api\Consultant\SocialLinkController;
+use App\Http\Controllers\Api\User\RegisterWorkshopController;
 use App\Http\Controllers\Api\Consultant\AchievementController;
 use App\Http\Controllers\Api\Consultant\CertificateController;
 use App\Http\Controllers\Api\Consultant\ConsultantLeadController;
@@ -35,6 +36,7 @@ use App\Http\Controllers\Api\Consultant\PayamnetGetWayController;
 use App\Http\Controllers\Api\Consultant\ConsultantEnquiryController;
 use App\Http\Controllers\Api\Consultant\CategoryConsultantController;
 use App\Http\Controllers\Api\Consultant\AdminPackageController as ConsultantAdminPackageController;
+use App\Http\Controllers\Api\User\WorkshopController as UserWorkshopController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,6 +87,16 @@ Route::get('stateWiseCity/{stateId?}', [CityController::class, 'stateWiseCity'])
 
 
 /* Payment View */
+
+
+Route::post('/razorpay-payment-store', [RegisterWorkshopController::class, 'razorpayPaymentStore'])->name('razorpay.payment.store');
+
+
+//Workshop View & List
+Route::get('/workshops', [UserWorkshopController::class, 'workshopList'])->name('workshops.list');
+
+// Route for workshop details
+Route::get('/workshops/{id}', [UserWorkshopController::class, 'workshopDetails'])->name('workshops.details');
 
 // Route::get('payments', 'App\Http\Controllers\Api\Admin\MembershipController@index');
 Route::get('payments-index', [MembershipController::class, 'index']);

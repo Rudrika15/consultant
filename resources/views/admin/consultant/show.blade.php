@@ -10,22 +10,22 @@
             <h4 class="">Consultant Details</h4>
         </div>
         <div class="">
-            <a href="{{ route('consultant.index') }}" id="back" class="btn btnback btn-sm">BACK</a>
+            <a href="{{ route('consultant.index') }}" id="back" class="btn btn-info btn-sm">BACK</a>
         </div>
     </div>
     <div class="card-body">
         <div class="row">
             <div class="col-md-6">
-                <strong>Name:</strong> {{ $user->name }}
+                <strong>Name:</strong> {{ $user->name ?? '-'}}
                 <br>
                 <br>
-                <strong>Email: </strong> {{ $user->email }}
+                <strong>Email: </strong> {{ $user->email ?? '-' }}
                 <br>
                 <br>
-                <strong>Contact No: </strong> {{ $user->contactNo }}
+                <strong>Contact No: </strong> {{ $user->contactNo ?? '-' }}
                 <br>
                 <br>
-                <strong>Plan Type: </strong> {{ $user->planType }}
+                <strong>Plan Type: </strong> {{ $user->planType ?? '-' }}
                 <br>
                 <br>
                 <strong>About: </strong> {{ $user->profile->about ?? '-' }}
@@ -43,9 +43,22 @@
                 <strong>Package: </strong> {{ $user->profile->packages->title ?? '-' }}
                 <br>
                 <br>
+                <strong>Skype Id: </strong> {{ $user->profile->skypeId ?? '-' }}
+                <br>
+                <br>
+                <strong>webSite: </strong> {{ $user->profile->webSite ?? '-' }}
+                <br>
+                <br>
+                <strong>map: </strong> {{ $user->profile->map ?? '-' }}
+                <br>
+                <br>
+                <strong>address: </strong> {{ $user->profile->address ?? '-' }}
+                <br>
+                <br>
                 <strong>Is Featured: </strong> {{ $user->profile->isFeatured ?? '-' }}
                 <br>
                 <br>
+
                 <strong>Status: </strong> {{ $user->status ?? '-' }}
                 <br>
                 <br>

@@ -63,7 +63,7 @@
                             data-description="Workshop Payment" data-image="{{ url('/your-workshop-logo.jpg') }}"
                             data-prefill.name="{{ Auth::user()->name }}" data-prefill.email="{{ Auth::user()->email }}"
                             data-theme.color="#333692" data-prefill.workshopId="{{ $workshop->id }}"></script> --}}
-                        <button class="pay-button btn text-white mt-4" type="button">Join Now</button>
+                        <button class="pay-button btn btn-primary mt-4" type="button">Join Now</button>
                     </div>
                 </form>
                 @endif
@@ -270,7 +270,7 @@
                             "currency": "INR",
                             "name": "Consultantcube",
                             "description": "Razorpay payment",
-                            "image": "asset/images/razorpay.png",
+                            "image": "/images/logo.png",
                             "handler": function(response) {
                                 // console.log(response);
                                 var paymentId = response.razorpay_payment_id;
@@ -308,7 +308,7 @@
                         }),
                     })
                     .then(response => {
-                        // console.log("responses", response);
+                        console.log("responses", response);
                         // console.log("paymentId", paymentId);
 
                         console.log('Payment ID stored successfully');

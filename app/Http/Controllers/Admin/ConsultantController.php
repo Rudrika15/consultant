@@ -107,6 +107,7 @@ class ConsultantController extends Controller
             'contactNo' => $request->contactNo,
             'gender' => $request->gender,
             'birthdate' => $request->birthdate,
+            'photo' => $request->photo,
 
         ]);
 
@@ -141,6 +142,11 @@ class ConsultantController extends Controller
             $profile->categoryId = $request->categoryId;
         }
 
+
+        if ($request->photo) {
+            $profile->photo = time() . '.' . $request->photo->extension();
+            $request->photo->move(public_path('profile'), $profile->photo);
+        }
 
         $profile->packageId = $request->packageId;
 
@@ -183,7 +189,14 @@ class ConsultantController extends Controller
             'contactNo' => 'required|string|max:255',
             'gender' => 'required|string|in:Male,Female',
             'birthdate' => 'required|date',
-            'isFeatured' => 'required'
+            'isFeatured' => 'required',
+            'about' => 'required',
+            'skypeId' => 'required',
+            'webSite' => 'required',
+            'map' => 'required',
+            'address' => 'required',
+            'photo' => 'required',
+
         ]);
 
         try {
@@ -202,6 +215,14 @@ class ConsultantController extends Controller
                 'contactNo' => $request->contactNo,
                 'gender' => $request->gender,
                 'birthdate' => $request->birthdate,
+                'about' => $request->about,
+                'skypeId' => $request->skypeId,
+                'webSite' => $request->webSite,
+                'map' => $request->map,
+                'address' => $request->address,
+                'photo' => $request->photo,
+                'isFeatured' => $request->isFeatured,
+
             ]);
 
             $user->save();
@@ -220,11 +241,66 @@ class ConsultantController extends Controller
                 $profile->city = $request->cityId;
             }
             $profile->isFeatured = $request->isFeatured;
+            $profile->about = $request->about;
+            $profile->skypeId = $request->skypeId;
+            $profile->webSite = $request->webSite;
+            $profile->map = $request->map;
+            $profile->address = $request->address;
+
+            if ($request->hasFile('photo')) {
+                $profile->photo = time() . '.' . $request->file('photo')->extension();
+                $request->file('photo')->move(public_path('profile'), $profile->photo);
+            }
+
+
+
             $profile->save();
             return redirect()->route('consultant.index')->with('success', 'Consultant updated successfully.');
         } catch (\Throwable $th) {
+            throw $th;
             // Handle any exceptions
             return view('servererror');
         }
     }
+
+    public function enable($id)
+    {
+        $profile = Profile::where('userId', $id)->first();
+        if ($profile) {
+            $profile->status = 'Active';
+            $profile->save();
+            return redirect()->back()->with('success', 'Consultant profile enabled successfully');
+        }
+        return redirect()->back()->with('error', 'Consultant profile not found');
+    }
+
+    public function disable($id)
+    {
+        $profile = Profile::where('userId', $id)->first();
+        if ($profile) {
+            $profile->status = 'Inactive';
+            $profile->save();
+            return redirect()->back()->with('success', 'Consultant profile disabled successfully');
+        }
+        return redirect()->back()->with('error', 'Consultant profile not found');
+    }
+
+    // public function changeStatus($id, $status)
+    // {
+    //     $profile = Profile::where('userId',$id)->first();
+
+    //     // Update the status based on the provided value
+    //     $profile->status = $status;
+    //     $profile->save();
+
+    //     // Optionally, you can add a success message
+    //     if ($status == 'Active') {
+    //         return redirect()->route('consultant.index')->with('success', 'Consultant status changed to Active.');
+    //     } elseif ($status == 'Inactive') {
+    //         return redirect()->route('consultant.index')->with('success', 'Consultant status changed to Deactive.');
+    //     }
+
+    //     // Redirect back with an error message if the status is neither active nor deactive
+    //     return redirect()->route('consultant.index')->with('error', 'Invalid status.');
+    // }
 }

@@ -331,7 +331,7 @@
     {{-- Be a consultant --}}
 
 
-    <div class="get_started-purple">
+    {{-- <div class="get_started-purple">
         <div class="get_text">
             <h2 class="text-center text-white pt-5">Be a Consultant</h2>
             <br>
@@ -342,13 +342,15 @@
 
         <div class="d-flex justify-content-center">
             <a href="{{ route('register') }}" class="btn text-center fw-bold start_with_me bg-white">Register
-                Now</a>
+                Now</a> --}}
             {{-- <button class="btn text-center fw-bold start_with_me bg-white">
                 Start With Free
             </button> --}}
-        </div>
+            {{--
+        </div> --}}
 
-    </div>
+        {{--
+    </div> --}}
 
     {{-- Be a consultant end --}}
 
@@ -425,9 +427,11 @@
         </div>
 
         <div class="d-flex justify-content-center">
-            <button class="btn text-center fw-bold start_with_me bg-white">
+            <a href="{{ route('register') }}" class="btn text-center fw-bold start_with_me bg-white">Register
+                Now</a>
+            {{-- <button class="btn text-center fw-bold start_with_me bg-white">
                 Start With Free
-            </button>
+            </button> --}}
         </div>
 
     </div>
