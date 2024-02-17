@@ -43,7 +43,7 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            {{-- <th>Features</th> --}}
+                            <th>Features</th>
                             @foreach ($adminpackage as $package)
                             <th>{{ $package->title }}</th>
                             @endforeach
@@ -51,8 +51,8 @@
                     </thead>
                     <tbody>
                         <tr>
-                            {{-- <td>
-
+                            <td>
+                                
                                 <b>Validity</b> <br> <br>
                                 <b>Online Platform Features</b> <br>
                                 Profile Name <br>
@@ -85,11 +85,13 @@
                                 Guides for making Youtube channle <br>
                                 Latest Technology related Video Tutorials <br>
 
-                            </td> --}}
+                            </td>
                             @foreach ($adminpackage as $package)
                             <td>{!! $package->details !!}</td>
                             @endforeach
-
+                            <td>
+                                {{-- Add your features content here --}}
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -115,7 +117,7 @@
             <!-- Repeat the pattern for the other plans -->
         </div>
         <div class="d-flex justify-content-center">
-            <a href="#" class="btn text-white mt-lg-5 mb-lg-5">Apply Now</a>
+            <a href="#" class="btn text-center mt-lg-5 mb-lg-5">Apply Now</a>
         </div>
     </div>
 

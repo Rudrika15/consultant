@@ -28,11 +28,23 @@
         <div class="">
             <h4 class="">Consultant List</h4>
         </div>
-        <div class="">
+        <div class="d-flex">
+            <form action="{{ route('excel.import') }}" method="post" enctype="multipart/form-data" id="importForm"
+                class="mr-2 mt-3">
+                @csrf
+                <button type="button" class="btn btn-info btn-sm" onclick="triggerFileInput()">Import</button>
+                <input type="file" name="excel_file" id="fileInput" accept=".xlsx, .xls" style="display:none">
+            </form>
             <a href="{{ route('consultant.index') }}" id="back" class="btn btnback btn-sm"
                 style="display:none;">BACK</a>
-            <a href="{{ route('consultant.create') }}" id="add" class="btn btnback btn-sm btn-info">ADD</a>
+            <a href="{{ route('consultant.create') }}" id="add" class="btn btnback btn-sm btn-info mt-3">ADD</a>
         </div>
+
+        <script>
+            function triggerFileInput() {
+                document.getElementById('fileInput').click();
+            }
+        </script>
     </div>
     <div class="card-body">
         <div class="table-responsive" id="dataTableDiv">
@@ -44,17 +56,12 @@
                         <th>Email</th>
                         <th>Contact No</th>
                         <th>Plan Type</th>
-                        {{-- <th>About</th> --}}
                         <th>Photo</th>
                         <th>Type</th>
                         <th>Company Name</th>
                         <th>Category</th>
                         <th>Package</th>
                         <th>Is Featured</th>
-                        {{-- <th>Skype Id</th>
-                        <th>Website</th>
-                        <th>Map</th>
-                        <th>Address</th> --}}
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -67,11 +74,6 @@
                         <td>{{ $consultant->email }}</td>
                         <td>{{ $consultant->contactNo }}</td>
                         <td>{{ $consultant->planType }}</td>
-                        {{-- <td>
-                            @if(isset($consultant->profile->about))
-                            {{ $consultant->profile->about }}
-                            @endif
-                        </td> --}}
                         <td>
                             @if(isset($consultant->profile->photo))
                             <img src="{{ url('/profile') . '/' . $consultant->profile->photo }}" width="50px"
@@ -105,27 +107,6 @@
                             {{ $consultant->profile->isFeatured }}
                             @endif
                         </td>
-
-                        {{-- <td>
-                            @if(isset($consultant->profile->skypeId))
-                            {{ $consultant->profile->skypeId }}
-                            @endif
-                        </td>
-                        <td>
-                            @if(isset($consultant->profile->webSite))
-                            {{ $consultant->profile->webSite }}
-                            @endif
-                        </td>
-                        <td>
-                            @if(isset($consultant->profile->map))
-                            {{ $consultant->profile->map }}
-                            @endif
-                        </td>
-                        <td>
-                            @if(isset($consultant->profile->address))
-                            {{ $consultant->profile->address }}
-                            @endif
-                        </td> --}}
                         <td>
                             @if(isset($consultant->profile->status))
                             {{ $consultant->profile->status }}
@@ -138,7 +119,6 @@
                             <a href="{{ route('consultant.edit', $consultant->id) }}"
                                 class="btn btn-primary btn-sm mt-3 edit">Edit</a>
 
-                                
                             <a href="{{ route('consultant.enable', $consultant->id) }}"
                                 class="btn btn-info btn-sm mt-3 edit">Enable</a>
 

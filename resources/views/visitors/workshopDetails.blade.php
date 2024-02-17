@@ -256,7 +256,12 @@
                 payButtons.forEach(function(button) {
                     button.addEventListener('click', function(e) {
                         var amountElement = button.closest('.pay-container').querySelector('.amount');
+                        var workshopIdElement = button.closest('.pay-container').querySelector('[name="workshopId"]');
+                        
+                        
                         var amount = parseFloat(amountElement.value); // Retrieve the amount value
+                        var workshopId = workshopIdElement.value;
+                        
                         // get name of login user
                         const nameInput = document.querySelector('.username');
                         const nameValue = nameInput.value;
@@ -274,7 +279,7 @@
                             "handler": function(response) {
                                 // console.log(response);
                                 var paymentId = response.razorpay_payment_id;
-                                storePaymentId(paymentId, amount);
+                                storePaymentId(paymentId, amount, workshopId);
                             },
                             "prefill": {
                                 "name": nameValue,
@@ -292,7 +297,7 @@
 
             });
 
-            function storePaymentId(paymentId = '', amount = '') {
+            function storePaymentId(paymentId = '', amount = '', workshopId = '') {
                 // Make an asynchronous POST request to your server
                 var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
@@ -304,17 +309,19 @@
                         },
                         body: JSON.stringify({
                             paymentId: paymentId,
-                            amount: amount
+                            amount: amount,
+                            workshopId: workshopId,
                         }),
                     })
                     .then(response => {
                         // console.log("responses", response);
                         // console.log("paymentId", paymentId);
+                        console.log("workshopId", workshopId);
 
-                        console.log('Payment ID stored successfully');
+                        console.log('Payment ID and Workshop ID stored successfully');
                     })
                     .catch(error => {
-                        console.error('Error storing payment ID: ', error);
+                      console.error('Error storing payment ID and Workshop ID: ', error);
                     });
             }
 </script>

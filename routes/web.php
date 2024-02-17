@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Attachment;
+use Illuminate\Http\Request;
 use League\Flysystem\Visibility;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -8,15 +9,16 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\RazorpayController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\StateController;
 use App\Http\Controllers\Admin\SliderController;
+// use App\Http\Controllers\Consultant\ConsultantController;
 use App\Http\Controllers\Admin\InquiryController;
 use App\Http\Controllers\Admin\PincodeController;
-// use App\Http\Controllers\Consultant\ConsultantController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AdminLeadController;
@@ -45,7 +47,6 @@ use App\Http\Controllers\Admin\ConsultantInquiryController;
 use App\Http\Controllers\Auth\ConsultantRegisterController;
 use App\Http\Controllers\Admin\WorkshopRegistrationController;
 use App\Http\Controllers\Consultant\ConsultantEnquiryController;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -314,16 +315,21 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('adminworkshop-store', [AdminWorkshopController::class, 'store'])->name('adminworkshop.store');
     Route::get('adminworkshop-edit/{id?}', [AdminWorkshopController::class, 'edit'])->name('adminworkshop.edit');
     Route::post('adminworkshop-update', [AdminWorkshopController::class, 'update'])->name('adminworkshop.update');
-    Route::get('adminworkshop-delete{id?}', [AdminWorkshopController::class, 'delete'])->name('adminworkshop.delete');
     Route::get('adminworkshop/{id}/show', [AdminWorkshopController::class, 'show'])->name('adminworkshop.show');
+    // Route::get('adminworkshop-delete{id?}', [AdminWorkshopController::class, 'delete'])->name('adminworkshop.delete');
+    Route::delete('adminworkshop-delete/{id?}', [WorkshopController::class, 'delete'])->name('adminworkshop.delete');
+
+    //Excel Import
+
+    Route::post('excel-import', [ExcelController::class, 'excelImport'])->name('excel.import');
 
     /* Workshop Registration View */
     // Route::get('workshopregistration', [WorkshopRegistrationController::class, 'index'])->name('workshopregistration.index');
 
     // Profile Enable & Disable
 
-    Route::get('/consultant/enable/{id}', [ConsultantController::class, 'enable'])->name('consultant.enable');
-    Route::get('/consultant/disable/{id}', [ConsultantController::class, 'disable'])->name('consultant.disable');
+    Route::get('/consultant/enable/{userId}', [ConsultantController::class, 'enable'])->name('consultant.enable');
+    Route::get('/consultant/disable/{userId}', [ConsultantController::class, 'disable'])->name('consultant.disable');
 
     // web.php
 
@@ -451,6 +457,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('workshop-edit/{id?}', [WorkshopController::class, 'edit'])->name('workshop.edit');
     Route::post('workshop-update', [WorkshopController::class, 'update'])->name('workshop.update');
     Route::get('workshop-delete/{id?}', [WorkshopController::class, 'delete'])->name('workshop.delete');
+
 
     /* Upgrade Plan */
     Route::get('upgradeplan-index', [UpgradePlanController::class, 'index'])->name('upgradeplan.index');

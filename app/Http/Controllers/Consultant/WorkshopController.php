@@ -151,19 +151,16 @@ class WorkshopController extends Controller
             return view('servererror');
         }
     }
+
     public function delete($id)
     {
         try {
             $workshop = Workshop::find($id);
             $workshop->status = "Deleted";
             $workshop->save();
-            return response()->json([
-                'success' => true,
-                'message' => 'Workshop Deleted Successfully!',
-
-            ]);
+            return redirect()->back()->with('success', 'Workshop Deleted Successfully!');
         } catch (\Throwable $th) {
-            //throw $th;
+            // throw $th;
             return view('servererror');
         }
     }

@@ -428,7 +428,7 @@ class VisitorController extends Controller
     }
 
 
-    // public function findConsultantList(Request $request)
+    // public function  ultantList(Request $request)
     // {
     //     $sliderfindconsultant = Slider::where('type', '=', "Find Consultant")->where('status', '=', 'Active')->get();
 

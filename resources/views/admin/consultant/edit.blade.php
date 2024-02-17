@@ -25,7 +25,7 @@
                 <!-- Outer Row -->
 
                 {{-- <form action="{{ route('consultant.update') }}" method="post"> --}}
-                    <form action="{{ route('consultant.update') }}" method="post">
+                    <form action="{{ route('consultant.update') }}" method="post" enctype="multipart/form-data">
 
                         {{-- <form action="{{ route('consultant.update', $profile->user->id) }}" method="POST"> --}}
                             @csrf
@@ -97,20 +97,18 @@
                                         <option value="">-- Select State --</option>
                                         @foreach($states as $data)
                                         <option value="{{$data->id}}" {{ $data->id == $profile->stateId ? 'selected' :
-                                            ''
-                                            }}>{{$data->stateName}}
+                                            '' }}>
+                                            {{$data->stateName}}
                                         </option>
-
-
-
                                         @endforeach
                                     </select>
-                                    @error('stateId')
+                                    @error('state')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
+
                                 <div class="col-md-6 pt-4">
                                     <select class="form-select register-form" aria-label="Default select example"
                                         id="cityId" name="cityId">
@@ -118,7 +116,8 @@
                                         @foreach($cities as $data)
                                         <option value="{{$data->id}}" {{ $data->id == $profile->cityId ? 'selected' : ''
                                             }}>
-                                            {{$data->cityName}}</option>
+                                            {{$data->cityName}}
+                                        </option>
                                         @endforeach
                                         <option value="other">Other</option>
                                     </select>
@@ -126,7 +125,7 @@
                                     <!-- Hidden text box for other city -->
                                     <div id="otherCityDiv" style="display: none; margin-top: 20px">
                                         <input id="otherCity" type="text" class="form-control register-form"
-                                            name="otherCity" placeholder="Enter City" value="{{ $profile->cityId }}">
+                                            name="otherCity" placeholder="Enter City" value="">
                                     </div>
 
                                     @error('cityId')
@@ -205,10 +204,9 @@
                                 </div>
 
                                 <div class="form-label-group mt-3">
-                                    {{-- <label for="photo" class="fw-bold">Photo <sup
-                                            class="text-danger">*</sup></label> --}}
+                                    {{-- <label for="photo" class="fw-bold">Photo <sup class="text-danger">*</sup></label> --}}
                                     <input id="photo" type="file" name="photo" class="form-control" placeholder="photo">
-                                    <img id="preview-photo" src="{{ url('/profle/' . $profile->photo) }}"
+                                    <img id="preview-photo" src="{{ url('/profile/' . $profile->photo) }}"
                                         name="preview-photo" class="mt-3" width="100px" height="100px">
 
                                     @if ($errors->has('photo'))
@@ -332,16 +330,36 @@
                             <div class="form-label-group mt-3">
                                 <label for="">Is Featured Selected ?</label>
                                 <div class="form-check mt-2">
-                                    <input class="form-check-input" type="radio" name="isFeatured" id="Yes" value="Yes">
+                                    {{-- <input class="form-check-input" type="radio" name="isFeatured" id="Yes"
+                                        value="Yes">
+                                    <label class="form-check-label" for="Yes">
+                                        Yes
+                                    </label> --}}
+
+                                    <input class="form-check-input" type="radio" name="isFeatured" id="Yes" value="Yes"
+                                        @if ($profile->isFeatured == "Yes") checked
+                                    @endif>
                                     <label class="form-check-label" for="Yes">
                                         Yes
                                     </label>
+
+
                                 </div>
                                 <div class="form-check mt-2">
-                                    <input class="form-check-input" type="radio" name="isFeatured" id="No" value="No">
+                                    {{-- <input class="form-check-input" type="radio" name="isFeatured" id="No"
+                                        value="No">
+                                    <label class="form-check-label" for="No">
+                                        No
+                                    </label> --}}
+
+                                    <input class="form-check-input" type="radio" name="isFeatured" id="No" value="No"
+                                        @if ($profile->isFeatured == "No")
+                                    checked
+                                    @endif>
                                     <label class="form-check-label" for="No">
                                         No
                                     </label>
+
                                 </div>
                                 @if ($errors->has('isFeatured'))
                                 <span class="error">{{ $errors->first('isFeatured') }}</span>
@@ -364,5 +382,59 @@
         </div>
     </div>
 </div>
+
+<script>
+    function previewPhoto(input) {
+        var file = input.files[0];
+
+        if (file) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#preview-photo').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#stateId').on('change', function() {
+            var idState = this.value;
+            $("#cityId").html('');
+            $.ajax({
+                url: "{{url('fetchCityAdmin')}}",
+                type: "POST",
+                data: {
+                    stateId: idState,
+                    _token: '{{csrf_token()}}'
+                },
+                dataType: 'json',
+                success: function(res) {
+                    $('#cityId').html('<option value="">-- Select City --</option>');
+                    $.each(res.cities, function(key, value) {
+                        $("#cityId").append('<option value="' + value.id + '">' + value.cityName + '</option>');
+                    });
+
+                    // Append the "Other" option after fetching the cities
+                    $("#cityId").append('<option value="other">Other</option>');
+                }
+            });
+        });
+
+        $('#cityId').on('change', function () {
+            var selectedCity = $(this).val();
+            
+            // Show or hide the text box based on the selected city
+            if (selectedCity === 'other') {
+                $('#otherCityDiv').show();
+            } else {
+                $('#otherCityDiv').hide();
+            }
+        });
+    });
+</script>
 
 @endsection

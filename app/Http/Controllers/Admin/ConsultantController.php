@@ -181,21 +181,21 @@ class ConsultantController extends Controller
     {
         // Validate request data
         $request->validate([
-            'name' => 'required|string|max:255',
-            'lastName' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
-            'stateId' => 'required',
-            'cityId' => 'required',
-            'contactNo' => 'required|string|max:255',
-            'gender' => 'required|string|in:Male,Female',
-            'birthdate' => 'required|date',
-            'isFeatured' => 'required',
-            'about' => 'required',
-            'skypeId' => 'required',
-            'webSite' => 'required',
-            'map' => 'required',
-            'address' => 'required',
-            'photo' => 'required',
+            // 'name' => 'required|string|max:255',
+            // 'lastName' => 'required|string|max:255',
+            // 'email' => 'required|string|email|max:255',
+            // 'stateId' => 'required',
+            // 'cityId' => 'required',
+            // 'contactNo' => 'required|string|max:255',
+            // 'gender' => 'required|string|in:Male,Female',
+            // 'birthdate' => 'required|date',
+            // // 'isFeatured' => 'required',
+            // 'about' => 'required',
+            // 'skypeId' => 'required',
+            // 'webSite' => 'required',
+            // 'map' => 'required',
+            // 'address' => 'required',
+            // // 'photo' => 'required',
 
         ]);
 
@@ -228,7 +228,8 @@ class ConsultantController extends Controller
             $user->save();
             $profile = Profile::where('userId', $userId)->first();
             // Update profile data
-            $profile->state = $request->stateId;
+            $user->stateId = $request->stateId;
+            $profile->stateId = $request->stateId;
 
             if (empty($request->cityId) || $request->cityId == 'other') {
                 $newCityName = $request->otherCity;
@@ -236,9 +237,9 @@ class ConsultantController extends Controller
                 $newCity = City::firstOrCreate(['cityName' => $newCityName, 'stateId' => $request->stateId]);
 
                 $user->cityId = $newCity->id;
-                $profile->city = $newCity->id;
+                $profile->cityId = $newCity->id;
             } else {
-                $profile->city = $request->cityId;
+                $profile->cityId = $request->cityId;
             }
             $profile->isFeatured = $request->isFeatured;
             $profile->about = $request->about;
@@ -248,8 +249,8 @@ class ConsultantController extends Controller
             $profile->address = $request->address;
 
             if ($request->hasFile('photo')) {
-                $profile->photo = time() . '.' . $request->file('photo')->extension();
-                $request->file('photo')->move(public_path('profile'), $profile->photo);
+                $profile->photo = time() . '.' . $request->photo->extension();
+                $request->photo->move(public_path('profile'), $profile->photo);
             }
 
 
@@ -263,9 +264,9 @@ class ConsultantController extends Controller
         }
     }
 
-    public function enable($id)
+    public function enable($userId)
     {
-        $profile = Profile::where('userId', $id)->first();
+        $profile = Profile::where('userId', $userId)->first();
         if ($profile) {
             $profile->status = 'Active';
             $profile->save();
@@ -274,9 +275,10 @@ class ConsultantController extends Controller
         return redirect()->back()->with('error', 'Consultant profile not found');
     }
 
-    public function disable($id)
+
+    public function disable($userId)
     {
-        $profile = Profile::where('userId', $id)->first();
+        $profile = Profile::where('userId', $userId)->first();
         if ($profile) {
             $profile->status = 'Inactive';
             $profile->save();

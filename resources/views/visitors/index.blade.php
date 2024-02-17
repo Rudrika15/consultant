@@ -300,8 +300,9 @@
                                         style="height: 200px; object-fit: cover;">
                                 </div>
                                 <div class="card-body text-center">
-                                    <p class="card-text">{{ $workshopData->title ?? '-' }} </p>
-                                    <p class="card-text">{{ $workshopDate->format('d-m-y') }}</p>
+                                    <p class="card-text" style="font-size: 15px">{{ $workshopData->title ?? '-' }} </p>
+                                    <p class="card-text" style="font-size: 17px">{{ $workshopDate->format('d-m-y') }}
+                                    </p>
                                     {{-- <p class="card-text">{{ $workshopData-> ?? '-' }}</p> --}}
                                     <a href="{{ route('visitor.workshopDetails', $workshopData->id) }}"
                                         class="btn text-white btn-register" style="width: 130px">Register Now</a>
