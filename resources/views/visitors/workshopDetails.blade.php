@@ -40,6 +40,7 @@
                 <div class="col-sm-3 col-md-3 col-6">
 
                     @auth
+
                         <form id="registrationForm" action="{{ route('workshop.register') }}" method="POST">
                             @csrf
                             <div class="pay-container">
