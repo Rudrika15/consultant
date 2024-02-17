@@ -177,8 +177,8 @@ class UserController extends Controller
             $profile->webSite = $request->webSite;
             $profile->map = $request->map;
             $profile->address = $request->address;
-            $profile->state = $request->stateId;
-            $profile->city = $request->cityId;
+            $profile->stateId = $request->stateId;
+            $profile->cityId = $request->cityId;
             $profile->pincode = $request->pincode;
             if ($request->photo) {
                 $profile->photo = time() . '.' . $request->photo->extension();
@@ -197,8 +197,8 @@ class UserController extends Controller
             $profile->webSite = $request->webSite;
             $profile->map = $request->map;
             $profile->address = $request->address;
-            $profile->state = $request->stateId;
-            $profile->city = $request->cityId;
+            $profile->stateId = $request->stateId;
+            $profile->cityId = $request->cityId;
             $profile->pincode = $request->pincode;
             if ($request->photo) {
                 $profile->photo = time() . '.' . $request->photo->extension();

@@ -64,7 +64,7 @@
                             </span>
                             @enderror
                         </div>
-                        <div class="col-md-3 pt-4">
+                        {{-- <div class="col-md-3 pt-4">
                             <input id="password" type="password"
                                 class="form-control register-form  @error('password') is-invalid @enderror"
                                 name="password" placeholder="Password" required autocomplete="new-password">
@@ -85,7 +85,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-                        </div>
+                        </div> --}}
 
 
                         <div class="col-md-6 pt-4">
@@ -238,6 +238,18 @@
                                 @enderror
                             </div>
                         </div>
+
+                        <div class="form-label-group mt-3">
+                            <label for="photo" class="fw-bold">Photo <sup class="text-danger">*</sup></label>
+                            <input id="photo" type="file" name="photo" class="form-control" placeholder="photo">
+                            <img id="preview-photo" src="gallery/default.jpg" name="preview-photo" class="mt-3"
+                                width="100px" height="100px">
+
+                            @if ($errors->has('photo'))
+                            <span class="error">{{ $errors->first('photo') }}</span>
+                            @endif
+                        </div>
+
 
 
                         <div class="col-md-12 text-center pt-5">

@@ -144,7 +144,7 @@
                         <p class="card-text">Not Available</p>
                         @endif
                         <a href="{{ route('visitors.consultantDetail', $consultantData->userId) }}"
-                            class="btn btn-primary">Show Profile</a>
+                            class="btn text-white " style="width: 150px ">Show Profile</a>
                     </div>
                 </div>
             </div>

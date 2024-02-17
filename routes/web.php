@@ -119,8 +119,8 @@ Route::get('category-detail/{id?}', [VisitorController::class, 'categoryDetail']
 Route::get('consultant-detail/{id?}', [VisitorController::class, 'consultantDetail'])->name('visitors.consultantDetail');
 
 //workshop register
-Route::post('/workshop/register', [VisitorController::class, 'registerAndPay'])
-    ->name('workshop.register');
+// Route::post('/workshop/register', [VisitorController::class, 'registerAndPay'])
+//     ->name('workshop.register');
 
 // Route::post('/workshop/register/{workshopId}', [VisitorController::class, 'registerAndPay'])
 //     ->name('workshop.register');
@@ -128,6 +128,16 @@ Route::post('/workshop/register', [VisitorController::class, 'registerAndPay'])
 // Add a new route for the registerAndPay method
 // Route::post('/workshop/register', 'YourController@registerAndPay')->name('workshop.register');
 
+
+//Workshop Register
+
+Route::post('/razorpay-payment-store', [VisitorController::class, 'razorpayPaymentStore'])->name('razorpayPaymentStore');
+
+
+// 
+Route::post('razorpayPaymentStore', [VisitorController::class, 'razorpayPaymentStore'])->name('razorpay.store');
+
+//Route::post('/razorpay-payment-store', 'YourControllerName@razorpayPaymentStore')->name('razorpay.payment.store');
 
 
 Route::get('/searchCity', [VisitorController::class, 'searchCity'])->name('visitors.searchCity');
@@ -309,6 +319,15 @@ Route::group(['middleware' => ['auth']], function () {
 
     /* Workshop Registration View */
     // Route::get('workshopregistration', [WorkshopRegistrationController::class, 'index'])->name('workshopregistration.index');
+
+    // Profile Enable & Disable
+
+    Route::get('/consultant/enable/{id}', [ConsultantController::class, 'enable'])->name('consultant.enable');
+    Route::get('/consultant/disable/{id}', [ConsultantController::class, 'disable'])->name('consultant.disable');
+
+    // web.php
+
+
 
 
     /* Contactus List */

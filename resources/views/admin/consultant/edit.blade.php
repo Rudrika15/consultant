@@ -29,7 +29,7 @@
 
                         {{-- <form action="{{ route('consultant.update', $profile->user->id) }}" method="POST"> --}}
                             @csrf
-                            <input type="hiddden" id="userId" name="userId" value="{{$user->id}}">
+                            <input type="hidden" id="userId" name="userId" value="{{$user->id}}">
 
 
                             <div class="row">
@@ -101,9 +101,7 @@
                                             }}>{{$data->stateName}}
                                         </option>
 
-                                        {{-- {{ old('category', $details->category) == $category->id ? 'selected' : ''
-                                        }}
-                                        --}}
+
 
                                         @endforeach
                                     </select>
@@ -136,6 +134,86 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
+                                </div>
+
+                                <div class="col-md-6 pt-4">
+                                    <input id="about" type="text"
+                                        class="form-control register-form @error('contactNo') is-invalid @enderror"
+                                        name="about" placeholder="About" value="{{ $profile->about }}"
+                                        autocomplete="about">
+
+                                    @error('about')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+
+                                <div class="col-md-6 pt-4">
+                                    <input id="skypeId" type="text"
+                                        class="form-control register-form @error('contactNo') is-invalid @enderror"
+                                        name="skypeId" placeholder="Skype Id" value="{{ $profile->skypeId }}"
+                                        autocomplete="skypeId">
+
+                                    @error('skypeId')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+
+                                <div class="col-md-6 pt-4">
+                                    <input id="webSite" type="text"
+                                        class="form-control register-form @error('contactNo') is-invalid @enderror"
+                                        name="webSite" placeholder="Website" value="{{ $profile->webSite }}"
+                                        autocomplete="webSite">
+
+                                    @error('webSite')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+
+                                <div class="col-md-6 pt-4">
+                                    <input id="map" type="text"
+                                        class="form-control register-form @error('contactNo') is-invalid @enderror"
+                                        name="map" placeholder="Map" value="{{ $profile->map }}" autocomplete="map">
+
+                                    @error('map')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+
+                                <div class="col-md-6 pt-4">
+                                    <input id="address" type="text"
+                                        class="form-control register-form @error('contactNo') is-invalid @enderror"
+                                        name="address" placeholder="Address" value="{{ $profile->address }}"
+                                        autocomplete="address">
+
+                                    @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-label-group mt-3">
+                                    {{-- <label for="photo" class="fw-bold">Photo <sup
+                                            class="text-danger">*</sup></label> --}}
+                                    <input id="photo" type="file" name="photo" class="form-control" placeholder="photo">
+                                    <img id="preview-photo" src="{{ url('/profle/' . $profile->photo) }}"
+                                        name="preview-photo" class="mt-3" width="100px" height="100px">
+
+                                    @if ($errors->has('photo'))
+                                    <span class="error">{{ $errors->first('photo') }}</span>
+                                    @endif
                                 </div>
 
                                 <div class="col-md-6 pt-4">

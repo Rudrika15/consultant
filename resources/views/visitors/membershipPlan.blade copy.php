@@ -38,7 +38,7 @@
     </div>
 
     <div class="container mt-5 mb-5">
-        <div class="row mb-6">
+        <div class="row mb-5">
             @foreach ($adminpackage as $adminpackage)
             <div class="col-md-4 mt-2">
                 <div class="card membercard shadow p-3 mb-5 bg-body rounded">

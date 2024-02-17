@@ -14,6 +14,7 @@ use App\Models\Slider;
 use App\Models\Gallery;
 use App\Models\Inquiry;
 use App\Models\Package;
+use App\Models\Payment;
 use App\Models\Pincode;
 use App\Models\Profile;
 use App\Models\Category;
@@ -171,36 +172,56 @@ class VisitorController extends Controller
 
 
 
-    public function registerAndPay(Request $request)
+    // public function registerAndPay(Request $request)
+    // {
+    //     $request->validate([
+    //         'workshopId' => 'required|exists:workshops,id',
+    //     ]);
+
+    //     $userId = auth()->user()->id;
+    //     $workshopId = $request->input('workshopId');
+
+    //     if (!RegisterWorkshop::where(['userId' => $userId, 'workshopId' => $workshopId])->exists()) {
+    //         RegisterWorkshop::create([
+    //             'userId' => $userId,
+    //             'workshopId' => $workshopId,
+    //         ]);
+
+    //         // Handle payment success logic here (update payment status, store payment details, etc.)
+    //         // You can access Razorpay payment details from $request->all()
+
+    //         return redirect()->back()->with('successMessage', 'Successfully Registered for the workshop.');
+    //     } else {
+    //         return back()->with('errorMessage', 'You are already registered for this workshop.');
+    //     }
+    // }
+
+
+
+    public function razorpayPaymentStore(Request $request)
     {
-        $request->validate([
-            'workshopId' => 'required|exists:workshops,id',
-        ]);
 
-        $userId = auth()->user()->id;
-        $workshopId = $request->input('workshopId');
+        $payment = new Payment();
 
-        if (!RegisterWorkshop::where(['userId' => $userId, 'workshopId' => $workshopId])->exists()) {
-            RegisterWorkshop::create([
-                'userId' => $userId,
-                'workshopId' => $workshopId,
-            ]);
+        $payment->userId = Auth::user()->id;
 
-            // Handle payment success logic here (update payment status, store payment details, etc.)
-            // You can access Razorpay payment details from $request->all()
+        $payment->r_payment_id = $request->input('paymentId');
+        $payment->amount = $request->input('amount');
 
-            return redirect()->back()->with('successMessage', 'Successfully Registered for the workshop.');
-        } else {
-            return back()->with('errorMessage', 'You are already registered for this workshop.');
-        }
+        $payment->save();
+
+
+        $workshop = new RegisterWorkshop();
+
+        $workshop->userId = Auth::user()->id;
+
+        $workshop->workshopId = $request->input('workshopId');
+
+        $workshop->save();
+
+
+        return redirect()->back()->with('successMessage', 'You are registered for the workshop successfully.');
     }
-
-
-
-
-
-
-
 
 
 
@@ -482,7 +503,7 @@ class VisitorController extends Controller
 
 
         // Get the consultants based on the conditions
-        $consultant = $consultantQuery->where('type', '=', 'consultant')->get();
+        $consultant = $consultantQuery->where('type', '=', 'consultant')->where('status', 'Active')->get();
 
         $countconsultant = count($consultant);
 
@@ -626,7 +647,7 @@ class VisitorController extends Controller
         }
     }
 
-    
+
 
 
 

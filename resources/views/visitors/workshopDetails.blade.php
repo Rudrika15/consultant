@@ -40,19 +40,31 @@
                 <div class="col-sm-3 col-md-3 col-6">
 
                     @auth
-
-                        <form id="registrationForm" action="{{ route('workshop.register') }}" method="POST">
-                            @csrf
-                            <div class="pay-container">
+                        @if ($workshop->price == 0)
+                            <form id="registrationForm" action="{{ route('razorpayPaymentStore') }}" method="POST">
+                                @csrf
                                 <input type="hidden" name="workshopId" value="{{ $workshop->id }}">
-                                <input type="hidden" name="amount" class="amount" value="{{ $workshop->price }}" />
-                                <input type="hidden" name="name" class="name" value="Name" />
-                                <input type="hidden" name="email" class="email" value="email" />
+                                <button type="submit" class="btn btn-primary mt-4" id="joinNowButton">Join Now</button>
+                            </form>
+                        @else
+                            <form id="registrationForm" action="{{ route('razorpayPaymentStore') }}" method="POST">
+                                @csrf
+                                <div class="pay-container">
+                                    <input type="hidden" name="workshopId" value="{{ $workshop->id }}">
+                                    <input type="hidden" name="amount" class="amount" value="{{ $workshop->price }}" />
+                                    {{-- <input type="hidden" name="name" class="name" value="Name" />
+                        <input type="hidden" name="email" class="email" value="email" /> --}}
 
-                                {{-- <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="{{ env('RAZORPAY_KEY') }}" data-amount="{{ $workshop->price * 100 }}" data-buttontext="Join Now" data-name="{{ $workshop->title }}" data-description="Workshop Payment" data-image="{{ url('/your-workshop-logo.jpg') }}" data-prefill.name="{{ Auth::user()->name }}" data-prefill.email="{{ Auth::user()->email }}" data-theme.color="#333692" data-prefill.workshopId="{{ $workshop->id }}"></script> --}}
-                                <button class="pay-button btn btn-primary mt-4" type="button">Join Now</button>
-                            </div>
-                        </form>
+                                    {{-- <script src="https://checkout.razorpay.com/v1/checkout.js"
+                            data-key="{{ env('RAZORPAY_KEY') }}" data-amount="{{ $workshop->price * 100 }}"
+                            data-buttontext="Join Now" data-name="{{ $workshop->title }}"
+                            data-description="Workshop Payment" data-image="{{ url('/your-workshop-logo.jpg') }}"
+                            data-prefill.name="{{ Auth::user()->name }}" data-prefill.email="{{ Auth::user()->email }}"
+                            data-theme.color="#333692" data-prefill.workshopId="{{ $workshop->id }}"></script> --}}
+                                    <button class="pay-button btn text-white mt-4" type="button">Join Now</button>
+                                </div>
+                            </form>
+                        @endif
                     @else
                         <button class="btn btn-primary mt-4" id="joinNowButton" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Join
                             Now</button>
@@ -221,8 +233,8 @@
         $name = Auth::user()->name;
         $email = Auth::user()->email;
         ?>
-        <input type="text" name="name" class="username" value="{{ $name }}">
-        <input type="email" name="email" class="useremail" value="{{ $email }}">
+        <input type="hidden" name="name" class="username" value="{{ $name }}">
+        <input type="hidden" name="email" class="useremail" value="{{ $email }}">
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 // Get all elements with the 'pay-button' class
@@ -248,7 +260,7 @@
                             "currency": "INR",
                             "name": "Consultantcube",
                             "description": "Razorpay payment",
-                            "image": "/images/logo.png",
+                            "image": "asset/images/razorpay.png",
                             "handler": function(response) {
                                 // console.log(response);
                                 var paymentId = response.razorpay_payment_id;
@@ -274,7 +286,7 @@
                 // Make an asynchronous POST request to your server
                 var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-                fetch('/razorpay-payment', {
+                fetch('/razorpay-payment-store', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -380,7 +392,7 @@
                 // Make an asynchronous POST request to your server
                 var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-                fetch('/razorpay-payment', {
+                fetch('/razorpay-payment-store', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

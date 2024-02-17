@@ -27,8 +27,7 @@
                     <h5 class="card-title">{{ $workshopData->title }}</h5>
                     {{-- Format the date as 'd-m-y' --}}
                     <p class="card-text">{{ $workshopDate->format('d-m-y') }}</p>
-                    <a href="{{ route('visitor.workshopDetails', $workshopData->id) }}" class="btn btn-primary">Show
-                        Details</a>
+                    <a href="{{ route('visitor.workshopDetails', $workshopData->id) }}" class="btn btn-primary">Join Now</a>
                 </div>
             </div>
         </div>
