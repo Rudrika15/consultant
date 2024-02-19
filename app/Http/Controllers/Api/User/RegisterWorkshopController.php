@@ -16,8 +16,8 @@ class RegisterWorkshopController extends Controller
         try {
             $rules = array(
                 'workshopId' => 'required',
-                'r_payment_id' => 'required',
-                'amount' => 'required',
+                'r_payment_id' => '',
+                'amount' => '',
             );
 
             $validator = Validator::make($request->all(), $rules);
@@ -27,6 +27,19 @@ class RegisterWorkshopController extends Controller
                     'success' => false,
                     'message' => $validator->errors(),
                     'status' => 404
+                ]);
+            }
+
+            // Check if the user is already registered for the workshop
+            $existingRegistration = RegisterWorkshop::where('workshopId', $request->workshopId)
+                ->where('userId', $request->userId)
+                ->first();
+
+            if ($existingRegistration) {
+                return response([
+                    'success' => false,
+                    'message' => 'You are already registered for this workshop.',
+                    'status' => 400
                 ]);
             }
 

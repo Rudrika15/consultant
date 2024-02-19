@@ -46,52 +46,21 @@
                             {{-- <th>Features</th> --}}
                             @foreach ($adminpackage as $package)
                             <th>{{ $package->title }}</th>
+
                             @endforeach
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            {{-- <td>
-
-                                <b>Validity</b> <br> <br>
-                                <b>Online Platform Features</b> <br>
-                                Profile Name <br>
-                                Photo<br>
-                                Description <br>
-                                Profile Creation <br>
-                                Video On Profile Page <br>
-                                Create Workshop on platform online / offline <br>
-                                Publish article <br>
-                                Getting Leads <br>
-                                Option for featured Consultant in his/her category<br> <br> <br>
-
-                                <b>Networking</b> <br>
-                                City level whatsapp group for networking <br>
-                                City level meet up [Discounted Rate as per category] <br>
-                                State level meetup <br>
-                                National level conference <br>
-                                Level based groups <br> <br> <br>
-
-
-                                <b>E-Book</b> <br>
-                                Experience more than 5 years in relevant field <br> <br>
-
-
-                                <b>Support & Resource</b> <br>
-                                Help in Publishing book <br>
-                                Coffee table booklet for corporates <br>
-                                Training Videos <br>
-                                Level up program by Indusrty Expert <br>
-                                Guides for making Youtube channle <br>
-                                Latest Technology related Video Tutorials <br>
-
-                            </td> --}}
                             @foreach ($adminpackage as $package)
                             <td>{!! $package->details !!}</td>
                             @endforeach
 
                         </tr>
-                    </tbody>
+                        @foreach ($adminpackage as $package)
+                        <td><button class="btn btn-primary">
+                                {{$package->title}}</button></td>
+                        @endforeach
                 </table>
             </div>
         </div>

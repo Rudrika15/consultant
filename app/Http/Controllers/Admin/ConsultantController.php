@@ -4,13 +4,25 @@ namespace App\Http\Controllers\Admin;
 
 use Auth;
 use App\Models\City;
+use App\Models\Time;
 use App\Models\User;
 use App\Models\State;
+use App\Models\Video;
+use App\Models\Gallery;
+use App\Models\Package;
 use App\Models\Profile;
 use App\Models\Category;
+use App\Models\Language;
+use App\Models\Workshop;
+use App\Models\Attachment;
 use App\Models\Consultant;
+use App\Models\SocialLink;
+use App\Models\Achievement;
+use App\Models\Certificate;
 use App\Models\AdminPackage;
+use App\Models\SocialMaster;
 use Illuminate\Http\Request;
+use App\Models\LanguageMaster;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -78,8 +90,20 @@ class ConsultantController extends Controller
         $cities = City::where('status', 'active')->get();
         $categories = Category::where('status', 'active')->get();
         $adminpackages = AdminPackage::where('status', 'active')->get();
+        $achievement = Achievement::all();
+        $attachment = Attachment::all();
+        $certificate = Certificate::all();
+        $gallery = Gallery::all();
+        $languageMaster = LanguageMaster::where('status', '!=', 'Deleted')->get();
+        $language = Language::all();
+        $package = Package::all();
+        $socialMaster = SocialMaster::where('status', '!=', 'Deleted')->get();
+        $socialLink = SocialLink::all();
+        $video = Video::all();
 
-        return view('admin.consultant.create', compact('states', 'cities', 'categories', 'adminpackages'));
+
+
+        return view('admin.consultant.create', compact('video', 'socialLink', 'socialMaster', 'package', 'language', 'languageMaster', 'gallery', 'adminpackages', 'achievement', 'attachment', 'certificate',  'states', 'cities', 'categories', 'adminpackages'));
     }
 
     public function store(Request $request)
@@ -119,6 +143,14 @@ class ConsultantController extends Controller
         // $profile->city = $request->cityId;
         $profile->contactNo2 = $request->contactNo;
         $profile->company = $request->company;
+        $profile->about = $request->about;
+        $profile->contact2 = $request->contact2;
+        $profile->skypeId = $request->skypeId;
+        $profile->webSite = $request->webSite;
+        $profile->map = $request->map;
+        $profile->address = $request->address;
+        $profile->address = $request->address;
+
         $profile->status = 'Active';
         //other city
 
@@ -149,12 +181,110 @@ class ConsultantController extends Controller
         }
 
         $profile->packageId = $request->packageId;
-
         $profile->type = 'Consultant';
-
         $user->assignRole('Consultant');
-
         $profile->save();
+
+        //aschievement
+        $achievement = new Achievement();
+        $achievement->title = $request->title;
+        if ($request->photo) {
+            $achievement->photo = time() . '.' . $request->photo->extension();
+            $request->photo->move(public_path('achievement'),  $achievement->photo);
+        }
+        $achievement->status = 'Active';
+        $achievement->save();
+
+        //Attachment
+        $attachment = new Attachment();
+        $attachment->title = $request->title;
+        if ($request->file) {
+            $attachment->file = time() . '.' . $request->file->extension();
+            $request->file->move(public_path('attachment'),  $attachment->file);
+        }
+        $attachment->status = 'Active';
+        $attachment->save();
+
+        //Certificates
+        $certificate = new Certificate();
+        $certificate->title = $request->title;
+        if ($request->photo) {
+            $certificate->photo = time() . '.' . $request->photo->extension();
+            $request->photo->move(public_path('certificate'),  $certificate->photo);
+        }
+        $certificate->status = 'Active';
+        $certificate->save();
+
+        //Gallery
+        $gallery = new Gallery();
+        $gallery->title = $request->title;
+        if ($request->photo) {
+            $gallery->photo = time() . '.' . $request->photo->extension();
+            $request->photo->move(public_path('gallery'),  $gallery->photo);
+        }
+        $gallery->status = 'Active';
+        $gallery->save();
+
+
+        //language
+        $language = new Language();
+        $language->languageId = $request->languageId;
+        $language->status = 'Active';
+        $language->save();
+
+
+        //Consultant package
+        $packages = new Package();
+        $packages->title = $request->title;
+        $packages->price = $request->price;
+        $packages->detail = $request->detail;
+        $packages->validUpTo = $request->validUpTo;
+        $packages->status = 'Active';
+        $packages->save();
+
+
+        //social link
+        $socialLink = new SocialLink();
+
+        $socialLink->socialMediaMasterId = $request->socialMediaMasterId;
+        $socialLink->url = $request->url;
+
+        $socialLink->status = 'Active';
+        $socialLink->save();
+
+        //time
+        $time = new Time();
+        $time->start_time = $request->input('start_time');
+        $time->end_time = $request->input('end_time');
+        $time->day = $request->input('day');
+        $time->status = 'Active';
+        $time->save();
+
+        //Videos
+
+        $video = new Video();
+        $video->url = $request->url;
+        $video->status = 'Active';
+        $video->save();
+
+        //Workshops
+        $workshop = new Workshop();
+        $workshop->userId = $request->userId;
+        $workshop->title = $request->title;
+        $workshop->price = $request->price;
+
+        if ($request->photo) {
+            $workshop->photo = time() . '.' . $request->photo->extension();
+            $request->photo->move(public_path('workshop'),  $workshop->photo);
+        }
+
+        $workshop->detail = $request->detail;
+        $workshop->workshopType = $request->workshopType;
+        $workshop->link = $request->link;
+        $workshop->address = $request->address;
+        $workshop->workshopDate = $request->workshopDate;
+        $workshop->save();
+
 
         return redirect()->route('consultant.index')->with('success', 'Consultant added successfully.');
     }
@@ -171,10 +301,21 @@ class ConsultantController extends Controller
         $cities = City::where('status', 'active')->get();
         $categories = Category::where('status', 'active')->get();
         $adminpackages = AdminPackage::where('status', 'active')->get();
+        $achievement = Achievement::all();
+        $attachment = Attachment::all();
+        $certificate = Certificate::all();
+        $gallery = Gallery::all();
+        $languageMaster = LanguageMaster::where('status', '!=', 'Deleted')->get();
+        $language = Language::all();
+        $package = Package::all();
+        $socialMaster = SocialMaster::where('status', '!=', 'Deleted')->get();
+        $socialLink = SocialLink::all();
+        $video = Video::all();
 
-        return view('admin.consultant.edit', compact('user', 'profile', 'states', 'cities', 'categories', 'adminpackages'));
+        return view('admin.consultant.edit', compact('user', 'profile', 'states', 'cities', 'categories', 'adminpackages', 'video', 'socialLink', 'socialMaster', 'package', 'language', 'languageMaster', 'gallery', 'achievement', 'attachment', 'certificate'));
         // Pass the user and profile data to the view
     }
+
 
 
     public function update(Request $request)
@@ -184,18 +325,18 @@ class ConsultantController extends Controller
             'name' => 'required|string|max:255',
             'lastName' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
-            'stateId' => 'required',
-            'cityId' => 'required',
+            // 'stateId' => 'required',
+            // 'cityId' => 'required',
             'contactNo' => 'required|string|max:255',
             'gender' => 'required|string|in:Male,Female',
             'birthdate' => 'required|date',
-            'isFeatured' => 'required',
+            // 'isFeatured' => 'required',
             'about' => 'required',
             'skypeId' => 'required',
             'webSite' => 'required',
             'map' => 'required',
             'address' => 'required',
-            'photo' => 'required',
+            // 'photo' => 'required',
 
         ]);
 
@@ -228,7 +369,7 @@ class ConsultantController extends Controller
             $user->save();
             $profile = Profile::where('userId', $userId)->first();
             // Update profile data
-            $profile->state = $request->stateId;
+            $profile->stateId = $request->stateId;
 
             if (empty($request->cityId) || $request->cityId == 'other') {
                 $newCityName = $request->otherCity;
@@ -236,9 +377,9 @@ class ConsultantController extends Controller
                 $newCity = City::firstOrCreate(['cityName' => $newCityName, 'stateId' => $request->stateId]);
 
                 $user->cityId = $newCity->id;
-                $profile->city = $newCity->id;
+                $profile->cityId = $newCity->id;
             } else {
-                $profile->city = $request->cityId;
+                $profile->cityId = $request->cityId;
             }
             $profile->isFeatured = $request->isFeatured;
             $profile->about = $request->about;
@@ -252,9 +393,10 @@ class ConsultantController extends Controller
                 $request->file('photo')->move(public_path('profile'), $profile->photo);
             }
 
-
-
             $profile->save();
+
+
+
             return redirect()->route('consultant.index')->with('success', 'Consultant updated successfully.');
         } catch (\Throwable $th) {
             throw $th;

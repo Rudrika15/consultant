@@ -200,28 +200,35 @@ class VisitorController extends Controller
 
     public function razorpayPaymentStore(Request $request)
     {
+        try {
+            // Check if the user is already registered for the workshop
+            $existingRegistration = RegisterWorkshop::where('userId', Auth::user()->id)
+                ->where('workshopId', $request->input('workshopId'))
+                ->exists();
 
-        $payment = new Payment();
+            if ($existingRegistration) {
+                return redirect()->back()->with('errorMessage', 'You are already registered for this workshop.');
+            }
 
-        $payment->userId = Auth::user()->id;
+            // Store payment details
+            $payment = new Payment();
+            $payment->userId = Auth::user()->id;
+            $payment->r_payment_id = $request->input('paymentId');
+            $payment->amount = $request->input('amount');
+            $payment->save();
 
-        $payment->r_payment_id = $request->input('paymentId');
-        $payment->amount = $request->input('amount');
+            // Register for the workshop
+            $workshop = new RegisterWorkshop();
+            $workshop->userId = Auth::user()->id;
+            $workshop->workshopId = $request->input('workshopId');
+            $workshop->save();
 
-        $payment->save();
-
-
-        $workshop = new RegisterWorkshop();
-
-        $workshop->userId = Auth::user()->id;
-
-        $workshop->workshopId = $request->input('workshopId');
-
-        $workshop->save();
-
-
-        return redirect()->back()->with('successMessage', 'You are registered for the workshop successfully.');
+            return redirect()->back()->with('successMessage', 'You are registered for the workshop successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('errorMessage', 'An error occurred while processing your request.');
+        }
     }
+
 
 
 

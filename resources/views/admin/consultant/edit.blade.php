@@ -332,16 +332,37 @@
                             <div class="form-label-group mt-3">
                                 <label for="">Is Featured Selected ?</label>
                                 <div class="form-check mt-2">
-                                    <input class="form-check-input" type="radio" name="isFeatured" id="Yes" value="Yes">
+
+                                    <input class="form-check-input" type="radio" name="isFeatured" id="Yes" value="Yes"
+                                        @if ($user->isFeatured == "Yes") checked
+                                    @endif>
                                     <label class="form-check-label" for="Yes">
                                         Yes
                                     </label>
+
+                                    {{-- <input class="form-check-input" type="radio" name="isFeatured" id="Yes"
+                                        value="Yes">
+                                    <label class="form-check-label" for="Yes">
+                                        Yes
+                                    </label> --}}
                                 </div>
                                 <div class="form-check mt-2">
-                                    <input class="form-check-input" type="radio" name="isFeatured" id="No" value="No">
+
+                                    <input class="form-check-input" type="radio" name="isFeatured" id="No" value="No"
+                                        @if ($user->isFeatured == "No")
+                                    checked
+                                    @endif>
                                     <label class="form-check-label" for="No">
                                         No
                                     </label>
+
+
+
+                                    {{-- <input class="form-check-input" type="radio" name="isFeatured" id="No"
+                                        value="No">
+                                    <label class="form-check-label" for="No">
+                                        No
+                                    </label> --}}
                                 </div>
                                 @if ($errors->has('isFeatured'))
                                 <span class="error">{{ $errors->first('isFeatured') }}</span>
